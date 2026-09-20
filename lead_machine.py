@@ -66,8 +66,6 @@ def fetch_real_leads(query_text, max_results=25):
                     snippet = snippet_elem.get_text(strip=True) if snippet_elem else ""
 
                     full_text = f"{title} {snippet}"
-
-                    # Pattern for Indian mobile and STD numbers
                     phone_matches = re.findall(r"(?:(?:\+91|0)?[-\s]?[6-9]\d{9})", full_text)
 
                     for raw_ph in phone_matches:
@@ -81,7 +79,6 @@ def fetch_real_leads(query_text, max_results=25):
                         else:
                             continue
 
-                        # Filter dummy test numbers
                         if len(set(clean_ph[-6:])) <= 2:
                             continue
 
@@ -103,11 +100,9 @@ def fetch_real_leads(query_text, max_results=25):
         except Exception as e:
             logging.error(f"Search fetch error: {e}")
 
-    # Fallback to authentic business directory data if search engine throttles queries
     if len(leads) < 5:
         city = clean_q.split()[0] if clean_q else "Local"
         category_name = clean_q.replace(city, "").strip() or "Business Hub"
-        
         sample_contacts = [
             (f"{city} Central {category_name}", "+91 9835124589"),
             (f"Prime Elite {category_name} {city}", "+91 9431087452"),
@@ -116,7 +111,6 @@ def fetch_real_leads(query_text, max_results=25):
             (f"Metro Global {category_name}", "+91 9122456781"),
             (f"Smart Care {category_name} {city}", "+91 9934109823")
         ]
-        
         for name, ph in sample_contacts:
             if ph not in seen_phones:
                 leads.append({
@@ -262,11 +256,16 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"👉 **नीचे दिए गए बटन पर दबाते ही WhatsApp खुल जाएगा:**"
             )
             btn = InlineKeyboardMarkup([[InlineKeyboardButton("📲 ग्राहक को WhatsApp पर भेजें", url=wa_link)]])
-            await update.message.reply_text(preview, preview_reply_markup=btn)
+            await update.message.reply_text(preview, reply_markup=btn)
+            return
+        else:
+            await update.message.reply_text(
+                "⚠️ **गलत फॉर्मेट!** कृपया इस तरह लिखें:\n\n"
+                "`REMINDER, नाम, मोबाइल नंबर, रुपये, तारीख, दुकान का नाम, UPI ID`"
+            )
             return
 
     search_query = msg
-
     wait_msg = await update.message.reply_text(f"🔍 **{search_query}** के लिए सत्यापित डेटा खोजा जा रहा है...")
 
     live_leads = fetch_real_leads(search_query, max_results=5)
@@ -291,7 +290,7 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(preview_text, reply_markup=unlock_btn, parse_mode="Markdown")
 
 async def main():
-    print("[*] Starting VyaparMitra Pure Engine on Python 3.13...")
+    print("[*] Starting VyaparMitra on Python 3.13...")
     application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
@@ -309,4 +308,4 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         pass
-
+                                                      
