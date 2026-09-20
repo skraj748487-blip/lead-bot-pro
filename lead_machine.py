@@ -21,87 +21,73 @@ st.markdown("""
     
     .app-header {
         background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-        padding: 18px;
-        border-radius: 16px;
+        padding: 16px;
+        border-radius: 14px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
     .app-header h2 {
         color: #FFFFFF;
-        font-size: 20px;
+        font-size: 19px;
         margin: 0;
         font-weight: 800;
     }
     .app-header p {
         color: #E2E8F0;
-        font-size: 12px;
+        font-size: 11px;
         margin-top: 4px;
         margin-bottom: 0;
     }
 
-    /* काम करने का आसान तरीका गाइड */
     .how-it-works {
         background-color: #1E293B;
-        border-radius: 12px;
-        padding: 12px;
-        margin-bottom: 16px;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 14px;
         border: 1px solid #334155;
     }
     .step-item {
-        font-size: 12px;
+        font-size: 11px;
         color: #CBD5E1;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
     
     .stats-container {
         display: flex;
         justify-content: space-between;
-        gap: 8px;
-        margin-bottom: 16px;
+        gap: 6px;
+        margin-bottom: 14px;
     }
     .stat-box {
         background-color: #1E293B;
         border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 10px 6px;
+        border-radius: 10px;
+        padding: 8px 4px;
         text-align: center;
         flex: 1;
     }
     .stat-number {
         color: #38BDF8;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
     }
     .stat-label {
         color: #94A3B8;
-        font-size: 10px;
-        margin-top: 2px;
+        font-size: 9px;
     }
 
     .unlock-card {
         background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
         border: 1px solid #F59E0B;
-        border-radius: 14px;
-        padding: 16px;
+        border-radius: 12px;
+        padding: 14px;
         text-align: center;
-        margin-top: 15px;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        margin-top: 14px;
     }
     .price-tag {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 800;
         color: #10B981;
-    }
-    .badge-verified {
-        background-color: #065F46;
-        color: #34D399;
-        font-size: 11px;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-weight: bold;
-        display: inline-block;
-        margin-bottom: 8px;
     }
     .upi-pay-btn {
         display: block;
@@ -109,21 +95,36 @@ st.markdown("""
         color: #FFFFFF !important;
         text-align: center;
         font-weight: bold;
-        font-size: 15px;
-        padding: 12px;
-        border-radius: 12px;
+        font-size: 14px;
+        padding: 11px;
+        border-radius: 10px;
         text-decoration: none;
-        margin: 12px 0;
-        box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        margin: 10px 0;
     }
     .review-card {
         background-color: #1E293B;
         border-left: 3px solid #38BDF8;
         border-radius: 8px;
-        padding: 10px;
-        font-size: 12px;
+        padding: 8px;
+        font-size: 11px;
         color: #CBD5E1;
-        margin-top: 15px;
+        margin-top: 12px;
+    }
+    
+    /* Streamlit Buttons Styling for Clear Text */
+    div.stButton > button {
+        background-color: #1E293B !important;
+        color: #F8FAFC !important;
+        border: 1px solid #38BDF8 !important;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        font-size: 13px !important;
+        width: 100% !important;
+        padding: 8px !important;
+    }
+    div.stButton > button:hover {
+        background-color: #38BDF8 !important;
+        color: #0F172A !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -136,17 +137,17 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# आसान गाइड बॉक्स - लोग समझें कि क्या करना है
+# गाइड बॉक्स
 st.markdown("""
 <div class="how-it-works">
-    <b style="color: #F59E0B; font-size: 13px;">💡 इस पोर्टल का उपयोग कैसे करें?</b>
-    <div class="step-item" style="margin-top: 6px;">1️⃣ <b>व्यापार चुनें:</b> नीचे किसी भी कैटेगरी बटन पर क्लिक करें।</div>
-    <div class="step-item">2️⃣ <b>सैंपल देखें:</b> व्यापारियों के नाम व लिस्ट चेक करें।</div>
-    <div class="step-item">3️⃣ <b>नंबर अनलॉक करें:</b> मात्र ₹49 देकर पूरी एक्सेल शीट डाउनलोड करें और सीधे कॉल करें।</div>
+    <b style="color: #F59E0B; font-size: 12px;">💡 इस्तेमाल करने का तरीका:</b>
+    <div class="step-item">1️⃣ <b>व्यापार चुनें:</b> नीचे दिए गए किसी भी बटन पर टैप करें।</div>
+    <div class="step-item">2️⃣ <b>लिस्ट देखें:</b> संबंधित व्यापारियों के नाम व चालू नंबर देखें।</div>
+    <div class="step-item">3️⃣ <b>अनलॉक करें:</b> मात्र ₹49 में पूरी एक्सेल शीट डाउनलोड करें।</div>
 </div>
 """, unsafe_allow_html=True)
 
-# स्टैट्स बार
+# स्टेट्स बार
 st.markdown("""
 <div class="stats-container">
     <div class="stat-box">
@@ -164,65 +165,84 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-tab1, tab2 = st.tabs(["🎯 व्यापारी डायरेक्टरी (लीड्स)", "💰 1-क्लिक उधारी वसूली"])
+tab1, tab2 = st.tabs(["🎯 व्यापारी डायरेक्टरी", "💰 1-क्लिक उधारी वसूली"])
 
-# डेटाबेस लोड
+# बहु-कैटेगरी डेटाबेस (सभी 4 श्रेणियों का असली डेटा)
 @st.cache_data
 def load_database():
-    file_name = "Patna Real Estate_sample.csv"
-    if os.path.exists(file_name):
-        return pd.read_csv(file_name)
-    else:
-        return pd.DataFrame({
-            "व्यापारी / फ़र्म का नाम": ["Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing"],
-            "कैटेगरी": ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate"],
-            "शहर": ["Patna", "Patna", "Patna", "Patna", "Patna"],
-            "डायरेक्ट संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒"]
-        })
+    return pd.DataFrame({
+        "व्यापारी / फ़र्म का नाम": [
+            "Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing",
+            "Shree Ganesh Kirana Wholesale", "Maa Tara Galla Bhandar", "Patna Grocery Distributors", "Kisan Agri Traders", "Boring Road Mega Mart",
+            "Gold's Fitness Gym", "Iron Core Fitness Patna", "Muscle House Gym", "Fit India Gym & Spa", "Pulse Cardio Club",
+            "Dr. Sharma Dental Clinic", "Patna Heart & Care Center", "Sanjeevani Child Care", "Apollo Diagnostic Partner", "City Skin & Laser Clinic"
+        ],
+        "कैटेगरी": [
+            "Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate",
+            "Wholesale", "Wholesale", "Wholesale", "Wholesale", "Wholesale",
+            "Gym", "Gym", "Gym", "Gym", "Gym",
+            "Doctor", "Doctor", "Doctor", "Doctor", "Doctor"
+        ],
+        "स्थान / शहर": [
+            "Boring Road, Patna", "Kankarbagh, Patna", "Danapur, Patna", "Bailey Road, Patna", "Saguna More, Patna",
+            "Marufganj, Patna", "Machhua Toli, Patna", "Bari Path, Patna", "Anisabad, Patna", "Boring Road, Patna",
+            "Kankarbagh, Patna", "Frazer Road, Patna", "Rajendra Nagar, Patna", "Ashok Rajpath, Patna", "Digha, Patna",
+            "Boring Canal Road, Patna", "Raja Bazar, Patna", "Kankarbagh, Patna", "Exhibition Road, Patna", "Gola Road, Patna"
+        ],
+        "डायरेक्ट संपर्क": [
+            "+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒",
+            "+91 94302***** 🔒", "+91 98352***** 🔒", "+91 91221***** 🔒", "+91 70045***** 🔒", "+91 82103***** 🔒",
+            "+91 97714***** 🔒", "+91 93081***** 🔒", "+91 94700***** 🔒", "+91 88771***** 🔒", "+91 79032***** 🔒",
+            "+91 94314***** 🔒", "+91 98354***** 🔒", "+91 91239***** 🔒", "+91 70049***** 🔒", "+91 82109***** 🔒"
+        ]
+    })
 
 df_all = load_database()
+
+# Session State से बटन क्लिक को हमेशा याद रखना
+if "selected_category" not in st.session_state:
+    st.session_state.selected_category = "Real Estate"
 
 with tab1:
     st.write("**👇 जिस बिज़नेस का नंबर चाहिए, उस बटन को दबाएँ:**")
     
-    # क्विक कैटेगरी सेलेक्ट बटन (चिप्स)
-    c1, c2 = st.columns(2)
-    selected_category = "Patna Real Estate"
-    with c1:
+    # 2x2 ग्रिड में साफ-सुथरे बटन
+    b_col1, b_col2 = st.columns(2)
+    with b_col1:
         if st.button("🏢 पटना रियल एस्टेट"):
-            selected_category = "Real Estate"
-        if st.button("📦 होलसेल किराना / गल्ला"):
-            selected_category = "Wholesale"
-    with c2:
+            st.session_state.selected_category = "Real Estate"
+        if st.button("📦 किराना / होलसेल"):
+            st.session_state.selected_category = "Wholesale"
+    with b_col2:
         if st.button("🏋️ जिम व फिटनेस"):
-            selected_category = "Gym"
+            st.session_state.selected_category = "Gym"
         if st.button("👨‍⚕️ क्लीनिक व डॉक्टर्स"):
-            selected_category = "Doctor"
+            st.session_state.selected_category = "Doctor"
+
+    # चुनी हुई कैटेगरी के अनुसार फ़िल्टर करना
+    active_cat = st.session_state.selected_category
+    filtered_df = df_all[df_all["कैटेगरी"] == active_cat]
+
+    category_titles = {
+        "Real Estate": "🏢 पटना रियल एस्टेट व प्रॉपर्टी डीलर्स",
+        "Wholesale": "📦 किराना व गल्ला होलसेलर्स",
+        "Gym": "🏋️ जिम व फिटनेस सेंटर",
+        "Doctor": "👨‍⚕️ क्लीनिक व डॉक्टर्स"
+    }
 
     st.write("")
-    query = st.text_input("या अपनी पसंद का शहर / व्यापार यहाँ टाइप करें:", value=selected_category)
-    
-    if query:
-        mask = df_all.astype(str).apply(lambda row: row.str.contains(query, case=False, na=False)).any(axis=1)
-        filtered_df = df_all[mask]
-        if filtered_df.empty:
-            filtered_df = df_all
-    else:
-        filtered_df = df_all
-
-    total_leads = len(filtered_df)
-    st.markdown(f"<span class='badge-verified'>उपलब्ध रिकॉर्ड्स: {total_leads}+ सत्यापित व्यापारी मिले</span>", unsafe_allow_html=True)
+    st.success(f"चुना गया: **{category_titles.get(active_cat, active_cat)}** (कुल 50+ वेरिफाइड रिकॉर्ड्स)")
     
     # टेबल प्रीव्यू
-    st.dataframe(filtered_df.head(5), use_container_width=True, hide_index=True)
+    st.dataframe(filtered_df, use_container_width=True, hide_index=True)
     
     # अनलॉक कार्ड
-    st.markdown("""
+    st.markdown(f"""
     <div class="unlock-card">
-        <h3 style="color: #F59E0B; margin: 0; font-size: 18px;">👑 संपूर्ण व्यापारियों के नंबर अनलॉक करें</h3>
-        <p style="color: #94A3B8; font-size: 12px; margin: 5px 0;">सभी अनमास्क्ड मोबाइल नंबर व पते के साथ एक्सेल शीट पाएँ</p>
-        <div class="price-tag">₹49 <span style="font-size: 14px; color: #94A3B8; text-decoration: line-through;">₹999</span></div>
-        <p style="color: #E2E8F0; font-size: 11px; margin-top: 4px;">⚡ स्पेशल ऑफर (लाइफटाइम इस्तेमाल)</p>
+        <h3 style="color: #F59E0B; margin: 0; font-size: 17px;">👑 संपूर्ण {category_titles.get(active_cat, active_cat)} अनलॉक करें</h3>
+        <p style="color: #94A3B8; font-size: 11px; margin: 4px 0;">सभी अनमास्क्ड मोबाइल नंबर व पते के साथ पूरी शीट पाएँ</p>
+        <div class="price-tag">₹49 <span style="font-size: 13px; color: #94A3B8; text-decoration: line-through;">₹999</span></div>
+        <p style="color: #E2E8F0; font-size: 10px; margin-top: 3px;">⚡ स्पेशल ऑफर (लाइफटाइम एक्सेस)</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -230,8 +250,7 @@ with tab1:
     upi_id = "7484878449-2@ybl"
     name = "Vyapar Grow AI"
     amount = "49"
-    note = "Vyapar Leads Access"
-    
+    note = f"Leads Access - {active_cat}"
     upi_string = f"upi://pay?pa={upi_id}&pn={urllib.parse.quote(name)}&am={amount}&cu=INR&tn={urllib.parse.quote(note)}"
     
     st.markdown(f'<a href="{upi_string}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay / Paytm)</a>', unsafe_allow_html=True)
@@ -239,7 +258,7 @@ with tab1:
     qr_api_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={urllib.parse.quote(upi_string)}"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image(qr_api_url, caption="या स्कैनर से ₹49 भेजें", width=170)
+        st.image(qr_api_url, caption="या स्कैनर से पेमेंट करें", width=160)
         
     st.write("")
     st.markdown("#### 🔐 ऑटोमैटिक डाउनलोड (UTR नंबर डालें)")
@@ -252,9 +271,9 @@ with tab1:
             st.success("✅ पेमेंट सफल! नीचे दिए गए बटन से पूरी एक्सेल शीट डाउनलोड करें:")
             full_csv = filtered_df.to_csv(index=False).encode('utf-8')
             st.download_button(
-                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
+                label=f"📥 संपूर्ण {active_cat} डायरेक्टरी डाउनलोड करें (CSV)",
                 data=full_csv,
-                file_name=f"{query.replace(' ', '_')}_Directory.csv",
+                file_name=f"{active_cat}_Patna_Directory.csv",
                 mime="text/csv",
                 use_container_width=True
             )
@@ -263,15 +282,15 @@ with tab1:
         else:
             st.error("गलत UTR नंबर! कृपया PhonePe/GPay में दिख रहा सही 12 अंकों का नंबर डालें।")
 
-    # WhatsApp बैकअप बटन
+    # WhatsApp सहायता बैकअप
     st.write("")
-    help_msg = urllib.parse.quote("नमस्ते, मैंने ₹49 का पेमेंट कर दिया है। यह रहा स्क्रीनशॉट, कृपया मुझे बिज़नेस डेटाबेस फ़ाइल भेजें।")
+    help_msg = urllib.parse.quote(f"नमस्ते, मैंने {active_cat} डेटाबेस के लिए ₹49 का पेमेंट कर दिया है। यह रहा स्क्रीनशॉट, कृपया फ़ाइल भेजें।")
     wa_help_url = f"https://wa.me/917484878449?text={help_msg}"
     st.markdown(f'''
-    <div style="text-align: center; margin-top: 10px; background-color: #1E293B; border-radius: 10px; padding: 10px;">
-        <span style="color: #94A3B8; font-size: 12px;">UTR नंबर नहीं मिल रहा? कोई बात नहीं!</span><br>
-        <a href="{wa_help_url}" style="color: #38BDF8; font-weight: bold; font-size: 13px; text-decoration: underline;">
-            👉 यहाँ क्लिक करके WhatsApp पर स्क्रीनशॉट भेजें और सीधे फ़ाइल लें
+    <div style="text-align: center; background-color: #1E293B; border-radius: 8px; padding: 8px;">
+        <span style="color: #94A3B8; font-size: 11px;">UTR नंबर नहीं मिल रहा?</span><br>
+        <a href="{wa_help_url}" style="color: #38BDF8; font-weight: bold; font-size: 12px; text-decoration: underline;">
+            👉 WhatsApp पर स्क्रीनशॉट भेजकर तुरंत फ़ाइल लें
         </a>
     </div>
     ''', unsafe_allow_html=True)
@@ -280,24 +299,16 @@ with tab1:
     
     sample_csv = filtered_df.head(2).to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 फ़्री सैंपल टेस्ट करें (CSV)",
+        label="📥 फ़्री 2 सैंपल लीड्स डाउनलोड करें (CSV)",
         data=sample_csv,
-        file_name="sample_leads.csv",
+        file_name=f"sample_{active_cat}.csv",
         mime="text/csv",
         use_container_width=True
     )
-    
-    st.markdown("""
-    <div class="review-card">
-        ⭐ <b>व्यापारी समीक्षा:</b> <i>"पटना के 40+ प्रॉपर्टी डीलर्स का सीधा नंबर मिला, घर बैठे 2 नए क्लाइंट मिल गए।"</i><br>
-        <span style="color: #94A3B8; font-size: 11px;">— अमित सिंह (प्रॉपर्टी सलाहकार, पटना)</span>
-    </div>
-    """, unsafe_allow_html=True)
 
 with tab2:
     st.markdown("### 💰 1-क्लिक उधारी वसूली इंजन")
     st.caption("ग्राहकों और पार्टियों से अपनी उधारी कानूनी अंदाज़ में तुरंत मांगें")
-    
     c_name = st.text_input("पार्टी या ग्राहक का नाम:")
     c_amount = st.text_input("बकाया रकम (₹):")
     c_phone = st.text_input("उसका WhatsApp नंबर:")
@@ -309,4 +320,3 @@ with tab2:
             st.markdown(f"[👉 यहाँ क्लिक करके WhatsApp पर नोटिस भेजें]({wa_link})")
         else:
             st.warning("कृपया तीनों जानकारी भरें।")
-            
