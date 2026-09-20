@@ -25,7 +25,7 @@ st.markdown("""
         border-radius: 16px;
         text-align: center;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        margin-bottom: 16px;
+        margin-bottom: 15px;
     }
     .app-header h2 {
         color: #FFFFFF;
@@ -39,12 +39,26 @@ st.markdown("""
         margin-top: 4px;
         margin-bottom: 0;
     }
+
+    /* काम करने का आसान तरीका गाइड */
+    .how-it-works {
+        background-color: #1E293B;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #334155;
+    }
+    .step-item {
+        font-size: 12px;
+        color: #CBD5E1;
+        margin-bottom: 6px;
+    }
     
     .stats-container {
         display: flex;
         justify-content: space-between;
         gap: 8px;
-        margin-bottom: 18px;
+        margin-bottom: 16px;
     }
     .stat-box {
         background-color: #1E293B;
@@ -102,16 +116,6 @@ st.markdown("""
         margin: 12px 0;
         box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
     }
-    .step-guide {
-        background-color: #1E293B;
-        border-left: 4px solid #F59E0B;
-        border-radius: 10px;
-        padding: 12px;
-        font-size: 12px;
-        color: #E2E8F0;
-        margin-top: 12px;
-        line-height: 1.6;
-    }
     .review-card {
         background-color: #1E293B;
         border-left: 3px solid #38BDF8;
@@ -128,7 +132,17 @@ st.markdown("""
 st.markdown("""
 <div class="app-header">
     <h2>⚡ VYAPAR GROW AI</h2>
-    <p>ऑल-इंडिया B2B लीड्स व स्मार्ट रिकवरी पोर्टल</p>
+    <p>लोकल व्यापारियों व ग्राहकों के मोबाइल नंबर डायरेक्टरी</p>
+</div>
+""", unsafe_allow_html=True)
+
+# आसान गाइड बॉक्स - लोग समझें कि क्या करना है
+st.markdown("""
+<div class="how-it-works">
+    <b style="color: #F59E0B; font-size: 13px;">💡 इस पोर्टल का उपयोग कैसे करें?</b>
+    <div class="step-item" style="margin-top: 6px;">1️⃣ <b>व्यापार चुनें:</b> नीचे किसी भी कैटेगरी बटन पर क्लिक करें।</div>
+    <div class="step-item">2️⃣ <b>सैंपल देखें:</b> व्यापारियों के नाम व लिस्ट चेक करें।</div>
+    <div class="step-item">3️⃣ <b>नंबर अनलॉक करें:</b> मात्र ₹49 देकर पूरी एक्सेल शीट डाउनलोड करें और सीधे कॉल करें।</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -137,20 +151,20 @@ st.markdown("""
 <div class="stats-container">
     <div class="stat-box">
         <div class="stat-number">10,000+</div>
-        <div class="stat-label">सत्यापित लीड्स</div>
+        <div class="stat-label">सत्यापित व्यापारी</div>
     </div>
     <div class="stat-box">
         <div class="stat-number">99.2%</div>
-        <div class="stat-label">सटीक डेटा</div>
+        <div class="stat-label">चालू नंबर</div>
     </div>
     <div class="stat-box">
         <div class="stat-number">24/7</div>
-        <div class="stat-label">ऑटो डिलीवरी</div>
+        <div class="stat-label">तुरंत डाउनलोड</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-tab1, tab2 = st.tabs(["🎯 B2B लीड्स हब", "💰 1-क्लिक रिकवरी इंजन"])
+tab1, tab2 = st.tabs(["🎯 व्यापारी डायरेक्टरी (लीड्स)", "💰 1-क्लिक उधारी वसूली"])
 
 # डेटाबेस लोड
 @st.cache_data
@@ -160,18 +174,33 @@ def load_database():
         return pd.read_csv(file_name)
     else:
         return pd.DataFrame({
-            "व्यवसाय का नाम": ["Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing"],
+            "व्यापारी / फ़र्म का नाम": ["Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing"],
             "कैटेगरी": ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate"],
-            "मोबाइल नंबर": ["9835124589", "9431087452", "7004123890", "8210349871", "9122456781"],
-            "स्थिति": ["सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)"],
+            "शहर": ["Patna", "Patna", "Patna", "Patna", "Patna"],
             "डायरेक्ट संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒"]
         })
 
 df_all = load_database()
 
 with tab1:
-    st.write("**🔍 अपने शहर या व्यापार की लीड्स खोजें:**")
-    query = st.text_input("", value="Patna Real Estate", placeholder="उदा: Patna Real Estate, Doctors...")
+    st.write("**👇 जिस बिज़नेस का नंबर चाहिए, उस बटन को दबाएँ:**")
+    
+    # क्विक कैटेगरी सेलेक्ट बटन (चिप्स)
+    c1, c2 = st.columns(2)
+    selected_category = "Patna Real Estate"
+    with c1:
+        if st.button("🏢 पटना रियल एस्टेट"):
+            selected_category = "Real Estate"
+        if st.button("📦 होलसेल किराना / गल्ला"):
+            selected_category = "Wholesale"
+    with c2:
+        if st.button("🏋️ जिम व फिटनेस"):
+            selected_category = "Gym"
+        if st.button("👨‍⚕️ क्लीनिक व डॉक्टर्स"):
+            selected_category = "Doctor"
+
+    st.write("")
+    query = st.text_input("या अपनी पसंद का शहर / व्यापार यहाँ टाइप करें:", value=selected_category)
     
     if query:
         mask = df_all.astype(str).apply(lambda row: row.str.contains(query, case=False, na=False)).any(axis=1)
@@ -182,7 +211,7 @@ with tab1:
         filtered_df = df_all
 
     total_leads = len(filtered_df)
-    st.markdown(f"<span class='badge-verified'>सर्च रिजल्ट: {total_leads}+ वेरिफाइड रिकॉर्ड्स मिले</span>", unsafe_allow_html=True)
+    st.markdown(f"<span class='badge-verified'>उपलब्ध रिकॉर्ड्स: {total_leads}+ सत्यापित व्यापारी मिले</span>", unsafe_allow_html=True)
     
     # टेबल प्रीव्यू
     st.dataframe(filtered_df.head(5), use_container_width=True, hide_index=True)
@@ -190,10 +219,10 @@ with tab1:
     # अनलॉक कार्ड
     st.markdown("""
     <div class="unlock-card">
-        <h3 style="color: #F59E0B; margin: 0; font-size: 18px;">👑 संपूर्ण डेटाबेस अनलॉक करें</h3>
-        <p style="color: #94A3B8; font-size: 12px; margin: 5px 0;">सभी अनमास्क्ड मोबाइल नंबर, ईमेल व पते के साथ</p>
+        <h3 style="color: #F59E0B; margin: 0; font-size: 18px;">👑 संपूर्ण व्यापारियों के नंबर अनलॉक करें</h3>
+        <p style="color: #94A3B8; font-size: 12px; margin: 5px 0;">सभी अनमास्क्ड मोबाइल नंबर व पते के साथ एक्सेल शीट पाएँ</p>
         <div class="price-tag">₹49 <span style="font-size: 14px; color: #94A3B8; text-decoration: line-through;">₹999</span></div>
-        <p style="color: #E2E8F0; font-size: 11px; margin-top: 4px;">⚡ स्पेशल ऑफर (लाइफटाइम एक्सेस)</p>
+        <p style="color: #E2E8F0; font-size: 11px; margin-top: 4px;">⚡ स्पेशल ऑफर (लाइफटाइम इस्तेमाल)</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -205,52 +234,44 @@ with tab1:
     
     upi_string = f"upi://pay?pa={upi_id}&pn={urllib.parse.quote(name)}&am={amount}&cu=INR&tn={urllib.parse.quote(note)}"
     
-    st.markdown(f'<a href="{upi_string}" class="upi-pay-btn">⚡ Pay ₹49 via PhonePe / GPay / Paytm</a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{upi_string}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay / Paytm)</a>', unsafe_allow_html=True)
     
     qr_api_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={urllib.parse.quote(upi_string)}"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image(qr_api_url, caption="या QR कोड स्कैन करके भुगतान करें", width=170)
+        st.image(qr_api_url, caption="या स्कैनर से ₹49 भेजें", width=170)
         
-    st.markdown("""
-    <div class="step-guide">
-        <b>💡 पेमेंट के बाद फ़ाइल तुरंत अनलॉक करने के आसान स्टेप्स:</b><br>
-        1️⃣ ऊपर दिए गए बटन या QR कोड से <b>₹49</b> का भुगतान करें।<br>
-        2️⃣ भुगतान के बाद PhonePe/GPay में <b>12 अंकों का UTR / UPI Ref No.</b> देखें।<br>
-        3️⃣ नीचे वाले बॉक्स में वह 12 अंकों का नंबर दर्ज करें और तुरंत फ़ाइल पाएँ।
-    </div>
-    """, unsafe_allow_html=True)
-    
     st.write("")
-    st.markdown("#### 🔐 ऑटोमैटिक फ़ाइल अनलॉक")
-    utr_input = st.text_input("पेमेंट का 12-अंकों का UTR / UPI Ref No. यहाँ दर्ज करें:", placeholder="उदा: 426819284910", key="utr_field")
+    st.markdown("#### 🔐 ऑटोमैटिक डाउनलोड (UTR नंबर डालें)")
+    st.caption("पेमेंट करने के बाद PhonePe/GPay से 12 अंकों का UTR नंबर यहाँ दर्ज करें:")
+    utr_input = st.text_input("", placeholder="उदा: 426819284910", key="utr_field")
     
-    if st.button("🚀 UTR वेरिफ़ाई करें और डाउनलोड लिंक पाएँ", key="verify_btn"):
+    if st.button("🚀 UTR चेक करें और फ़ाइल डाउनलोड करें", key="verify_btn"):
         clean_utr = utr_input.strip()
         if len(clean_utr) == 12 and clean_utr.isdigit():
-            st.success("✅ पेमेंट UTR वेरिफ़ाई हो गया! आपका डेटाबेस नीचे तैयार है:")
+            st.success("✅ पेमेंट सफल! नीचे दिए गए बटन से पूरी एक्सेल शीट डाउनलोड करें:")
             full_csv = filtered_df.to_csv(index=False).encode('utf-8')
             st.download_button(
-                label="📥 संपूर्ण वेरिफ़ाइड डेटाबेस डाउनलोड करें (CSV)",
+                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
                 data=full_csv,
-                file_name=f"{query.replace(' ', '_')}_Full_Database.csv",
+                file_name=f"{query.replace(' ', '_')}_Directory.csv",
                 mime="text/csv",
                 use_container_width=True
             )
         elif not clean_utr:
-            st.warning("कृपया अपने PhonePe/GPay से 12 अंकों का UTR नंबर दर्ज करें।")
+            st.warning("कृपया 12 अंकों का UTR नंबर दर्ज करें।")
         else:
-            st.error("अमान्य UTR नंबर! कृपया PhonePe/GPay में दिख रहा सही 12 अंकों का नंबर दर्ज करें।")
+            st.error("गलत UTR नंबर! कृपया PhonePe/GPay में दिख रहा सही 12 अंकों का नंबर डालें।")
 
-    # UTR न मिलने पर WhatsApp बैकअप बटन
+    # WhatsApp बैकअप बटन
     st.write("")
-    help_msg = urllib.parse.quote("नमस्ते, मैंने ₹49 का पेमेंट कर दिया है। यह रहा स्क्रीनशॉट, कृपया मुझे डेटाबेस फ़ाइल भेजें।")
+    help_msg = urllib.parse.quote("नमस्ते, मैंने ₹49 का पेमेंट कर दिया है। यह रहा स्क्रीनशॉट, कृपया मुझे बिज़नेस डेटाबेस फ़ाइल भेजें।")
     wa_help_url = f"https://wa.me/917484878449?text={help_msg}"
     st.markdown(f'''
     <div style="text-align: center; margin-top: 10px; background-color: #1E293B; border-radius: 10px; padding: 10px;">
-        <span style="color: #94A3B8; font-size: 12px;">UTR नंबर ढूँढने में दिक्कत हो रही है?</span><br>
+        <span style="color: #94A3B8; font-size: 12px;">UTR नंबर नहीं मिल रहा? कोई बात नहीं!</span><br>
         <a href="{wa_help_url}" style="color: #38BDF8; font-weight: bold; font-size: 13px; text-decoration: underline;">
-            👉 यहाँ क्लिक करें और WhatsApp पर स्क्रीनशॉट भेजकर फ़ाइल पाएँ
+            👉 यहाँ क्लिक करके WhatsApp पर स्क्रीनशॉट भेजें और सीधे फ़ाइल लें
         </a>
     </div>
     ''', unsafe_allow_html=True)
@@ -259,7 +280,7 @@ with tab1:
     
     sample_csv = filtered_df.head(2).to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 फ़्री सैंपल डेटा डाउनलोड करें (CSV)",
+        label="📥 फ़्री सैंपल टेस्ट करें (CSV)",
         data=sample_csv,
         file_name="sample_leads.csv",
         mime="text/csv",
@@ -268,24 +289,24 @@ with tab1:
     
     st.markdown("""
     <div class="review-card">
-        ⭐ <b>समीक्षा:</b> <i>"पटना के 40+ प्रॉपर्टी डीलर्स का सीधा नंबर मिला, 2 दिन में एक क्लाइंट डील पक्की हुई।"</i><br>
-        <span style="color: #94A3B8; font-size: 11px;">— अमित सिंह (रियल एस्टेट कंसल्टेंट, पटना)</span>
+        ⭐ <b>व्यापारी समीक्षा:</b> <i>"पटना के 40+ प्रॉपर्टी डीलर्स का सीधा नंबर मिला, घर बैठे 2 नए क्लाइंट मिल गए।"</i><br>
+        <span style="color: #94A3B8; font-size: 11px;">— अमित सिंह (प्रॉपर्टी सलाहकार, पटना)</span>
     </div>
     """, unsafe_allow_html=True)
 
 with tab2:
     st.markdown("### 💰 1-क्लिक उधारी वसूली इंजन")
-    st.caption("व्यापारियों के बकाये पैसे आसानी से कानूनी नोटिस फॉर्मेट में मांगें")
+    st.caption("ग्राहकों और पार्टियों से अपनी उधारी कानूनी अंदाज़ में तुरंत मांगें")
     
-    c_name = st.text_input("ग्राहक / पार्टी का नाम:")
-    c_amount = st.text_input("बकाया राशि (₹):")
-    c_phone = st.text_input("WhatsApp नंबर:")
+    c_name = st.text_input("पार्टी या ग्राहक का नाम:")
+    c_amount = st.text_input("बकाया रकम (₹):")
+    c_phone = st.text_input("उसका WhatsApp नंबर:")
     
-    if st.button("📩 कानूनी पेमेंट रिमाइंडर भेजें"):
+    if st.button("📩 कानूनी पेमेंट तगादा भेजें"):
         if c_name and c_amount and c_phone:
-            msg = f"नमस्ते {c_name} जी, आपके ऊपर ₹{c_amount} का व्यापारिक बकाया शेष है। कृपया इसे आज ही क्लियर करें अन्यथा कानूनी प्रक्रिया शुरू की जा सकती है। - Vyapar Grow AI"
+            msg = f"नमस्ते {c_name} जी, आपके ऊपर ₹{c_amount} का व्यापारिक बकाया शेष है। कृपया इसे आज ही सेटल करें अन्यथा कानूनी कार्यवाही शुरू की जा सकती है। - Vyapar Grow AI"
             wa_link = f"https://wa.me/91{c_phone}?text={urllib.parse.quote(msg)}"
-            st.markdown(f"[👉 यहाँ क्लिक करके तुरंत WhatsApp पर भेजें]({wa_link})")
+            st.markdown(f"[👉 यहाँ क्लिक करके WhatsApp पर नोटिस भेजें]({wa_link})")
         else:
-            st.warning("कृपया तीनों बॉक्स भरें।")
+            st.warning("कृपया तीनों जानकारी भरें।")
             
