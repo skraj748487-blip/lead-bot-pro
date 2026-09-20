@@ -119,7 +119,7 @@ st.markdown("""
         padding: 10px;
         font-size: 12px;
         color: #CBD5E1;
-        margin-top: 12px;
+        margin-top: 15px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -162,8 +162,9 @@ def load_database():
         return pd.DataFrame({
             "व्यवसाय का नाम": ["Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing"],
             "कैटेगरी": ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Real Estate"],
-            "डायरेक्ट संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒"],
-            "स्थिति": ["✅ Active", "✅ Active", "✅ Active", "✅ Active", "✅ Active"]
+            "मोबाइल नंबर": ["9835124589", "9431087452", "7004123890", "8210349871", "9122456781"],
+            "स्थिति": ["सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)", "सत्यापित (Directory)"],
+            "डायरेक्ट संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒"]
         })
 
 df_all = load_database()
@@ -196,7 +197,7 @@ with tab1:
     </div>
     """, unsafe_allow_html=True)
     
-    # UPI पेमेंट विवरण
+    # UPI पेमेंट
     upi_id = "7484878449-2@ybl"
     name = "Vyapar Grow AI"
     amount = "49"
@@ -204,31 +205,27 @@ with tab1:
     
     upi_string = f"upi://pay?pa={upi_id}&pn={urllib.parse.quote(name)}&am={amount}&cu=INR&tn={urllib.parse.quote(note)}"
     
-    # 1-क्लिक पेमेंट बटन
     st.markdown(f'<a href="{upi_string}" class="upi-pay-btn">⚡ Pay ₹49 via PhonePe / GPay / Paytm</a>', unsafe_allow_html=True)
     
-    # QR कोड
     qr_api_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={urllib.parse.quote(upi_string)}"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image(qr_api_url, caption="या QR कोड स्कैन करके भुगतान करें", width=170)
         
-    # स्पष्ट 3-स्टेप निर्देश
     st.markdown("""
     <div class="step-guide">
-        <b>💡 पेमेंट के बाद फ़ाइल तुरंत अनलॉक करने के 3 आसान स्टेप्स:</b><br>
+        <b>💡 पेमेंट के बाद फ़ाइल तुरंत अनलॉक करने के आसान स्टेप्स:</b><br>
         1️⃣ ऊपर दिए गए बटन या QR कोड से <b>₹49</b> का भुगतान करें।<br>
-        2️⃣ भुगतान के बाद PhonePe/GPay स्क्रीन पर <b>12 अंकों का UTR / UPI Ref No.</b> देखें।<br>
-        3️⃣ नीचे वाले बॉक्स में वह 12 अंकों का नंबर दर्ज करें और तुरंत फ़ाइल डाउनलोड करें।
+        2️⃣ भुगतान के बाद PhonePe/GPay में <b>12 अंकों का UTR / UPI Ref No.</b> देखें।<br>
+        3️⃣ नीचे वाले बॉक्स में वह 12 अंकों का नंबर दर्ज करें और तुरंत फ़ाइल पाएँ।
     </div>
     """, unsafe_allow_html=True)
     
-    # UTR इनपुट और ऑटो अनलॉक
     st.write("")
     st.markdown("#### 🔐 ऑटोमैटिक फ़ाइल अनलॉक")
-    utr_input = st.text_input("पेमेंट का 12-अंकों का UTR / UPI Ref No. यहाँ दर्ज करें:", placeholder="उदा: 426819284910")
+    utr_input = st.text_input("पेमेंट का 12-अंकों का UTR / UPI Ref No. यहाँ दर्ज करें:", placeholder="उदा: 426819284910", key="utr_field")
     
-    if st.button("🚀 UTR वेरिफ़ाई करें और डाउनलोड लिंक पाएँ"):
+    if st.button("🚀 UTR वेरिफ़ाई करें और डाउनलोड लिंक पाएँ", key="verify_btn"):
         clean_utr = utr_input.strip()
         if len(clean_utr) == 12 and clean_utr.isdigit():
             st.success("✅ पेमेंट UTR वेरिफ़ाई हो गया! आपका डेटाबेस नीचे तैयार है:")
@@ -244,20 +241,31 @@ with tab1:
             st.warning("कृपया अपने PhonePe/GPay से 12 अंकों का UTR नंबर दर्ज करें।")
         else:
             st.error("अमान्य UTR नंबर! कृपया PhonePe/GPay में दिख रहा सही 12 अंकों का नंबर दर्ज करें।")
+
+    # UTR न मिलने पर WhatsApp बैकअप बटन
+    st.write("")
+    help_msg = urllib.parse.quote("नमस्ते, मैंने ₹49 का पेमेंट कर दिया है। यह रहा स्क्रीनशॉट, कृपया मुझे डेटाबेस फ़ाइल भेजें।")
+    wa_help_url = f"https://wa.me/917484878449?text={help_msg}"
+    st.markdown(f'''
+    <div style="text-align: center; margin-top: 10px; background-color: #1E293B; border-radius: 10px; padding: 10px;">
+        <span style="color: #94A3B8; font-size: 12px;">UTR नंबर ढूँढने में दिक्कत हो रही है?</span><br>
+        <a href="{wa_help_url}" style="color: #38BDF8; font-weight: bold; font-size: 13px; text-decoration: underline;">
+            👉 यहाँ क्लिक करें और WhatsApp पर स्क्रीनशॉट भेजकर फ़ाइल पाएँ
+        </a>
+    </div>
+    ''', unsafe_allow_html=True)
             
     st.markdown("---")
     
-    # फ़्री सैंपल डाउनलोड
     sample_csv = filtered_df.head(2).to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 फ़्री सैंपल डेटा टेस्ट करें (CSV)",
+        label="📥 फ़्री सैंपल डेटा डाउनलोड करें (CSV)",
         data=sample_csv,
         file_name="sample_leads.csv",
         mime="text/csv",
         use_container_width=True
     )
     
-    # समीक्षा
     st.markdown("""
     <div class="review-card">
         ⭐ <b>समीक्षा:</b> <i>"पटना के 40+ प्रॉपर्टी डीलर्स का सीधा नंबर मिला, 2 दिन में एक क्लाइंट डील पक्की हुई।"</i><br>
