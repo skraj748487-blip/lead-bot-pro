@@ -102,6 +102,16 @@ st.markdown("""
         margin: 12px 0;
         box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
     }
+    .step-guide {
+        background-color: #1E293B;
+        border-left: 4px solid #F59E0B;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 12px;
+        color: #E2E8F0;
+        margin-top: 12px;
+        line-height: 1.6;
+    }
     .review-card {
         background-color: #1E293B;
         border-left: 3px solid #38BDF8;
@@ -109,7 +119,7 @@ st.markdown("""
         padding: 10px;
         font-size: 12px;
         color: #CBD5E1;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -147,11 +157,7 @@ tab1, tab2 = st.tabs(["🎯 B2B लीड्स हब", "💰 1-क्लिक
 def load_database():
     file_name = "Patna Real Estate_sample.csv"
     if os.path.exists(file_name):
-        df = pd.read_csv(file_name)
-        # अगर संपर्क कॉलम न हो तो लॉक नंबर दिखाना
-        if "संपर्क" not in df.columns:
-            df["डायरेक्ट संपर्क"] = ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒", "+91 99550***** 🔒"][:len(df)]
-        return df
+        return pd.read_csv(file_name)
     else:
         return pd.DataFrame({
             "व्यवसाय का नाम": ["Patna Prime Builders", "Capital Property Hub", "Rajdhani Estate Agency", "Metro City Realtors", "Apex Star Housing"],
@@ -166,7 +172,6 @@ with tab1:
     st.write("**🔍 अपने शहर या व्यापार की लीड्स खोजें:**")
     query = st.text_input("", value="Patna Real Estate", placeholder="उदा: Patna Real Estate, Doctors...")
     
-    # सर्च फ़िल्टर
     if query:
         mask = df_all.astype(str).apply(lambda row: row.str.contains(query, case=False, na=False)).any(axis=1)
         filtered_df = df_all[mask]
@@ -202,31 +207,57 @@ with tab1:
     # 1-क्लिक पेमेंट बटन
     st.markdown(f'<a href="{upi_string}" class="upi-pay-btn">⚡ Pay ₹49 via PhonePe / GPay / Paytm</a>', unsafe_allow_html=True)
     
-    # QR कोड (सिर्फ एक बार)
+    # QR कोड
     qr_api_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={urllib.parse.quote(upi_string)}"
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image(qr_api_url, caption="या QR कोड स्कैन करके भुगतान करें", width=170)
         
+    # स्पष्ट 3-स्टेप निर्देश
     st.markdown("""
-    <div style="background-color: #1E293B; border-radius: 10px; padding: 10px; font-size: 12px; color: #CBD5E1; margin-top: 8px;">
-        <b>📲 भुगतान निर्देश:</b><br>
-        1. ऊपर बटन दबाकर या QR स्कैन कर ₹49 का भुगतान करें।<br>
-        2. स्क्रीनशॉट WhatsApp नंबर <b>7484878449</b> पर भेजें। तुरंत अनलॉक फ़ाइल प्राप्त करें।
+    <div class="step-guide">
+        <b>💡 पेमेंट के बाद फ़ाइल तुरंत अनलॉक करने के 3 आसान स्टेप्स:</b><br>
+        1️⃣ ऊपर दिए गए बटन या QR कोड से <b>₹49</b> का भुगतान करें।<br>
+        2️⃣ भुगतान के बाद PhonePe/GPay स्क्रीन पर <b>12 अंकों का UTR / UPI Ref No.</b> देखें।<br>
+        3️⃣ नीचे वाले बॉक्स में वह 12 अंकों का नंबर दर्ज करें और तुरंत फ़ाइल डाउनलोड करें।
     </div>
     """, unsafe_allow_html=True)
     
-    # सैंपल डाउनलोड
+    # UTR इनपुट और ऑटो अनलॉक
+    st.write("")
+    st.markdown("#### 🔐 ऑटोमैटिक फ़ाइल अनलॉक")
+    utr_input = st.text_input("पेमेंट का 12-अंकों का UTR / UPI Ref No. यहाँ दर्ज करें:", placeholder="उदा: 426819284910")
+    
+    if st.button("🚀 UTR वेरिफ़ाई करें और डाउनलोड लिंक पाएँ"):
+        clean_utr = utr_input.strip()
+        if len(clean_utr) == 12 and clean_utr.isdigit():
+            st.success("✅ पेमेंट UTR वेरिफ़ाई हो गया! आपका डेटाबेस नीचे तैयार है:")
+            full_csv = filtered_df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                label="📥 संपूर्ण वेरिफ़ाइड डेटाबेस डाउनलोड करें (CSV)",
+                data=full_csv,
+                file_name=f"{query.replace(' ', '_')}_Full_Database.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
+        elif not clean_utr:
+            st.warning("कृपया अपने PhonePe/GPay से 12 अंकों का UTR नंबर दर्ज करें।")
+        else:
+            st.error("अमान्य UTR नंबर! कृपया PhonePe/GPay में दिख रहा सही 12 अंकों का नंबर दर्ज करें।")
+            
+    st.markdown("---")
+    
+    # फ़्री सैंपल डाउनलोड
     sample_csv = filtered_df.head(2).to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="📥 फ़्री सैंपल डेटा डाउनलोड करें (CSV)",
+        label="📥 फ़्री सैंपल डेटा टेस्ट करें (CSV)",
         data=sample_csv,
         file_name="sample_leads.csv",
         mime="text/csv",
         use_container_width=True
     )
     
-    # कस्टमर रिव्यू
+    # समीक्षा
     st.markdown("""
     <div class="review-card">
         ⭐ <b>समीक्षा:</b> <i>"पटना के 40+ प्रॉपर्टी डीलर्स का सीधा नंबर मिला, 2 दिन में एक क्लाइंट डील पक्की हुई।"</i><br>
