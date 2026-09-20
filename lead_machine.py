@@ -24,7 +24,7 @@ ADMIN_USERNAME = "VyaparGrowAdmin"
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 
-def main_menu(user_id=None):
+def main_menu():
     keyboard = [
         [InlineKeyboardButton("🏢 Real Estate (B2B Lead Hub)", callback_data="preset_Real Estate")],
         [InlineKeyboardButton("🚗 Car Showrooms / Dealerships", callback_data="preset_Car Showrooms")],
@@ -44,11 +44,9 @@ def fetch_real_leads(query_text, max_results=30):
     }
 
     clean_q = re.sub(r"[^\w\s]", "", query_text).strip()
-
     search_queries = [
         f"{clean_q} contact number mobile",
-        f"{clean_q} justdial sulekha indiamart phone",
-        f"best {clean_q} contact mobile number directory"
+        f"{clean_q} justdial sulekha indiamart phone"
     ]
 
     seen_phones = set()
@@ -58,7 +56,7 @@ def fetch_real_leads(query_text, max_results=30):
             break
         try:
             url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(term)}"
-            resp = requests.get(url, headers=headers, timeout=8)
+            resp = requests.get(url, headers=headers, timeout=5)
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.text, "html.parser")
                 results = soup.find_all("div", class_="result__body")
@@ -89,7 +87,7 @@ def fetch_real_leads(query_text, max_results=30):
                             seen_phones.add(clean_ph)
                             name = re.split(r"[-|–—:•]", title)[0].strip()
                             if len(name) < 4:
-                                name = f"{clean_q} Hub"
+                                name = f"{clean_q} Business"
 
                             leads.append({
                                 "name": name[:45],
@@ -101,7 +99,7 @@ def fetch_real_leads(query_text, max_results=30):
                             if len(leads) >= max_results:
                                 break
         except Exception as e:
-            logging.error(f"Scraper error: {e}")
+            logging.error(f"Error: {e}")
 
     if len(leads) < 5:
         city = clean_q.split()[0] if clean_q else "Local"
@@ -111,8 +109,7 @@ def fetch_real_leads(query_text, max_results=30):
             (f"Capital {category_name} Network {city}", "+91 9431087452"),
             (f"Rajdhani {category_name} Agency", "+91 7004123890"),
             (f"Metro Global {category_name} Hub", "+91 8210349871"),
-            (f"Apex Star {category_name} {city}", "+91 9122456781"),
-            (f"National Care {category_name}", "+91 9934109823")
+            (f"Apex Star {category_name} {city}", "+91 9122456781")
         ]
         for name, ph in sample_contacts:
             if ph not in seen_phones:
@@ -127,28 +124,25 @@ def fetch_real_leads(query_text, max_results=30):
     return leads
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    context.user_data.clear()
-    uid = update.effective_user.id
     text = (
         "🇮🇳 **डिजिटल भारत सेवा व व्यापार केंद्र (Enterprise AI Hub)** 🇮🇳\n\n"
         "⚡ *राष्ट्रीय स्तर का बिज़नेस लीड्स, रिकवरी व सेवा इंजन सक्रिय है!*\n\n"
-        "👉 **सीधे शहर/पिनकोड व बिज़नेस का नाम लिखें:**\n"
+        "👉 **सीधे शहर/पिनकोड व बिज़नेस का नाम लिखकर भेजें:**\n"
         "उदा: `Patna Gym`, `Lucknow Real Estate`, `800001 Doctors`\n\n"
-        "या नीचे दिए गए सेवाओं में से चुनें:"
+        "या नीचे दी गई सेवाओं में से चुनें:"
     )
     if update.message:
-        await update.message.reply_text(text, reply_markup=main_menu(uid), parse_mode="Markdown")
+        await update.message.reply_text(text, reply_markup=main_menu(), parse_mode="Markdown")
     elif update.callback_query:
-        await update.callback_query.message.edit_text(text, reply_markup=main_menu(uid), parse_mode="Markdown")
+        await update.callback_query.message.reply_text(text, reply_markup=main_menu(), parse_mode="Markdown")
 
-async def generate_and_send_csv(query_text, update_or_msg):
+async def generate_and_send_csv(query_text, msg_obj):
     clean_name = re.sub(r"[^\w]", "_", query_text).strip("_")
     filename = f"Live_Leads_{clean_name}.csv"
 
-    msg_obj = update_or_msg.message if hasattr(update_or_msg, "message") else update_or_msg
-    status_msg = await msg_obj.reply_text("🔄 **ऑल-इंडिया डायरेक्टरी संकलित हो रही है... कृपया प्रतीक्षा करें...**")
+    status_msg = await msg_obj.reply_text("🔄 **डेटाबेस संकलित हो रहा है... कृपया 5 सेकंड प्रतीक्षा करें...**")
 
-    leads_data = fetch_real_leads(query_text, max_results=35)
+    leads_data = fetch_real_leads(query_text, max_results=30)
 
     with open(filename, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -157,19 +151,26 @@ async def generate_and_send_csv(query_text, update_or_msg):
             writer.writerow([lead["name"], lead["category"], lead["city"], lead["phone"], lead["status"]])
 
     await status_msg.delete()
-    await msg_obj.reply_document(
-        document=open(filename, "rb"),
-        caption=f"👑 **{query_text}** का पूरा प्रीमियम डेटाबेस तैयार है!\nकुल संपर्क: {len(leads_data)} रिकॉर्ड्स।"
-    )
+    with open(filename, "rb") as doc:
+        await msg_obj.reply_document(
+            document=doc,
+            caption=f"👑 **{query_text}** का प्रीमियम डेटाबेस तैयार है!\nकुल संपर्क: {len(leads_data)} रिकॉर्ड्स।"
+        )
     if os.path.exists(filename):
         os.remove(filename)
 
 async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await query.answer()
-    user_id = query.from_user.id
+    # बिना किसी देरी के Telegram को जवाब दें ताकि बटन अटके नहीं
+    try:
+        await query.answer()
+    except Exception:
+        pass
 
-    if query.data == "export_sample":
+    user_id = query.from_user.id
+    data = query.data
+
+    if data == "export_sample":
         filename = "Sample_National_B2B_Leads.csv"
         with open(filename, mode="w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
@@ -178,26 +179,27 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             writer.writerow(["Talwalkars Fitness Gym", "Gym", "Patna", "+91 9835012345", "Live Verified"])
             writer.writerow(["Shree Ram Real Estate Infra", "Real Estate", "Lucknow", "+91 9415019988", "Live Verified"])
 
-        await query.message.reply_document(
-            document=open(filename, "rb"),
-            caption="✅ **नेशनल सैंपल फ़ाइल तैयार है!** असली डेटा के लिए शहर और काम का नाम लिखें।"
-        )
+        with open(filename, "rb") as doc:
+            await query.message.reply_document(
+                document=doc,
+                caption="✅ **नेशनल सैंपल फ़ाइल तैयार है!** असली डेटा के लिए शहर और काम का नाम लिखें।"
+            )
         if os.path.exists(filename):
             os.remove(filename)
 
-    elif query.data == "reminder_tool":
+    elif data == "reminder_tool":
         text = (
             "💰 **उधार वसूली इंजन (WhatsApp 1-Click Reminder)**\n\n"
             "दुकानदार भाइयों के लिए बिना रिश्ते खराब किए फंसी उधारी वसूलने का टूल।\n\n"
-            "सीधे इस फॉर्मेट में लिखकर भेजें:\n\n"
+            "सीधे इस फ़ॉर्मेट में लिखकर भेजें:\n\n"
             "`REMINDER, [ग्राहक का नाम], [मोबाइल नंबर], [रुपये], [तारीख], [दुकान का नाम], [आपकी UPI ID]`\n\n"
             "📌 **उदाहरण:**\n"
             "`REMINDER, अमित कुमार, 9876543210, 15000, 25 तारीख, राज ट्रेडर्स, 7484878440-2@ybl`"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ मुख्य मेन्यू", callback_data="back_home")]])
-        await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
+        await query.message.reply_text(text, reply_markup=back_btn, parse_mode="Markdown")
 
-    elif query.data == "csc_portal":
+    elif data == "csc_portal":
         text = (
             "🏛️ **जन सेवा, टिकटिंग एवं बैंकिंग सुविधा केंद्र**\n\n"
             "घर बैठे सभी ऑनलाइन सेवाएँ उपलब्ध हैं:\n"
@@ -210,9 +212,9 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "⏱️ सेवा समय: 24x7 ऑनलाइन"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ मुख्य मेन्यू", callback_data="back_home")]])
-        await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
+        await query.message.reply_text(text, reply_markup=back_btn, parse_mode="Markdown")
 
-    elif query.data == "franchise_info":
+    elif data == "franchise_info":
         text = (
             "🤝 **मास्टर फ्रेंचाइजी एवं पार्टनरशिप प्रोग्राम**\n\n"
             "क्या आप अपने ज़िले में हमारे AI टूल्स और सीएससी सर्विस के अधिकृत पार्टनर बनना चाहते हैं?\n\n"
@@ -225,19 +227,19 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"📞 Official Contact: `{ADMIN_UPI.split('-')[0]}`"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ मुख्य मेन्यू", callback_data="back_home")]])
-        await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
+        await query.message.reply_text(text, reply_markup=back_btn, parse_mode="Markdown")
 
-    elif query.data.startswith("preset_"):
-        cat = query.data.replace("preset_", "")
+    elif data.startswith("preset_"):
+        cat = data.replace("preset_", "")
         text = (
             f"🔍 चुनी गई कैटेगरी: **{cat}**\n\n"
             f"अब अपने शहर या ज़िले का नाम लिखकर भेजें (उदा: `Patna {cat}` या `Lucknow {cat}`):"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ मुख्य मेन्यू", callback_data="back_home")]])
-        await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
+        await query.message.reply_text(text, reply_markup=back_btn, parse_mode="Markdown")
 
-    elif query.data.startswith("unlock_"):
-        search_term = query.data.replace("unlock_", "")
+    elif data.startswith("unlock_"):
+        search_term = data.replace("unlock_", "")
 
         upi_payload = f"upi://pay?pa={ADMIN_UPI}&pn=DigitalBharatAI&am={PAYMENT_AMOUNT}&cu=INR&tn=B2B_Data_Unlock"
         qr_api_url = f"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={urllib.parse.quote(upi_payload)}"
@@ -248,8 +250,8 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"💰 शुल्क: **₹{PAYMENT_AMOUNT}** (One-Time License)\n"
             f"📲 Official UPI ID:\n`{ADMIN_UPI}`\n\n"
             "📌 **भुगतान करने का तरीका:**\n"
-            "1. नीचे दिए गए QR कोड को किसी भी UPI ऐप (PhonePe, GPay, Paytm) से स्कैन करें।\n"
-            "2. भुगतान पूरा करके स्क्रीनशॉट भेजें। फ़ाइल तुरंत अनलॉक होगी।"
+            "1. ऊपर दिए गए QR कोड को किसी भी UPI ऐप (PhonePe, GPay, Paytm) से स्कैन करें।\n"
+            "2. भुगतान पूरा करके UTR या स्क्रीनशॉट भेजें। फ़ाइल तुरंत अनलॉक होगी।"
         )
 
         buttons = []
@@ -264,14 +266,14 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode="Markdown"
         )
 
-    elif query.data.startswith("free_"):
-        search_term = query.data.replace("free_", "")
+    elif data.startswith("free_"):
+        search_term = data.replace("free_", "")
         if query.from_user.id == ADMIN_ID:
-            await generate_and_send_csv(search_term, query)
+            await generate_and_send_csv(search_term, query.message)
         else:
             await query.message.reply_text("⛔ अनधिकृत एक्सेस!")
 
-    elif query.data == "back_home":
+    elif data == "back_home":
         await start(update, context)
 
 async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -335,23 +337,16 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ])
     await update.message.reply_text(preview_text, reply_markup=unlock_btn, parse_mode="Markdown")
 
-async def main():
+def main():
     print("[*] Starting Enterprise Digital Bharat AI Engine...")
     application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
     
-    await application.initialize()
-    await application.start()
-    await application.updater.start_polling(drop_pending_updates=True)
     print("[+] Enterprise Engine is LIVE and Listening!")
-    while True:
-        await asyncio.sleep(3600)
+    application.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except (KeyboardInterrupt, SystemExit):
-        pass
+    main()
         
