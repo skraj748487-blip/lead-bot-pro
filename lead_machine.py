@@ -3,11 +3,12 @@ import os
 import re
 import logging
 import urllib.parse
+import asyncio
 import requests
 from bs4 import BeautifulSoup
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
-    ApplicationBuilder,
+    Application,
     CommandHandler,
     CallbackQueryHandler,
     MessageHandler,
@@ -35,13 +36,13 @@ def main_menu():
 def fetch_real_leads(query_text, max_results=30):
     leads = []
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
     search_terms = [
         f"{query_text} contact phone address",
         f"{query_text} dealers contact number",
-        f"best {query_text} office phone number"
+        f"best {query_text} office number"
     ]
 
     seen_phones = set()
@@ -51,12 +52,11 @@ def fetch_real_leads(query_text, max_results=30):
             break
         try:
             url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(term)}"
-            resp = requests.get(url, headers=headers, timeout=10)
+            resp = requests.get(url, headers=headers, timeout=8)
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.text, "html.parser")
                 results = soup.find_all("div", class_="result__body")
                 for res in results:
-                    title_elem = res.find("a", class_="result__snippet") or res.find("a", class_="result__url")
                     title_tag = res.find("h2", class_="result__title")
                     title = title_tag.get_text(strip=True) if title_tag else "Business Partner"
                     snippet = res.find("a", class_="result__snippet")
@@ -271,11 +271,23 @@ async def process_user_query(msg, update, context):
 async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await process_user_query(update.message.text.strip(), update, context)
 
+async def main():
+    print("[*] Starting VyaparMitra on Python 3.13...")
+    application = Application.builder().token(BOT_TOKEN).build()
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CallbackQueryHandler(button_handler))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
+    
+    await application.initialize()
+    await application.start()
+    await application.updater.start_polling(drop_pending_updates=True)
+    print("[+] Bot is LIVE and Listening!")
+    while True:
+        await asyncio.sleep(3600)
+
 if __name__ == "__main__":
-    print("[*] VyaparMitra Live Engine Running...")
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CallbackQueryHandler(button_handler))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
-    app.run_polling()
-       
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        pass
+                            
