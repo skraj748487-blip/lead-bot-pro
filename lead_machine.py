@@ -1,13 +1,14 @@
 import csv
 import os
 import logging
+import urllib.parse
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = "8924269550:AAGEI8vHQVrJqEqcs9cV9F956QaAicvVUrE"
-UPI_ID = "7484878440-2@ybl"
 PAYMENT_AMOUNT = "999"
 ADMIN_ID = 8290334681
+ADMIN_UPI = "7484878440-2@ybl"
 
 logging.basicConfig(format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO)
 
@@ -24,8 +25,8 @@ def main_menu():
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (
         "💼 **VyaparMitra AI - B2B Growth & Recovery Engine** 💼\n\n"
-        "⚡ *सुपरफास्ट मोड सक्रिय है - आप लिखकर या वॉइस मैसेज भेजकर डेटा ले सकते हैं!*\n\n"
-        "👉 नीचे दी गई कैटेगरी चुनें या सीधे लिखें/बोलें:\n"
+        "⚡ *सुपरफास्ट मोड सक्रिय है!*\n\n"
+        "👉 नीचे दी गई कैटेगरी चुनें या सीधे लिखें:\n"
         "`[City] [Business]` (उदा: `Mumbai Real Estate`)"
     )
     if update.message:
@@ -72,11 +73,11 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif query.data == "reminder_tool":
         text = (
-            "💰 **उधार वसूली (Instant Reminder Tool)**\n\n"
-            "व्यापारियों के बकाया पैसों का तगादा करने के लिए इस फॉर्मेट में लिखें:\n\n"
-            "`REMINDER, [ग्राहक का नाम], [रुपये], [ड्यू डेट], [दुकान का नाम]`\n\n"
-            "उदाहरण:\n"
-            "`REMINDER, राहुल कुमार, 25000, 25 सितम्बर, शर्मा ट्रेडर्स`"
+            "💰 **उधार वसूली (WhatsApp Reminder Automation)**\n\n"
+            "ग्राहक को ऑटोमेशन मैसेज भेजने के लिए इस तरह लिखकर भेजें:\n\n"
+            "`REMINDER, [ग्राहक का नाम], [मोबाइल नंबर], [रुपये], [तारीख], [दुकान का नाम], [आपकी UPI ID]`\n\n"
+            "📌 **उदाहरण:**\n"
+            "`REMINDER, अमित कुमार, 9876543210, 15000, 25 सितम्बर, राज ट्रेडर्स, rajtraders@upi`"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ वापस जाएँ", callback_data="back_home")]])
         await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
@@ -86,7 +87,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["selected_category"] = category
         text = (
             f"🔍 चुनी गई कैटेगरी: **{category}**\n\n"
-            "अब अपने शहर का नाम टाइप करें या वॉइस मैसेज भेजें (उदा: `Mumbai`, `Patna`, `Jaipur`):"
+            "अब अपने शहर का नाम लिखें (उदा: `Mumbai`, `Patna`, `Jaipur`):"
         )
         back_btn = InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ वापस जाएँ", callback_data="back_home")]])
         await query.message.edit_text(text, reply_markup=back_btn, parse_mode="Markdown")
@@ -98,20 +99,15 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         text = (
             f"⚡ **अनलॉक करें: {search_term} की 500+ प्रीमियम लीड्स**\n\n"
             f"💰 एक्सेस फीस: **₹{PAYMENT_AMOUNT}**\n"
-            f"📲 PhonePe / GPay UPI ID:\n`{UPI_ID}`\n\n"
-            "1. ऊपर दी गई UPI ID पर किसी भी UPI ऐप से ₹999 ट्रांसफर करें।\n"
-            "2. भुगतान के बाद स्क्रीनशॉट या UTR चैट में भेजें, सिस्टम डेटा अनलॉक कर देगा।"
+            f"📲 Admin UPI ID:\n`{ADMIN_UPI}`\n\n"
+            "1. ऊपर दी गई UPI ID पर ₹999 ट्रांसफर करें।\n"
+            "2. स्क्रीनशॉट या UTR भेजें, सिस्टम डेटा अनलॉक कर देगा।"
         )
 
+        buttons = []
         if user_id == ADMIN_ID:
-            buttons = [
-                [InlineKeyboardButton("👑 मालिक के लिए फ़्री डाउनलोड (Admin Bypass)", callback_data=f"free_{search_term}")],
-                [InlineKeyboardButton("⬅️ मेन मेन्यू", callback_data="back_home")]
-            ]
-        else:
-            buttons = [
-                [InlineKeyboardButton("⬅️ मेन मेन्यू", callback_data="back_home")]
-            ]
+            buttons.append([InlineKeyboardButton("👑 मालिक के लिए फ़्री डाउनलोड (Admin Bypass)", callback_data=f"free_{search_term}")])
+        buttons.append([InlineKeyboardButton("⬅️ मेन मेन्यू", callback_data="back_home")])
 
         await query.message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode="Markdown")
 
@@ -120,7 +116,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if query.from_user.id == ADMIN_ID:
             await generate_and_send_csv(search_term, query)
         else:
-            await query.message.reply_text("⛔ अनधिकृत एक्सेस! केवल बॉट एडमिन ही फ्री डाउनलोड कर सकते हैं।")
+            await query.message.reply_text("⛔ अनधिकृत एक्सेस!")
 
     elif query.data == "back_home":
         await start(update, context)
@@ -128,23 +124,41 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def process_user_query(msg, update, context):
     if msg.upper().startswith("REMINDER"):
         parts = [p.strip() for p in msg.split(",")]
-        if len(parts) >= 5:
-            _, client_name, amount, due_date, shop_name = parts
-            reminder_script = (
-                f"📢 **तैयार वसूली मैसेज (WhatsApp/SMS ड्राफ्ट):**\n\n"
-                f"━━━━━━━━━━━━━━━━━━━━\n"
-                f"आदरणीय *{client_name}* जी,\n"
-                f"सस्नेह नमस्कार। *{shop_name}* की ओर से आपका बिल बकाया राशि *₹{amount}* है, जिसकी देय तिथि *{due_date}* है।\n\n"
+        if len(parts) >= 7:
+            _, client_name, client_phone, amount, due_date, shop_name, user_upi = parts
+            clean_phone = "".join(filter(str.isdigit, client_phone))
+            if len(clean_phone) == 10:
+                clean_phone = "91" + clean_phone
+
+            raw_reminder = (
+                f"आदरणीय {client_name} जी,\n"
+                f"सस्नेह नमस्कार। {shop_name} की ओर से आपका बिल बकाया राशि ₹{amount} है, जिसकी देय तिथि {due_date} है।\n\n"
                 f"कृपया खाते के नियमित संचालन हेतु भुगतान समय पर करने का कष्ट करें।\n"
-                f"ऑनलाइन भुगतान UPI: `{UPI_ID}`\n\n"
-                f"धन्यवाद,\n*{shop_name}*\n"
-                f"━━━━━━━━━━━━━━━━━━━━\n\n"
-                f"💡 इसे सीधे कॉपी करके अपने ग्राहक को भेजें।"
+                f"ऑनलाइन भुगतान हेतु UPI ID: {user_upi}\n\n"
+                f"धन्यवाद,\n{shop_name}"
             )
-            await update.message.reply_text(reminder_script, parse_mode="Markdown")
+
+            encoded_text = urllib.parse.quote(raw_reminder)
+            wa_link = f"https://wa.me/{clean_phone}?text={encoded_text}"
+
+            preview = (
+                f"📢 **तैयार वसूली मैसेज:**\n\n"
+                f"━━━━━━━━━━━━━━━━━━━━\n"
+                f"{raw_reminder}\n"
+                f"━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"👉 **नीचे दिए गए बटन पर दबाते ही WhatsApp खुल जाएगा:**"
+            )
+
+            btn = InlineKeyboardMarkup([[InlineKeyboardButton("📲 ग्राहक को WhatsApp पर भेजें", url=wa_link)]])
+            await update.message.reply_text(preview, reply_markup=btn)
             return
         else:
-            await update.message.reply_text("⚠️ फॉर्मेट: `REMINDER, राहुल कुमार, 25000, 25 सितम्बर, शर्मा ट्रेडर्स`", parse_mode="Markdown")
+            await update.message.reply_text(
+                "⚠️ **गलत फॉर्मेट!** इस तरह लिखें:\n\n"
+                "`REMINDER, [ग्राहक का नाम], [मोबाइल नंबर], [रुपये], [तारीख], [दुकान का नाम], [UPI ID]`\n\n"
+                "उदा: `REMINDER, अमित कुमार, 9876543210, 15000, 25 सितम्बर, राज ट्रेडर्स, raj@upi`",
+                parse_mode="Markdown"
+            )
             return
 
     cat = context.user_data.get("selected_category", "")
@@ -171,16 +185,10 @@ async def process_user_query(msg, update, context):
 async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await process_user_query(update.message.text.strip(), update, context)
 
-async def handle_voice(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🎙️ *वॉइस नोट प्राप्त हुआ!* डेटा तैयार किया जा रहा है...", parse_mode="Markdown")
-    cat = context.user_data.get("selected_category", "Real Estate")
-    await process_user_query(f"Local {cat}", update, context)
-
 if __name__ == "__main__":
-    print("[*] VyaparMitra Live with Admin Protection...")
+    print("[*] VyaparMitra Running...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CallbackQueryHandler(button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
-    app.add_handler(MessageHandler(filters.VOICE, handle_voice))
     app.run_polling()
