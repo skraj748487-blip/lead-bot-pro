@@ -1,4 +1,4 @@
-                                "            import csv
+import csv
 import os
 import re
 import logging
@@ -249,7 +249,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"📲 Official UPI ID:\n`{ADMIN_UPI}`\n\n"
             "📌 **भुगतान करने का तरीका:**\n"
             "1. नीचे दिए गए QR कोड को किसी भी UPI ऐप (PhonePe, GPay, Paytm) से स्कैन करें।\n"
-            "2. भुगतान पूरा करके UTR या स्क्रीनशॉट भेजें। फ़ाइल तुरंत अनलॉक होगी।"
+            "2. भुगतान पूरा करके स्क्रीनशॉट भेजें। फ़ाइल तुरंत अनलॉक होगी।"
         )
 
         buttons = []
@@ -354,4 +354,4 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         pass
-        
+      
