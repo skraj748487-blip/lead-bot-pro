@@ -1,4 +1,4 @@
-       import csv
+import csv
 import os
 import re
 import logging
@@ -64,7 +64,7 @@ def fetch_real_leads(query_text, max_results=30):
 
                     full_text = f"{title} {snippet_text}"
                     phones = re.findall(r"(?:(?:\+91[\-\s]?)?[6-9]\d{9})", full_text)
-                    
+
                     for phone in phones:
                         clean_ph = re.sub(r"[^\d+]", "", phone)
                         if len(clean_ph) >= 10 and clean_ph not in seen_phones:
@@ -94,7 +94,7 @@ def fetch_real_leads(query_text, max_results=30):
                 "phone": f"+91 98{i:02d}1100{i:02d}",
                 "status": "Directory Verified"
             })
-            
+
     return leads
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -112,7 +112,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def generate_and_send_csv(query_text, update_or_msg):
     clean_name = query_text.replace(" ", "_").replace(")", "").replace("(", "")
     filename = f"Live_Leads_{clean_name}.csv"
-    
+
     msg_obj = update_or_msg.message if hasattr(update_or_msg, "message") else update_or_msg
     status_msg = await msg_obj.reply_text("🔄 **इंटरनेट से असली डेटा निकाला जा रहा है... कृपया 5 सेकंड प्रतीक्षा करें...**")
 
@@ -246,7 +246,7 @@ async def process_user_query(msg, update, context):
     search_query = f"{msg} {cat}".strip()
 
     wait_msg = await update.message.reply_text(f"🔍 **{search_query}** के लिए इंटरनेट से लाइव लीड्स खोजी जा रही हैं...")
-    
+
     live_leads = fetch_real_leads(search_query, max_results=5)
     await wait_msg.delete()
 
@@ -278,4 +278,4 @@ if __name__ == "__main__":
     app.add_handler(CallbackQueryHandler(button_handler))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
     app.run_polling()
-        
+       
