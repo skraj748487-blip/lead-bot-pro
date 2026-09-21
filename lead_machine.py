@@ -4,13 +4,16 @@ from datetime import datetime
 
 # 1. एजेंसी कॉन्फ़िगरेशन
 st.set_page_config(
-    page_title="GrowthCore AI — 3-in-1 Business Growth Operating System",
+    page_title="GrowthCore AI — 3-in-1 Business Growth OS",
     page_icon="⚡",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# अल्ट्रा-प्रीमियम साइबर फिनटेक UI
+# 2. भाषा चयन (Language Switcher)
+lang = st.radio("🌐 भाषा चुनें / Select Language:", ["🇮🇳 हिंदी", "🌍 English"], horizontal=True)
+
+# 3. डार्क साइबर UI
 st.markdown("""
 <style>
     .stApp {
@@ -93,187 +96,193 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# मुख्य हेडर
-st.markdown("""
-<div class="main-banner">
-    <h2>⚡ GROWTHCORE — 3-IN-1 ऑल-इन-वन बिज़नेस ग्रोथ इंजन</h2>
-    <p>Google Maps रैंकिंग • AI वायरल रील्स इंजन • डिजिटल इनवॉइस व एसेट्स</p>
-</div>
-""", unsafe_allow_html=True)
-
 MY_WA_NUMBER = "917484878440"
 MY_UPI_ID = "7484878449-2@ybl"
 today_date = datetime.now().strftime("%d-%m-%Y")
 
-tabs = st.tabs([
-    "⭐ 1. Google Maps 5-Star इंजन",
-    "🎬 2. AI वायरल रील्स जनरेटर",
-    "📑 3. डिजिटल इनवॉइस व किट",
-    "👑 4. ₹30,000 एजेंसी बुकिंग"
-])
+# हेडर बैनर
+if "हिंदी" in lang:
+    st.markdown("""
+    <div class="main-banner">
+        <h2>⚡ GROWTHCORE — 3-IN-1 बिज़नेस ग्रोथ इंजन</h2>
+        <p>Google Maps 5-स्टार रैंकिंग • वायरल रील्स स्क्रिप्ट • 1-क्लिक रिव्यू बूस्टर</p>
+    </div>
+    """, unsafe_allow_html=True)
+    tabs = st.tabs([
+        "⭐ Google Maps रिव्यू इंजन",
+        "📲 WhatsApp रिव्यू बूस्टर",
+        "🎬 AI वायरल रील्स स्क्रिप्ट",
+        "👑 ₹30,000 एजेंसी बुकिंग"
+    ])
+else:
+    st.markdown("""
+    <div class="main-banner">
+        <h2>⚡ GROWTHCORE — 3-IN-1 BUSINESS GROWTH ENGINE</h2>
+        <p>Google Maps 5-Star Booster • Viral Reels Generator • Instant Review Automator</p>
+    </div>
+    """, unsafe_allow_html=True)
+    tabs = st.tabs([
+        "⭐ Google Maps Review Engine",
+        "📲 WhatsApp Review Automator",
+        "🎬 AI Viral Reels Generator",
+        "👑 ₹30,000 Agency Retainer"
+    ])
 
 # ----------------------------------------------------
-# 1. ⭐ असली Google Maps 5-Star इंजन
+# 1. ⭐ Google Maps Review Engine
 # ----------------------------------------------------
 with tabs[0]:
-    st.markdown("### ⭐ Google Maps 5-स्टार रिव्यू और रैंकिंग बूस्टर")
-    st.caption("क्लाइंट का Google Maps लिंक या दुकान का नाम डालें — यह तुरंत असली स्कैनिंग QR बना देगा:")
+    if "हिंदी" in lang:
+        st.markdown("### ⭐ Google Maps 5-स्टार रिव्यू और रैंकिंग बूस्टर")
+        st.caption("क्लाइंट का Google Maps लिंक या दुकान का नाम डालें — सिस्टम तुरंत असली स्कैनिंग QR बना देगा:")
+        b_name_map = st.text_input("दुकान / कंपनी का नाम:", placeholder="उदा: पटना ऑटोमोटिव केयर")
+        map_link = st.text_input("Google Maps Review लिंक (या दुकान का नाम व शहर):", placeholder="उदा: https://maps.app.goo.gl/xyz123")
+        btn_qr = "🚀 असली Review QR कोड जनरेट करें"
+    else:
+        st.markdown("### ⭐ Google Maps 5-Star Review Booster")
+        st.caption("Enter client's shop name or Maps link to generate an instant review QR code:")
+        b_name_map = st.text_input("Business / Shop Name:", placeholder="e.g. Coimbatore Car Care")
+        map_link = st.text_input("Google Maps Link (or Shop Name with City):", placeholder="e.g. https://maps.app.goo.gl/xyz123")
+        btn_qr = "🚀 Generate Instant Review QR Code"
 
-    b_name_map = st.text_input("दुकान / कंपनी का नाम:", placeholder="उदा: पटना ऑटोमोटिव केयर")
-    map_link = st.text_input("Google Maps Review लिंक (या प्रोफाइल लिंक):", placeholder="उदा: https://maps.app.goo.gl/xyz123")
-
-    if st.button("🚀 असली Review QR कोड जनरेट करें"):
+    if st.button(btn_qr):
         target_link = map_link.strip() if map_link.strip() else f"https://www.google.com/search?q={urllib.parse.quote(b_name_map + ' reviews')}"
-        qr_gen_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={urllib.parse.quote(target_link)}"
+        qr_gen_url = f"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data={urllib.parse.quote(target_link)}"
 
         st.markdown(f"""
         <div class="real-card" style="text-align: center; border-left: 4px solid #F59E0B;">
             <p style="color: #F59E0B; font-size: 15px; font-weight: bold; margin-bottom: 8px;">
-                📲 {b_name_map if b_name_map else 'आपकी दुकान'} का लाइव 5-स्टार रिव्यू QR
+                📲 {b_name_map if b_name_map else 'Your Business'} 5-Star Review QR
             </p>
             <img src="{qr_gen_url}" width="180" style="background:#fff; padding:8px; border-radius:12px; border:2px solid #F59E0B;" />
             <p style="color:#94A3B8; font-size:12px; margin-top:8px;">
-                ग्राहक काउंटर पर इस QR को स्कैन करते ही सीधे Google पर 5-स्टार रिव्यू देगा।
+                {'ग्राहक इसे स्कैन करते ही सीधे 5-स्टार रिव्यू पेज पर पहुँचेगा।' if 'हिंदी' in lang else 'Customers can scan this to leave an instant 5-star Google review.'}
             </p>
         </div>
         """, unsafe_allow_html=True)
-        st.info("💡 क्लाइंट को समझाएं: इसे अपनी दुकान के बिलिंग काउंटर पर प्रिंट करके लगा लें। रोज़ 10 रिव्यू मिलेंगे तो दुकान अपने शहर में नंबर 1 रैंक करेगी।")
 
 # ----------------------------------------------------
-# 2. 🎬 असली AI वायरल रील्स जनरेटर
+# 2. 📲 WhatsApp Review Automator
 # ----------------------------------------------------
 with tabs[1]:
-    st.markdown("### 🎬 AI वायरल रील्स व शॉर्ट्स स्क्रिप्ट इंजन")
-    st.caption("बिज़नेस की कैटेगरी चुनें — यह तुरंत 30 सेकंड की रेडीमेड वायरल स्क्रिप्ट, वॉइसओवर और विजुअल्स बनाकर देगा:")
+    if "हिंदी" in lang:
+        st.markdown("### 📲 ग्राहक के WhatsApp पर डायरेक्ट 5-स्टार रिव्यू रिक्वेस्ट भेजें")
+        st.caption("बिलिंग के बाद ग्राहक को 1-क्लिक में रिव्यू लिंक भेजें ताकि वह घर जाकर भी 5-स्टार दे:")
+        wa_cname = st.text_input("ग्राहक का नाम:", placeholder="उदा: अमित कुमार")
+        wa_cphone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", placeholder="उदा: 9876543210")
+        wa_bname = st.text_input("आपकी दुकान का नाम:", placeholder="उदा: रॉयल गैरेज")
+        wa_link = st.text_input("Google Review लिंक:", placeholder="https://maps.app.goo.gl/...")
+        btn_wa_rev = "⚡ WhatsApp पर रिव्यू मैसेज भेजें"
+    else:
+        st.markdown("### 📲 Send 1-Click WhatsApp Review Requests")
+        st.caption("Send instant automated review requests to customers right after their visit:")
+        wa_cname = st.text_input("Customer Name:", placeholder="e.g. John Doe")
+        wa_cphone = st.text_input("Customer WhatsApp Number (10 digits):", placeholder="e.g. 9876543210")
+        wa_bname = st.text_input("Your Business Name:", placeholder="e.g. Coimbatore Motors")
+        wa_link = st.text_input("Google Maps Review Link:", placeholder="https://maps.app.goo.gl/...")
+        btn_wa_rev = "⚡ Send Review Request on WhatsApp"
 
-    biz_cat = st.selectbox("बिज़नेस कैटेगरी:", [
-        "🚗 कार रिपेयर / ऑटोमोबाइल गैरेज", 
-        "🏋️ जिम व फिटनेस सेंटर", 
-        "🏥 डेंटल व स्किन क्लीनिक", 
-        "🏢 रियल एस्टेट व प्रॉपर्टी", 
-        "🛍️ कपड़ा व रिटेल स्टोर"
-    ])
-    reel_topic = st.text_input("वीडियो का खास टॉपिक (वैकल्पिक):", placeholder="उदा: गाड़ी का माइलेज 20% बढ़ाने का सीक्रेट")
+    if st.button(btn_wa_rev):
+        cn = wa_cname.strip() if wa_cname.strip() else "Valued Customer"
+        bn = wa_bname.strip() if wa_bname.strip() else "Our Store"
+        rl = wa_link.strip() if wa_link.strip() else "https://google.com"
+        cp = wa_cphone.strip() if len(wa_cphone.strip()) == 10 else MY_WA_NUMBER
 
-    if st.button("🔥 30-सेकंड वायरल रील स्क्रिप्ट तैयार करें"):
-        topic_clean = reel_topic.strip() if reel_topic.strip() else "इस महीने का सबसे बड़ा स्पेशल ऑफर"
-        
-        reel_script = f"""==================================================
-🎬 30-SECOND VIRAL REEL BLUEPRINT
-CATEGORY: {biz_cat}
-TOPIC: {topic_clean}
-==================================================
+        if "हिंदी" in lang:
+            req_msg = f"नमस्ते {cn} जी! {bn} में आने के लिए हार्दिक धन्यवाद। 🙏\n\nयदि आपको हमारी सेवा पसंद आई, तो कृपया नीचे दिए गए लिंक पर 5 सेकंड निकालकर हमें Google पर 5-Star रेटिंग दें। आपका एक रिव्यू हमारे लिए बहुत महत्वपूर्ण है:\n👉 {rl}\n\nधन्यवाद!"
+        else:
+            req_msg = f"Hello {cn}! Thank you for visiting {bn}. 🙏\n\nIf you enjoyed our service, please take 5 seconds to support us with a 5-Star rating on Google:\n👉 {rl}\n\nWe appreciate your support!"
 
-[00:00 - 00:03] 🔥 वायरल हुक (Visual: तेज कट के साथ समस्या दिखाना):
-Voiceover: "क्या आप भी {biz_cat.split(' ')[1]} में अपना पैसा और समय बर्बाद कर रहे हैं? रुकिए!"
-
-[00:03 - 00:15] 💡 असली समाधान (Visual: काम करते हुए फास्ट-मोशन वीडियो):
-Voiceover: "ज़्यादातर लोग यह छोटी गलती करते हैं। लेकिन {topic_clean} को सही करने का सिर्फ एक आसान तरीका है..."
-
-[00:15 - 00:25] ⚡ सामाजिक प्रमाण व ऑफर (Visual: खुश ग्राहक और फाइनल काम):
-Voiceover: "हमारे यहाँ आपको मिलता है 100% गारंटीड समाधान, वो भी बाज़ार से 20% कम खर्च में।"
-
-[00:25 - 00:30] 🚀 कॉल टू एक्शन (Visual: बायो लिंक या WhatsApp नंबर):
-Voiceover: "ऑफर सिर्फ इस हफ्ते के लिए है। अभी नीचे दिए गए नंबर पर WhatsApp करें या हमारी प्रोफाइल विजिट करें!"
-
-🏷️ ट्रेंडिंग हैशटैग्स:
-#{biz_cat.split(' ')[1].replace(' ', '')} #LocalBusiness #ViralReel #TrendingReels2026
-=================================================="""
-
-        st.text_area("तैयार रील स्क्रिप्ट (सीधे कॉपी करके वीडियो बनाएं):", reel_script, height=240)
-        st.download_button("📥 डाउनलोड रील स्क्रिप्ट (TXT)", data=reel_script, file_name=f"Reel_Script_{datetime.now().strftime('%Y%m%d_%H%M')}.txt", mime="text/plain", use_container_width=True)
+        enc_req = urllib.parse.quote(req_msg)
+        wa_fire_url = f"https://wa.me/91{cp}?text={enc_req}"
+        st.markdown(f'<a href="{wa_fire_url}" target="_blank" class="pay-btn-main" style="background:#25D366;">📲 Open WhatsApp & Send Request</a>', unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 3. 📑 असली डिजिटल इनवॉइस व एसेट किट
+# 3. 🎬 AI Viral Reels Generator
 # ----------------------------------------------------
 with tabs[2]:
-    st.markdown("### 📑 डिजिटल बिलिंग व WhatsApp एसेट मेकर")
-    st.caption("क्लाइंट के ग्राहकों के लिए 10 सेकंड में पक्का डिजिटल इनवॉइस बनाएं:")
+    if "हिंदी" in lang:
+        st.markdown("### 🎬 AI वायरल रील्स व शॉर्ट्स स्क्रिप्ट इंजन")
+        biz_cat = st.selectbox("बिज़नेस कैटेगरी:", ["🚗 कार रिपेयर / ऑटो गैरेज", "🏋️ जिम व फिटनेस सेंटर", "🏥 डेंटल व स्किन क्लीनिक", "🏢 रियल एस्टेट", "🛍️ रिटेल स्टोर"])
+        reel_topic = st.text_input("वीडियो टॉपिक:", placeholder="उदा: 20% माइलेज बढ़ाने का तरीका")
+        btn_reel = "🔥 30-सेकंड वायरल रील तैयार करें"
+    else:
+        st.markdown("### 🎬 AI Viral Reels & Shorts Engine")
+        biz_cat = st.selectbox("Business Category:", ["🚗 Automobile & Garage", "🏋️ Gym & Fitness Center", "🏥 Dental & Skin Clinic", "🏢 Real Estate & Property", "🛍️ Retail & Fashion"])
+        reel_topic = st.text_input("Video Topic:", placeholder="e.g. 3 Tips to save 20% fuel")
+        btn_reel = "🔥 Generate 30-Second Viral Script"
 
-    col_inv1, col_inv2 = st.columns(2)
-    with col_inv1:
-        inv_shop = st.text_input("फर्म / स्टोर का नाम:", placeholder="उदा: मॉडर्न सर्विस सेंटर")
-        inv_amt = st.text_input("बिल राशि (₹):", placeholder="उदा: 2500")
-    with col_inv2:
-        inv_cust = st.text_input("ग्राहक का नाम व फोन:", placeholder="उदा: राहुल सिंह (9876543210)")
-        inv_items = st.text_input("सेवा / सामान का विवरण:", placeholder="उदा: फुल इंजन ट्यूनअप + ऑयल चेंज")
+    if st.button(btn_reel):
+        t_clean = reel_topic.strip() if reel_topic.strip() else "Best Special Offer"
+        r_script = f"""==================================================
+🎬 30-SECOND VIRAL REEL BLUEPRINT
+CATEGORY: {biz_cat}
+TOPIC: {t_clean}
+==================================================
 
-    if st.button("⚡ पक्का डिजिटल बिल तैयार करें"):
-        bill_txt = f"""🧾 **डिजिटल कैश मेमो / रसीद**
-🏪 **प्रतिष्ठान:** {inv_shop if inv_shop else 'अधिकृत स्टोर'}
-📅 **तारीख:** {today_date}
-👤 **ग्राहक:** {inv_cust if inv_cust else 'सम्मानित ग्राहक'}
-----------------------------------
-📦 **विवरण:** {inv_items if inv_items else 'सर्विस / डिलीवरी'}
-💰 **कुल भुगतान:** ₹{inv_amt if inv_amt else '0'}
-✅ **स्थिति:** भुगतान प्राप्त / पेड (PAID)
-----------------------------------
-🙏 हमारे यहाँ आने के लिए हार्दिक धन्यवाद!"""
+[00:00 - 00:03] 🔥 HOOK (Fast cut visual):
+"Stop making this huge mistake with your {biz_cat.split(' ')[1]}! Watch this till the end."
 
-        st.text_area("डिजिटल रसीद:", bill_txt, height=160)
-        enc_bill = urllib.parse.quote(bill_txt)
-        st.markdown(f'<a href="https://wa.me/?text={enc_bill}" target="_blank" class="pay-btn-main" style="background:#25D366;">📲 सीधे ग्राहक को WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
+[00:03 - 00:15] 💡 THE SOLUTION (B-roll footage):
+"Most people ignore this simple step. Here is how you solve {t_clean} in 5 minutes..."
+
+[00:15 - 00:25] ⚡ PROOF & OFFER:
+"Visit our store this week and get an exclusive 15% discount on your first appointment."
+
+[00:25 - 00:30] 🚀 CALL TO ACTION:
+"Click the link in our bio or WhatsApp us directly right now!"
+=================================================="""
+        st.text_area("Reel Script:", r_script, height=220)
+        st.download_button("📥 Download Script (TXT)", data=r_script, file_name="Reel_Script.txt", mime="text/plain", use_container_width=True)
 
 # ----------------------------------------------------
-# 4. 👑 ₹30,000 एजेंसी बुकिंग
+# 4. 👑 ₹30,000 Agency Booking
 # ----------------------------------------------------
 with tabs[3]:
-    st.markdown("### 👑 3-in-1 ग्रोथ इंजन पैकेज (₹30,000 / माह)")
-    
+    st.markdown("### 👑 GrowthCore Commercial Agency Retainer")
     st.markdown("""
     <div class="real-card" style="border-left: 4px solid #10B981;">
-        <h3 style="color:#10B981; margin:0;">🔥 कम्पलीट 3-in-1 बिजनेस ग्रोथ पैकेज</h3>
+        <h3 style="color:#10B981; margin:0;">Complete 3-in-1 Business Growth Retainer</h3>
         <p style="font-size:14px; color:#F8FAFC; margin:8px 0;">
-            1. <b>Google Maps 5-Star Booster:</b> काउंटर QR + ऑटो-रिव्यू सिस्टम<br>
-            2. <b>AI Faceless Reels:</b> महीने की 25 रेडीमेड वायरल स्क्रिप्ट्स व वीडियो प्लान<br>
-            3. <b>डिजिटल बिलिंग व WhatsApp फॉलो-अप:</b> 0-सेकंड कस्टमर क्लोजिंग टूल
+            • Google Maps Top-3 Ranking System<br>
+            • 25 AI Viral Reels Scripts & Content Plan / month<br>
+            • 1-Click WhatsApp Review Automator
         </p>
-        <p style="font-size:16px; color:#38BDF8; font-weight:bold; margin:0;">एकमुश्त सेटअप फ़ीस: ₹30,000</p>
+        <p style="font-size:16px; color:#38BDF8; font-weight:bold; margin:0;">Monthly Retainer: ₹30,000 / $360 USD</p>
     </div>
     """, unsafe_allow_html=True)
 
-    # टोकन बुकिंग पेमेंट
     token_amt = "1500"
-    upi_engine = f"upi://pay?pa={MY_UPI_ID}&pn=GrowthCore%20Agency&am={token_amt}&cu=INR&tn=Setup%20Booking"
+    upi_engine = f"upi://pay?pa={MY_UPI_ID}&pn=GrowthCore%20Agency&am={token_amt}&cu=INR&tn=Retainer%20Booking"
     qr_engine_img = f"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={urllib.parse.quote(upi_engine)}"
 
     st.markdown(f"""
     <div class="real-card" style="text-align: center;">
-        <p style="color: #38BDF8 !important; font-weight: bold; margin-bottom: 8px;">📲 ₹1,500 एडवांस टोकन पे करके सेटअप चालू करवाएं:</p>
+        <p style="color: #38BDF8 !important; font-weight: bold; margin-bottom: 8px;">📲 Pay ₹1,500 Advance Token (PhonePe / GPay):</p>
         <img src="{qr_engine_img}" width="165" style="background: #fff; padding: 6px; border-radius: 12px; border: 2px solid #2563EB;" />
         <p style="font-size: 12px; color: #94A3B8 !important; margin-top: 6px;">UPI ID: <b>{MY_UPI_ID}</b></p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown(f'<a href="{upi_engine}" class="pay-btn-main">⚡ ₹{token_amt} एडवांस टोकन पे करें (PhonePe / GPay)</a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{upi_engine}" class="pay-btn-main">⚡ Pay ₹{token_amt} Token Now</a>', unsafe_allow_html=True)
 
-    utr_token = st.text_input("पेमेंट के बाद 12 अंकों का UTR नंबर दर्ज करें:", placeholder="उदा: 428192837461", key="growth_utr")
-    if st.button("🚀 बुकिंग सत्यापित करें"):
-        u_val = utr_token.strip()
-        if u_val in ["7484878440", "111122223333"] or (len(u_val) == 12 and u_val.isdigit()):
-            st.success("✅ बुकिंग सत्यापित! हमारा सीनियर ग्रोथ कंसल्टेंट अगले 2 घंटे में आपसे संपर्क करके सेटअप लाइव करेगा।")
-        else:
-            st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
-
-# ----------------------------------------------------
-# 👑 संस्थापक प्रोफाइल
-# ----------------------------------------------------
+# संस्थापक प्रोफाइल
 st.markdown("---")
-wa_founder_real = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मुझे अपने बिज़नेस के लिए ₹30,000 वाला 3-in-1 ग्रोथ इंजन लगवाना है।')}"
+wa_founder_link = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('Hello Sahil, I want to deploy GrowthCore 3-in-1 Engine for my business.')}"
 st.markdown(f"""
 <div class="founder-card">
     <p style="color: #38BDF8 !important; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
-        🏛️ FOUNDER & GROWTH ARCHITECT
+        🏛️ FOUNDER & MANAGING DIRECTOR
     </p>
     <h2 style="color: #FFFFFF !important; margin: 8px 0; font-size: 22px; font-weight: 900;">
         साहिल अहमद (Sahil Ahmad)
     </h2>
     <p style="color: #CBD5E1 !important; font-size: 13px; margin-bottom: 14px;">
-        ⚡ ग्रोथकोर एआई — भारतीय व्यवसायों को Google Maps, AI रील्स और डिजिटल टूल्स से लीड्स व सेल्स देने वाला 3-in-1 इंजन।
+        ⚡ GrowthCore AI — Engineered to scale local businesses with Google Maps, AI Reels, and Automation.
     </p>
-    <a href="{wa_founder_real}" target="_blank" 
+    <a href="{wa_founder_link}" target="_blank" 
        style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">
-        💬 सीधे WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर मीटिंग शेड्यूल करें
+        💬 Connect on WhatsApp (+91 {MY_WA_NUMBER[-10:]})
     </a>
 </div>
 """, unsafe_allow_html=True)
