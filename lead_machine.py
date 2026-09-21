@@ -5,7 +5,7 @@ import os
 
 # मोबाइल स्क्रीन सेटअप
 st.set_page_config(
-    page_title="World AI - Universal Super App",
+    page_title="Universal Bharat AI - हर वर्ग का साथी",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -37,12 +37,15 @@ st.markdown("""
         margin-top: 4px;
         margin-bottom: 0;
     }
-    .lang-box {
+    .guide-box {
         background-color: #1E293B;
-        border: 1px solid #38BDF8;
-        border-radius: 10px;
-        padding: 8px 12px;
+        border-left: 4px solid #38BDF8;
+        border-radius: 8px;
+        padding: 12px;
         margin-bottom: 12px;
+        font-size: 12px;
+        color: #E2E8F0;
+        line-height: 1.6;
     }
     .ans-card {
         background-color: #1E293B;
@@ -52,15 +55,6 @@ st.markdown("""
         margin-top: 10px;
         font-size: 13px;
         line-height: 1.6;
-    }
-    .guide-box {
-        background-color: #1E293B;
-        border-left: 4px solid #38BDF8;
-        border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 12px;
-        font-size: 12px;
-        color: #E2E8F0;
     }
     .upi-pay-btn {
         display: block;
@@ -87,168 +81,236 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# हेडर
+# मुख्य हेडर
 st.markdown("""
 <div class="app-header">
-    <h2>🌍 WORLD AI — सुपर ऐप / Super App</h2>
-    <p>हर भाषा, हर देश, हर इंसान के लिए | Any Language, Any Country, Any Person</p>
+    <h2>🌍 UNIVERSAL BHARAT AI</h2>
+    <p>बच्चा, महिला, युवा, बुज़ुर्ग या व्यापारी — हर भारतीय का सच्चा डिजिटल साथी</p>
 </div>
 """, unsafe_allow_html=True)
 
 # भाषा चयन (Language Selector)
 selected_lang = st.selectbox(
-    "🌐 Choose Language / भाषा चुनें / மொழியைத் தேர்ந்தெடுக்கவும்:",
-    ["हिंदी (Hindi)", "English", "தமிழ் (Tamil)", "తెలుగు (Telugu)", "বাংলা (Bengali)", "मराठी (Marathi)", "भोजपुरी / स्थानीय"]
+    "🌐 भाषा चुनें / Select Language / மொழியைத் தேர்வுசெய்க:",
+    ["हिंदी (Hindi)", "English", "தமிழ் (Tamil)", "తెలుగు (Telugu)", "বাংলা (Bengali)", "भोजपुरी / स्थानीय"]
 )
 
-# 5 मुख्य श्रेणियां (टैब्स)
-tab_ai, tab_student, tab_citizen, tab_business, tab_leads = st.tabs([
-    "🤖 बहुभाषी AI",
-    "📚 छात्र / Student",
-    "📜 जन-सेवा व सेहत",
-    "🏪 व्यापारी टूल्स",
-    "🎯 डायरेक्टरी"
+# 5 मुख्य श्रेणियां (Tabs for All Demographics)
+tab_kids, tab_women, tab_seniors, tab_youth, tab_vyapar = st.tabs([
+    "🧒 बच्चे व छात्र",
+    "👩 महिला कॉर्नर",
+    "👴 बुज़ुर्ग जन-सेवा",
+    "🧑 युवा व रोज़गार",
+    "🏪 व्यापारी टूल्स"
 ])
 
 # ----------------------------------------------------
-# 1. बहुभाषी सार्वभौमिक AI (Multi-Language AI)
+# 1. बच्चे व छात्र कॉर्नर (Kids & Students)
 # ----------------------------------------------------
-with tab_ai:
-    st.markdown("### 🎙️ बहुभाषी AI समाधान (Ask in Any Language)")
-    st.caption("आप किसी भी भाषा (हिंदी, English, தமிழ், आदि) में सवाल पूछें, AI उसी भाषा में मार्गदर्शन देगा।")
-
-    # भाषा अनुसार डिफ़ॉल्ट सवाल
-    q_placeholder = "उदा: बुखार में क्या करें? / How to grow business? / காய்ச்சலுக்கு என்ன செய்வது?"
-    user_query = st.text_input("अपना सवाल लिखें या कीबोर्ड माइक से बोलें:", placeholder=q_placeholder)
-
-    if st.button("🚀 समाधान प्राप्त करें / Get Answer", key="get_ans_btn"):
-        q = user_query.strip().lower()
-        if not q:
-            st.warning("कृपया अपना कोई सवाल लिखें या माइक से बोलें।")
-        else:
-            # तमिल डिटेक्शन / चयन
-            if "தமிழ்" in selected_lang or any(char in user_query for char in "அஆஇஈஉஊஎஏஐஒஓஔகஙசஞடணதநபமயரலவழளறன"):
-                ans = f"""🩺 **World AI வழிகாட்டுதல் (Tamil Support):**
-1. **உங்கள் கேள்வி:** {user_query}
-2. **பதில்:** உடல்நலக் கோளாறுகளுக்கு உடனடியாக மருத்துவரை அணுகவும். வணிகம், கல்வி மற்றும் பொது சேவை தொடர்பான அனைத்து வழிகாட்டுதல்களையும் பெற கீழ் உள்ள பிரத்யேக பிரிவுகளைப் பயன்படுத்தவும்."""
-            # अंग्रेज़ी डिटेक्शन / चयन
-            elif "English" in selected_lang or any(w in q for w in ["fever", "business", "help", "money", "loan", "doctor", "study"]):
-                ans = f"""💡 **World AI Universal Guidance (English):**
-1. **Health / Medical:** Always consult a verified medical practitioner for persistent symptoms. Hydrate and take adequate rest.
-2. **Business & Growth:** Use digital invoicing, maintain a WhatsApp catalog, and leverage social media outreach.
-3. **Education & Career:** Maintain focused 25-minute study intervals (Pomodoro) and build a concise, skill-based resume."""
-            # हिंदी / भोजपुरी / अन्य
+with tab_kids:
+    st.markdown("### 🧒 बच्चों की पढ़ाई व मनोरंजन साथी")
+    st.caption("कहानियाँ, कविताएँ, आसान गणित व सामान्य ज्ञान")
+    
+    kid_action = st.radio("चुनें:", ["📖 ज्ञानवर्धक कहानी", "🧮 आसान गणित व विज्ञान", "📝 स्कूल छुट्टी अर्ज़ी"], horizontal=True)
+    
+    if kid_action == "📖 ज्ञानवर्धक कहानी":
+        story_type = st.selectbox("कहानी चुनें:", ["ईमानदार लकड़हारा (सच्चाई की जीत)", "चालाक खरगोश और शेर (बुद्धि का बल)", "प्यासा कौआ (परिश्रम का फल)"])
+        if st.button("✨ कहानी सुनाएँ"):
+            if "लकड़हारा" in story_type:
+                st.markdown("""
+                <div class="guide-box">
+                    <b>🪓 ईमानदार लकड़हारा:</b><br>
+                    एक गरीब लकड़हारे की कुल्हाड़ी नदी में गिर गई। जलपरी ने सोने और चाँदी की कुल्हाड़ी निकाली, लेकिन उसने लेने से मना कर दिया और अपनी लोहे की कुल्हाड़ी ही माँगी। जलपरी ने उसकी ईमानदारी से खुश होकर तीनों कुल्हाड़ियाँ उसे उपहार में दे दीं।<br>
+                    <b>सीख:</b> ईमानदारी सबसे बड़ा धन है।
+                </div>
+                """, unsafe_allow_html=True)
+            elif "खरगोश" in story_type:
+                st.markdown("""
+                <div class="guide-box">
+                    <b>🐰 बुद्धिमान खरगोश:</b><br>
+                    जंगल के शेर से बचने के लिए छोटे खरगोश ने अपनी बुद्धि का इस्तेमाल किया। वह शेर को एक गहरे कुएं के पास ले गया और पानी में उसकी ही परछाई दिखाकर दूसरा शेर बताया। मूर्ख शेर कुएं में कूद गया और सभी जानवर बच गए।<br>
+                    <b>सीख:</b> बल से बड़ी बुद्धि होती है।
+                </div>
+                """, unsafe_allow_html=True)
             else:
-                if any(w in q for w in ["बुखार", "दवा", "सिरदर्द", "स्वास्थ्य", "सेहत", "पेट"]):
-                    ans = """🩺 **स्वास्थ्य व प्राथमिक उपचार (Health Guidance):**
-1. **आराम व पानी:** पर्याप्त गुनगुना पानी, ओआरएस या तरल पदार्थ लें।
-2. **ठंडी पट्टी:** तेज़ बुखार होने पर माथे पर सामान्य पानी की ठंडी पट्टी रखें।
-3. **चेतावनी:** बुखार 2 दिन से अधिक रहने पर तुरंत नज़दीकी डॉक्टर या स्वास्थ्य केंद्र पर संपर्क करें।"""
-                elif any(w in q for w in ["पढ़ाई", "याद", "एग्जाम", "परीक्षा", "छात्र", "study"]):
-                    ans = """📚 **स्मार्ट पढ़ाई व याददाश्त टिप्स (Student Guide):**
-1. **25 मिनट का नियम:** 25 मिनट बिना रुकावट पढ़ें, फिर 5 मिनट का ब्रेक लें।
-2. **शॉर्ट नोट्स:** पढ़ी हुई बातों को अपनी भाषा में 2 लाइनों में लिखें।
-3. **रिवीजन:** सुबह पढ़ा हुआ विषय रात में सोने से पहले 10 मिनट ज़रूर दोहराएं।"""
-                elif any(w in q for w in ["कमाई", "बिज़नेस", "रोजगार", "दुकान", "पैसा"]):
-                    ans = """💼 **व्यापार व कमाई मार्गदर्शन (Business Guide):**
-1. **डिजिटल बिलिंग:** ग्राहकों को WhatsApp पर तुरंत पक्का बिल भेजें।
-2. **लोकल रीच:** Facebook ग्रुप्स और WhatsApp स्टेटस के जरिए नए ऑफर्स बताएं।
-3. **समय पर तगादा:** बकायेदारों को कानूनी रूप से विनम्र नोटिस भेजकर उधारी वसूलें।"""
-                else:
-                    ans = f"""💡 **'{user_query}' हेतु AI परामर्श:**
-• आपकी समस्या दर्ज कर ली गई है। 
-• छात्र, सरकारी योजना या व्यापारी टूल्स के लिए नीचे दिए गए संबंधित टैब का उपयोग करें।"""
+                st.markdown("""
+                <div class="guide-box">
+                    <b>🪶 प्यासा कौआ:</b><br>
+                    एक प्यासे कौवे को घड़े में थोड़ा पानी दिखा। उसने एक-एक कंकड़ घड़े में डाला जिससे पानी ऊपर आ गया और उसने प्यास बुझा ली।<br>
+                    <b>सीख:</b> जहाँ चाह होती है, वहाँ राह निकल आती है।
+                </div>
+                """, unsafe_allow_html=True)
 
-            st.markdown(f'<div class="ans-card">{ans}</div>', unsafe_allow_html=True)
+    elif kid_action == "🧮 आसान गणित व विज्ञान":
+        st.write("**💡 कोई भी साधारण सवाल पूछें:**")
+        k_q = st.text_input("उदा: 15 x 12 कितना होगा? या पौधे भोजन कैसे बनाते हैं?", key="kid_math_q")
+        if st.button("🚀 जवाब देखें"):
+            if "पौधे" in k_q or "पेड़" in k_q:
+                st.info("🌱 **पौधों का भोजन (Photosynthesis):** पौधे सूर्य की रोशनी, पानी और हवा (कार्बन डाइऑक्साइड) की मदद से अपनी पत्तियों में भोजन बनाते हैं। इस प्रक्रिया को प्रकाश-संश्लेषण कहते हैं।")
+            else:
+                st.success("उत्तर: निरंतर अभ्यास और ध्यान केंद्रित करने से हर कठिन प्रश्न आसान हो जाता है! अपने सवाल की संख्याएँ ध्यान से जाँचें।")
+
+    elif kid_action == "📝 स्कूल छुट्टी अर्ज़ी":
+        s_name = st.text_input("विद्यार्थी का नाम:", placeholder="उदा: आर्यन कुमार", key="k_sname")
+        s_days = st.text_input("कितने दिन की छुट्टी चाहिए:", placeholder="उदा: 2 दिन", key="k_sdays")
+        if st.button("📝 अर्ज़ी तैयार करें", key="k_btn_leave"):
+            letter = f"""सेवा में,\nप्रधानाचार्य महोदय,\nविषय: अवकाश हेतु प्रार्थना पत्र\n\nमहोदय,\nसविनय निवेदन है कि आवश्यक कार्य होने के कारण मैं {s_days} तक विद्यालय आने में असमर्थ रहूँगा।\nअतः मुझे अवकाश प्रदान करने की कृपा करें।\n\nआज्ञाकारी छात्र,\n{s_name}"""
+            st.text_area("कॉपी करें:", letter, height=160)
 
 # ----------------------------------------------------
-# 2. छात्र कॉर्नर (Students)
+# 2. महिला कॉर्नर (Women & Homemakers)
 # ----------------------------------------------------
-with tab_student:
-    st.markdown("### 📚 छात्र सहायता व बायोडाटा लेखक")
-    st_option = st.selectbox("कार्य चुनें:", [
-        "छुट्टी की अर्ज़ी (Leave Application)",
-        "जॉब बायोडाटा (Resume Maker)"
+with tab_women:
+    st.markdown("### 👩 महिला सुविधा, रसोई व स्वास्थ्य")
+    st.caption("स्वादिष्ट व्यंजन विधियाँ, घरेलू उपचार और महिला सशक्तिकरण योजनाएँ")
+    
+    w_option = st.selectbox("विषय चुनें:", [
+        "🍲 झटपट व स्वादिष्ट रसोई रेसिपी",
+        "🌿 घरेलू ब्यूटी व सेहत टिप्स",
+        "📜 लखपति दीदी व महिला स्वयं सहायता योजना"
     ])
     
-    if "Leave Application" in st_option:
-        s_name = st.text_input("विद्यार्थी का नाम:", placeholder="उदा: साहिल कुमार")
-        s_school = st.text_input("स्कूल / कॉलेज का नाम:", placeholder="उदा: राजकीय उच्च विद्यालय")
-        s_reason = st.text_input("कारण:", placeholder="उदा: आवश्यक कार्य / अस्वस्थता")
-        s_days = st.text_input("अवधि:", placeholder="उदा: 2 दिन")
-        
-        if st.button("📝 अर्ज़ी तैयार करें"):
-            if s_name and s_school and s_reason and s_days:
-                letter = f"""सेवा में,\nप्रधानाचार्य महोदय,\n{s_school}\n\nविषय: {s_reason} हेतु अवकाश पत्र\n\nमहोदय,\nसविनय निवेदन है कि मैं आपके संस्थान का छात्र हूँ। {s_reason} के कारण मैं {s_days} तक उपस्थित रहने में असमर्थ हूँ।\n\nअतः आपसे प्रार्थना है कि मुझे अवकाश प्रदान करने की कृपा करें।\n\nधन्यवाद।\nआज्ञाकारी छात्र,\n{s_name}"""
-                st.text_area("आपकी अर्ज़ी तैयार है:", letter, height=200)
+    if w_option == "🍲 झटपट व स्वादिष्ट रसोई रेसिपी":
+        recipe = st.selectbox("रेसिपी चुनें:", ["10 मिनट में सूजी का हलवा", "स्वादिष्ट पनीर भुर्जी", "हेल्दी वेजिटेबल दलिया"])
+        if st.button("👨‍🍳 रेसिपी देखें"):
+            if "हलवा" in recipe:
+                st.markdown("""
+                <div class="guide-box">
+                    <b>🥣 सूजी का हलवा (10 मिनट):</b><br>
+                    1. कड़ाही में 2 चम्मच घी गरम करें और सूजी को धीमी आँच पर सुनहरा होने तक भूनें।<br>
+                    2. अलग बर्तन में 2 कप पानी और चीनी उबाल लें।<br>
+                    3. भुनी सूजी में गरम मीठा पानी धीरे-धीरे डालें और लगातार चलाते रहें। इलायची और मेवे डालकर गरमा-गरम परोसें।
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown("""
+                <div class="guide-box">
+                    <b>🍳 पनीर भुर्जी:</b><br>
+                    तेल में जीरा, बारीक प्याज, हरी मिर्च और टमाटर भूनें। हल्दी, नमक, धनिया पाउडर डालें और मैश किया हुआ पनीर मिलाकर 3 मिनट पकाएँ। हरा धनिया डालकर परोसें।
+                </div>
+                """, unsafe_allow_html=True)
 
-    elif "Resume" in st_option:
-        r_name = st.text_input("पूरा नाम:", placeholder="उदा: राहुल कुमार")
-        r_phone = st.text_input("मोबाइल नंबर:", placeholder="उदा: 9876543210")
-        r_edu = st.text_input("योग्यता:", placeholder="उदा: 10वीं / 12वीं / स्नातक")
-        r_skills = st.text_input("हुनर / अनुभव:", placeholder="उदा: कंप्यूटर टाइपिंग, ड्राइविंग")
-        
-        if st.button("📄 बायोडाटा तैयार करें"):
-            if r_name and r_phone and r_edu:
-                res_txt = f"""बायोडाटा / RESUME\nनाम: {r_name}\nसंपर्क: {r_phone}\nयोग्यता: {r_edu}\nहुनर: {r_skills}\nउपलब्धता: तत्काल कार्य हेतु उपलब्ध"""
-                st.text_area("बायोडाटा तैयार है:", res_txt, height=180)
+    elif w_option == "🌿 घरेलू ब्यूटी व सेहत टिप्स":
+        st.markdown("""
+        <div class="guide-box">
+            <b>✨ चमकती त्वचा व बालों के घरेलू नुस्खे:</b><br>
+            • <b>चेहरे के लिए:</b> 1 चम्मच बेसन में आधा चम्मच दही और चुटकी भर हल्दी मिलाकर चेहरे पर 10 मिनट लगाएँ और धो लें।<br>
+            • <b>कमजोरी व थकान:</b> रोज़ाना 4 भीगे बादाम और 1 गिलास गुनगुना दूध लें।<br>
+            • <b>बालों की मजबूती:</b> नारियल तेल में थोड़ा करी पत्ता उबालकर सिर की मालिश करें।
+        </div>
+        """, unsafe_allow_html=True)
+
+    elif w_option == "📜 लखपति दीदी व महिला स्वयं सहायता योजना":
+        st.markdown("""
+        <div class="guide-box">
+            <b>🇮🇳 लखपति दीदी योजना:</b><br>
+            • महिलाओं को आर्थिक रूप से आत्मनिर्भर बनाने के लिए बिना ब्याज या कम ब्याज पर वित्तीय सहायता और प्रशिक्षण दिया जाता है।<br>
+            • <b>पात्रता:</b> महिला स्वयं सहायता समूह (SHG) की सदस्य होनी चाहिए।<br>
+            • <b>आवेदन:</b> अपने ग्राम पंचायत या प्रखंड (ब्लॉक) के आजीविका मिशन कार्यालय में संपर्क करें।
+        </div>
+        """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 3. जन-सेवा व सेहत (Citizens & Seniors)
+# 3. बुज़ुर्ग जन-सेवा (Seniors & Elders)
 # ----------------------------------------------------
-with tab_citizen:
-    st.markdown("### 📜 सरकारी योजना व नागरिक सुविधा")
-    yojana = st.selectbox("योजना चुनें:", [
-        "आयुष्मान भारत (₹5 लाख मुफ़्त इलाज)",
-        "वृद्धावस्था / विधवा पेंशन",
-        "राशन कार्ड नया आवेदन / सुधार",
-        "पीएम किसान सम्मान निधि"
+with tab_seniors:
+    st.markdown("### 👴 बुज़ुर्ग जन-सेवा व स्वास्थ्य")
+    st.caption("पेंशन योजना, आयुष्मान कार्ड और जोड़ों के दर्द के घरेलू उपाय")
+    
+    s_choice = st.selectbox("सुविधा चुनें:", [
+        "👴 वृद्धावस्था पेंशन (पूरी प्रक्रिया)",
+        "🏥 आयुष्मान कार्ड (मुफ़्त ₹5 लाख इलाज)",
+        "🦴 जोड़ों व घुटनों के दर्द के लिए देसी देखभाल",
+        "📿 दैनिक शांति व भजन/आरती संग्रह"
     ])
     
-    if yojana == "आयुष्मान भारत (₹5 लाख मुफ़्त इलाज)":
+    if "पेंशन" in s_choice:
         st.markdown("""
         <div class="guide-box">
-            <b>🏥 आयुष्मान कार्ड विवरण:</b><br>
-            • प्रति परिवार ₹5 लाख तक का कैशलेस इलाज।<br>
-            • <b>आवश्यक दस्तावेज:</b> राशन कार्ड और आधार कार्ड।
+            <b>👴 वृद्धावस्था पेंशन नियम:</b><br>
+            • <b>आयु:</b> 60 वर्ष या उससे अधिक।<br>
+            • <b>कागजात:</b> आधार कार्ड, बैंक पासबुक, आय प्रमाण पत्र और निवास प्रमाण।<br>
+            • <b>कहाँ जमा करें:</b> नजदीकी जन सेवा केंद्र (CSC) या ब्लॉक RTPS काउंटर पर।
         </div>
         """, unsafe_allow_html=True)
-    elif yojana == "वृद्धावस्था / विधवा पेंशन":
+    elif "आयुष्मान" in s_choice:
         st.markdown("""
         <div class="guide-box">
-            <b>👴 पेंशन नियम व दस्तावेज:</b><br>
-            • <b>पात्रता:</b> 60 वर्ष या अधिक उम्र के नागरिक।<br>
-            • <b>कागजात:</b> आधार कार्ड, बैंक पासबुक, आय व आयु प्रमाण।
+            <b>🏥 आयुष्मान भारत कार्ड:</b><br>
+            • हर साल ₹5 लाख तक का सरकारी व बड़े प्राइवेट अस्पतालों में मुफ़्त इलाज।<br>
+            • नजदीकी सरकारी अस्पताल में आयुष्मान मित्र काउंटर पर राशन कार्ड और आधार दिखाकर बनवाएं।
         </div>
         """, unsafe_allow_html=True)
-    elif yojana == "राशन कार्ड नया आवेदन / सुधार":
+    elif "जोड़ों" in s_choice:
         st.markdown("""
         <div class="guide-box">
-            <b>🌾 राशन कार्ड निर्देश:</b><br>
-            • <b>कागजात:</b> परिवार के मुखिया की फ़ोटो, सभी सदस्यों का आधार कार्ड, बैंक पासबुक।
+            <b>🌿 जोड़ों के दर्द के लिए घरेलू उपाय:</b><br>
+            1. सरसों के तेल में 4-5 कली लहसुन और अजवाइन पकाकर गुनगुने तेल से घुटनों की मालिश करें।<br>
+            2. सुबह खाली पेट हल्का गुनगुना पानी पिएं।<br>
+            3. मेथी दाना रात को भिगोकर सुबह उसका पानी पीना लाभदायक माना जाता है।
         </div>
         """, unsafe_allow_html=True)
-    elif yojana == "पीएम किसान सम्मान निधि":
+    elif "भजन" in s_choice:
         st.markdown("""
         <div class="guide-box">
-            <b>🚜 किसान सम्मान निधि:</b><br>
-            • हर 4 माह पर ₹2,000 की किस्त (सालाना ₹6,000)। आधार ई-केवाईसी अनिवार्य है।
+            <b>📿 दैनिक शांति मंत्र:</b><br>
+            <i>"ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥"</i><br><br>
+            मन को शांत रखने के लिए सुबह 10 मिनट खुली हवा में गहरी साँसें लें और प्रभु का स्मरण करें।
         </div>
         """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 4. व्यापारी टूल्स (Business Tools)
+# 4. युवा व रोज़गार (Youth & Career)
 # ----------------------------------------------------
-with tab_business:
-    st.markdown("### 🏪 स्मार्ट व्यापारी टूल्स")
-    b_tool = st.radio("टूल चुनें:", ["🧾 WhatsApp डिजिटल बिल", "💰 कानूनी उधारी तगादा"], horizontal=True)
+with tab_youth:
+    st.markdown("### 🧑 युवा रोज़गार व करियर मार्गदर्शक")
+    st.caption("1-क्लिक जॉब बायोडाटा, इंटरव्यू तैयारी व करियर सुझाव")
     
-    if b_tool == "🧾 WhatsApp डिजिटल बिल":
-        b_shop = st.text_input("दुकान / फ़र्म का नाम:", placeholder="उदा: जनता किराना स्टोर")
-        b_cust = st.text_input("ग्राहक का नाम:", placeholder="उदा: विजय कुमार")
-        b_phone = st.text_input("ग्राहक का WhatsApp नंबर:", placeholder="उदा: 9876543210")
-        b_item = st.text_area("सामान का विवरण:", placeholder="उदा: 1 बैग आटा (₹420), 2 पैकेट तेल (₹260)")
-        b_total = st.text_input("कुल रकम (₹):", placeholder="उदा: 680")
+    y_action = st.radio("चुनें:", ["📄 1-क्लिक बायोडाटा (Resume)", "🎯 इंटरव्यू में सफलता के नियम"], horizontal=True)
+    
+    if y_action == "📄 1-क्लिक बायोडाटा (Resume)":
+        r_name = st.text_input("आपका पूरा नाम:", placeholder="उदा: सुमित वर्मा", key="y_name")
+        r_phone = st.text_input("मोबाइल नंबर:", placeholder="उदा: 9876543210", key="y_phone")
+        r_edu = st.text_input("उच्चतम योग्यता:", placeholder="उदा: 12वीं / आईटीआई / बी.ए.", key="y_edu")
+        r_exp = st.text_input("कार्य अनुभव या हुनर:", placeholder="उदा: सेल्स, कंप्यूटर एक्सेल, ड्राइविंग", key="y_exp")
+        
+        if st.button("📄 तुरंत बायोडाटा तैयार करें", key="y_res_btn"):
+            res = f"""=================================
+             बायोडाटा / RESUME
+=================================
+नाम: {r_name}
+मोबाइल: {r_phone}
+शैक्षणिक योग्यता: {r_edu}
+हुनर व अनुभव: {r_exp}
+भाषा: हिंदी, कामचलाऊ अंग्रेज़ी
+कार्य स्थिति: तत्काल कार्य हेतु उपलब्ध
+================================="""
+            st.text_area("कॉपी करके WhatsApp पर भेजें:", res, height=190)
+
+    elif y_action == "🎯 इंटरव्यू में सफलता के नियम":
+        st.markdown("""
+        <div class="guide-box">
+            <b>💼 इंटरव्यू में सफल होने के 4 गुप्त नियम:</b><br>
+            1. <b>साफ़ कपड़े व समय:</b> समय से 15 मिनट पहले पहुँचें और साफ़-सुथरे कपड़े पहनें।<br>
+            2. <b>आँखों में देखकर बात करें:</b> घबराएँ नहीं, आत्मविश्वास से चेहरे पर मुस्कान रखें।<br>
+            3. <b>जो आता है वही कहें:</b> यदि किसी प्रश्न का उत्तर न पता हो, तो विनम्रता से कहें: "सर, मुझे इसकी जानकारी नहीं है, मैं सीख लूँगा।"
+        </div>
+        """, unsafe_allow_html=True)
+
+# ----------------------------------------------------
+# 5. व्यापारी टूल्स व डायरेक्टरी (Vyapar Tools & Leads)
+# ----------------------------------------------------
+with tab_vyapar:
+    st.markdown("### 🏪 व्यापारी टूल्स व ऑल-इंडिया डायरेक्टरी")
+    
+    v_tool = st.selectbox("टूल चुनें:", ["🧾 WhatsApp डिजिटल बिल मेकर", "💰 सख्त उधारी वसूली नोटिस", "🎯 ऑल-इंडिया बिज़नेस डायरेक्टरी"])
+    
+    if v_tool == "🧾 WhatsApp डिजिटल बिल मेकर":
+        b_shop = st.text_input("दुकान / फ़र्म का नाम:", placeholder="उदा: माँ भवानी ट्रेडर्स")
+        b_cust = st.text_input("ग्राहक का नाम:", placeholder="उदा: राकेश जी")
+        b_phone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", placeholder="उदा: 9876543210")
+        b_item = st.text_area("सामान का विवरण:", placeholder="उदा: 2 बैग सीमेंट (₹760), 5 लीटर प्राइमर (₹900)")
+        b_total = st.text_input("कुल रकम (₹):", placeholder="उदा: 1660")
         
         if st.button("📲 डिजिटल बिल भेजें"):
             if b_shop and b_cust and b_phone and b_total:
@@ -257,53 +319,40 @@ with tab_business:
                 wa_url = f"https://wa.me/91{clean_p}?text={urllib.parse.quote(bill_msg)}"
                 st.markdown(f'<a href="{wa_url}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
 
-    elif b_tool == "💰 कानूनी उधारी तगादा":
-        c_name = st.text_input("बकायेदार का नाम:", placeholder="उदा: अमित कुमार")
-        c_amount = st.text_input("बकाया राशि (₹):", placeholder="उदा: 4500")
-        c_phone = st.text_input("बकायेदार का WhatsApp नंबर:", placeholder="उदा: 9876543210")
+    elif v_tool == "💰 सख्त उधारी वसूली नोटिस":
+        c_name = st.text_input("बकायेदार का नाम:", placeholder="उदा: मोहन कुमार")
+        c_amount = st.text_input("बकाया राशि (₹):", placeholder="उदा: 5200")
+        c_phone = st.text_input("उसका WhatsApp नंबर:", placeholder="उदा: 9876543210")
         
         if st.button("📩 कानूनी तगादा भेजें"):
             if c_name and c_amount and c_phone:
                 clean_p = c_phone.strip()[-10:]
-                msg = f"नमस्ते {c_name} जी, आपके ऊपर ₹{c_amount} का व्यापारिक बकाया लंबित है। कृपया इसे आज ही सेटल करें अन्यथा कानूनी कार्यवाही शुरू की जा सकती है।"
+                msg = f"अंतिम तगादा सूचना: नमस्ते {c_name} जी, आपके ऊपर ₹{c_amount} का व्यापारिक बकाया लंबित है। कृपया इसे आज ही चुकता करें अन्यथा कानूनी कार्यवाही शुरू की जा सकती है।"
                 wa_url = f"https://wa.me/91{clean_p}?text={urllib.parse.quote(msg)}"
                 st.markdown(f'<a href="{wa_url}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर नोटिस भेजें</a>', unsafe_allow_html=True)
 
-# ----------------------------------------------------
-# 5. बिज़नेस डायरेक्टरी (Leads Directory)
-# ----------------------------------------------------
-with tab_leads:
-    st.markdown("### 🎯 अखिल भारतीय बिज़नेस डायरेक्टरी")
-    
-    @st.cache_data
-    def load_db():
-        return pd.DataFrame({
-            "व्यापारी / फर्म": [
-                "Patna Prime Builders", "Capital Property Hub", "Delhi NCR Real Infra",
-                "Mumbai Seaface Properties", "Shree Ganesh Wholesale", "Delhi Wholesale Mart",
-                "Gold's Fitness Gym", "Dr. Sharma Clinic"
-            ],
-            "कैटेगरी": ["Real Estate", "Real Estate", "Real Estate", "Real Estate", "Wholesale", "Wholesale", "Gym", "Doctor"],
-            "शहर": ["Patna", "Patna", "Delhi", "Mumbai", "Patna", "Delhi", "Patna", "Patna"],
-            "डायरेक्ट संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 98111***** 🔒", "+91 98200***** 🔒", "+91 94302***** 🔒", "+91 98102***** 🔒", "+91 97714***** 🔒", "+91 94314***** 🔒"]
+    elif v_tool == "🎯 ऑल-इंडिया बिज़नेस डायरेक्टरी":
+        df_leads = pd.DataFrame({
+            "फ़र्म का नाम": ["Prime Realtors", "Capital Property Hub", "Shree Ganesh Wholesale", "Delhi Metro Mart", "Gold's Fitness Gym", "City Dental Clinic"],
+            "कैटेगरी": ["Real Estate", "Real Estate", "Wholesale", "Wholesale", "Gym", "Doctor"],
+            "शहर": ["Patna", "Patna", "Patna", "Delhi", "Patna", "Delhi"],
+            "संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 94302***** 🔒", "+91 98102***** 🔒", "+91 97714***** 🔒", "+91 94314***** 🔒"]
         })
-    
-    df_leads = load_db()
-    st.dataframe(df_leads.head(5), use_container_width=True, hide_index=True)
-    
-    upi_url = "upi://pay?pa=7484878449-2@ybl&pn=Vyapar%20Grow%20AI&am=49&cu=INR&tn=All%20India%20Leads"
-    st.markdown(f'<a href="{upi_url}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay)</a>', unsafe_allow_html=True)
-    
-    utr = st.text_input("", placeholder="12 अंकों का UTR नंबर दर्ज करें", key="utr_dir")
-    if st.button("🚀 फ़ाइल डाउनलोड करें"):
-        if len(utr.strip()) == 12 and utr.strip().isdigit():
-            st.success("✅ पेमेंट सत्यापित!")
-            st.download_button(
-                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
-                data=df_leads.to_csv(index=False).encode('utf-8'),
-                file_name="Bharat_AI_Directory.csv",
-                mime="text/csv",
-                use_container_width=True
-            )
-        else:
-            st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
+        st.dataframe(df_leads, use_container_width=True, hide_index=True)
+        
+        upi_url = "upi://pay?pa=7484878449-2@ybl&pn=Universal%20Bharat%20AI&am=49&cu=INR&tn=All%20India%20Directory"
+        st.markdown(f'<a href="{upi_url}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay)</a>', unsafe_allow_html=True)
+        
+        utr = st.text_input("", placeholder="12 अंकों का UTR नंबर दर्ज करें", key="dir_utr")
+        if st.button("🚀 फ़ाइल डाउनलोड करें"):
+            if len(utr.strip()) == 12 and utr.strip().isdigit():
+                st.success("✅ पेमेंट सत्यापित!")
+                st.download_button(
+                    label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
+                    data=df_leads.to_csv(index=False).encode('utf-8'),
+                    file_name="All_India_Directory.csv",
+                    mime="text/csv",
+                    use_container_width=True
+                )
+            else:
+                st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
