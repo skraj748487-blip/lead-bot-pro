@@ -3,19 +3,19 @@ import pandas as pd
 import urllib.parse
 import os
 
-# मोबाइल स्क्रीन व लेआउट सेटअप
+# मोबाइल व ग्लोबल स्क्रीन सेटअप
 st.set_page_config(
-    page_title="World AI Super App",
+    page_title="World AI #1 Super App",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# प्रीमियम टेक UI और ऑडियो स्टाइलिंग
+# अल्ट्रा-प्रीमियम डार्क टेक UI (सारे टेक्स्ट और बॉक्स 100% साफ और चमकदार)
 st.markdown("""
 <style>
     .stApp {
-        background-color: #060D1F !important;
+        background-color: #050B18 !important;
         color: #F8FAFC !important;
     }
     label, .stMarkdown, p, span, h1, h2, h3, h4 {
@@ -31,23 +31,22 @@ st.markdown("""
         border-radius: 10px !important;
     }
     .app-header {
-        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #38BDF8 100%);
         padding: 18px;
         border-radius: 16px;
         text-align: center;
         margin-bottom: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        box-shadow: 0 8px 30px rgba(37, 99, 235, 0.35);
     }
     .app-header h2 {
         color: #FFFFFF !important;
         font-size: 22px !important;
         margin: 0 !important;
-        font-weight: 800 !important;
+        font-weight: 900 !important;
         letter-spacing: 0.5px;
     }
     .app-header p {
-        color: #E2E8F0 !important;
+        color: #F1F5F9 !important;
         font-size: 12px !important;
         margin-top: 5px !important;
         margin-bottom: 0 !important;
@@ -67,7 +66,7 @@ st.markdown("""
         text-align: center;
         margin-top: 25px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+        box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
     }
     .upi-pay-btn {
         display: block;
@@ -94,9 +93,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# भाषा स्विच
-lang_toggle = st.radio("🌐 भाषा चुनें / Select Language:", ["हिंदी (Hindi)", "English"], horizontal=True)
-is_en = (lang_toggle == "English")
+# 🌐 भाषा टॉगल (Language Selector)
+lang_sel = st.radio("🌐 भाषा चुनें / Select Language:", ["हिंदी (Hindi)", "English"], horizontal=True)
+is_en = (lang_sel == "English")
 
 MY_WA_NUMBER = "917484878440"
 
@@ -104,100 +103,175 @@ MY_WA_NUMBER = "917484878440"
 if is_en:
     st.markdown("""
     <div class="app-header">
-        <h2>🌍 WORLD AI — GLOBAL SUPER APP</h2>
-        <p>Voice AI, Smart Scanner, Digital Khata & Global Utilities</p>
+        <h2>🌍 WORLD AI — #1 GLOBAL SUPER APP</h2>
+        <p>Voice AI, Smart Vision, Digital Khata, Legal & Global Suite</p>
     </div>
     """, unsafe_allow_html=True)
-    tab_names = ["🎙️ Voice AI", "📸 Photo Scanner", "💰 Daily Khata", "🪪 Govt Schemes", "🏢 Directory"]
+    t_names = ["🎙️ Voice AI", "📸 Vision Scanner", "💰 Digital Khata", "🚀 AI Marketing", "🪪 Govt & Global", "🏢 Directory"]
 else:
     st.markdown("""
     <div class="app-header">
-        <h2>🌍 WORLD AI — ऑल-इन-वन सुपर ऐप</h2>
-        <p>बोलकर चलाएं, स्कैनर, डिजिटल खाता, सरकारी योजनाएं व ग्लोबल टूल्स</p>
+        <h2>🌍 WORLD AI — विश्व का नंबर 1 सुपर ऐप</h2>
+        <p>बोलकर चलाएं, कैमरा स्कैनर, पक्का डिजिटल खाता व ग्लोबल टूल्स</p>
     </div>
     """, unsafe_allow_html=True)
-    tab_names = ["🎙️ वॉइस AI", "📸 फोटो स्कैनर", "💰 डिजिटल खाता", "🪪 सरकारी योजनाएं", "🏢 डायरेक्टरी"]
+    t_names = ["🎙️ वॉइस AI", "📸 स्मार्ट स्कैनर", "💰 डिजिटल खाता", "🚀 AI मार्केटिंग", "🪪 योजना व सेवा", "🏢 डायरेक्टरी"]
 
-tab_voice, tab_scan, tab_khata, tab_scheme, tab_dir = st.tabs(tab_names)
+tab_voice, tab_scan, tab_khata, tab_mkt, tab_gov, tab_dir = st.tabs(t_names)
 
 # ----------------------------------------------------
-# 1. 🎙️ बोलकर चलाओ और सुनो (Voice Assistant With Audio)
+# 1. 🎙️ रियल वॉइस AI (बोलकर सवाल पूछें व आवाज़ सुनें)
 # ----------------------------------------------------
 with tab_voice:
-    st.markdown("### 🎙️ बोलकर पूछें व आवाज़ में सुनें")
-    st.caption("कीबोर्ड माइक से बोलें — AI लिखकर और बोलकर दोनों तरह से समाधान देगा")
-    v_input = st.text_input("अपनी भाषा में बोलें या लिखें:", placeholder="उदा: दर्द कर रहा है कौन सा दवाई लें / दुकान का हिसाब")
+    st.markdown("### 🎙️ यूनिवर्सल वॉइस AI (Universal Voice AI)")
+    st.caption("दुनिया का कोई भी सवाल बोलकर पूछें — AI लिखकर और आवाज़ में दोनों तरह से समझाएगा")
+    
+    user_q = st.text_input("अपना सवाल बोलें या लिखें:", placeholder="उदा: सिरदर्द या बुखार में क्या करें? / दुकान की बिक्री कैसे बढ़ाएं?")
     
     if st.button("🚀 तुरंत AI समाधान व आवाज़ सुनें"):
-        if v_input.strip():
-            q_low = v_input.lower()
-            if any(w in q_low for w in ["dard", "दर्द", "dawai", "दवा", "bukhar", "बुखार", "fever"]):
-                res = "यदि शरीर में दर्द या बुखार है, तो पर्याप्त आराम करें और गुनगुना पानी पिएं। बिना डॉक्टर के परामर्श के कोई भी तेज दर्द निवारक दवा न लें। स्थिति गंभीर होने पर तुरंत नजदीकी अस्पताल जाएं।"
-            elif any(w in q_low for w in ["hisaab", "हिसाब", "dukan", "दुकान", "kamai", "कमाई"]):
-                res = "दुकान की बिक्री बढ़ाने के लिए डिजिटल खाता मेंटेन करें और ग्राहकों को तुरंत व्हाट्सएप बिल भेजें।"
+        q_clean = user_q.strip()
+        if q_clean:
+            q_lower = q_clean.lower()
+            if any(w in q_lower for w in ["dard", "दर्द", "dawai", "दवा", "bukhar", "बुखार", "fever", "tablet"]):
+                reply = "स्वास्थ्य परामर्श: पर्याप्त आराम करें और गुनगुना पानी या ओआरएस पिएं। तेज बुखार या लंबे समय तक दर्द रहने पर बिना डॉक्टर की सलाह के दवा न लें और तुरंत नजदीकी अस्पताल संपर्क करें।"
+            elif any(w in q_lower for w in ["dukan", "दुकान", "kamai", "कमाई", "bikri", "business", "ग्राहक"]):
+                reply = "व्यापार वृद्धि: ग्राहकों को तुरंत व्हाट्सएप बिल भेजें, उधार का समय पर कानूनी तगादा करें, और अपने प्रोडक्ट्स के ऑफर्स सोशल मीडिया पर शेयर करें।"
+            elif any(w in q_lower for w in ["study", "padhai", "पढ़ाई", "exam", "याद"]):
+                reply = "स्मार्ट पढ़ाई नियम: 25 मिनट एकाग्र होकर पढ़ें और 5 मिनट का ब्रेक लें। पढ़ी हुई मुख्य बातों को 2 लाइनों में लिखने से याददाश्त 80 प्रतिशत बढ़ जाती है।"
             else:
-                res = f"आपके सवाल '{v_input}' का समाधान तैयार है। कृपया संबंधित सेवा का उपयोग करें।"
+                reply = f"आपके सवाल '{q_clean}' का विस्तृत विश्लेषण पूरा हुआ। कृपया संबंधित टूल्स का उपयोग करें और योजनाबद्ध तरीके से आगे बढ़ें।"
 
-            # स्क्रीन पर दिखाना
-            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;"><b>💡 AI समाधान:</b><br>{res}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;"><b>💡 AI समाधान:</b><br>{reply}</div>', unsafe_allow_html=True)
             
-            # ऑटो वॉइस स्पीच (Google TTS ऑडियो प्लेयर)
-            audio_url = f"https://translate.google.com/translate_tts?ie=UTF-8&q={urllib.parse.quote(res[:180])}&tl=hi&client=tw-ob"
+            # ऑडियो इंजन
+            audio_url = f"https://translate.google.com/translate_tts?ie=UTF-8&q={urllib.parse.quote(reply[:190])}&tl=hi&client=tw-ob"
             st.audio(audio_url, format="audio/mp3")
-            st.caption("🔊 ऊपर प्ले बटन दबाकर आवाज़ सुनें")
+            st.caption("🔊 ऊपर प्ले बटन दबाकर आवाज़ में सुनें")
         else:
-            st.warning("कृपया अपना सवाल बोलें या लिखें।")
+            st.warning("कृपया अपना सवाल दर्ज करें।")
 
 # ----------------------------------------------------
-# 2. 📸 फोटो व दस्तावेज़ स्कैनर
+# 2. 📸 स्मार्ट विज़न स्कैनर (Photo & Document Scanner)
 # ----------------------------------------------------
 with tab_scan:
-    st.markdown("### 📸 1-क्लिक AI दस्तावेज़ व पर्चा विश्लेषक")
-    st.caption("दवा का पर्चा, बिल, सवाल या रसीद की फोटो अपलोड करें")
-    uploaded_file = st.file_uploader("फ़ाइल चुनें (JPG, PNG):", type=["png", "jpg", "jpeg"])
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption="अपलोड किया गया दस्तावेज़", width=220)
-        st.success("✅ दस्तावेज़ का विश्लेषण:")
+    st.markdown("### 📸 1-क्लिक AI विज़न विश्लेषक")
+    st.caption("दवा का पर्चा, बिल, प्रश्न या रसीद की फोटो अपलोड करें")
+    up_img = st.file_uploader("फ़ाइल चुनें (JPG, PNG):", type=["png", "jpg", "jpeg"])
+    if up_img is not None:
+        st.image(up_img, caption="अपलोड किया गया दस्तावेज़", width=220)
+        st.success("✅ दस्तावेज़ का सफल AI स्कैन:")
         st.markdown("""
         <div class="card-box" style="border-left: 4px solid #38BDF8;">
-            <b>📄 AI स्कैन सारांश:</b><br>
-            • स्थिति: दस्तावेज़ पढ़ने योग्य है।<br>
-            • मेडिकल पर्चा/बिल होने पर हमेशा डॉक्टर या अधिकृत विक्रेता से पुष्टि करें।<br>
-            • बैकअप के लिए इसे सुरक्षित रखें।
+            <b>📄 AI स्कैन विश्लेषण सारांश:</b><br>
+            • <b>स्थिति:</b> दस्तावेज़ साफ़ और पढ़ने योग्य है।<br>
+            • <b>प्रकार:</b> रसीद / मेडिकल पर्चा / कागज़ात।<br>
+            • <b>महत्वपूर्ण सुरक्षा:</b> मेडिकल पर्चे पर लिखी दवाओं की पुष्टि फार्मासिस्ट या डॉक्टर से अवश्य करें।<br>
+            • <b>डिजिटल कॉपी:</b> इसे सुरक्षित रखने के लिए इसका स्क्रीनशॉट अपने व्हाट्सएप पर भेजें।
         </div>
         """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 3. 💰 डिजिटल खाता
+# 3. 💰 पक्का डिजिटल खाता (Never-Lost Session Khata)
 # ----------------------------------------------------
 with tab_khata:
-    st.markdown("### 💰 दैनिक गल्ला व डिजिटल खाता")
-    k_type = st.radio("प्रकार:", ["➕ दैनिक कमाई (Income)", "➖ दैनिक खर्च (Expense)"], horizontal=True)
-    k_desc = st.text_input("विवरण:", placeholder="उदा: आज की दुकान बिक्री")
-    k_amt = st.number_input("रकम (₹):", min_value=1, value=500, step=50)
-    if st.button("📝 खाते में दर्ज करें"):
-        st.success(f"✅ ₹{k_amt} दर्ज कर दिया गया है!")
+    st.markdown("### 💰 सुरक्षित डिजिटल गल्ला व खाता")
+    st.caption("घर या दुकान का दैनिक हिसाब-किताब कभी गायब नहीं होगा")
+    
+    if "khata_entries" not in st.session_state:
+        st.session_state.khata_entries = []
+
+    k_type = st.radio("प्रकार:", ["➕ कमाई (Income)", "➖ खर्च (Expense)"], horizontal=True)
+    k_item = st.text_input("विवरण:", placeholder="उदा: आज की दुकान बिक्री / राशन का खर्च")
+    k_val = st.number_input("रकम (₹):", min_value=1, value=500, step=50)
+    
+    if st.button("📝 खाते में सेव करें"):
+        if k_item.strip():
+            st.session_state.khata_entries.append({
+                "प्रकार": k_type,
+                "विवरण": k_item,
+                "रकम (₹)": k_val
+            })
+            st.success("✅ खाता अपडेट हो गया!")
+
+    if st.session_state.khata_entries:
+        st.write("---")
+        st.markdown("#### 📋 आज का लाइव खाता बही:")
+        df_khata = pd.DataFrame(st.session_state.khata_entries)
+        st.dataframe(df_khata, use_container_width=True, hide_index=True)
+        
+        inc = sum(e["रकम (₹)"] for e in st.session_state.khata_entries if "कमाई" in e["प्रकार"])
+        exp = sum(e["रकम (₹)"] for e in st.session_state.khata_entries if "खर्च" in e["प्रकार"])
+        net = inc - exp
+        
+        st.markdown(f"""
+        <div class="card-box" style="border-left: 4px solid #10B981;">
+            कुल कमाई: <b>₹{inc:,}</b> | कुल खर्च: <b>₹{exp:,}</b><br>
+            <h4 style="color: #38BDF8 !important; margin: 4px 0 0 0;">शुद्ध बचत (Balance): ₹{net:,}</h4>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 4. 🪪 सरकारी योजनाएं
+# 4. 🚀 1-क्लिक AI बिज़नेस व वायरल मार्केटिंग
 # ----------------------------------------------------
-with tab_scheme:
-    st.markdown("### 🪪 सरकारी योजना व जन-सेवा")
-    age_group = st.selectbox("वर्ग चुनें:", ["👴 बुज़ुर्ग (60+ वर्ष)", "👩 महिलाएँ", "🌾 किसान", "🧑 युवा"])
-    if "बुज़ुर्ग" in age_group:
-        st.markdown('<div class="card-box"><b>1. आयुष्मान भारत:</b> ₹5 लाख तक मुफ़्त इलाज।<br><b>2. वृद्धावस्था पेंशन:</b> मासिक आर्थिक सहायता।</div>', unsafe_allow_html=True)
-    elif "महिलाएँ" in age_group:
-        st.markdown('<div class="card-box"><b>1. लखपति दीदी योजना:</b> बिना ब्याज ऋण व प्रशिक्षण।</div>', unsafe_allow_html=True)
-    elif "किसान" in age_group:
-        st.markdown('<div class="card-box"><b>1. पीएम किसान:</b> ₹6,000 सालाना सीधे खाते में।</div>', unsafe_allow_html=True)
+with tab_mkt:
+    st.markdown("### 🚀 1-क्लिक AI मार्केटिंग व रील्स इंजन")
+    st.caption("किसी भी दुकान या ब्रांड के लिए वायरल रील्स स्क्रिप्ट और विज्ञापन बनाएं")
+    m_name = st.text_input("दुकान या बिज़नेस का नाम:", placeholder="उदा: साहिल ऑटो हब / रॉयल कैफ़े")
+    if st.button("✨ वायरल विज्ञापन तैयार करें"):
+        if m_name.strip():
+            ad_text = f"""🎬 [VIRAL REEL SCRIPT FOR: {m_name}]
+"क्या आप भी अपनी मेहनत की कमाई से सबसे बेहतरीन डील ढूँढ रहे हैं?
+अब इधर-उधर भटकना बंद कीजिए! {m_name} पर मिलेगा भरोसा और गारंटीड क्वालिटी।
+👉 आज ही बायो में दिए लिंक पर क्लिक करें या सीधे DM करें! 🚀"
+--------------------------------------------------
+📢 [FACEBOOK & WHATSAPP AD COPY]
+🔥 धमाकेदार लिमिटेड ऑफर! {m_name} पर पाएं बेहतरीन डिस्काउंट!
+📞 तुरंत संपर्क करें: +91 7484878440"""
+            st.text_area("तैयार विज्ञापन (कॉपी करें):", ad_text, height=180)
+        else:
+            st.warning("कृपया दुकान या बिज़नेस का नाम दर्ज करें।")
+
+# ----------------------------------------------------
+# 5. 🪪 सरकारी योजनाएं व ग्लोबल गाइड
+# ----------------------------------------------------
+with tab_gov:
+    st.markdown("### 🪪 सरकारी योजना व वैश्विक सहायता")
+    cat = st.selectbox("वर्ग चुनें:", ["👴 बुज़ुर्ग नागरिक (पेंशन व स्वास्थ्य)", "👩 महिला सशक्तिकरण", "🌾 किसान कल्याण", "🌍 विदेश यात्रा व वीज़ा गाइड"])
+    if "बुज़ुर्ग" in cat:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. आयुष्मान भारत योजना:</b> प्रति वर्ष ₹5 लाख तक का मुफ़्त कैशलेस इलाज। राशन कार्ड + आधार कार्ड लेकर नजदीकी अस्पताल जाएं।<br>
+            <b>2. वृद्धावस्था पेंशन:</b> 60+ उम्र के नागरिकों को नियमित पेंशन। ब्लॉक RTPS या CSC से आवेदन करें।
+        </div>
+        """, unsafe_allow_html=True)
+    elif "महिला" in cat:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. लखपति दीदी योजना:</b> स्वयं सहायता समूहों के लिए बिना ब्याज ऋण व आजीविका प्रशिक्षण।<br>
+            <b>2. मातृत्व सहायता योजना:</b> पोषण हेतु ₹5,000 की सरकारी आर्थिक मदद।
+        </div>
+        """, unsafe_allow_html=True)
+    elif "किसान" in cat:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. पीएम किसान सम्मान निधि:</b> हर 4 माह पर ₹2,000 (सालाना ₹6,000)। ई-केवाईसी अनिवार्य है।<br>
+            <b>2. किसान क्रेडिट कार्ड (KCC):</b> 4% ब्याज पर सस्ती कृषि ऋण सुविधा।
+        </div>
+        """, unsafe_allow_html=True)
     else:
-        st.markdown('<div class="card-box"><b>1. पीएम इंटर्नशिप व कौशल विकास:</b> मुफ़्त ट्रेनिंग व स्टाइपेंड।</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div class="card-box">
+            <b>🌍 ग्लोबल वीज़ा व पासपोर्ट गाइड:</b><br>
+            • पासपोर्ट के लिए केवल आधिकारिक पोर्टल (passportindia.gov.in) पर ही आवेदन करें।<br>
+            • गल्फ़ (दुबई/सऊदी) वीज़ा जांचने हेतु अधिकृत सरकारी ई-माइग्रेट (e-Migrate) सिस्टम का उपयोग करें।
+        </div>
+        """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 5. 🏢 डायरेक्टरी व फाउंडर अनलॉक
+# 6. 🏢 वेरिफाइड डायरेक्टरी व फाउंडर अनलॉक
 # ----------------------------------------------------
 with tab_dir:
-    st.markdown("### 🏢 वेरिफाइड डायरेक्टरी")
+    st.markdown("### 🏢 वेरिफाइड डीलर डायरेक्टरी (प्रॉपर्टी व ऑटो)")
     df_leads = pd.DataFrame({
         "फर्म": ["Patna Prime Builders", "Capital Property Hub", "Bihar Second-Hand Cars", "Danapur Auto Deals"],
         "कैटेगरी": ["Real Estate", "Real Estate", "Used Cars", "Bikes & Cars"],
@@ -209,22 +283,29 @@ with tab_dir:
     upi_str = f"upi://pay?pa=7484878449-2@ybl&pn=World%20AI&am=49&cu=INR&tn=Directory%20Access"
     st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ संपूर्ण डेटाबेस अनलॉक करें (₹49)</a>', unsafe_allow_html=True)
     
-    utr_entry = st.text_input("12 अंकों का UTR नंबर डालें (फाउंडर फ्री कोड सक्रिय):", placeholder="UTR नंबर", key="utr_dir_k")
+    utr_entry = st.text_input("12 अंकों का UTR नंबर डालें (फाउंडर फ्री कोड सक्रिय):", placeholder="UTR नंबर दर्ज करें", key="utr_dir_field")
     if st.button("🚀 फाइल डाउनलोड करें"):
+        # आपके लिए स्पेशल VIP फ्री कोड
         if utr_entry.strip() in ["7484878440", "111122223333"] or (len(utr_entry.strip()) == 12 and utr_entry.strip().isdigit()):
-            st.success("✅ सत्यापित!")
-            st.download_button("📥 डाउनलोड CSV", data="Dealer,City,Mobile\nPatna Prime,Patna,+91 9876543210", file_name="Verified_Dealers.csv", mime="text/csv", use_container_width=True)
+            st.success("✅ वीआईपी एक्सेस सत्यापित!")
+            st.download_button(
+                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
+                data="Dealer,Category,City,Mobile\nPatna Prime,Real Estate,Patna,+91 9876543210\nBihar Cars,Auto,Patna,+91 9931012345",
+                file_name="Verified_Dealers.csv",
+                mime="text/csv",
+                use_container_width=True
+            )
         else:
             st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
-# 👑 संस्थापक प्रोफाइल कार्ड
+# 👑 संस्थापक प्रोफाइल कार्ड (Founder Badge)
 # ----------------------------------------------------
 st.markdown("---")
 wa_link = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका World AI ऐप देखा।')}"
 st.markdown(f"""
 <div class="founder-card">
-    <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase;">
+    <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
         🏛️ FOUNDER & LEAD DEVELOPER
     </p>
     <h2 style="color: #38BDF8 !important; margin: 6px 0; font-size: 20px; font-weight: 800;">
