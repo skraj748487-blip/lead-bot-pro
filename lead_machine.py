@@ -56,6 +56,16 @@ st.markdown("""
         font-size: 13px;
         line-height: 1.6;
     }
+    .founder-card {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        border: 2px solid #38BDF8;
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        margin-top: 24px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+    }
     .upi-pay-btn {
         display: block;
         background: linear-gradient(90deg, #10B981 0%, #059669 100%);
@@ -151,7 +161,7 @@ with tab_kids:
                 st.success("उत्तर: निरंतर अभ्यास और ध्यान केंद्रित करने से हर कठिन प्रश्न आसान हो जाता है! अपने सवाल की संख्याएँ ध्यान से जाँचें।")
 
     elif kid_action == "📝 स्कूल छुट्टी अर्ज़ी":
-        s_name = st.text_input("विद्यार्थी का नाम:", placeholder="उदा: आर्यन कुमार", key="k_sname")
+        s_name = st.text_input("विद्यार्थी का नाम:", placeholder="उदा: साहिल कुमार", key="k_sname")
         s_days = st.text_input("कितने दिन की छुट्टी चाहिए:", placeholder="उदा: 2 दिन", key="k_sdays")
         if st.button("📝 अर्ज़ी तैयार करें", key="k_btn_leave"):
             letter = f"""सेवा में,\nप्रधानाचार्य महोदय,\nविषय: अवकाश हेतु प्रार्थना पत्र\n\nमहोदय,\nसविनय निवेदन है कि आवश्यक कार्य होने के कारण मैं {s_days} तक विद्यालय आने में असमर्थ रहूँगा।\nअतः मुझे अवकाश प्रदान करने की कृपा करें।\n\nआज्ञाकारी छात्र,\n{s_name}"""
@@ -275,16 +285,7 @@ with tab_youth:
         r_exp = st.text_input("कार्य अनुभव या हुनर:", placeholder="उदा: सेल्स, कंप्यूटर एक्सेल, ड्राइविंग", key="y_exp")
         
         if st.button("📄 तुरंत बायोडाटा तैयार करें", key="y_res_btn"):
-            res = f"""=================================
-             बायोडाटा / RESUME
-=================================
-नाम: {r_name}
-मोबाइल: {r_phone}
-शैक्षणिक योग्यता: {r_edu}
-हुनर व अनुभव: {r_exp}
-भाषा: हिंदी, कामचलाऊ अंग्रेज़ी
-कार्य स्थिति: तत्काल कार्य हेतु उपलब्ध
-================================="""
+            res = f"""=================================\n             बायोडाटा / RESUME\n=================================\nनाम: {r_name}\nमोबाइल: {r_phone}\nशैक्षणिक योग्यता: {r_edu}\nहुनर व अनुभव: {r_exp}\nभाषा: हिंदी, कामचलाऊ अंग्रेज़ी\nकार्य स्थिति: तत्काल कार्य हेतु उपलब्ध\n================================="""
             st.text_area("कॉपी करके WhatsApp पर भेजें:", res, height=190)
 
     elif y_action == "🎯 इंटरव्यू में सफलता के नियम":
@@ -356,3 +357,25 @@ with tab_vyapar:
                 )
             else:
                 st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
+
+# ----------------------------------------------------
+# 👑 संस्थापक एवं डेवलपर प्रोफाइल कार्ड (Founder Badge)
+# ----------------------------------------------------
+st.markdown("---")
+st.markdown("""
+<div class="founder-card">
+    <p style="color: #94A3B8; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
+        🏛️ प्लेटफ़ॉर्म निर्माता एवं संस्थापक (Founder & Lead Developer)
+    </p>
+    <h2 style="color: #38BDF8; margin: 6px 0; font-size: 20px; font-weight: 800;">
+        साहिल अहमद (Sahil Ahmad)
+    </h2>
+    <p style="color: #CBD5E1; font-size: 12px; margin-bottom: 12px; line-height: 1.5;">
+        🇮🇳 डिजिटल भारत मिशन — देश के हर छात्र, बुज़ुर्ग, युवा व व्यापारी को आधुनिक AI तकनीक से सशक्त बनाने की एक पहल।
+    </p>
+    <a href="https://wa.me/917484878449?text=नमस्ते%20साहिल%20जी,%20मैंने%20आपका%20Universal%20Bharat%20AI%20ऐप%20देखा।" 
+       style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: white; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">
+        💬 सीधे WhatsApp पर संपर्क / फीडबैक दें
+    </a>
+</div>
+""", unsafe_allow_html=True)
