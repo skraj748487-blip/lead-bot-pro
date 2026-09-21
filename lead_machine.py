@@ -3,19 +3,19 @@ import pandas as pd
 import urllib.parse
 import streamlit.components.v1 as components
 
-# मोबाइल व ग्लोबल स्क्रीन सेटअप
+# मोबाइल स्क्रीन सेटअप
 st.set_page_config(
-    page_title="World AI — Global Super App",
+    page_title="World AI — All-in-One Super App",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# हाई-कंट्रास्ट अल्ट्रा प्रीमियम टेक CSS
+# मोबाइल-फ्रेंडली कंट्रास्ट CSS
 st.markdown("""
 <style>
     .stApp {
-        background-color: #050B18 !important;
+        background-color: #060D1F !important;
         color: #F8FAFC !important;
     }
     label, .stMarkdown, p, span, h1, h2, h3, h4 {
@@ -92,71 +92,64 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 🌐 ग्लोबल भाषा चयन
-lang = st.radio("🌐 Select Interface Language / भाषा चुनें:", ["English (Global)", "हिंदी (Hindi)"], horizontal=True)
-is_en = ("English" in lang)
+# भाषा चयन
+lang = st.radio("🌐 भाषा चुनें / Select Language:", ["हिंदी (Hindi)", "English"], horizontal=True)
+is_en = (lang == "English")
 
 MY_WA_NUMBER = "917484878440"
 
-# हेडर डिस्प्ले
+# हेडर
 if is_en:
     st.markdown("""
     <div class="app-header">
-        <h2>🌍 WORLD AI — GLOBAL SUPER SUITE</h2>
-        <p>Voice AI, Instant Invoicing, Currency Hub & Business Tools for Everyone</p>
+        <h2>🌍 WORLD AI — ALL-IN-ONE SUPER APP</h2>
+        <p>Smart Tools for Students, Seniors, Merchants & Everyday Needs</p>
     </div>
     """, unsafe_allow_html=True)
-    t_voice, t_bill, t_curr, t_khata, t_dir = "🎙️ Voice AI", "🧾 Digital Invoice", "💱 Global Currency", "💰 Pocket Khata", "🏢 Verified Leads"
+    t_voice, t_kids, t_bill, t_khata, t_dir = "🎙️ Voice AI", "📚 Students & Homework", "🧾 WhatsApp Bill", "💰 Digital Khata", "🏢 Verified Leads"
 else:
     st.markdown("""
     <div class="app-header">
-        <h2>🌍 WORLD AI — विश्व का नंबर 1 सुपर ऐप</h2>
-        <p>बोलकर चलाएं, डिजिटल बिल, मुद्रा कनवर्टर, खाता व ग्लोबल टूल्स</p>
+        <h2>🌍 WORLD AI — ऑल-इन-वन सुपर ऐप</h2>
+        <p>छात्र, बच्चे, बुज़ुर्ग व व्यापारी — हर वर्ग का आसान डिजिटल साथी</p>
     </div>
     """, unsafe_allow_html=True)
-    t_voice, t_bill, t_curr, t_khata, t_dir = "🎙️ वॉइस AI", "🧾 WhatsApp बिल", "💱 विदेशी मुद्रा", "💰 डिजिटल खाता", "🏢 वेरिफाइड डायरेक्टरी"
+    t_voice, t_kids, t_bill, t_khata, t_dir = "🎙️ वॉइस AI", "📚 छात्र व बच्चे", "🧾 WhatsApp बिल", "💰 डिजिटल खाता", "🏢 वेरिफाइड लीड्स"
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs([t_voice, t_bill, t_curr, t_khata, t_dir])
+tab1, tab2, tab3, tab4, tab5 = st.tabs([t_voice, t_kids, t_bill, t_khata, t_dir])
 
 # ----------------------------------------------------
-# 1. 🎙️ वॉइस AI (Dual-Language Speech)
+# 1. 🎙️ बोलकर पूछें व आवाज़ में सुनें
 # ----------------------------------------------------
 with tab1:
-    if is_en:
-        st.markdown("### 🎙️ Global Voice AI Assistant")
-        st.caption("Ask anything via text or mic — AI speaks back in clear voice")
-        v_in = st.text_input("Ask health, business, study or daily advice:", placeholder="e.g. How to cure headache? / How to scale my store?")
-        btn_v = "🚀 Get AI Solution & Audio Voice"
-    else:
-        st.markdown("### 🎙️ यूनिवर्सल वॉइस AI असिस्टेंट")
-        st.caption("माइक से बोलें या लिखें — AI स्क्रीन पर लिखकर और आवाज़ में बोलकर दोनों समझाएगा")
-        v_in = st.text_input("स्वास्थ्य, व्यापार, पढ़ाई या कोई भी सवाल पूछें:", placeholder="उदा: बुखार में क्या करें? / दुकान की बिक्री कैसे बढ़ाएं?")
-        btn_v = "🚀 तुरंत AI समाधान व आवाज़ सुनें"
-
-    if st.button(btn_v):
+    st.markdown("### 🎙️ वॉइस AI सहायक")
+    st.caption("माइक से बोलें या लिखें — AI लिखकर और आवाज़ में दोनों समझाएगा")
+    
+    v_in = st.text_input("सवाल दर्ज करें:", placeholder="उदा: बुखार में क्या करें? / दुकान की बिक्री कैसे बढ़ाएं?")
+    
+    if st.button("🚀 समाधान पाएँ व आवाज़ सुनें"):
         q_txt = v_in.strip()
         if q_txt:
             q_l = q_txt.lower()
             if is_en:
                 speech_lang = 'en-US'
-                if any(w in q_l for w in ["fever", "headache", "pain", "cold", "doctor"]):
-                    reply = "Health Guide: Rest properly, drink warm fluids, and stay hydrated. For severe fever lasting over 48 hours, please consult a licensed doctor immediately."
-                elif any(w in q_l for w in ["business", "sale", "money", "shop", "earn"]):
-                    reply = "Business Advice: Keep accurate digital logs of expenses, issue instant WhatsApp invoices to buyers, and run targeted local offers."
+                if any(w in q_l for w in ["fever", "pain", "cold", "doctor"]):
+                    reply = "Health Guide: Take sufficient rest and drink warm water. If high fever persists, consult a registered doctor immediately."
+                elif any(w in q_l for w in ["shop", "business", "sale"]):
+                    reply = "Business Advice: Keep accurate logs of daily expenses and share professional digital invoices with customers via WhatsApp."
                 else:
-                    reply = f"World AI Guidance for '{q_txt}': Your request has been analyzed. Use our specialized tabs for currency conversion, budgeting, and invoicing."
+                    reply = f"Solution for '{q_txt}': Your query has been processed. Use our specialized tabs for school help, billing, and budgeting."
             else:
                 speech_lang = 'hi-IN'
-                if any(w in q_l for w in ["dard", "दर्द", "dawai", "दवा", "bukhar", "बुखार", "fever"]):
-                    reply = "स्वास्थ्य सलाह: पर्याप्त आराम करें और गुनगुना पानी पिएं। तेज बुखार या लंबे समय तक दर्द रहने पर बिना डॉक्टर की सलाह के दवा न लें और नजदीकी स्वास्थ्य केंद्र जाएं।"
-                elif any(w in q_l for w in ["dukan", "दुकान", "kamai", "कमाई", "bikri", "व्यापार"]):
-                    reply = "व्यापार वृद्धि: ग्राहकों को WhatsApp पर पक्का पर्चा भेजें, उधारी का समय पर तगादा करें, और नियमित ऑफर्स शेयर करें।"
+                if any(w in q_l for w in ["dard", "दर्द", "dawai", "दवा", "bukhar", "बुखार"]):
+                    reply = "स्वास्थ्य सलाह: पर्याप्त आराम करें और गुनगुना पानी पिएं। तेज बुखार या ज्यादा दर्द होने पर बिना डॉक्टरी सलाह के दवा न लें और तुरंत नजदीकी अस्पताल जाएं।"
+                elif any(w in q_l for w in ["dukan", "दुकान", "kamai", "कमाई", "व्यापार"]):
+                    reply = "व्यापार वृद्धि: ग्राहकों को WhatsApp पर पक्का बिल भेजें, उधारी का समय पर हिसाब रखें और अपने ऑफर्स शेयर करें।"
                 else:
-                    reply = f"आपके सवाल '{q_txt}' का समाधान तैयार है। विस्तृत कार्य हेतु संबंधित सेवा का उपयोग करें।"
+                    reply = f"आपके सवाल '{q_txt}' का समाधान तैयार है। विस्तृत कार्य हेतु संबंधित मेनू का उपयोग करें।"
 
-            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;"><b>💡 AI Response:</b><br>{reply}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;"><b>💡 AI समाधान:</b><br>{reply}</div>', unsafe_allow_html=True)
             
-            # ऑटो वेब स्पीच
             clean_speech = reply.replace('"', '\\"').replace('\n', ' ')
             components.html(f"""
             <script>
@@ -166,122 +159,116 @@ with tab1:
                 window.speechSynthesis.speak(msg);
             </script>
             """, height=0)
-            st.success("🔊 " + ("Audio playback started on device speaker" if is_en else "उत्तर बोला जा रहा है (स्पीकर चालू रखें)"))
+            st.success("🔊 उत्तर डिवाइस स्पीकर से बोला जा रहा है")
         else:
-            st.warning("Please enter your question / कृपया सवाल दर्ज करें")
+            st.warning("कृपया अपना सवाल दर्ज करें।")
 
 # ----------------------------------------------------
-# 2. 🧾 WhatsApp डिजिटल इनवॉइस / बिल
+# 2. 📚 छात्र व बच्चे (होमवर्क व अर्ज़ी)
 # ----------------------------------------------------
 with tab2:
-    if is_en:
-        st.markdown("### 🧾 1-Click WhatsApp Invoice Generator")
-        b_shop = st.text_input("Store / Firm Name:", value="Sahil Global Store")
-        b_cust = st.text_input("Customer Name:", placeholder="e.g. David Wilson")
-        b_phone = st.text_input("WhatsApp Number with Country Code:", placeholder="e.g. 917484878440")
-        b_tot = st.text_input("Total Amount (Currency):", placeholder="e.g. 50 USD / 1250 INR")
-        btn_inv = "📲 Send Invoice via WhatsApp"
+    st.markdown("### 📚 छात्र सहायता व स्कूल अर्ज़ी")
+    st.caption("स्कूल की छुट्टी के लिए प्रार्थना पत्र और 1-क्लिक जॉब बायोडाटा")
+    
+    st_mode = st.radio("चुनें:", ["📝 स्कूल छुट्टी की अर्ज़ी", "📄 नौकरी का बायोडाटा (Resume)"], horizontal=True)
+    
+    if "अर्ज़ी" in st_mode:
+        s_name = st.text_input("विद्यार्थी का नाम:", value="साहिल")
+        s_days = st.text_input("छुट्टी के दिन:", value="2 दिन")
+        s_reason = st.text_input("कारण:", value="ज़रूरी कार्य / अस्वस्थता")
+        
+        if st.button("📝 अर्ज़ी तैयार करें"):
+            app_text = f"""सेवा में,\nप्रधानाचार्य महोदय,\nविषय: अवकाश हेतु प्रार्थना पत्र।\n\nमहोदय,\nसविनय निवेदन है कि मुझे {s_reason} होने के कारण मैं {s_days} तक विद्यालय आने में असमर्थ हूँ।\nअतः मुझे अवकाश प्रदान करने की कृपा करें।\n\nधन्यवाद,\nआज्ञाकारी छात्र: {s_name}"""
+            st.text_area("कॉपी करें:", app_text, height=150)
     else:
-        st.markdown("### 🧾 1-क्लिक WhatsApp डिजिटल बिल मेकर")
-        b_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
-        b_cust = st.text_input("ग्राहक का नाम:", placeholder="उदा: रमेश जी")
-        b_phone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", placeholder="उदा: 9876543210")
-        b_tot = st.text_input("कुल रकम (₹):", placeholder="उदा: 1250")
-        btn_inv = "📲 डिजिटल बिल WhatsApp पर भेजें"
-
-    if st.button(btn_inv):
-        if b_shop and b_cust and b_phone and b_tot:
-            clean_num = b_phone.replace("+", "").replace("-", "").strip()
-            if not clean_num.startswith("91") and len(clean_num) == 10:
-                clean_num = "91" + clean_num
-            bill_msg = f"""🧾 *DIGITAL INVOICE / पर्चा*
-🏪 Store: {b_shop}
-👤 Customer: {b_cust}
-💰 Total: {b_tot}
-✅ Status: Paid & Verified
--------------------------
-_Built with World AI by Sahil Ahmad_"""
-            wa_url = f"https://wa.me/{clean_num}?text={urllib.parse.quote(bill_msg)}"
-            st.markdown(f'<a href="{wa_url}" target="_blank" class="upi-pay-btn">👉 Open WhatsApp & Send Invoice</a>', unsafe_allow_html=True)
-        else:
-            st.warning("Please fill all details / कृपया सभी विवरण भरें")
+        r_name = st.text_input("पूरा नाम:", value="साहिल कुमार")
+        r_phone = st.text_input("मोबाइल नंबर:", value="9876543210")
+        r_edu = st.text_input("शिक्षा:", value="12वीं / आईटीआई")
+        r_exp = st.text_input("हुनर / अनुभव:", value="ड्राइविंग, कंप्यूटर टाइपिंग, सेल्स")
+        
+        if st.button("📄 बायोडाटा बनाएँ"):
+            res_text = f"""बायोडाटा / RESUME\nनाम: {r_name}\nसंपर्क: {r_phone}\nशिक्षा: {r_edu}\nकार्य अनुभव: {r_exp}\nउपलब्धता: तुरंत कार्य हेतु उपलब्ध"""
+            st.text_area("तैयार बायोडाटा:", res_text, height=140)
 
 # ----------------------------------------------------
-# 3. 💱 ग्लोबल करेंसी कनवर्टर (World FX)
+# 3. 🧾 WhatsApp डिजिटल बिल
 # ----------------------------------------------------
 with tab3:
-    st.markdown("### 💱 Global Currency Converter")
-    st.caption("Live conversion rates across world currencies")
-    c1, c2 = st.columns(2)
-    with c1:
-        f_amt = st.number_input("Amount / रकम:", min_value=1, value=100)
-    with c2:
-        f_curr = st.selectbox("Currency:", ["USD ($)", "EUR (€)", "AED (Dirham)", "SAR (Riyal)", "GBP (£)"])
+    st.markdown("### 🧾 WhatsApp डिजिटल बिल मेकर")
+    b_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
+    b_cust = st.text_input("ग्राहक का नाम:", placeholder="उदा: रमेश जी")
+    b_phone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", placeholder="उदा: 9876543210")
+    b_tot = st.text_input("कुल रकम (₹):", placeholder="उदा: 750")
     
-    fx_rates = {"USD ($)": 87.5, "EUR (€)": 92.0, "AED (Dirham)": 23.8, "SAR (Riyal)": 23.3, "GBP (£)": 110.5}
-    inr_val = f_amt * fx_rates[f_curr]
-    
-    st.markdown(f"""
-    <div class="card-box" style="border-left: 4px solid #38BDF8; text-align: center;">
-        <h3 style="color: #38BDF8 !important; margin: 0;">₹{inr_val:,.2f} INR</h3>
-        <p style="font-size: 12px; margin-top: 4px;">1 {f_curr} = ₹{fx_rates[f_curr]}</p>
-    </div>
-    """, unsafe_allow_html=True)
+    if st.button("📲 डिजिटल बिल भेजें"):
+        if b_shop and b_cust and b_phone and b_tot:
+            clean_num = b_phone.strip()[-10:]
+            bill_msg = f"""🧾 *डिजिटल बिल / CASH MEMO*
+🏪 दुकान: {b_shop}
+👤 ग्राहक: {b_cust}
+💰 कुल राशि: ₹{b_tot}
+✅ स्थिति: भुगतान प्राप्त
+-------------------------
+_World AI द्वारा प्रमाणित_"""
+            wa_url = f"https://wa.me/91{clean_num}?text={urllib.parse.quote(bill_msg)}"
+            st.markdown(f'<a href="{wa_url}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
+        else:
+            st.warning("कृपया सभी विवरण भरें।")
 
 # ----------------------------------------------------
-# 4. 💰 डिजिटल खाता (Session Storage)
+# 4. 💰 डिजिटल खाता
 # ----------------------------------------------------
 with tab4:
-    st.markdown("### 💰 Smart Pocket & Shop Khata")
+    st.markdown("### 💰 दैनिक गल्ला व डिजिटल खाता")
     if "khata_entries" not in st.session_state:
         st.session_state.khata_entries = []
 
-    k_type = st.radio("Type / प्रकार:", ["➕ Income / कमाई", "➖ Expense / खर्च"], horizontal=True)
-    k_desc = st.text_input("Note / विवरण:", placeholder="e.g. Daily grocery / Store revenue")
-    k_amt = st.number_input("Amount / रकम:", min_value=1, value=500, step=50)
+    k_type = st.radio("प्रकार:", ["➕ कमाई (Income)", "➖ खर्च (Expense)"], horizontal=True)
+    k_desc = st.text_input("विवरण:", placeholder="उदा: आज की दुकान बिक्री / राशन खर्च")
+    k_amt = st.number_input("रकम (₹):", min_value=1, value=500, step=50)
     
-    if st.button("📝 Record Entry / खाते में दर्ज करें"):
+    if st.button("📝 खाते में दर्ज करें"):
         if k_desc.strip():
-            st.session_state.khata_entries.append({"Type": k_type, "Note": k_desc, "Amount": k_amt})
-            st.success("Entry saved!")
+            st.session_state.khata_entries.append({"प्रकार": k_type, "विवरण": k_desc, "रकम": k_amt})
+            st.success("प्रविष्टि सुरक्षित हो गई!")
 
     if st.session_state.khata_entries:
         st.write("---")
         df_k = pd.DataFrame(st.session_state.khata_entries)
         st.dataframe(df_k, use_container_width=True, hide_index=True)
-        inc = sum(e["Amount"] for e in st.session_state.khata_entries if "Income" in e["Type"] or "कमाई" in e["Type"])
-        exp = sum(e["Amount"] for e in st.session_state.khata_entries if "Expense" in e["Type"] or "खर्च" in e["Type"])
-        st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;">Net Balance: <b>₹{inc - exp:,}</b> (Income: ₹{inc:,} | Expense: ₹{exp:,})</div>', unsafe_allow_html=True)
+        inc = sum(e["रकम"] for e in st.session_state.khata_entries if "कमाई" in e["प्रकार"])
+        exp = sum(e["रकम"] for e in st.session_state.khata_entries if "खर्च" in e["प्रकार"])
+        st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;">बचत / बैलेंस: <b>₹{inc - exp:,}</b> (कमाई: ₹{inc:,} | खर्च: ₹{exp:,})</div>', unsafe_allow_html=True)
 
 # ----------------------------------------------------
 # 5. 🏢 डायरेक्टरी व फाउंडर अनलॉक
 # ----------------------------------------------------
 with tab5:
-    st.markdown("### 🏢 Verified Directory (Real Estate & Auto)")
+    st.markdown("### 🏢 वेरिफाइड डीलर डायरेक्टरी (प्रॉपर्टी व ऑटो)")
     df_leads = pd.DataFrame({
-        "Firm": ["Patna Prime Estate", "Capital Land Agency", "Bihar Wheels Second-Hand", "Danapur Auto Deals"],
-        "Type": ["Plot/Land", "Flats", "Used Cars", "Bikes & Cars"],
-        "City": ["Patna", "Patna", "Patna", "Danapur"],
-        "Contact": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 99310***** 🔒", "+91 70040***** 🔒"]
+        "फर्म": ["Patna Prime Estate", "Capital Land Agency", "Bihar Wheels Second-Hand", "Danapur Auto Deals"],
+        "कैटेगरी": ["Plot/Land", "Flats", "Used Cars", "Bikes & Cars"],
+        "शहर": ["Patna", "Patna", "Patna", "Danapur"],
+        "संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 99310***** 🔒", "+91 70040***** 🔒"]
     })
     st.dataframe(df_leads, use_container_width=True, hide_index=True)
     
     upi_str = f"upi://pay?pa=7484878449-2@ybl&pn=World%20AI&am=49&cu=INR&tn=Directory%20Access"
-    st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ Unlock Full Database (₹49)</a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ संपूर्ण डेटाबेस अनलॉक करें (₹49)</a>', unsafe_allow_html=True)
     
-    utr_f = st.text_input("Enter 12-Digit UTR (VIP bypass available):", placeholder="Enter UTR number", key="utr_f_glob")
-    if st.button("🚀 Download Full Database"):
+    utr_f = st.text_input("12 अंकों का UTR नंबर डालें (फाउंडर कोड सक्रिय):", placeholder="UTR नंबर", key="utr_k")
+    if st.button("🚀 फाइल डाउनलोड करें"):
         if utr_f.strip() in ["7484878440", "111122223333"] or (len(utr_f.strip()) == 12 and utr_f.strip().isdigit()):
-            st.success("✅ VIP Access Verified!")
+            st.success("✅ सत्यापित!")
             st.download_button(
-                label="📥 Download CSV",
-                data="Firm,Type,City,Mobile\nPatna Prime,Land,Patna,+91 9876543210\nBihar Wheels,Cars,Patna,+91 9931012345",
-                file_name="Global_Verified_Directory.csv",
+                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
+                data="Firm,Category,City,Mobile\nPatna Prime,Land,Patna,+91 9876543210\nBihar Wheels,Cars,Patna,+91 9931012345",
+                file_name="Verified_Dealers.csv",
                 mime="text/csv",
                 use_container_width=True
             )
         else:
-            st.error("Please enter valid 12-digit UTR number.")
+            st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
 # 👑 संस्थापक प्रोफाइल कार्ड
@@ -290,7 +277,7 @@ st.markdown("---")
 wa_link = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका World AI ऐप देखा।')}"
 st.markdown(f"""
 <div class="founder-card">
-    <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 1px;">
+    <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase;">
         🏛️ FOUNDER & LEAD DEVELOPER
     </p>
     <h2 style="color: #38BDF8 !important; margin: 6px 0; font-size: 20px; font-weight: 800;">
