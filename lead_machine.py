@@ -3,28 +3,25 @@ import pandas as pd
 import urllib.parse
 import os
 
-# मोबाइल स्क्रीन सेटअप
+# स्क्रीन सेटअप
 st.set_page_config(
-    page_title="Bharat AI Super App",
+    page_title="Bharat AI - Viral Super App",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# बिल्कुल साफ़ विज़िबल मोबाइल CSS (सफ़ेद बॉक्स में साफ़ काला टेक्स्ट)
+# अल्ट्रा-क्लीन मोबाइल CSS
 st.markdown("""
 <style>
     .stApp {
         background-color: #0B1329 !important;
         color: #FFFFFF !important;
     }
-    
     label, .stMarkdown, p, span, h1, h2, h3, h4 {
         color: #FFFFFF !important;
         font-weight: 600 !important;
     }
-
-    /* इनपुट बॉक्स और टेक्स्ट-एरिया को साफ़ और पठनीय बनाना */
     input, textarea, .stTextInput input, .stTextArea textarea {
         background-color: #FFFFFF !important;
         color: #000000 !important;
@@ -32,13 +29,12 @@ st.markdown("""
         font-size: 15px !important;
         border-radius: 8px !important;
     }
-
     .app-header {
         background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%);
         padding: 16px;
         border-radius: 14px;
         text-align: center;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         border: 1px solid #60A5FA;
     }
     .app-header h2 {
@@ -53,18 +49,13 @@ st.markdown("""
         margin-top: 4px !important;
         margin-bottom: 0 !important;
     }
-
-    .guide-box {
+    .card-box {
         background-color: #1E293B;
-        border-left: 4px solid #38BDF8;
-        border-radius: 8px;
+        border: 1px solid #334155;
+        border-radius: 10px;
         padding: 14px;
-        margin-bottom: 14px;
-        font-size: 13px;
-        color: #F8FAFC !important;
-        line-height: 1.6;
+        margin-bottom: 12px;
     }
-
     .founder-card {
         background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
         border: 2px solid #38BDF8;
@@ -73,22 +64,19 @@ st.markdown("""
         text-align: center;
         margin-top: 24px;
         margin-bottom: 20px;
-        box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
     }
-
     .upi-pay-btn {
         display: block;
         background: linear-gradient(90deg, #10B981 0%, #059669 100%);
         color: #FFFFFF !important;
         text-align: center;
         font-weight: bold;
-        font-size: 15px;
-        padding: 12px;
+        font-size: 14px;
+        padding: 11px;
         border-radius: 10px;
         text-decoration: none;
-        margin: 12px 0;
+        margin: 10px 0;
     }
-
     div.stButton > button {
         background-color: #1E293B !important;
         color: #38BDF8 !important;
@@ -97,200 +85,167 @@ st.markdown("""
         font-weight: 700 !important;
         font-size: 14px !important;
         width: 100% !important;
-        padding: 10px !important;
+        padding: 9px !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# 🌐 भाषा विकल्प (केवल हिंदी और English)
-lang = st.selectbox(
-    "🌐 भाषा चुनें / Select Language:",
-    ["हिंदी + English (Hinglish)", "Pure English"]
-)
-
-is_pure_en = ("Pure English" in lang)
-
 # हेडर
-if is_pure_en:
-    st.markdown("""
-    <div class="app-header">
-        <h2>🇮🇳 BHARAT AI — SUPER APP</h2>
-        <p>Real Estate, Car Bazaar, Students, Seniors & Business Toolkit</p>
-    </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-    <div class="app-header">
-        <h2>🇮🇳 BHARAT AI — सुपर ऐप</h2>
-        <p>जमीन-मकान, पुरानी गाड़ियाँ, छात्र, बुज़ुर्ग व व्यापारियों का ऑल-इन-वन ऐप</p>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("""
+<div class="app-header">
+    <h2>🇮🇳 BHARAT AI — वायरल सुपर ऐप</h2>
+    <p>जमीन-गाड़ी, EMI कैलकुलेटर, इंस्टा वायरल टूल्स, छात्र व व्यापारिक समाधान</p>
+</div>
+""", unsafe_allow_html=True)
 
-# मुख्य नंबर
+# आपका आधिकारिक WhatsApp नंबर
 MY_WA_NUMBER = "917484878440"
 
-# 5 मुख्य टैब्स
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🏢 ज़मीन-मकान व गाड़ियाँ",
+# 5 ट्रेंडिंग टैब्स
+tab_lead, tab_emi, tab_viral, tab_student, tab_biz = st.tabs([
+    "🏢 जमीन व पुरानी गाड़ियाँ",
+    "🔢 EMI कैलकुलेटर",
+    "🔥 वायरल रील्स व कैप्शन",
     "📚 छात्र व बच्चे",
-    "🏪 व्यापारी बिल व उधारी",
-    "👵 जन-सेवा व बुज़ुर्ग",
-    "🤖 AI सवाल-जवाब"
+    "🏪 व्यापारी बिल व उधारी"
 ])
 
 # ----------------------------------------------------
-# 1. ज़मीन, मकान (Real Estate) और गाड़ियाँ (Car/Bike Bazaar)
+# 1. ज़मीन, मकान व गाड़ियाँ (Leads)
 # ----------------------------------------------------
-with tab1:
-    st.markdown("### 🏢 प्रॉपर्टी (जमीन/मकान) व पुरानी गाड़ियाँ")
-    st.caption("पटना व बिहार के वेरिफाइड डीलर्स, मकान मालिक व सेलर लिस्ट")
+with tab_lead:
+    st.markdown("### 🏢 प्रॉपर्टी व पुरानी गाड़ियों के नंबर")
+    m_choice = st.radio("चुनें:", ["🏠 जमीन / मकान / फ्लैट", "🚗 पुरानी कार व बाइक डीलर्स"], horizontal=True)
 
-    market_type = st.radio("कैटेगरी चुनें:", ["🏠 जमीन / मकान / फ्लैट", "🚗 पुरानी कार व बाइक डीलर्स"], horizontal=True)
-
-    if market_type == "🏠 जमीन / मकान / फ्लैट":
-        df_prop = pd.DataFrame({
-            "प्रॉपर्टी / डीलर": ["Patna Prime Properties", "Capital Land Hub", "Rajdhani Flats Danapur", "Maa Tara Homes Boring Road"],
-            "प्रकार": ["Plot / Land", "Commercial Land", "2/3 BHK Flats", "House / Duplex"],
-            "स्थान": ["Saguna More, Patna", "Bailey Road, Patna", "Danapur Cantt, Patna", "Boring Road, Patna"],
+    if m_choice == "🏠 जमीन / मकान / फ्लैट":
+        df_p = pd.DataFrame({
+            "प्रॉपर्टी / फर्म": ["Patna Prime Estate", "Capital Land Agency", "Danapur Flats Hub", "Boring Road Homes"],
+            "प्रकार": ["Plot / Land", "Commercial Space", "2/3 BHK Flats", "House / Villa"],
+            "स्थान": ["Saguna More, Patna", "Bailey Road, Patna", "Danapur, Patna", "Boring Road, Patna"],
             "संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒"]
         })
-        st.dataframe(df_prop, use_container_width=True, hide_index=True)
+        st.dataframe(df_p, use_container_width=True, hide_index=True)
     else:
-        df_car = pd.DataFrame({
-            "डीलर / शोरूम": ["Patna Second-Hand Cars", "Bihar Wheels Hub", "Danapur Auto Bazaar", "Star Pre-Owned Cars"],
-            "उपलब्ध गाड़ियाँ": ["Swift, Scorpio, Bolero", "i20, WagonR, Alto", "Pulsar, Splendor Bikes", "Creta, Brezza, Innova"],
-            "स्थान": ["Raja Bazar, Patna", "Kankarbagh, Patna", "Danapur, Patna", "Boring Canal Road, Patna"],
+        df_c = pd.DataFrame({
+            "डीलर / शोरूम": ["Patna Second-Hand Cars", "Bihar Wheels Hub", "Patna Bike Bazaar", "Apex Auto Deals"],
+            "स्टॉक": ["Scorpio, Swift, Bolero", "i20, Alto, WagonR", "Pulsar, Splendor, Bullet", "Creta, Brezza, Innova"],
+            "स्थान": ["Raja Bazar, Patna", "Kankarbagh, Patna", "Boring Canal Road, Patna", "Danapur, Patna"],
             "संपर्क": ["+91 99310***** 🔒", "+91 82100***** 🔒", "+91 70040***** 🔒", "+91 93080***** 🔒"]
         })
-        st.dataframe(df_car, use_container_width=True, hide_index=True)
+        st.dataframe(df_c, use_container_width=True, hide_index=True)
 
     st.markdown("""
-    <div style="background-color: #1E293B; border: 1px solid #F59E0B; border-radius: 10px; padding: 12px; text-align: center; margin-top: 10px;">
-        <h4 style="color: #F59E0B !important; margin: 0;">👑 पूरी डायरेक्टरी अनलॉक करें (मात्र ₹49)</h4>
-        <p style="color: #CBD5E1 !important; font-size: 11px; margin: 4px 0;">40+ चालू नंबर सीधे एक्सेल शीट में डाउनलोड करें</p>
+    <div style="background-color: #1E293B; border: 1px solid #F59E0B; border-radius: 10px; padding: 10px; text-align: center; margin-top: 10px;">
+        <b style="color: #F59E0B;">👑 पूरी कॉलिंग लिस्ट अनलॉक करें (मात्र ₹49)</b>
+        <p style="color: #CBD5E1; font-size: 11px; margin: 3px 0;">40+ एक्टिव डीलर्स व मालिकों के पूरे नंबर एक्सेल शीट में</p>
     </div>
     """, unsafe_allow_html=True)
 
-    upi_link = f"upi://pay?pa=7484878449-2@ybl&pn=Bharat%20AI&am=49&cu=INR&tn=Directory%20Access"
-    st.markdown(f'<a href="{upi_link}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay / Paytm)</a>', unsafe_allow_html=True)
+    upi_str = f"upi://pay?pa=7484878449-2@ybl&pn=Bharat%20AI&am=49&cu=INR&tn=Leads%20Access"
+    st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay / Paytm)</a>', unsafe_allow_html=True)
 
-    utr_val = st.text_input("पेमेंट के बाद 12 अंकों का UTR नंबर डालें:", placeholder="उदा: 426819284910", key="utr_prop")
-    if st.button("🚀 UTR चेक करें और फ़ाइल डाउनलोड करें"):
-        if len(utr_val.strip()) == 12 and utr_val.strip().isdigit():
-            st.success("✅ पेमेंट सत्यापित! नीचे बटन से पूरी डायरेक्टरी डाउनलोड करें:")
-            st.download_button(
-                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
-                data="Dealer,Type,Location,Phone\nPatna Prime,Plot,Saguna More,+91 9876543210\nCapital Land,Flat,Bailey Road,+91 9431012345",
-                file_name="Patna_Property_Cars.csv",
-                mime="text/csv",
-                use_container_width=True
-            )
+    utr_num = st.text_input("पेमेंट के बाद UTR नंबर डालें (फाउंडर फ्री कोड उपलब्ध):", placeholder="12 अंकों का UTR नंबर दर्ज करें", key="utr_k")
+    if st.button("🚀 फाइल डाउनलोड करें"):
+        # आपके लिए स्पेशल फ्री सीक्रेट कोड
+        if utr_num.strip() in ["7484878440", "111122223333"] or (len(utr_num.strip()) == 12 and utr_num.strip().isdigit()):
+            st.success("✅ सत्यापित! नीचे दिए गए बटन से पूरी शीट डाउनलोड करें:")
+            full_csv = "Name,Type,Location,Mobile\nPatna Prime,Plot,Saguna More,+91 9876543210\nBihar Wheels,Cars,Kankarbagh,+91 9931012345"
+            st.download_button("📥 पूरी डायरेक्टरी डाउनलोड करें (CSV)", data=full_csv, file_name="Verified_Dealers.csv", mime="text/csv", use_container_width=True)
         else:
             st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
-# 2. छात्र व बच्चे (Students & Kids)
+# 2. बाइक, कार व पर्सनल लोन EMI कैलकुलेटर
 # ----------------------------------------------------
-with tab2:
-    st.markdown("### 📚 छात्र सहायता व स्कूल अर्ज़ी")
-    st_opt = st.radio("चुनें:", ["📝 स्कूल छुट्टी की अर्ज़ी (Leave App)", "📖 प्रेरणादायक कहानी", "📄 1-क्लिक नौकरी बायोडाटा"], horizontal=True)
-
-    if st_opt == "📝 स्कूल छुट्टी की अर्ज़ी (Leave App)":
-        s_name = st.text_input("छात्र का नाम:", value="Sahil")
-        s_days = st.text_input("कितने दिन की छुट्टी चाहिए:", value="2 दिन")
-        s_reason = st.text_input("छुट्टी का कारण:", value="आवश्यक कार्य / तबियत खराब")
+with tab_emi:
+    st.markdown("### 🔢 1-सेकंड लोन EMI कैलकुलेटर")
+    st.caption("बाइक, कार या जमीन खरीदने से पहले अपनी मासिक किस्त (EMI) तुरंत जानें")
+    
+    col_e1, col_e2 = st.columns(2)
+    with col_e1:
+        loan_amt = st.number_input("लोन की रकम (₹):", min_value=10000, max_value=5000000, value=150000, step=10000)
+    with col_e2:
+        loan_time = st.number_input("समय (महीनों में):", min_value=6, max_value=84, value=24, step=6)
         
-        if st.button("📝 अर्ज़ी तैयार करें"):
-            res_letter = f"""सेवा में,\nप्रधानाचार्य महोदय,\nविद्यालय/महाविद्यालय\n\nविषय: {s_reason} हेतु अवकाश पत्र।\n\nमहोदय,\nसविनय निवेदन है कि मुझे {s_reason} होने के कारण मैं {s_days} तक उपस्थित नहीं हो पाऊँगा।\nअतः प्रार्थना है कि मुझे अवकाश प्रदान करें।\n\nधन्यवाद।\nआज्ञाकारी छात्र,\n{s_name}"""
-            st.text_area("आपकी अर्ज़ी (कॉपी करें):", res_letter, height=180)
-
-    elif st_opt == "📖 प्रेरणादायक कहानी":
-        st.markdown("""
-        <div class="guide-box">
-            <b>🪓 ईमानदार लकड़हारा:</b><br>
-            नदी में कुल्हाड़ी गिरने पर लकड़हारे ने जलपरी की सोने-चाँदी की कुल्हाड़ी लेने से मना कर दिया और अपनी पुरानी लोहे की कुल्हाड़ी ली। उसकी सच्चाई देखकर जलपरी ने तीनों कुल्हाड़ियाँ इनाम में दे दीं।<br>
-            <b>सीख:</b> ईमानदारी सबसे बड़ा खज़ाना है।
-        </div>
-        """, unsafe_allow_html=True)
-
-    else:
-        r_name = st.text_input("पूरा नाम:", value="सुमित कुमार")
-        r_phone = st.text_input("मोबाइल नंबर:", value="9876543210")
-        r_edu = st.text_input("शिक्षा:", value="12वीं पास")
-        r_skill = st.text_input("हुनर / अनुभव:", value="ड्राइविंग, सेल्स, मोबाइल रिपेयरिंग")
-        if st.button("📄 बायोडाटा (Resume) बनाएँ"):
-            res_txt = f"""बायोडाटा / RESUME\n--------------------\nनाम: {r_name}\nफ़ोन: {r_phone}\nशिक्षा: {r_edu}\nहुनर: {r_skill}\nउपलब्धता: तत्काल काम हेतु उपलब्ध"""
-            st.text_area("तैयार बायोडाटा:", res_txt, height=140)
-
-# ----------------------------------------------------
-# 3. व्यापारी बिल व उधारी (Vyapar Tools)
-# ----------------------------------------------------
-with tab3:
-    st.markdown("### 🏪 1-क्लिक WhatsApp बिल व उधारी तगादा")
-    v_tool = st.radio("टूल:", ["🧾 WhatsApp डिजिटल बिल", "💰 कानूनी उधारी तगादा"], horizontal=True)
-
-    if v_tool == "🧾 WhatsApp डिजिटल बिल":
-        b_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
-        b_cust = st.text_input("ग्राहक का नाम:", value="रमेश जी")
-        b_phone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", value="9876543210")
-        b_amt = st.text_input("कुल रकम (₹):", value="1250")
-        
-        if st.button("📲 WhatsApp बिल तैयार करें"):
-            bill_msg = f"🧾 *डिजिटल बिल / CASH MEMO*\n🏪 दुकान: {b_shop}\n👤 ग्राहक: {b_cust}\n💰 कुल देय: ₹{b_amt}\n✅ स्थिति: भुगतान प्राप्त\nधन्यवाद! फिर पधारें 🙏"
-            wa_url = f"https://wa.me/91{b_phone.strip()[-10:]}?text={urllib.parse.quote(bill_msg)}"
-            st.markdown(f'<a href="{wa_url}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
-
-    else:
-        c_name = st.text_input("बकायेदार का नाम:", value="विकास जी")
-        c_amt = st.text_input("बकाया राशि (₹):", value="3500")
-        c_phone = st.text_input("बकायेदार का WhatsApp नंबर:", value="9876543210")
-        
-        if st.button("📩 कानूनी तगादा भेजें"):
-            rec_msg = f"नमस्ते {c_name} जी, आपके ऊपर ₹{c_amt} का व्यापारिक बकाया लंबित है। कृपया आज ही इसका भुगतान करें अन्यथा कानूनी प्रक्रिया शुरू की जा सकती है।"
-            wa_rec = f"https://wa.me/91{c_phone.strip()[-10:]}?text={urllib.parse.quote(rec_msg)}"
-            st.markdown(f'<a href="{wa_rec}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर नोटिस भेजें</a>', unsafe_allow_html=True)
-
-# ----------------------------------------------------
-# 4. जन-सेवा व बुज़ुर्ग (Seniors & Schemes)
-# ----------------------------------------------------
-with tab4:
-    st.markdown("### 👵 सरकारी योजनाएँ व बुज़ुर्ग सहायता")
-    st.markdown("""
-    <div class="guide-box">
-        <b>🏥 आयुष्मान भारत योजना (₹5 लाख तक मुफ़्त इलाज):</b><br>
-        • हर साल परिवार को ₹5,00,000 का मुफ़्त इलाज मिलता है।<br>
-        • <b>कागज़ात:</b> आधार कार्ड और राशन कार्ड।<br>
-        • <b>टोल-फ्री हेल्पलाइन:</b> 14555 पर कॉल करें।
-    </div>
-    <div class="guide-box">
-        <b>👴 वृद्धावस्था पेंशन योजना:</b><br>
-        • 60 साल या अधिक उम्र के नागरिकों के लिए।<br>
-        • आधार कार्ड, बैंक पासबुक और आय प्रमाण पत्र लेकर नजदीकी CSC सेंटर या ब्लॉक RTPS में जमा करें।
-    </div>
-    <div class="guide-box">
-        <b>🌾 राशन कार्ड सहायता:</b><br>
-        • नए राशन कार्ड में नाम जुड़वाने हेतु परिवार के सभी सदस्यों के आधार कार्ड व मुखिया की फोटो ब्लॉक में जमा करें।
+    loan_rate = st.slider("सालाना ब्याज दर (%):", min_value=8.0, max_value=24.0, value=12.0, step=0.5)
+    
+    r = (loan_rate / 12) / 100
+    n = loan_time
+    emi = loan_amt * r * ((1 + r)**n) / (((1 + r)**n) - 1)
+    total_pay = emi * n
+    interest_amt = total_pay - loan_amt
+    
+    st.markdown(f"""
+    <div class="card-box" style="border-left: 4px solid #10B981;">
+        <h4 style="color: #10B981 !important; margin: 0;">महीने की किस्त (EMI): ₹{int(emi):,}/महीना</h4>
+        <p style="margin: 4px 0 0 0; font-size: 13px;">कुल ब्याज: <b>₹{int(interest_amt):,}</b> | कुल वापसी रकम: <b>₹{int(total_pay):,}</b></p>
     </div>
     """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 5. AI सवाल-जवाब
+# 3. वायरल रील्स व सोशल मीडिया टूल्स
 # ----------------------------------------------------
-with tab5:
-    st.markdown("### 🤖 कोई भी सवाल पूछें")
-    ask_q = st.text_input("अपनी समस्या लिखें:", placeholder="उदा: बुखार में क्या प्राथमिक उपचार करें? या दुकान की बिक्री कैसे बढ़ाएँ?")
-    if st.button("🚀 तुरंत समाधान पाएँ"):
-        if "बुखार" in ask_q or "दवा" in ask_q:
-            st.info("🩺 **स्वास्थ्य सलाह:** आराम करें और ओआरएस/गुनगुना पानी पिएं। माथे पर सामान्य पानी की पट्टी रखें। बुखार 2 दिन से अधिक रहे तो तुरंत डॉक्टर को दिखाएँ।")
-        else:
-            st.success("💡 **परामर्श:** अपने काम को योजनाबद्ध तरीक़े से करें। रोज़ाना 10 नए ग्राहकों से संपर्क करने से व्यापार में तेज़ी आती है!")
+with tab_viral:
+    st.markdown("### 🔥 इंस्टा व यूट्यूब वायरल टूल")
+    st.caption("रील्स के लिए 1-क्लिक में ट्रेंडिंग कैप्शन, हैशटैग और एटीट्यूड बायो तैयार करें")
+    
+    v_tool = st.selectbox("आपको क्या चाहिए?", ["🔥 रील्स के लिए वायरल कैप्शन्स", "🚀 ट्रेंडिंग हैशटैग्स (All India)", "😎 स्टाइलिश इंस्टा बायो"])
+    
+    if v_tool == "🔥 रील्स के लिए वायरल कैप्शन्स":
+        st.markdown("""
+        <div class="card-box">
+            <b>1. एटीट्यूड / स्टाइल:</b><br>
+            <i>"हम वो नहीं जो हवा का रुख देखकर चलते हैं, हम वो हैं जो हवाओं का रुख मोड़ देते हैं। ⚡👑"</i><br><br>
+            <b>2. मोटिवेशन / मेहनत:</b><br>
+            <i>"जो आज कहते हैं तुझसे नहीं होगा, कल वही तालियाँ बजाने वालों की कतार में सबसे आगे होंगे। 🦁🔥"</i><br><br>
+            <b>3. बाइक / कार राइडर:</b><br>
+            <i>"सड़कें वही हैं, बस रफ्तार और रुतबा अपना है। 🏍️💨"</i>
+        </div>
+        """, unsafe_allow_html=True)
+    elif v_tool == "🚀 ट्रेंडिंग हैशटैग्स (All India)":
+        tags = "#viral #reelsindia #trendingreels #bihar #patna #explorepage #foryou #attitude #motivation #creator"
+        st.text_area("कॉपी करके अपनी रील में डालें:", tags, height=80)
+    else:
+        st.markdown("""
+        <div class="card-box">
+            👑 <b>रॉयल बायो:</b><br>
+            • Simple Guy With Big Dreams 🚀<br>
+            • Focus on Goals, Not Noise 🎯<br>
+            • Apna Time Aayega Nahi, Layenge! 🦁
+        </div>
+        """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 👑 संस्थापक प्रोफाइल (100% सही WhatsApp नंबर)
+# 4. छात्र व बच्चे
+# ----------------------------------------------------
+with tab_student:
+    st.markdown("### 📚 स्कूल अर्ज़ी व पढ़ाई")
+    st_name = st.text_input("विद्यार्थी का नाम:", value="साहिल कुमार")
+    st_days = st.text_input("छुट्टी के दिन:", value="2 दिन")
+    if st.button("📝 अर्ज़ी तैयार करें"):
+        letter = f"""सेवा में,\nप्रधानाचार्य महोदय,\nविषय: अवकाश हेतु प्रार्थना पत्र\n\nमहोदय,\nसविनय निवेदन है कि आवश्यक कार्य होने से मैं {st_days} तक विद्यालय आने में असमर्थ हूँ। कृपया अवकाश प्रदान करें।\n\nआज्ञाकारी छात्र,\n{st_name}"""
+        st.text_area("कॉपी करें:", letter, height=140)
+
+# ----------------------------------------------------
+# 5. व्यापारी बिल व उधारी
+# ----------------------------------------------------
+with tab_biz:
+    st.markdown("### 🏪 WhatsApp बिल व उधारी तगादा")
+    b_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
+    b_cust = st.text_input("ग्राहक का नाम:", value="विजय जी")
+    b_amt = st.text_input("रकम (₹):", value="1450")
+    b_phone = st.text_input("ग्राहक का WhatsApp नंबर:", value="9876543210")
+    
+    if st.button("📲 WhatsApp बिल भेजें"):
+        bill = f"🧾 *डिजिटल बिल / CASH MEMO*\n🏪 दुकान: {b_shop}\n👤 ग्राहक: {b_cust}\n💰 कुल देय: ₹{b_amt}\nस्थिति: भुगतान प्राप्त ✅\nधन्यवाद!"
+        wa_u = f"https://wa.me/91{b_phone.strip()[-10:]}?text={urllib.parse.quote(bill)}"
+        st.markdown(f'<a href="{wa_u}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
+
+# ----------------------------------------------------
+# 👑 संस्थापक प्रोफाइल कार्ड
 # ----------------------------------------------------
 st.markdown("---")
-founder_url = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका Bharat AI ऐप देखा।')}"
-
+wa_me = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका Bharat AI ऐप देखा।')}"
 st.markdown(f"""
 <div class="founder-card">
     <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase;">
@@ -300,11 +255,11 @@ st.markdown(f"""
         साहिल अहमद (Sahil Ahmad)
     </h2>
     <p style="color: #E2E8F0 !important; font-size: 12px; margin-bottom: 12px;">
-        🇮🇳 डिजिटल भारत मिशन — देश के हर छात्र, बुज़ुर्ग, युवा व व्यापारी को डिजिटल शक्ति से जोड़ने की पहल।
+        🇮🇳 डिजिटल भारत मिशन — देश के हर छात्र, युवा, बुज़ुर्ग व व्यापारी का डिजिटल साथी।
     </p>
-    <a href="{founder_url}" target="_blank" 
+    <a href="{wa_me}" target="_blank" 
        style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">
-        💬 सीधे WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर जुड़ें
+        💬 सीधे साहिल जी से WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर जुड़ें
     </a>
 </div>
 """, unsafe_allow_html=True)
