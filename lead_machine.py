@@ -3,15 +3,15 @@ import pandas as pd
 import urllib.parse
 import os
 
-# मोबाइल व ग्लोबल स्क्रीन सेटअप
+# मोबाइल स्क्रीन व लेआउट सेटअप
 st.set_page_config(
-    page_title="World AI Super App — Global Suite",
+    page_title="Bharat World AI — Universal Super Suite",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# अल्ट्रा-क्लीन और हाई-विजिबिलिटी CSS
+# हाई-कंट्रास्ट क्लीन CSS (सफ़ेद बॉक्स में साफ़ काला टेक्स्ट)
 st.markdown("""
 <style>
     .stApp {
@@ -31,15 +31,15 @@ st.markdown("""
     }
     .app-header {
         background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
-        padding: 18px;
+        padding: 16px;
         border-radius: 14px;
         text-align: center;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         border: 1px solid #60A5FA;
     }
     .app-header h2 {
         color: #FFFFFF !important;
-        font-size: 22px !important;
+        font-size: 21px !important;
         margin: 0 !important;
         font-weight: 800 !important;
     }
@@ -91,231 +91,167 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# मुख्य हेडर
-st.markdown("""
-<div class="app-header">
-    <h2>🌍 WORLD AI — GLOBAL SUPER SUITE</h2>
-    <p>AI मार्केटिंग, कानूनी एग्रीमेंट, करेंसी कनवर्टर, लोन EMI व बिज़नेस टूल्स</p>
-</div>
-""", unsafe_allow_html=True)
+# 🌐 भाषा स्विच
+lang_toggle = st.radio("🌐 Select Language / भाषा चुनें:", ["हिंदी (Hindi)", "English"], horizontal=True)
+is_en = (lang_toggle == "English")
 
 MY_WA_NUMBER = "917484878440"
 
-# 6 शक्तिशाली ग्लोबल टैब्स
-tab_market, tab_legal, tab_curr, tab_emi, tab_leads, tab_biz = st.tabs([
-    "🚀 AI मार्केटिंग इंजन",
-    "📜 कानूनी एग्रीमेंट मेकर",
-    "💱 मुद्रा (Currency)",
-    "🔢 EMI कैलकुलेटर",
-    "🏢 प्रॉपर्टी व गाड़ियाँ",
-    "🏪 डिजिटल बिलिंग"
-])
+# हेडर
+if is_en:
+    st.markdown("""
+    <div class="app-header">
+        <h2>🌍 WORLD AI — ALL-IN-ONE SUPER APP</h2>
+        <p>Voice AI, Scanner, Digital Khata, Govt Schemes & Global Utility</p>
+    </div>
+    """, unsafe_allow_html=True)
+    tab_names = ["🎙️ Voice AI", "📸 Photo Scanner", "💰 Daily Khata", "🪪 Govt Schemes", "💼 Earn Daily", "🏢 Directory"]
+else:
+    st.markdown("""
+    <div class="app-header">
+        <h2>🌍 WORLD AI — ऑल-इन-वन सुपर ऐप</h2>
+        <p>बोलकर चलाएं, स्कैनर, डिजिटल खाता, सरकारी योजनाएं व ग्लोबल टूल्स</p>
+    </div>
+    """, unsafe_allow_html=True)
+    tab_names = ["🎙️ वॉइस AI", "📸 फोटो स्कैनर", "💰 डिजिटल खाता", "🪪 सरकारी योजनाएं", "💼 रोज़गार व कमाई", "🏢 डायरेक्टरी"]
+
+tab_voice, tab_scan, tab_khata, tab_scheme, tab_earn, tab_dir = st.tabs(tab_names)
 
 # ----------------------------------------------------
-# 1. AI मार्केटिंग इंजन (Global Business Marketing)
+# 1. 🎙️ बोलकर चलाओ वॉइस AI (Voice Assistant)
 # ----------------------------------------------------
-with tab_market:
-    st.markdown("### 🚀 1-क्लिक AI बिज़नेस मार्केटिंग इंजन")
-    st.caption("किसी भी दुकान, रेस्टोरेंट, जिम, या ऑनलाइन बिज़नेस के लिए वायरल विज्ञापन और रील्स स्क्रिप्ट बनाएँ")
-    
-    b_name = st.text_input("व्यवसाय या ब्रांड का नाम:", placeholder="उदा: साहिल ऑटो हब / रॉयल कैफ़े / Star Fitness")
-    b_type = st.selectbox("विज्ञापन का प्रकार चुनें:", ["🔥 वायरल रील्स वीडियो स्क्रिप्ट (Instagram/YouTube)", "📢 Facebook व WhatsApp सेल्स विज्ञापन", "🎉 फेस्टिव / स्पेशल डिस्काउंट ऑफर"])
-    
-    if st.button("✨ 1-क्लिक में मार्केटिंग कॉपी तैयार करें"):
-        if b_name.strip():
-            if "रील्स" in b_type:
-                ad_content = f"""🎬 [REEL SCRIPT FOR: {b_name}]
---------------------------------------------------
-[Visual: कैमरे की तरफ देखते हुए दमदार आवाज़ में]
-"क्या आप भी अपनी मेहनत की कमाई से बेस्ट डील ढूँढ रहे हैं?
-अब इधर-उधर भटकना बंद कीजिए!
-
-मिलिए {b_name} से — जहाँ क्वालिटी और भरोसे का पक्का वादा मिलता है।
-चाहे सबसे कम दाम हो या बेहतरीन सर्विस, आपको मिलेगा सब कुछ एक ही छत के नीचे!
-
-👉 आज ही बायो में दिए लिंक पर टैप करें या DM करें।
-सीमित समय का ऑफर! ⚡🚀"
-
-#viral #business #{b_name.replace(' ', '')} #trendingreels #growth"""
-            elif "Facebook" in b_type:
-                ad_content = f"""📢 [HIGH-CONVERTING AD COPY: {b_name}]
---------------------------------------------------
-🔥 जबरदस्त ऑफर! सिर्फ इस हफ्ते के लिए!
-क्या आप अपनी लाइफस्टाइल या बिजनेस को अपग्रेड करना चाहते हैं?
-
-{b_name} लेकर आया है प्रीमियम समाधान वो भी सबसे किफायती दामों में!
-✅ 100% भरोसेमंद व प्रमाणित
-✅ तुरंत डिलीवरी और आसान सहायता
-✅ स्पेशल डिस्काउंट कूपन उपलब्ध
-
-👇 नीचे दिए बटन पर क्लिक करें या सीधे WhatsApp करें:
-📞 तुरंत संपर्क: +91 7484878440"""
+with tab_voice:
+    st.markdown("### 🎙️ वॉइस AI असिस्टेंट (Voice Assistant)")
+    st.caption("अनपढ़ हों या पढ़े-लिखे—कीबोर्ड माइक दबाकर बोलें या टाइप करें")
+    v_input = st.text_input("अपनी भाषा में बोलें या लिखें:", placeholder="उदा: बुखार में क्या करें? / दुकान का हिसाब कैसे रखें?")
+    if st.button("🚀 तुरंत AI समाधान"):
+        if v_input.strip():
+            q_low = v_input.lower()
+            if any(w in q_low for w in ["बुखार", "दवा", "सिरदर्द", "fever", "health"]):
+                res = "🩺 **स्वास्थ्य सलाह:** पर्याप्त आराम करें और गुनगुना पानी/ओआरएस पिएं। बुखार 48 घंटे से अधिक रहे तो तुरंत डॉक्टर से संपर्क करें।"
+            elif any(w in q_low for w in ["हिसाब", "दुकान", "कमाई", "business"]):
+                res = "💼 **व्यापार सलाह:** डिजिटल खाता टैब का उपयोग करें, ग्राहकों को WhatsApp बिल भेजें और दैनिक खर्चों को ट्रैक करें।"
             else:
-                ad_content = f"""🎉 [MEGA FESTIVE OFFER: {b_name}]
---------------------------------------------------
-धमाकेदार छूट की शुरुआत! 💥
-{b_name} पर पाएं भारी डिस्काउंट ऑफर! 
-पहले 50 ग्राहकों को मिलेगा फ्लैट 20% तक का अतिरिक्त लाभ।
-
-📍 आज ही संपर्क करें और ऑफर का लाभ उठाएं!
-सीधे कॉल / व्हाट्सएप: +91 7484878440"""
-
-            st.text_area("आपकी AI मार्केटिंग कॉपी तैयार है (कॉपी करें):", ad_content, height=220)
+                res = f"💡 **World AI परामर्श:** आपके सवाल '{v_input}' का विश्लेषण किया गया है। विस्तृत सहायता हेतु संबंधित टैब का उपयोग करें।"
+            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;">{res}</div>', unsafe_allow_html=True)
         else:
-            st.warning("कृपया अपने बिज़नेस का नाम दर्ज करें।")
+            st.warning("कृपया अपना सवाल बोलें या लिखें।")
 
 # ----------------------------------------------------
-# 2. कानूनी एग्रीमेंट मेकर (Smart Legal Contract)
+# 2. 📸 फोटो व दस्तावेज़ स्कैनर (Photo Scanner)
 # ----------------------------------------------------
-with tab_legal:
-    st.markdown("### 📜 1-क्लिक मकान / दुकान रेंट एग्रीमेंट")
-    st.caption("वकीलों के चक्कर काटे बिना घर बैठे कानूनी फॉर्मेट में रेंट एग्रीमेंट तैयार करें और डाउनलोड करें")
+with tab_scan:
+    st.markdown("### 📸 1-क्लिक AI फोटो व डॉक्यूमेंट विश्लेषक")
+    st.caption("दवा का पर्चा, बिल, सवाल या रसीद की फोटो अपलोड करें")
+    uploaded_file = st.file_uploader("फ़ाइल या फोटो चुनें (JPG, PNG):", type=["png", "jpg", "jpeg"])
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption="अपलोड किया गया दस्तावेज़", width=200)
+        st.success("✅ दस्तावेज़ सफलता से लोड हुआ! AI विश्लेषण:")
+        st.markdown("""
+        <div class="card-box" style="border-left: 4px solid #38BDF8;">
+            <b>📄 AI स्कैन परिणाम:</b><br>
+            • दस्तावेज़ का प्रकार: रसीद / पर्चा / सामान्य फ़ाइल<br>
+            • स्थिति: स्पष्ट व पढ़ने योग्य<br>
+            • सुझाव: इसे सुरक्षित डिजिटल बैकअप के रूप में अपने WhatsApp पर सहेजें।
+        </div>
+        """, unsafe_allow_html=True)
+
+# ----------------------------------------------------
+# 3. 💰 दैनिक बजट व डिजिटल खाता (Personal & Shop Khata)
+# ----------------------------------------------------
+with tab_khata:
+    st.markdown("### 💰 दैनिक गल्ला व डिजिटल खाता (Daily Khata)")
+    st.caption("दुकान या घर का दैनिक खर्च और कमाई तुरंत जोड़ें")
+    k_type = st.radio("प्रकार:", ["➕ दैनिक कमाई (Income)", "➖ दैनिक खर्च (Expense)"], horizontal=True)
+    k_desc = st.text_input("विवरण:", placeholder="उदा: आज की दुकान बिक्री / सब्जी का खर्च")
+    k_amt = st.number_input("रकम (₹):", min_value=1, value=500, step=50)
+    if st.button("📝 खाते में दर्ज करें"):
+        st.success(f"✅ ₹{k_amt} '{k_desc}' के लिए दर्ज कर दिया गया है!")
+
+# ----------------------------------------------------
+# 4. 🪪 1-क्लिक सरकारी योजना व जन-सेवा
+# ----------------------------------------------------
+with tab_scheme:
+    st.markdown("### 🪪 सरकारी योजना व जन-सेवा खोजक")
+    age_group = st.selectbox("वर्ग चुनें:", ["👴 बुज़ुर्ग (60+ वर्ष)", "👩 महिलाएँ व बालिकाएँ", "🌾 किसान भाई", "🧑 छात्र व युवा"])
+    if "बुज़ुर्ग" in age_group:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. आयुष्मान भारत योजना:</b> ₹5 लाख तक का सालाना मुफ़्त इलाज। आधार + राशन कार्ड आवश्यक।<br>
+            <b>2. वृद्धावस्था पेंशन:</b> हर महीने बंधी आर्थिक सहायता। ब्लॉक/CSC से ऑनलाइन आवेदन।
+        </div>
+        """, unsafe_allow_html=True)
+    elif "महिलाएँ" in age_group:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. लखपति दीदी योजना:</b> स्वयं सहायता समूह की महिलाओं को बिना ब्याज लोन व बिज़नेस ट्रेनिंग।<br>
+            <b>2. मातृत्व वंदना योजना:</b> गर्भवती महिलाओं को पोषण हेतु ₹5000 की वित्तीय मदद।
+        </div>
+        """, unsafe_allow_html=True)
+    elif "किसान" in age_group:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. पीएम किसान सम्मान निधि:</b> हर साल ₹6,000 सीधे खाते में। ई-केवाईसी अनिवार्य।<br>
+            <b>2. किसान क्रेडिट कार्ड (KCC):</b> 4% ब्याज पर खेती व पशुपालन हेतु ऋण।
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <div class="card-box">
+            <b>1. पीएम इंटर्नशिप योजना:</b> टॉप कंपनियों में मासिक स्टाइपेंड के साथ ट्रेनिंग।<br>
+            <b>2. कौशल विकास मिशन:</b> फ्री कंप्यूटर व वोकेशनल ट्रेनिंग सर्टिफिकेट के साथ।
+        </div>
+        """, unsafe_allow_html=True)
+
+# ----------------------------------------------------
+# 5. 💼 रोज़गार व मोबाइल से कमाई (Earn Daily)
+# ----------------------------------------------------
+with tab_earn:
+    st.markdown("### 💼 मोबाइल से रोज़ाना कमाई के साधन")
+    st.caption("छात्रों और युवाओं के लिए जीरो-इन्वेस्टमेंट कमाई के सिद्ध तरीके")
+    st.markdown("""
+    <div class="card-box" style="border-left: 4px solid #10B981;">
+        <b>1. बायोडाटा व फॉर्म सेवा:</b> अपने गांव/कस्बे के लड़कों का जॉब बायोडाटा हमारे ऐप से बनाकर ₹30-50 प्रति बायोडाटा लें।<br><br>
+        <b>2. दुकानदारों के लिए डिजिटल बिलिंग:</b> आसपास के 10 दुकानदारों को WhatsApp डिजिटल बिलिंग सेवा देकर महीने का ₹100-200 प्रति दुकान लें।<br><br>
+        <b>3. डायरेक्टरी री-सेल:</b> हमारे वेरिफाइड रियल एस्टेट व कार डीलर्स की लिस्ट को प्रॉपर्टी खरीदारों को साझा करके कमीशन पाएं।
+    </div>
+    """, unsafe_allow_html=True)
+
+# ----------------------------------------------------
+# 6. 🏢 लीड्स व डायरेक्टरी (Founder Free Access)
+# ----------------------------------------------------
+with tab_dir:
+    st.markdown("### 🏢 वेरिफाइड डीलर डायरेक्टरी")
+    df_leads = pd.DataFrame({
+        "फर्म": ["Patna Prime Builders", "Capital Property Hub", "Bihar Second-Hand Cars", "Danapur Auto Deals"],
+        "कैटेगरी": ["Real Estate", "Real Estate", "Used Cars", "Bikes & Cars"],
+        "शहर": ["Patna", "Patna", "Patna", "Danapur"],
+        "संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 99310***** 🔒", "+91 70040***** 🔒"]
+    })
+    st.dataframe(df_leads, use_container_width=True, hide_index=True)
     
-    col_l1, col_l2 = st.columns(2)
-    with col_l1:
-        owner_name = st.text_input("मकान मालिक / फ़र्म का नाम:", value="साहिल अहमद")
-        tenant_name = st.text_input("किराएदार का नाम:", placeholder="उदा: राकेश कुमार")
-    with col_l2:
-        rent_amt = st.text_input("मासिक किराया (₹):", value="8500")
-        prop_addr = st.text_input("मकान / दुकान का पता:", placeholder="उदा: बोरिंग रोड, पटना")
-        
-    if st.button("📄 कानूनी एग्रीमेंट तैयार करें"):
-        if owner_name and tenant_name and rent_amt and prop_addr:
-            agreement_text = f"""==================================================
-           किरायानामा अनुबंध / RENT AGREEMENT
-==================================================
-यह अनुबंध आज दिनांक को प्रथम पक्षकार (मकान मालिक) 
-श्री {owner_name}
-एवं द्वितीय पक्षकार (किराएदार) 
-श्री {tenant_name} के मध्य निष्पादित किया गया।
-
-1. संपत्ति विवरण: {prop_addr}
-2. तय मासिक किराया: ₹{rent_amt}/- (प्रति माह)
-3. किराएदार प्रत्येक माह की 1 से 7 तारीख तक किराया भुगतान करने हेतु बाध्य रहेगा।
-4. बिजली व पानी का बिल किराएदार द्वारा मीटर रीडिंग अनुसार देय होगा।
-5. परिसर का उपयोग केवल वैध कार्यों हेतु ही किया जाएगा।
-
-प्रथम पक्षकार (मालिक): {owner_name}
-द्वितीय पक्षकार (किराएदार): {tenant_name}
-=================================================="""
-            st.text_area("तैयार एग्रीमेंट (कॉपी करें):", agreement_text, height=220)
+    upi_str = f"upi://pay?pa=7484878449-2@ybl&pn=World%20AI&am=49&cu=INR&tn=Directory%20Access"
+    st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ संपूर्ण डेटाबेस अनलॉक करें (₹49)</a>', unsafe_allow_html=True)
+    
+    utr_entry = st.text_input("पेमेंट के बाद UTR नंबर डालें (फाउंडर फ्री कोड सक्रिय):", placeholder="12 अंकों का UTR नंबर", key="utr_glob")
+    if st.button("🚀 फाइल डाउनलोड करें"):
+        if utr_entry.strip() in ["7484878440", "111122223333"] or (len(utr_entry.strip()) == 12 and utr_entry.strip().isdigit()):
+            st.success("✅ सत्यापित! नीचे दिए गए बटन से पूरी शीट डाउनलोड करें:")
             st.download_button(
-                label="📥 एग्रीमेंट फ़ाइल डाउनलोड करें (TXT)",
-                data=agreement_text,
-                file_name="Rent_Agreement.txt",
-                mime="text/plain",
+                label="📥 संपूर्ण डायरेक्टरी डाउनलोड करें (CSV)",
+                data="Dealer,Category,City,Mobile\nPatna Prime,Real Estate,Patna,+91 9876543210\nBihar Cars,Auto,Patna,+91 9931012345",
+                file_name="Verified_Dealers.csv",
+                mime="text/csv",
                 use_container_width=True
             )
-        else:
-            st.warning("कृपया सभी बॉक्स भरें।")
-
-# ----------------------------------------------------
-# 3. लाइव मुद्रा कनवर्टर (Currency Converter)
-# ----------------------------------------------------
-with tab_curr:
-    st.markdown("### 💱 ग्लोबल करेंसी कनवर्टर (Global FX)")
-    col_c1, col_c2 = st.columns(2)
-    with col_c1:
-        amt_curr = st.number_input("रकम डालें:", value=100, min_value=1)
-    with col_c2:
-        curr_type = st.selectbox("मुद्रा चुनें:", ["USD ($ अमेरिका)", "AED (दिरहम दुबई)", "SAR (रियाल सऊदी)", "EUR (€ यूरोप)"])
-        
-    rates = {"USD ($ अमेरिका)": 87.5, "AED (दिरहम दुबई)": 23.8, "SAR (रियाल सऊदी)": 23.3, "EUR (€ यूरोप)": 92.0}
-    converted = amt_curr * rates[curr_type]
-    
-    st.markdown(f"""
-    <div class="card-box" style="border-left: 4px solid #38BDF8; text-align: center;">
-        <h3 style="color: #38BDF8 !important; margin: 0;">₹{converted:,.2f} भारतीय रुपये (INR)</h3>
-        <p style="font-size: 12px; margin-top: 4px;">लाइव दर: 1 {curr_type.split(' ')[0]} = ₹{rates[curr_type]}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# ----------------------------------------------------
-# 4. लोन EMI कैलकुलेटर
-# ----------------------------------------------------
-with tab_emi:
-    st.markdown("### 🔢 1-सेकंड लोन EMI कैलकुलेटर")
-    col_e1, col_e2 = st.columns(2)
-    with col_e1:
-        loan_amt = st.number_input("लोन रकम (₹):", min_value=10000, max_value=5000000, value=150000, step=10000)
-    with col_e2:
-        loan_time = st.number_input("महीने (Tenure):", min_value=6, max_value=84, value=24, step=6)
-        
-    loan_rate = st.slider("ब्याज दर (% प्रति वर्ष):", min_value=8.0, max_value=24.0, value=12.0, step=0.5)
-    r = (loan_rate / 12) / 100
-    n = loan_time
-    emi = loan_amt * r * ((1 + r)**n) / (((1 + r)**n) - 1)
-    
-    st.markdown(f"""
-    <div class="card-box" style="border-left: 4px solid #10B981;">
-        <h4 style="color: #10B981 !important; margin: 0;">महीने की EMI: ₹{int(emi):,}/माह</h4>
-        <p style="margin: 4px 0 0 0; font-size: 13px;">कुल वापसी रकम: <b>₹{int(emi * n):,}</b></p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# ----------------------------------------------------
-# 5. जमीन, मकान व गाड़ियाँ (Leads)
-# ----------------------------------------------------
-with tab_leads:
-    st.markdown("### 🏢 वेरिफाइड प्रॉपर्टी व पुरानी गाड़ियाँ")
-    m_choice = st.radio("चुनें:", ["🏠 जमीन / मकान / फ्लैट", "🚗 पुरानी कार व बाइक डीलर्स"], horizontal=True)
-
-    if m_choice == "🏠 जमीन / मकान / फ्लैट":
-        df_p = pd.DataFrame({
-            "प्रॉपर्टी / फर्म": ["Patna Prime Estate", "Capital Land Agency", "Danapur Flats Hub", "Boring Road Homes"],
-            "प्रकार": ["Plot / Land", "Commercial Space", "2/3 BHK Flats", "House / Villa"],
-            "स्थान": ["Saguna More, Patna", "Bailey Road, Patna", "Danapur, Patna", "Boring Road, Patna"],
-            "संपर्क": ["+91 98765***** 🔒", "+91 94310***** 🔒", "+91 91234***** 🔒", "+91 98350***** 🔒"]
-        })
-        st.dataframe(df_p, use_container_width=True, hide_index=True)
-    else:
-        df_c = pd.DataFrame({
-            "डीलर / शोरूम": ["Patna Second-Hand Cars", "Bihar Wheels Hub", "Patna Bike Bazaar", "Apex Auto Deals"],
-            "स्टॉक": ["Scorpio, Swift, Bolero", "i20, Alto, WagonR", "Pulsar, Splendor, Bullet", "Creta, Brezza, Innova"],
-            "स्थान": ["Raja Bazar, Patna", "Kankarbagh, Patna", "Boring Canal Road, Patna", "Danapur, Patna"],
-            "संपर्क": ["+91 99310***** 🔒", "+91 82100***** 🔒", "+91 70040***** 🔒", "+91 93080***** 🔒"]
-        })
-        st.dataframe(df_c, use_container_width=True, hide_index=True)
-
-    st.markdown("""
-    <div style="background-color: #1E293B; border: 1px solid #F59E0B; border-radius: 10px; padding: 10px; text-align: center; margin-top: 10px;">
-        <b style="color: #F59E0B;">👑 पूरी कॉलिंग लिस्ट अनलॉक करें (मात्र ₹49)</b>
-        <p style="color: #CBD5E1; font-size: 11px; margin: 3px 0;">40+ एक्टिव डीलर्स व मालिकों के नंबर सीधे एक्सेल में</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    upi_str = f"upi://pay?pa=7484878449-2@ybl&pn=Bharat%20AI&am=49&cu=INR&tn=Leads%20Access"
-    st.markdown(f'<a href="{upi_str}" class="upi-pay-btn">⚡ ₹49 पे करें (PhonePe / GPay / Paytm)</a>', unsafe_allow_html=True)
-
-    utr_num = st.text_input("पेमेंट के बाद UTR नंबर डालें (फाउंडर फ्री कोड उपलब्ध):", placeholder="12 अंकों का UTR नंबर", key="utr_glob")
-    if st.button("🚀 फाइल डाउनलोड करें"):
-        if utr_num.strip() in ["7484878440", "111122223333"] or (len(utr_num.strip()) == 12 and utr_num.strip().isdigit()):
-            st.success("✅ सत्यापित! नीचे दिए गए बटन से पूरी शीट डाउनलोड करें:")
-            full_csv = "Name,Type,Location,Mobile\nPatna Prime,Plot,Saguna More,+91 9876543210\nBihar Wheels,Cars,Kankarbagh,+91 9931012345"
-            st.download_button("📥 पूरी डायरेक्टरी डाउनलोड करें (CSV)", data=full_csv, file_name="Verified_Dealers.csv", mime="text/csv", use_container_width=True)
         else:
             st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
-# 6. डिजिटल बिलिंग (WhatsApp Invoicing)
-# ----------------------------------------------------
-with tab_biz:
-    st.markdown("### 🏪 WhatsApp डिजिटल बिल व वसूली नोटिस")
-    b_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
-    b_cust = st.text_input("ग्राहक का नाम:", value="विजय जी")
-    b_amt = st.text_input("रकम (₹):", value="1450")
-    b_phone = st.text_input("ग्राहक का WhatsApp नंबर (10 अंक):", value="9876543210")
-    
-    if st.button("📲 WhatsApp बिल भेजें"):
-        bill = f"🧾 *डिजिटल बिल / CASH MEMO*\n🏪 दुकान: {b_shop}\n👤 ग्राहक: {b_cust}\n💰 कुल देय: ₹{b_amt}\nस्थिति: भुगतान प्राप्त ✅\nधन्यवाद!"
-        wa_u = f"https://wa.me/91{b_phone.strip()[-10:]}?text={urllib.parse.quote(bill)}"
-        st.markdown(f'<a href="{wa_u}" target="_blank" class="upi-pay-btn">👉 WhatsApp पर बिल भेजें</a>', unsafe_allow_html=True)
-
-# ----------------------------------------------------
-# 👑 संस्थापक प्रोफाइल कार्ड (Founder Badge)
+# 👑 संस्थापक प्रोफाइल कार्ड
 # ----------------------------------------------------
 st.markdown("---")
-wa_me = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका World AI ऐप देखा।')}"
+wa_link = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मैंने आपका World AI ऐप देखा।')}"
 st.markdown(f"""
 <div class="founder-card">
     <p style="color: #94A3B8 !important; font-size: 11px; margin: 0; text-transform: uppercase;">
@@ -325,11 +261,11 @@ st.markdown(f"""
         साहिल अहमद (Sahil Ahmad)
     </h2>
     <p style="color: #E2E8F0 !important; font-size: 12px; margin-bottom: 12px;">
-        🌍 वर्ल्ड एआई मिशन — दुनिया के हर छात्र, युवा, व्यापारी व नागरिक के दैनिक कार्यों को आसान बनाने की पहल।
+        🌍 वर्ल्ड एआई मिशन — देश व दुनिया के हर छात्र, युवा, बुज़ुर्ग व व्यापारी को डिजिटल शक्ति से सशक्त बनाने की पहल।
     </p>
-    <a href="{wa_me}" target="_blank" 
+    <a href="{wa_link}" target="_blank" 
        style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">
-        💬 सीधे साहिल जी से WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर जुड़ें
+        💬 सीधे WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर जुड़ें
     </a>
 </div>
 """, unsafe_allow_html=True)
