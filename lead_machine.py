@@ -5,13 +5,13 @@ import os
 
 # मोबाइल व ग्लोबल स्क्रीन सेटअप
 st.set_page_config(
-    page_title="World AI Super App",
+    page_title="World AI Super App — Global Suite",
     page_icon="🌍",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# अल्ट्रा-मॉडर्न क्लीन मोबाइल CSS
+# अल्ट्रा-क्लीन और हाई-विजिबिलिटी CSS
 st.markdown("""
 <style>
     .stApp {
@@ -31,15 +31,15 @@ st.markdown("""
     }
     .app-header {
         background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
-        padding: 16px;
+        padding: 18px;
         border-radius: 14px;
         text-align: center;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         border: 1px solid #60A5FA;
     }
     .app-header h2 {
         color: #FFFFFF !important;
-        font-size: 21px !important;
+        font-size: 22px !important;
         margin: 0 !important;
         font-weight: 800 !important;
     }
@@ -94,72 +94,126 @@ st.markdown("""
 # मुख्य हेडर
 st.markdown("""
 <div class="app-header">
-    <h2>🌍 WORLD AI — ग्लोबल सुपर ऐप</h2>
-    <p>दुनिया का हर काम एक जगह: भाषा अनुवाद, करेंसी, लोन EMI, व्यापार व सोशल मीडिया</p>
+    <h2>🌍 WORLD AI — GLOBAL SUPER SUITE</h2>
+    <p>AI मार्केटिंग, कानूनी एग्रीमेंट, करेंसी कनवर्टर, लोन EMI व बिज़नेस टूल्स</p>
 </div>
 """, unsafe_allow_html=True)
 
 MY_WA_NUMBER = "917484878440"
 
 # 6 शक्तिशाली ग्लोबल टैब्स
-tab_ai, tab_trans, tab_curr, tab_emi, tab_leads, tab_biz = st.tabs([
-    "🤖 ग्लोबल AI",
-    "🌐 भाषा अनुवाद",
+tab_market, tab_legal, tab_curr, tab_emi, tab_leads, tab_biz = st.tabs([
+    "🚀 AI मार्केटिंग इंजन",
+    "📜 कानूनी एग्रीमेंट मेकर",
     "💱 मुद्रा (Currency)",
     "🔢 EMI कैलकुलेटर",
-    "🏢 जमीन व गाड़ियाँ",
-    "🏪 व्यापार टूल्स"
+    "🏢 प्रॉपर्टी व गाड़ियाँ",
+    "🏪 डिजिटल बिलिंग"
 ])
 
 # ----------------------------------------------------
-# 1. ग्लोबल AI सवाल-जवाब (Ask Anything)
+# 1. AI मार्केटिंग इंजन (Global Business Marketing)
 # ----------------------------------------------------
-with tab_ai:
-    st.markdown("### 🤖 Universal AI — कोई भी सवाल पूछें")
-    st.caption("स्वास्थ्य, कोडिंग, बिज़नेस, पढ़ाई या करियर संबंधी सवाल दुनिया की किसी भी भाषा में पूछें")
+with tab_market:
+    st.markdown("### 🚀 1-क्लिक AI बिज़नेस मार्केटिंग इंजन")
+    st.caption("किसी भी दुकान, रेस्टोरेंट, जिम, या ऑनलाइन बिज़नेस के लिए वायरल विज्ञापन और रील्स स्क्रिप्ट बनाएँ")
     
-    q_input = st.text_input("अपना सवाल लिखें:", placeholder="उदा: बुखार में क्या करें? / How to make money online? / கோடிங் என்றால் என்ன?")
-    if st.button("🚀 तुरंत AI उत्तर पाएँ"):
-        q_clean = q_input.strip().lower()
-        if not q_clean:
-            st.warning("कृपया अपना सवाल दर्ज करें।")
-        else:
-            if any(w in q_clean for w in ["fever", "cold", "बुखार", "दवा", "सिरदर्द"]):
-                ans = "🩺 **Health Guidance:** Stay hydrated with warm fluids or ORS. Rest well. For persistent fever above 101°F for more than 48 hours, consult a physician immediately."
-            elif any(w in q_clean for w in ["money", "online", "कमाई", "earning", "business"]):
-                ans = "💼 **Online Growth:** Top global skills include digital marketing, AI prompting, local business software services, and video editing for creators."
-            elif any(w in q_clean for w in ["study", "exam", "याद", "पढ़ाई"]):
-                ans = "📚 **Study Protocol:** Follow 25-minute study intervals (Pomodoro method). Review notes before sleep to improve retention."
+    b_name = st.text_input("व्यवसाय या ब्रांड का नाम:", placeholder="उदा: साहिल ऑटो हब / रॉयल कैफ़े / Star Fitness")
+    b_type = st.selectbox("विज्ञापन का प्रकार चुनें:", ["🔥 वायरल रील्स वीडियो स्क्रिप्ट (Instagram/YouTube)", "📢 Facebook व WhatsApp सेल्स विज्ञापन", "🎉 फेस्टिव / स्पेशल डिस्काउंट ऑफर"])
+    
+    if st.button("✨ 1-क्लिक में मार्केटिंग कॉपी तैयार करें"):
+        if b_name.strip():
+            if "रील्स" in b_type:
+                ad_content = f"""🎬 [REEL SCRIPT FOR: {b_name}]
+--------------------------------------------------
+[Visual: कैमरे की तरफ देखते हुए दमदार आवाज़ में]
+"क्या आप भी अपनी मेहनत की कमाई से बेस्ट डील ढूँढ रहे हैं?
+अब इधर-उधर भटकना बंद कीजिए!
+
+मिलिए {b_name} से — जहाँ क्वालिटी और भरोसे का पक्का वादा मिलता है।
+चाहे सबसे कम दाम हो या बेहतरीन सर्विस, आपको मिलेगा सब कुछ एक ही छत के नीचे!
+
+👉 आज ही बायो में दिए लिंक पर टैप करें या DM करें।
+सीमित समय का ऑफर! ⚡🚀"
+
+#viral #business #{b_name.replace(' ', '')} #trendingreels #growth"""
+            elif "Facebook" in b_type:
+                ad_content = f"""📢 [HIGH-CONVERTING AD COPY: {b_name}]
+--------------------------------------------------
+🔥 जबरदस्त ऑफर! सिर्फ इस हफ्ते के लिए!
+क्या आप अपनी लाइफस्टाइल या बिजनेस को अपग्रेड करना चाहते हैं?
+
+{b_name} लेकर आया है प्रीमियम समाधान वो भी सबसे किफायती दामों में!
+✅ 100% भरोसेमंद व प्रमाणित
+✅ तुरंत डिलीवरी और आसान सहायता
+✅ स्पेशल डिस्काउंट कूपन उपलब्ध
+
+👇 नीचे दिए बटन पर क्लिक करें या सीधे WhatsApp करें:
+📞 तुरंत संपर्क: +91 7484878440"""
             else:
-                ans = f"💡 **World AI Solution for '{q_input}':** Your query has been processed. For specific operations, use the specialized tabs for Currency, Translation, and Business tools."
-            st.markdown(f'<div class="card-box" style="border-left: 4px solid #10B981;">{ans}</div>', unsafe_allow_html=True)
+                ad_content = f"""🎉 [MEGA FESTIVE OFFER: {b_name}]
+--------------------------------------------------
+धमाकेदार छूट की शुरुआत! 💥
+{b_name} पर पाएं भारी डिस्काउंट ऑफर! 
+पहले 50 ग्राहकों को मिलेगा फ्लैट 20% तक का अतिरिक्त लाभ।
+
+📍 आज ही संपर्क करें और ऑफर का लाभ उठाएं!
+सीधे कॉल / व्हाट्सएप: +91 7484878440"""
+
+            st.text_area("आपकी AI मार्केटिंग कॉपी तैयार है (कॉपी करें):", ad_content, height=220)
+        else:
+            st.warning("कृपया अपने बिज़नेस का नाम दर्ज करें।")
 
 # ----------------------------------------------------
-# 2. ग्लोबल भाषा अनुवादक (Multi-Language Translator)
+# 2. कानूनी एग्रीमेंट मेकर (Smart Legal Contract)
 # ----------------------------------------------------
-with tab_trans:
-    st.markdown("### 🌐 1-सेकंड भाषा अनुवादक (Translator)")
-    st.caption("किसी भी भाषा के टेक्स्ट को अपनी भाषा में बदलें")
+with tab_legal:
+    st.markdown("### 📜 1-क्लिक मकान / दुकान रेंट एग्रीमेंट")
+    st.caption("वकीलों के चक्कर काटे बिना घर बैठे कानूनी फॉर्मेट में रेंट एग्रीमेंट तैयार करें और डाउनलोड करें")
     
-    t_text = st.text_area("टेक्स्ट यहाँ लिखें:", placeholder="उदा: Hello, how are you? / नमस्ते, आप कैसे हैं?")
-    t_target = st.selectbox("किस भाषा में अनुवाद चाहिए?", ["Hindi (हिंदी)", "English", "Tamil (தமிழ்)", "Arabic (العربية)"])
-    
-    if st.button("🔄 ट्रांसलेट करें"):
-        if t_text.strip():
-            # गूगल ट्रांसलेट का डायरेक्ट सुरक्षित लिंक
-            t_url = f"https://translate.google.com/?sl=auto&tl={t_target[:2].lower()}&text={urllib.parse.quote(t_text)}&op=translate"
-            st.success("✅ अनुवाद लिंक तैयार है!")
-            st.markdown(f'<a href="{t_url}" target="_blank" class="upi-pay-btn">👉 अनुवाद देखें / Open Translation</a>', unsafe_allow_html=True)
+    col_l1, col_l2 = st.columns(2)
+    with col_l1:
+        owner_name = st.text_input("मकान मालिक / फ़र्म का नाम:", value="साहिल अहमद")
+        tenant_name = st.text_input("किराएदार का नाम:", placeholder="उदा: राकेश कुमार")
+    with col_l2:
+        rent_amt = st.text_input("मासिक किराया (₹):", value="8500")
+        prop_addr = st.text_input("मकान / दुकान का पता:", placeholder="उदा: बोरिंग रोड, पटना")
+        
+    if st.button("📄 कानूनी एग्रीमेंट तैयार करें"):
+        if owner_name and tenant_name and rent_amt and prop_addr:
+            agreement_text = f"""==================================================
+           किरायानामा अनुबंध / RENT AGREEMENT
+==================================================
+यह अनुबंध आज दिनांक को प्रथम पक्षकार (मकान मालिक) 
+श्री {owner_name}
+एवं द्वितीय पक्षकार (किराएदार) 
+श्री {tenant_name} के मध्य निष्पादित किया गया।
+
+1. संपत्ति विवरण: {prop_addr}
+2. तय मासिक किराया: ₹{rent_amt}/- (प्रति माह)
+3. किराएदार प्रत्येक माह की 1 से 7 तारीख तक किराया भुगतान करने हेतु बाध्य रहेगा।
+4. बिजली व पानी का बिल किराएदार द्वारा मीटर रीडिंग अनुसार देय होगा।
+5. परिसर का उपयोग केवल वैध कार्यों हेतु ही किया जाएगा।
+
+प्रथम पक्षकार (मालिक): {owner_name}
+द्वितीय पक्षकार (किराएदार): {tenant_name}
+=================================================="""
+            st.text_area("तैयार एग्रीमेंट (कॉपी करें):", agreement_text, height=220)
+            st.download_button(
+                label="📥 एग्रीमेंट फ़ाइल डाउनलोड करें (TXT)",
+                data=agreement_text,
+                file_name="Rent_Agreement.txt",
+                mime="text/plain",
+                use_container_width=True
+            )
         else:
-            st.warning("कृपया अनुवाद करने के लिए कुछ टेक्स्ट लिखें।")
+            st.warning("कृपया सभी बॉक्स भरें।")
 
 # ----------------------------------------------------
 # 3. लाइव मुद्रा कनवर्टर (Currency Converter)
 # ----------------------------------------------------
 with tab_curr:
-    st.markdown("### 💱 ग्लोबल करेंसी कनवर्टर (Live Rates)")
-    st.caption("विदेशी पैसों को भारतीय रुपये (INR) या किसी भी मुद्रा में बदलें")
-    
+    st.markdown("### 💱 ग्लोबल करेंसी कनवर्टर (Global FX)")
     col_c1, col_c2 = st.columns(2)
     with col_c1:
         amt_curr = st.number_input("रकम डालें:", value=100, min_value=1)
@@ -172,7 +226,7 @@ with tab_curr:
     st.markdown(f"""
     <div class="card-box" style="border-left: 4px solid #38BDF8; text-align: center;">
         <h3 style="color: #38BDF8 !important; margin: 0;">₹{converted:,.2f} भारतीय रुपये (INR)</h3>
-        <p style="font-size: 12px; margin-top: 4px;">दर: 1 {curr_type.split(' ')[0]} = ₹{rates[curr_type]}</p>
+        <p style="font-size: 12px; margin-top: 4px;">लाइव दर: 1 {curr_type.split(' ')[0]} = ₹{rates[curr_type]}</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -243,7 +297,7 @@ with tab_leads:
             st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
-# 6. व्यापारी टूल्स (Business Invoicing)
+# 6. डिजिटल बिलिंग (WhatsApp Invoicing)
 # ----------------------------------------------------
 with tab_biz:
     st.markdown("### 🏪 WhatsApp डिजिटल बिल व वसूली नोटिस")
@@ -279,4 +333,3 @@ st.markdown(f"""
     </a>
 </div>
 """, unsafe_allow_html=True)
-                     
