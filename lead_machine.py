@@ -1,24 +1,20 @@
 import streamlit as st
 import urllib.parse
 from datetime import datetime
-import streamlit.components.v1 as components
 
-# 1. ग्लोबल कॉन्फ़िगरेशन
+# 1. एजेंसी लेआउट
 st.set_page_config(
-    page_title="ApexMind AI — Universal Autonomous Decision OS",
+    page_title="NexusAI Agency — Enterprise WhatsApp & Lead Automation",
     page_icon="⚡",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 2. भाषा चयन (ग्लोबल रीच: हिंदी + English)
-lang = st.radio("🌐 Platform Interface / भाषा चुनें:", ["🌍 English (Global)", "🇮🇳 हिंदी (India)"], horizontal=True)
-
-# 3. अल्ट्रा-एडवांस डीप-टेक UI
+# 2. अल्ट्रा-प्रीमियम एजेंसी UI
 st.markdown("""
 <style>
     .stApp {
-        background-color: #030712 !important;
+        background-color: #020617 !important;
         color: #F8FAFC !important;
     }
     label, p, span, h1, h2, h3, h4 {
@@ -26,47 +22,41 @@ st.markdown("""
         font-weight: 600 !important;
     }
     input, textarea, .stTextInput input, .stTextArea textarea, select {
-        background-color: #0B132B !important;
+        background-color: #0F172A !important;
         color: #38BDF8 !important;
         font-weight: 600 !important;
         font-size: 15px !important;
-        border: 1px solid #1E293B !important;
-        border-radius: 12px !important;
+        border: 1px solid #334155 !important;
+        border-radius: 10px !important;
     }
-    .apex-banner {
-        background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #DB2777 100%);
-        padding: 22px;
+    .agency-banner {
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 50%, #0F172A 100%);
+        padding: 24px;
         border-radius: 18px;
         text-align: center;
         margin-bottom: 16px;
-        box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4);
-        border: 1px solid #A78BFA;
+        box-shadow: 0 10px 40px rgba(37, 99, 235, 0.35);
+        border: 1px solid #38BDF8;
     }
-    .apex-banner h2 {
+    .agency-banner h2 {
         color: #FFFFFF !important;
         font-size: 24px !important;
         margin: 0 !important;
         font-weight: 900 !important;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
     }
-    .apex-banner p {
-        color: #EDE9FE !important;
+    .agency-banner p {
+        color: #E0F2FE !important;
         font-size: 13px !important;
         margin-top: 6px !important;
         margin-bottom: 0 !important;
     }
-    .terminal-box {
-        background-color: #0B132B;
+    .card-box {
+        background-color: #0F172A;
         border: 1px solid #1E293B;
         border-radius: 14px;
-        padding: 16px;
+        padding: 18px;
         margin-bottom: 14px;
-        font-family: monospace;
-    }
-    .step-log {
-        color: #38BDF8;
-        font-size: 13px;
-        margin-bottom: 6px;
     }
     .pay-btn-main {
         display: block;
@@ -82,20 +72,20 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
     }
     .founder-badge {
-        background: linear-gradient(135deg, #0B132B 0%, #020617 100%);
-        border: 2px solid #8B5CF6;
+        background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+        border: 2px solid #38BDF8;
         border-radius: 18px;
         padding: 20px;
         text-align: center;
         margin-top: 30px;
         margin-bottom: 20px;
-        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.25);
+        box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2);
     }
     div.stButton > button {
-        background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
         color: #FFFFFF !important;
         border: none !important;
-        border-radius: 12px !important;
+        border-radius: 10px !important;
         font-weight: 900 !important;
         font-size: 15px !important;
         width: 100% !important;
@@ -104,163 +94,141 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# हेडर बैनर
-if "English" in lang:
-    st.markdown("""
-    <div class="apex-banner">
-        <h2>⚡ APEXMIND OS — AUTONOMOUS AI DECISION AGENT</h2>
-        <p>Enterprise Research • Multi-Step Problem Solving • Autonomous Strategy & Execution</p>
-    </div>
-    """, unsafe_allow_html=True)
-    tabs = st.tabs(["⚡ Run Autonomous Task", "🧠 Deep Strategy Terminal", "👑 VIP Agent Pro"])
-else:
-    st.markdown("""
-    <div class="apex-banner">
-        <h2>⚡ APEXMIND OS — यूनिवर्सल ऑटोनॉमस AI एजेंट</h2>
-        <p>जटिल समस्याओं का विश्लेषण • स्वायत्त निर्णय क्षमता • 1-क्लिक स्ट्रैटेजी व एक्ज़ीक्यूशन</p>
-    </div>
-    """, unsafe_allow_html=True)
-    tabs = st.tabs(["⚡ ऑटोनॉमस टास्क निष्पादन", "🧠 डीप स्ट्रैटेजी टर्मिनल", "👑 VIP एजेंट प्रो"])
+# एजेंसी हेडर
+st.markdown("""
+<div class="agency-banner">
+    <h2>⚡ NEXUS-AI — एंटरप्राइज ऑटोमेशन एजेंसी</h2>
+    <p>व्यवसायों के लिए 24x7 ऑटोमैटिक WhatsApp लीड क्लोजिंग व AI वर्कफ़्लो इंजन</p>
+</div>
+""", unsafe_allow_html=True)
 
 MY_WA_NUMBER = "917484878440"
 MY_UPI_ID = "7484878449-2@ybl"
 
+tabs = st.tabs([
+    "🚀 लाइव AI लीड डेमो",
+    "💼 ऑटोमेशन पैकेज (₹15,000 - ₹25,000)",
+    "📑 पार्टनरशिप व ऑडिट टोकन (₹499)"
+])
+
 # ----------------------------------------------------
-# 1. ⚡ ऑटोनॉमस टास्क इंजन
+# 1. 🚀 लाइव AI लीड डेमो
 # ----------------------------------------------------
 with tabs[0]:
-    if "English" in lang:
-        st.markdown("### ⚡ Define Your Complex Goal / Task")
-        st.caption("Enter any high-stakes business, legal, financial, or strategic challenge:")
-        task_input = st.text_area("Your Directive:", placeholder="e.g. Design a strategy to recover ₹5,00,000 bad debt while preserving client relations, including a formal arbitration draft.")
-        domain = st.selectbox("Intelligence Domain:", ["💼 Corporate & Venture Strategy", "⚖️ High-Court Legal & Dispute Resolution", "📈 Financial Arbitrage & Capital Growth", "💻 Full-Stack System Architecture"])
-        btn_run = "🚀 Execute Autonomous Reasoning"
-    else:
-        st.markdown("### ⚡ अपना जटिल टास्क / लक्ष्य दर्ज करें")
-        st.caption("कोई भी बड़ा कानूनी, व्यावसायिक, वित्तीय या रणनीतिक मामला यहाँ लिखें:")
-        task_input = st.text_area("आपका निर्देश:", placeholder="उदा: 5 लाख की फंसी रकम को कानूनी और व्यापारिक तरीके से सुरक्षित निकालने का पूरा एक्शन प्लान और लीगल नोटिस तैयार करो।")
-        domain = st.selectbox("इंटेलिजेंस डोमेन:", ["💼 कॉर्पोरेट बिज़नेस स्ट्रैटेजी", "⚖️ विधिक व विवाद समाधान (Legal/Arbitration)", "📈 वित्तीय विश्लेषण व वेल्थ स्ट्रैटेजी", "💻 तकनीकी आर्किटेक्चर व सिस्टम डिज़ाइन"])
-        btn_run = "🚀 ऑटोनॉमस निष्पादन शुरू करें"
+    st.markdown("### ⚡ अपने बिज़नेस के लिए लाइव AI डेमो टेस्ट करें")
+    st.caption("नीचे अपनी जानकारी भरें और देखें कि आपका ग्राहक बनते ही 2 सेकंड में WhatsApp पर AI कैसे डील क्लोज करता है:")
 
-    if st.button(btn_run):
-        t_clean = task_input.strip() if task_input.strip() else domain
+    biz_name = st.text_input("आपके बिज़नेस का नाम:", placeholder="उदा: पटना कार बाज़ार / रॉयल फिटनेस जिम")
+    biz_type = st.selectbox("बिज़नेस का प्रकार:", ["🚗 पुरानी व नई कार डीलरशिप", "🏋️ जिम व फिटनेस सेंटर", "🏥 डेंटल व स्किन क्लीनिक", "📚 कोचिंग व शिक्षण संस्थान", "🏢 रियल एस्टेट व प्रॉपर्टी"])
+    client_phone = st.text_input("आपका WhatsApp मोबाइल नंबर:", placeholder="उदा: 9876543210")
+
+    if st.button("🔥 तुरंत लाइव ऑटोमेशन डेमो टेस्ट करें"):
+        b_name = biz_name.strip() if biz_name.strip() else "आपका बिज़नेस"
+        c_num = client_phone.strip() if len(client_phone.strip()) == 10 else MY_WA_NUMBER
         
-        # ऑटोनॉमस रीजनिंग स्टेप्स का सिमुलेशन
+        demo_msg = f"""नमस्ते! 👋
+{b_name} में आपका स्वागत है। 
+
+हमने आपकी रुचि दर्ज कर ली है। हमारी AI ऑटोमेशन टीम 24x7 आपकी सेवा में तत्पर है।
+क्या आप आज की स्पेशल डील्स देखना चाहते हैं या हमारे सीनियर कंसल्टेंट से बात करना चाहते हैं?
+
+(यह एक ऑटोमैटिक AI मैसेज है — 0 सेकंड रिस्पांस टाइम)"""
+
+        encoded_demo = urllib.parse.quote(demo_msg)
+        wa_demo_link = f"https://wa.me/91{c_num}?text={encoded_demo}"
+
         st.markdown(f"""
-        <div class="terminal-box">
-            <div class="step-log">▶ [Step 1/3] Parsing Natural Directive: "{t_clean[:40]}..."</div>
-            <div class="step-log">▶ [Step 2/3] Mapping Regulatory Context & Economic Risk Factors...</div>
-            <div class="step-log">▶ [Step 3/3] Synthesizing Multi-Action Protocol & Formal Execution Draft...</div>
-            <div style="color: #10B981; font-weight: bold; margin-top: 4px;">✓ EXECUTION PROTOCOL CONSTRUCTED [Latency: 0.84s]</div>
+        <div class="card-box" style="border-left: 4px solid #10B981;">
+            <b style="color:#10B981;">✓ ऑटोमेशन तैयार!</b><br>
+            नीचे दिए गए बटन पर क्लिक करके देखें कि कैसे यह मैसेज सीधे आपके WhatsApp पर 1 सेकंड में पहुँचेगा:
         </div>
         """, unsafe_allow_html=True)
-
-        if "English" in lang:
-            output_plan = f"""==================================================
-⚡ APEXMIND AUTONOMOUS DIRECTIVE REPORT
-TARGET: {t_clean.upper()}
-DOMAIN: {domain}
-==================================================
-
-1. STRATEGIC ROOT-CAUSE ANALYSIS:
-The friction point lies in information asymmetry and lack of enforceable structural milestones. Resolving this requires shifting from informal communication to formal, legally binding frameworks.
-
-2. STEP-BY-STEP ACTION PROTOCOL:
-• Phase A (Immediate): Issue a Formal Demand Letter / Directive with strict 72-hour verification SLA.
-• Phase B (Mitigation): Activate structured milestone escrow or collateral-backed settlement terms.
-• Phase C (Enforcement): Proceed with expedited arbitration under standard commercial dispute clauses.
-
-3. FORMAL ENFORCEMENT MEMORANDUM:
-"To Whom It May Concern: This communication constitutes formal notice regarding {t_clean}. All prior representations are hereby incorporated. Failure to reach documented settlement within the stipulated statutory timeline shall trigger immediate escalation to relevant judicial and regulatory authorities without further notice."
-
-=================================================="""
-        else:
-            output_plan = f"""==================================================
-⚡ APEXMIND ऑटोनॉमस निर्णय व कार्य योजना
-लक्ष्य: {t_clean}
-डोमेन: {domain}
-==================================================
-
-1. समस्या का रणनीतिक विश्लेषण:
-यह मामला केवल बातचीत का नहीं है, बल्कि जवाबदेही और कानूनी बाध्यता तय करने का है। इसे हल करने के लिए अनौपचारिक तरीकों को छोड़कर सीधे लिखित विधिक व वित्तीय प्रोटोकॉल लागू करना होगा।
-
-2. चरणबद्ध कार्य योजना (Step-by-Step Action):
-• चरण 1 (तात्कालिक): 72 घंटे की समय-सीमा वाला औपचारिक नोटिस व ऑडिट रिपोर्ट प्रस्तुत करें।
-• चरण 2 (समझौता): लिखित समाधान योजना (Settlement Agreement) तैयार कर दोनों पक्षों के हस्ताक्षर कराएं।
-• चरण 3 (कानूनी बाध्यता): समय पर अनुपालन न होने की स्थिति में संबंधित सक्षम फोरम/अदालत में विधिक वाद प्रस्तुत करें।
-
-3. आधिकारिक ड्राफ्ट मेमोरेंडम:
-"संबंधित पक्ष को सूचित किया जाता है कि विषय '{t_clean}' के संदर्भ में यह आधिकारिक सूचना प्रेषित है। यदि निर्धारित वैधानिक अवधि में इसका विधिवत निस्तारण नहीं किया जाता है, तो बिना अग्रिम सूचना के समस्त विधिक व न्यायिक उपचार प्रारंभ कर दिए जाएंगे जिसका दायित्व आपका होगा।"
-
-=================================================="""
-
-        st.text_area("निर्णय व ड्राफ्ट रिपोर्ट (Report Output):", output_plan, height=220)
-        st.download_button("📥 Download Action Memorandum (TXT)", data=output_plan, file_name=f"Directive_{datetime.now().strftime('%Y%m%d_%H%M')}.txt", mime="text/plain", use_container_width=True)
+        st.markdown(f'<a href="{wa_demo_link}" target="_blank" class="pay-btn-main" style="background:#25D366;">📲 WhatsApp पर लाइव AI टेस्ट देखें</a>', unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 2. 🧠 डीप स्ट्रैटेजी टर्मिनल
+# 2. 💼 एजेंसी पैकेज (High-Ticket Packages)
 # ----------------------------------------------------
 with tabs[1]:
-    st.markdown("### 🧠 Sovereign Strategic Protocols")
+    st.markdown("### 💼 कमर्शियल AI ऑटोमेशन पैकेजेस")
+    
     st.markdown("""
-    <div class="terminal-box" style="border-left: 4px solid #6366F1;">
-        <b>Protocol 01 — Capital Protection & Recovery</b><br>
-        Framework designed to trace, formalize, and recover frozen assets via structured commercial arbitration.
+    <div class="card-box" style="border-left: 4px solid #38BDF8;">
+        <h3 style="color:#38BDF8; margin:0;">1. लोकल बिज़नेस स्टार्टर — ₹15,000</h3>
+        <p style="font-size:13px; color:#CBD5E1; margin:6px 0;">(क्लीनिक, जिम, लोकल शोरूम के लिए)</p>
+        <ul style="font-size:13px; color:#F8FAFC; margin-bottom:0;">
+            <li>24x7 ऑटोमैटिक WhatsApp रिप्लाई सिस्टम</li>
+            <li>Google Maps और Facebook लीड्स का 5 सेकंड में फॉलो-अप</li>
+            <li>कस्टमर अपॉइंटमेंट और बुकिंग कन्फर्मेशन</li>
+            <li>एकमुश्त सेटअप फ़ीस (Zero Maintenance)</li>
+        </ul>
     </div>
-    <div class="terminal-box" style="border-left: 4px solid #EC4899;">
-        <b>Protocol 02 — High-Velocity Corporate Negotiation</b><br>
-        Psychological leverage blueprints designed to secure maximum value in B2B enterprise agreements.
+    <div class="card-box" style="border-left: 4px solid #F59E0B;">
+        <h3 style="color:#F59E0B; margin:0;">2. एंटरप्राइज ग्रोथ इंजन — ₹25,000</h3>
+        <p style="font-size:13px; color:#CBD5E1; margin:6px 0;">(कार डीलर्स, रियल एस्टेट, बड़े संस्थानों के लिए)</p>
+        <ul style="font-size:13px; color:#F8FAFC; margin-bottom:0;">
+            <li>फुल AI सेल्स एजेंट (ग्राहक के हर सवाल का खुद जवाब देगा)</li>
+            <li>मल्टी-चैनल ऑटोमेशन (Facebook Ads + Website + WhatsApp)</li>
+            <li>मासिक मेंटेनेंस व लीड ट्रैकिंग सपोर्ट (₹5,000/माह)</li>
+        </ul>
     </div>
     """, unsafe_allow_html=True)
 
 # ----------------------------------------------------
-# 3. 👑 VIP एजेंट प्रो (मोनेटाइजेशन गेटवे)
+# 3. 📑 पार्टनरशिप व ऑडिट टोकन (₹499 Booking)
 # ----------------------------------------------------
 with tabs[2]:
-    st.markdown("### 👑 ApexMind Pro Intelligence Tier")
-    
+    st.markdown("### 📑 बिज़नेस AI ऑडिट व कंसल्टेशन बुक करें")
     st.markdown("""
-    <div class="terminal-box" style="border-left: 4px solid #F59E0B; text-align: center;">
-        <h3 style="color: #F59E0B !important; margin: 0;">Unlimited Autonomous Actions — ₹99 / $2 USD</h3>
+    <div class="card-box" style="border-left: 4px solid #10B981; text-align: center;">
+        <h3 style="color: #10B981 !important; margin: 0;">एडवांस सिस्टम ऑडिट टोकन — मात्र ₹499</h3>
         <p style="font-size: 13px; margin-top: 6px; color: #E2E8F0 !important;">
-            Full Legal Drafting Suite • High-Stakes Business Arbitration • Complete Strategy Vault
+            हम आपके बिज़नेस के लिए पूरा AI वर्कफ़्लो डिज़ाइन करेंगे। यह ₹499 आपके मुख्य पैकेज (₹15,000) में एडजस्ट हो जाएगा।
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-    # UPI व पेमेंट
-    upi_pay_apex = f"upi://pay?pa={MY_UPI_ID}&pn=ApexMind%20AI&am=99&cu=INR&tn=VIP%20Pro%20Access"
-    st.markdown(f'<a href="{upi_pay_apex}" class="pay-btn-main">⚡ Unlock VIP Agent Pro (₹99 / $2)</a>', unsafe_allow_html=True)
+    # QR कोड व UPI
+    upi_audit = f"upi://pay?pa={MY_UPI_ID}&pn=NexusAI%20Agency&am=499&cu=INR&tn=AI%20Audit%20Booking"
+    qr_img = f"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={urllib.parse.quote(upi_audit)}"
 
-    v_code = st.text_input("Enter 12-digit Transaction UTR / Ref No:", placeholder="e.g. 428192837461", key="apex_utr")
-    if st.button("🚀 Verify & Unlock Enterprise Core"):
-        c_val = v_code.strip()
-        if c_val in ["7484878440", "111122223333"] or (len(c_val) == 12 and c_val.isdigit()):
-            st.success("✅ Enterprise Verification Complete! Downloading System Protocols...")
-            enterprise_csv = "Domain,Framework,Execution_Module\nCorporate,Asset Recovery Engine,Formal_Arbitration_Suite\nLegal,High Court Recovery Notices,Civil_Suit_Templates\nStrategy,Market Penetration OS,B2B_Leverage_Engine"
-            st.download_button("📥 Download Enterprise Protocol Suite (CSV)", data=enterprise_csv, file_name="ApexMind_Enterprise_Suite.csv", mime="text/csv", use_container_width=True)
+    st.markdown(f"""
+    <div class="card-box" style="text-align: center;">
+        <p style="color: #38BDF8 !important; font-weight: bold; margin-bottom: 8px;">📲 किसी भी UPI ऐप से स्कैन करके ₹499 का टोकन बुक करें:</p>
+        <img src="{qr_img}" width="165" style="background: #fff; padding: 6px; border-radius: 12px; border: 2px solid #2563EB;" />
+        <p style="font-size: 12px; color: #94A3B8 !important; margin-top: 6px;">UPI ID: <b>{MY_UPI_ID}</b></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f'<a href="{upi_audit}" class="pay-btn-main">⚡ ₹499 पे करें (PhonePe / GPay)</a>', unsafe_allow_html=True)
+
+    utr_audit = st.text_input("पेमेंट के बाद 12 अंकों का UTR नंबर दर्ज करें:", placeholder="उदा: 428192837461", key="audit_utr")
+    if st.button("🚀 ऑडिट स्लॉट कन्फर्म करें"):
+        u_val = utr_audit.strip()
+        if u_val in ["7484878440", "111122223333"] or (len(u_val) == 12 and u_val.isdigit()):
+            st.success("✅ बुकिंग सत्यापित! हमारा सीनियर ऑटोमेशन आर्किटेक्ट अगले 2 घंटे में आपसे संपर्क करेगा।")
         else:
-            st.error("Please provide a valid 12-digit transaction ID.")
+            st.error("कृपया सही 12 अंकों का UTR नंबर दर्ज करें।")
 
 # ----------------------------------------------------
 # 👑 संस्थापक प्रोफाइल
 # ----------------------------------------------------
 st.markdown("---")
-wa_founder = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('Hello Sahil, I reviewed ApexMind OS and would like to discuss an enterprise deployment.')}"
+wa_agency_connect = f"https://wa.me/{MY_WA_NUMBER}?text={urllib.parse.quote('नमस्ते साहिल जी, मुझे अपने बिज़नेस के लिए ₹15,000 वाला AI ऑटोमेशन सेटअप करवाना है।')}"
 st.markdown(f"""
 <div class="founder-badge">
-    <p style="color: #A78BFA !important; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
-        🏛️ FOUNDER & CHIEF ARCHITECT
+    <p style="color: #38BDF8 !important; font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 2px;">
+        🏛️ FOUNDER & MANAGING DIRECTOR
     </p>
     <h2 style="color: #FFFFFF !important; margin: 8px 0; font-size: 22px; font-weight: 900;">
         साहिल अहमद (Sahil Ahmad)
     </h2>
     <p style="color: #CBD5E1 !important; font-size: 13px; margin-bottom: 14px;">
-        ⚡ ApexMind OS — Autonomous decision intelligence engineered for high-stakes problem resolution.
+        ⚡ नेक्सस-एआई — भारतीय व्यवसायों को 24x7 स्वायत्त AI सिस्टम से लैस करने वाली अगली पीढ़ी की ऑटोमेशन एजेंसी।
     </p>
-    <a href="{wa_founder}" target="_blank" 
+    <a href="{wa_agency_connect}" target="_blank" 
        style="background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">
-        💬 Connect Directly on WhatsApp (+91 {MY_WA_NUMBER[-10:]})
+        💬 सीधे WhatsApp (+91 {MY_WA_NUMBER[-10:]}) पर एजेंसी मीटिंग बुक करें
     </a>
 </div>
 """, unsafe_allow_html=True)
+    
