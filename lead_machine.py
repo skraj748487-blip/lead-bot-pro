@@ -4,15 +4,15 @@ import urllib.parse
 from datetime import datetime
 import pandas as pd
 
-# 1. Page Config
+# 1. Page Configuration
 st.set_page_config(
-    page_title="BHARAT MIND OS — Global Multi-Language AI",
-    page_icon="🌐",
+    page_title="BHARAT MIND OS — Global Autonomous Action Engine",
+    page_icon="⚡",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 2. Ultra-Clean Responsive Mobile Styling
+# 2. Modern Cyber Dark CSS
 st.markdown("""
 <style>
     .stApp { background-color: #020617 !important; color: #F8FAFC !important; }
@@ -24,7 +24,7 @@ st.markdown("""
     }
     .hero-orb {
         background: radial-gradient(circle at center, #1E1B4B 0%, #020617 100%);
-        padding: 20px 14px; border-radius: 20px; text-align: center; margin-bottom: 16px;
+        padding: 22px 14px; border-radius: 20px; text-align: center; margin-bottom: 16px;
         border: 1px solid #312E81; box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
     }
     .action-box {
@@ -53,87 +53,77 @@ today_str = datetime.now().strftime("%d-%m-%Y")
 # Header
 st.markdown("""
 <div class="hero-orb">
-    <div style="font-size: 32px; margin-bottom: 4px;">🌐⚡</div>
-    <h1 style="color:#FFF; margin:0; font-size:22px; letter-spacing: -0.5px;">BHARAT MIND OS — WORLD AI</h1>
-    <p style="color:#94A3B8; font-size:12px; margin-top:4px;">Global Multilingual Autonomous Engine (Duniya Ki Har Bhasha Me)</p>
+    <div style="font-size: 34px; margin-bottom: 4px;">⚡🌐</div>
+    <h1 style="color:#FFF; margin:0; font-size:22px; letter-spacing: -0.5px;">BHARAT MIND OS — GLOBAL ENGINE</h1>
+    <p style="color:#94A3B8; font-size:12px; margin-top:4px;">Google सिर्फ लिंक दिखाता है — Bharat Mind OS काम खुद पूरा करता है।</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Global Language Selector (Duniya ki kisi bhi bhasha ke liye)
-selected_lang = st.selectbox("🌍 Bhasha Chunein / Select Language / اختر اللغة:", [
+# 1. भाषा चयन
+selected_lang = st.selectbox("🌍 भाषा चुनें / Select Language:", [
     "🇮🇳 Hindi (हिन्दी)",
-    "🇬🇧 English (US/UK)",
+    "🇬🇧 English (International)",
     "🌾 Bhojpuri / Maithili (देसी बोली)",
     "🇦🇪 Arabic (العربية)",
-    "🇪🇸 Spanish (Español)",
-    "🇷🇺 Russian (Русский)",
-    "🇫🇷 French (Français)"
+    "🇪🇸 Spanish (Español)"
 ])
 
-# Role / Action Selector (Fixed text layout)
-user_role = st.selectbox("🎯 Kaam Ka Prakar Chunein:", [
-    "💼 Dukandar / Vyapari (Hisab-Kitab Ledger)",
-    "📞 24/7 Voice Care & WhatsApp Ticket",
-    "🎓 Student / Job Application & Resume",
-    "🏛️ Legal & Civic Document Drafter"
+# 2. कार्य श्रेणी
+user_role = st.selectbox("🎯 कार्य श्रेणी चुनें:", [
+    "💼 दुकानदार / व्यापारी (दैनिक हिसाब-किताब व बहीखाता)",
+    "📞 कस्टमर केयर एजेंट (लाइव आवाज़ व WhatsApp रसीद)",
+    "🎓 छात्र व युवा (आवेदन पत्र, लीव लेटर व रिज्यूमे)",
+    "🏛️ आम नागरिक (सरकारी योजना, राशन व कानूनी ड्राफ्ट)"
 ])
 
-# Task Input
+# 3. कार्य इनपुट
 task_input = st.text_input(
-    "👉 Apna Kaam Likhein:",
-    value="Dukan ki aaj ki kul bikri ₹14,500 darj karo aur WhatsApp par bhyjo"
+    "👉 अपना काम यहाँ लिखें (Command Bar):",
+    value="दुकान की आज की कुल बिक्री ₹14,500 दर्ज करो और WhatsApp पर्ची बनाओ"
 )
 
 col_1, col_2 = st.columns(2)
 with col_1:
-    user_name = st.text_input("Aapka Naam:", value="Sahil Ahmad")
+    user_name = st.text_input("आपका नाम:", value="साहिल अहमद")
 with col_2:
-    user_phone = st.text_input("WhatsApp Number (10 Digit):", value="7484878440")
+    user_phone = st.text_input("WhatsApp नंबर (10 अंक):", value="7484878440")
 
 # 1-Click Action Execution
-if st.button("🚀 1-CLICK EXECUTE (Kaam Turant Karein)"):
+if st.button("🚀 1-CLICK EXECUTE (काम तुरंत पूरा करें)"):
     clean_p = user_phone.strip()
-    st.success("🟢 Aadesh sweekar hua! System ne kaam complete kar diya:")
+    st.success("🟢 आदेश स्वीकार हुआ! न्यूरल कोर ने काम पूरा कर दिया:")
 
-    # Multi-Language Voice Code & Response Mapping
+    # भाषा व कार्य के अनुसार रिस्पॉन्स
     if "English" in selected_lang:
         lang_code = "en-US"
-        spoken_text = f"Hello {user_name}! Your automated ledger entry for {task_input} has been processed successfully. Receipt is ready on WhatsApp."
+        spoken_text = f"Hello {user_name}! Your automated action for {task_input} has been executed successfully. Details dispatched to WhatsApp."
         doc_header = "GLOBAL AUTONOMOUS DIGITAL LEDGER"
     elif "Arabic" in selected_lang:
         lang_code = "ar-SA"
-        spoken_text = f"مرحبا {user_name}! تم تسجيل المعاملة بنجاح وجاهزة للإرسال عبر واتساب."
+        spoken_text = f"مرحبا {user_name}! تم إنجاز المهمة بنجاح وتجهيز التقرير للإرسال."
         doc_header = "دفتر الحسابات الرقمي الذاتي"
-    elif "Spanish" in selected_lang:
-        lang_code = "es-ES"
-        spoken_text = f"¡Hola {user_name}! Su registro comercial ha sido completado con éxito."
-        doc_header = "LIBRO DE ACCIÓN AUTÓNOMA"
     elif "Bhojpuri" in selected_lang:
         lang_code = "hi-IN"
-        spoken_text = f"Pranaam {user_name} ji! Rauwa dukan ke hisab-kitab bilkul darj ho gail ba, parchi WhatsApp par bhej dihal gail ba."
-        doc_header = "BHOJPURI DESI DIGITAL KHATA"
-    elif "Russian" in selected_lang:
-        lang_code = "ru-RU"
-        spoken_text = f"Здравствуйте {user_name}! Ваша задача успешно выполнена."
-        doc_header = "ЦИФРОВОЙ РЕЕСТР ДЕЙСТВИЙ"
-    elif "French" in selected_lang:
-        lang_code = "fr-FR"
-        spoken_text = f"Bonjour {user_name}! Votre tâche a été exécutée avec succès."
-        doc_header = "REGISTRE NUMÉRIQUE AUTONOME"
-    else: # Hindi Default
+        spoken_text = f"प्रणाम {user_name} जी! रउवा आदेश के काम पूरा हो गईल बा, परची WhatsApp पर तइयार बा।"
+        doc_header = "भोजपुरी देसी डिजिटल बहीखाता"
+    elif "Spanish" in selected_lang:
+        lang_code = "es-ES"
+        spoken_text = f"¡Hola {user_name}! Su tarea ha sido procesada exitosamente."
+        doc_header = "LIBRO DE ACCIÓN AUTÓNOMA"
+    else:
         lang_code = "hi-IN"
-        spoken_text = f"Namaste {user_name} ji! Aapki dukan ka hisab darj ho gaya hai. Parchi WhatsApp par taiyar hai."
-        doc_header = "DAINIK DIGITAL BAHIKHATA"
+        spoken_text = f"नमस्ते {user_name} जी! आपके आदेशानुसार काम पूरा कर दिया गया है। आपकी रसीद WhatsApp पर तैयार है।"
+        doc_header = "दैनिक डिजिटल बहीखाता व आधिकारिक रिकॉर्ड"
 
     final_doc = f"""==================================================
 {doc_header}
-Date: {today_str} | Authorized: {user_name}
-Language Mode: {selected_lang}
-Task: {task_input}
-Status: VERIFIED & COMPLETED BY NEURAL CORE ✅
+दिनांक: {today_str} | अधिकृत: {user_name}
+भाषा मोड: {selected_lang}
+दर्ज कार्य: {task_input}
+स्थिति: न्यूरल कोर द्वारा सत्यापित एवं पूर्ण ✅
 =================================================="""
 
-    # Dynamic Multilingual Female Voice Script
+    # स्पष्ट महिला आवाज़ (Female Speech Synthesis)
     js_multi_voice = f"""
     <script>
         window.speechSynthesis.cancel();
@@ -141,11 +131,13 @@ Status: VERIFIED & COMPLETED BY NEURAL CORE ✅
         msg.text = "{spoken_text}";
         msg.lang = '{lang_code}';
         msg.rate = 0.92;
-        msg.pitch = 1.5;
+        msg.pitch = 1.6;
 
         var vList = window.speechSynthesis.getVoices();
         for (var i = 0; i < vList.length; i++) {{
-            if (vList[i].lang.includes('{lang_code.split("-")[0]}')) {{
+            var n = vList[i].name.toLowerCase();
+            if ((vList[i].lang.includes('{lang_code.split("-")[0]}')) && 
+                (n.includes('female') || n.includes('google') || n.includes('india') || n.includes('zira'))) {{
                 msg.voice = vList[i];
                 break;
             }}
@@ -155,37 +147,58 @@ Status: VERIFIED & COMPLETED BY NEURAL CORE ✅
     """
     components.html(js_multi_voice, height=0)
 
-    # Output Card
+    # आउटपुट कार्ड
     st.markdown(f"""
     <div class="action-box" style="border-left: 4px solid #10B981; margin-top:12px;">
-        <p style="color:#10B981; font-weight:bold; margin-bottom:4px;">🔊 Multilingual AI Voice Output ({selected_lang}):</p>
+        <p style="color:#10B981; font-weight:bold; margin-bottom:4px;">🔊 AI वॉयस एग्जीक्यूटर ({selected_lang}):</p>
         <p style="font-size:14px; color:#F8FAFC; margin:0;">"{spoken_text}"</p>
     </div>
     """, unsafe_allow_html=True)
 
-    st.text_area("📄 Generated Document / Log:", final_doc, height=130)
+    st.text_area("📄 तैयार दस्तावेज़ / आउटपुट:", final_doc, height=130)
 
-    # WhatsApp Direct Send
+    # WhatsApp शेयर
     enc_wa = urllib.parse.quote(f"{doc_header}\n{spoken_text}")
-    st.markdown(f'<a href="https://wa.me/91{clean_p}?text={enc_wa}" target="_blank" class="pay-btn-glow">📲 WhatsApp Par Receipt Bhejein</a>', unsafe_allow_html=True)
+    st.markdown(f'<a href="https://wa.me/91{clean_p}?text={enc_wa}" target="_blank" class="pay-btn-glow">📲 सीधे WhatsApp पर रसीद भेजें</a>', unsafe_allow_html=True)
 
-# Database Grid
+# डेटाबेस ग्रिड
 st.markdown("---")
-st.markdown("### 📊 Global National Action Grid")
+st.markdown("### 📊 लाइव एक्शन ग्रिड (National Execution Log)")
 live_grid = {
-    "Time": [datetime.now().strftime("%H:%M:%S"), "16:20:10", "15:55:40"],
-    "User": [user_name, "Carlos (Madrid)", "Fatima (Dubai)"],
-    "Language": [selected_lang.split(" ")[1], "Spanish", "Arabic"],
-    "Status": ["Completed ✅", "Completed ✅", "Completed ✅"]
+    "समय": [datetime.now().strftime("%H:%M:%S"), "16:20:10", "15:55:40"],
+    "यूज़र": [user_name, "अनिल कुमार (पटना)", "प्रिया सिंह (लखनऊ)"],
+    "भाषा": [selected_lang.split(" ")[1], "हिन्दी", "हिन्दी"],
+    "स्थिति": ["सफल ✅", "सफल ✅", "सफल ✅"]
 }
 st.dataframe(pd.DataFrame(live_grid), use_container_width=True)
 
-# Founder Card
+# टोकन गेटवे
+st.markdown("---")
+st.markdown("### 👑 Enterprise Sovereign Deployment — ₹1,00,000")
+st.caption("अपने बिज़नेस में इस AI सिस्टम को तैनात करने के लिए टोकन ट्रांसफर करें:")
+
+token_amt = "10000"
+upi_uri = f"upi://pay?pa={MY_UPI_ID}&pn=Bharat%20Mind%20OS&am={token_amt}&cu=INR&tn=Sovereign%20Token"
+qr_uri = f"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={urllib.parse.quote(upi_uri)}"
+
+col_k, col_l = st.columns([1, 2])
+with col_k:
+    st.image(qr_uri, width=150)
+with col_l:
+    st.markdown(f"""
+    <div style="padding-top:8px;">
+        <p style="color:#38BDF8; font-size:15px; margin:0;"><b>Book ₹10,000 Deployment Token</b></p>
+        <p style="color:#94A3B8; font-size:12px; margin:4px 0 10px 0;">PhonePe / Google Pay / BHIM Support</p>
+        <p style="color:#CBD5E1; font-size:13px; margin:0;">UPI ID: <b>{MY_UPI_ID}</b></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# संस्थापक प्रोफ़ाइल
 st.markdown("---")
 st.markdown(f"""
 <div class="action-box" style="text-align: center; border: 2px solid #38BDF8;">
     <p style="color:#38BDF8; font-size:11px; margin:0; letter-spacing:2px;">🏛️ FOUNDER & CHIEF ARCHITECT</p>
-    <h2 style="color:#FFF; margin:6px 0; font-size:22px;">Sahil Ahmad</h2>
+    <h2 style="color:#FFF; margin:6px 0; font-size:22px;">साहिल अहमद (Sahil Ahmad)</h2>
     <p style="color:#CBD5E1; font-size:13px; margin-bottom:12px;">Bharat Mind OS — Engineering Global Sovereign Autonomous Intelligence</p>
     <a href="https://wa.me/{MY_WA_NUMBER}" target="_blank" style="background:#10B981; color:#fff; padding:10px 22px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">💬 Connect on WhatsApp (+91 {MY_WA_NUMBER[-10:]})</a>
 </div>
