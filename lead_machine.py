@@ -5,7 +5,7 @@ from datetime import datetime
 
 # 1. Page Configuration
 st.set_page_config(
-    page_title="Maha Seva AI — Sovereign Citizen Legal Mission",
+    page_title="Maha Seva AI — Citizen Legal Mission",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -349,4 +349,219 @@ LANG_DATA = {
                 "det": "I am financially incapable of bearing litigation expenses and formally request a free government advocate."
             },
             "13. Landlord Forcible Eviction Without Legal Notice": {
-                "act": "R
+                "act": "Rent Control Act & Bharatiya Nyaya Sanhita",
+                "authority": "Rent Controller & Local Police",
+                "rule": "Landlords cannot cut electricity/water or break locks without a formal judicial eviction decree.",
+                "det": "The landlord has unlawfully disconnected electricity and water, attempting forcible eviction without judicial notice."
+            },
+            "14. Caste-Based Discrimination & Harassment (SC/ST Act)": {
+                "act": "SC/ST Prevention of Atrocities Act & Article 15",
+                "authority": "Superintendent of Police (SP) & Special Court",
+                "rule": "Casteist slurs, social boycott, or blocking public roads invite mandatory non-bailable arrest.",
+                "det": "The accused party used derogatory casteist slurs publicly and subjected me to humiliation and severe intimidation."
+            }
+        }
+    }
+}
+
+# Language Picker
+chosen_lang = st.radio(
+    "🌐 भाषा चुनें / Select Language:",
+    ["🇮🇳 हिन्दी", "🇬🇧 English"],
+    horizontal=True
+)
+T = LANG_DATA.get(chosen_lang, LANG_DATA["🇮🇳 हिन्दी"])
+
+# Header
+st.markdown(f"""
+<div style="background: radial-gradient(circle at center, #1E3A8A 0%, #030712 100%); border: 2px solid #38BDF8; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 14px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);">
+    <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800;">
+        {T['tag']}
+    </span>
+    <h1 style="font-size:22px; margin:6px 0 0 0; color:#FFF;">{T['title']}</h1>
+    <p style="font-size:12px; color:#38BDF8; margin:4px 0 0 0;">{T['sub']}</p>
+</div>
+""", unsafe_allow_html=True)
+
+nav_choice = st.radio(
+    T["nav_lbl"],
+    [
+        T["sec_rights"],
+        T["sec_sos"],
+        T["sec_health"],
+        T["sec_job"],
+        T["sec_scheme"],
+        T["sec_fraud"]
+    ],
+    horizontal=True
+)
+
+st.markdown("---")
+
+# 14 LEGAL ENGINE
+if nav_choice == T["sec_rights"]:
+    st.write(f"### {T['r_title']}")
+    st.caption(T['r_sub'])
+
+    cases_dict = T["cases"]
+    selected_issue = st.radio("📌 Select / अपनी समस्या चुनें:", list(cases_dict.keys()))
+    case_info = cases_dict[selected_issue]
+
+    st.info(f"⚖️ **{T['law_prefix']}:** {case_info['act']} | **{T['auth_prefix']}:** {case_info['authority']}")
+
+    col_v1, col_v2 = st.columns(2)
+    with col_v1:
+        v_name = st.text_input(T["name_lbl"], value=T["def_name"], key=f"name_{chosen_lang}")
+    with col_v2:
+        v_loc = st.text_input(T["city_lbl"], value=T["def_city"], key=f"city_{chosen_lang}")
+
+    v_phone = st.text_input(T["phone_lbl"], value="7484878440", key=f"phone_{chosen_lang}")
+    v_accused = st.text_input(T["accused_lbl"], value=T["def_accused"], key=f"acc_{chosen_lang}")
+
+    issue_code = selected_issue.split(".")[0].strip()
+    v_details = st.text_area(T["detail_lbl"], value=case_info["det"], key=f"det_{chosen_lang}_{issue_code}")
+
+    if st.button(T['btn_rights'], key=f"btn_r_{chosen_lang}_{issue_code}"):
+        full_notice = f"""======================================================================
+FORMAL LEGAL NOTICE & INVESTIGATION COMPLAINT
+(Under: {case_info['act']})
+Date: {today_str}
+
+To,
+1. {case_info['authority']}, {v_loc}
+2. National Human Rights Commission (NHRC) / Legal Vigilance Authority
+
+Subject: Immediate FIR, Penal Prosecution, and Restitution against '{v_accused}' for '{selected_issue}'.
+
+Respected Authority,
+The complainant {v_name} (Phone: +91 {v_phone}), resident of {v_loc}, submits:
+
+1. The complainant is a law-abiding citizen of India. The accused '{v_accused}' has flagrantly violated constitutional and statutory rights.
+2. Factual Summary:
+"{v_details}"
+3. Statutory Provisions:
+- {case_info['rule']}
+
+Prayer:
+(a) Register immediate FIR under relevant penal sections against '{v_accused}'.
+(b) Ensure full recovery of unpaid dues, statutory compensation, and legal restitution.
+(c) Provide comprehensive security to the complainant.
+
+Complainant:
+{v_name}
+Phone: +91 {v_phone}
+Digital Tracking: Maha Seva AI Sovereign Legal Infrastructure
+======================================================================"""
+
+        st.success("🟢 Legal Notice Generated:")
+        st.text_area("📄 Official Document:", full_notice, height=220)
+
+        st.markdown(f"""
+        <div class="caution-card">
+            <h3 style="color:#EF4444; margin:0 0 6px 0;">⚖️ Legal Shield:</h3>
+            <p style="margin:0; font-size:14px; color:#FCA5A5;">{case_info['rule']}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style="text-align:center; margin:8px 0;">
+            <a href="tel:112" class="btn-red-call">📞 112 Police</a>
+            <a href="tel:1064" class="btn-red-call">📞 1064 Anti-Corruption</a>
+            <a href="tel:14434" class="btn-red-call">📞 14434 Labor Dues</a>
+            <a href="tel:1915" class="btn-red-call">📞 1915 Consumer Protection</a>
+            <a href="tel:139" class="btn-red-call">📞 139 RailMadad</a>
+            <a href="tel:15100" class="btn-red-call">📞 15100 Free Legal Aid (NALSA)</a>
+        </div>
+        """, unsafe_allow_html=True)
+
+        enc_notice = urllib.parse.quote(full_notice)
+        st.markdown(f'<a href="https://wa.me/?text={enc_notice}" target="_blank" class="btn-green">{T["send_wa"]}</a>', unsafe_allow_html=True)
+
+elif nav_choice == T["sec_sos"]:
+    st.markdown("""
+    <div class="emergency-card">
+        <h2 style="color:#FFF; margin:0 0 6px 0; font-size:22px;">🚨 24x7 Night Safety & Panic SOS</h2>
+        <p style="color:#FECACA; font-size:13px; margin:0 0 12px 0;">Direct emergency calling (Sim-based, works without internet):</p>
+        <div>
+            <a href="tel:112" class="btn-red-call">📞 112 National Police</a>
+            <a href="tel:1090" class="btn-red-call">📞 1090 Women Helpline</a>
+            <a href="tel:181" class="btn-red-call">📞 181 Women Crisis Line</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    family_phone = st.text_input("Family/Emergency Mobile Number:", value="7484878440")
+    my_location = st.text_input("Current Road / Location:", value="Main Road / Highway")
+
+    sos_msg = f"EMERGENCY SOS ALERT! I need immediate help. My current location: {my_location}. Please contact me or notify local police immediately."
+    enc_sos = urllib.parse.quote(sos_msg)
+    st.markdown(f'<a href="https://wa.me/91{family_phone}?text={enc_sos}" target="_blank" class="btn-green">📲 1-Click Send SOS to Family</a>', unsafe_allow_html=True)
+
+elif nav_choice == T["sec_health"]:
+    st.markdown("""
+    <div class="emergency-card">
+        <h2 style="color:#FFF; margin:0 0 6px 0; font-size:20px;">🚨 Medical Emergency Ambulance</h2>
+        <div>
+            <a href="tel:108" class="btn-red-call">📞 108 Free Ambulance</a>
+            <a href="tel:102" class="btn-red-call">📞 102 Mother & Child Ambulance</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    m_name = st.text_input("Medicine Name / Salt:", value="Azithromycin 500")
+    if st.button("🔍 Medicine Generic Price Check"):
+        st.markdown(f"""
+        <div class="info-card">
+            <h3 style="color:#38BDF8; margin:0 0 6px 0;">💊 Salt Overview: {m_name}</h3>
+            <p style="margin:0; font-size:14px;">Essential antibiotic used for respiratory and bacterial infections.</p>
+            <p style="color:#10B981; font-size:14px; margin-top:6px;"><b>Jan Aushadhi Price:</b> Rs 20 to Rs 35 (70-80% lower than branded MRP).</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+elif nav_choice == T["sec_job"]:
+    st.write("### 💼 Pan-India Direct Job & Contractor Connect")
+    target_city = st.text_input("📍 Job City:", value="Surat")
+    work_role = st.text_input("🔧 Job Role:", value="Factory Helper / Warehouse Worker")
+    c_name = st.text_input("👤 Your Name:", value="Sahil Ahmad")
+    c_phone = st.text_input("📱 Phone Number:", value="7484878440")
+
+    if st.button("⚡ Generate English Contractor Pitch"):
+        g_maps_search = f"https://www.google.com/maps/search/{urllib.parse.quote(f'{work_role} contractor agency in {target_city}')}"
+        eng_pitch = f"Hello, My name is {c_name}. I am looking for immediate work as {work_role} in {target_city}. Contact: +91 {c_phone}. Ready for immediate joining."
+        st.text_area("📄 Job Pitch:", eng_pitch, height=100)
+        st.markdown(f'<a href="{g_maps_search}" target="_blank" class="btn-blue">📞 Open Local Contractors Directory</a>', unsafe_allow_html=True)
+
+elif nav_choice == T["sec_scheme"]:
+    st.write("### 🏛️ Welfare Schemes Directory")
+    custom_scheme = st.text_input("Scheme Name:", value="PM Awas Yojana")
+    if st.button("⚡ Get Scheme Verification Details"):
+        st.markdown(f"""
+        <div class="info-card">
+            <h3 style="color:#38BDF8; margin:0 0 6px 0;">📌 Details: {custom_scheme}</h3>
+            <p style="margin:0; font-size:14px;">Direct DBT financial assistance between Rs 1,20,000 to Rs 2,50,000 transferred straight into beneficiary bank account.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+elif nav_choice == T["sec_fraud"]:
+    st.write("### 🛡️ Cyber Crime Shield & Anti-Addiction")
+    st.markdown("""
+    <div class="caution-card">
+        <h3 style="color:#EF4444; margin:0 0 6px 0;">📞 National Cyber Crime Helpline:</h3>
+        <p style="font-size:15px; margin:0;"><a href="tel:1930" style="color:#FFF; font-weight:bold;">📞 Call 1930 Immediately</a> (In case of financial fraud/scam)</p>
+    </div>
+    <div class="info-card">
+        <h3 style="color:#10B981; margin:0 0 6px 0;">🕊️ National Tobacco & Addiction Quitline:</h3>
+        <p style="font-size:15px; margin:0;"><a href="tel:14446" style="color:#FFF; font-weight:bold;">📞 Call 14446 (Toll-Free)</a> for free counseling.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Founder National Sovereign Footer
+st.markdown("---")
+st.markdown(f"""
+<div style="text-align: center; background: #0B1329; padding: 16px; border-radius: 14px; border: 2px solid #38BDF8;">
+    <p style="color:#38BDF8; font-size:11px; margin:0; letter-spacing:2px;">🏛️ FOUNDER & CHIEF SYSTEM ARCHITECT</p>
+    <h2 style="color:#FFF; margin:4px 0; font-size:22px;">साहिल अहमद (Sahil Ahmad)</h2>
+    <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Maha Seva AI — All-India Sovereign Citizen Legal & Welfare Infrastructure</p>
+    <a href="https://wa.me/{MY_WA_NUMBER}" target="_blank" style="background:#10B981; color:#fff; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">💬 राष्ट्रीय संस्थापक सूत्र (+91 {MY_WA_NUMBER[-10:]})</a>
+</div>
+""", unsafe_allow_html=True)
