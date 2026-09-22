@@ -5,276 +5,241 @@ from datetime import datetime
 
 # 1. Page Configuration
 st.set_page_config(
-    page_title="APEX AI — Sovereign Business Engine",
-    page_icon="💼",
+    page_title="स्मार्ट बिज़नेस व बिलिंग ऐप — Sahil Ahmad",
+    page_icon="📱",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 2. High-Contrast Crystal Clear Styling (Dark & Bright Text)
+# 2. Clean, Modern & High-Contrast Design
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@500;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
     .stApp {
-        background-color: #030712 !important;
+        background-color: #0B1120 !important;
         color: #FFFFFF !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Clear High-Contrast Labels */
-    label, p, span, h1, h2, h3, h4, div {
+    /* Headings & Text */
+    h1, h2, h3, p, span, label, div {
         color: #FFFFFF !important;
         font-weight: 700 !important;
     }
 
-    /* Top HUD */
-    .hud-top {
-        display: flex; justify-content: space-between; align-items: center;
+    /* Top Clean Header */
+    .top-badge {
+        background: #1E293B;
         border: 1px solid #38BDF8;
-        padding: 12px 18px; margin-bottom: 20px;
-        background: #0B1329;
-        font-family: 'Space Grotesk', monospace; font-size: 12px; letter-spacing: 1.5px;
-        border-radius: 12px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+        border-radius: 12px;
+        padding: 10px 16px;
+        text-align: center;
+        margin-bottom: 16px;
     }
 
-    /* Crystal Clear Inputs */
+    /* Input Fields - Clear, Big & Bold */
     input, .stTextInput input, textarea, .stTextArea textarea {
         background-color: #0F172A !important;
         color: #38BDF8 !important;
         font-size: 16px !important;
-        font-weight: 800 !important;
-        border: 2px solid #38BDF8 !important;
-        border-radius: 12px !important;
+        font-weight: 700 !important;
+        border: 2px solid #334155 !important;
+        border-radius: 10px !important;
         padding: 12px !important;
     }
     input:focus, textarea:focus {
-        border-color: #10B981 !important;
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5) !important;
+        border-color: #38BDF8 !important;
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.4) !important;
     }
 
-    /* Select Dropdown */
-    div[data-baseweb="select"] > div {
-        background-color: #0F172A !important;
-        border: 2px solid #38BDF8 !important;
-        color: #FFFFFF !important;
-        border-radius: 12px !important;
-        font-weight: 800 !important;
-    }
-
-    /* Buttons */
+    /* Big Main Action Button */
     div.stButton > button {
-        background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%) !important;
+        background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%) !important;
         color: #FFFFFF !important;
-        font-weight: 900 !important;
-        font-size: 17px !important;
+        font-weight: 800 !important;
+        font-size: 18px !important;
         border-radius: 12px !important;
         width: 100% !important;
         padding: 16px !important;
-        border: 1px solid #38BDF8 !important;
-        box-shadow: 0 4px 25px rgba(37, 99, 235, 0.5) !important;
+        border: none !important;
+        box-shadow: 0 4px 20px rgba(2, 132, 199, 0.5) !important;
+        margin-top: 10px;
     }
 
-    .btn-deal {
+    /* WhatsApp Button */
+    .btn-wa {
         display: block;
         background: linear-gradient(90deg, #10B981 0%, #059669 100%);
         color: #FFFFFF !important;
         text-align: center;
-        font-weight: 900;
+        font-weight: 800;
         font-size: 16px;
-        padding: 15px;
-        border-radius: 12px;
+        padding: 14px;
+        border-radius: 10px;
         text-decoration: none;
-        margin: 10px 0;
-        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        margin: 12px 0;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
     }
 
-    .qr-card {
-        background: #0B1329;
-        border: 2px solid #10B981;
+    /* Clean Card */
+    .bill-card {
+        background: #0F172A;
+        border: 2px solid #38BDF8;
         border-radius: 14px;
         padding: 18px;
-        text-align: center;
-        margin-top: 15px;
-        box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+        margin-top: 14px;
     }
 </style>
 """, unsafe_allow_html=True)
 
 MY_WA_NUMBER = "917484878440"
-UPI_ID = "7484878440@ybl"
+MY_UPI_ID = "7484878440@ybl"
 today_str = datetime.now().strftime("%d-%m-%Y")
 time_now = datetime.now().strftime("%I:%M %p")
 
-# Top Metrics HUD
-st.markdown(f"""
-<div class="hud-top">
-    <div>🚀 SYSTEM: <span style="color:#10B981;">100% ACTIVE</span></div>
-    <div>ARCHITECT: <span style="color:#FFF;">SAHIL AHMAD</span></div>
-    <div>NODE: <span style="color:#38BDF8;">SECURE CLOUD</span></div>
-</div>
-""", unsafe_allow_html=True)
-
-# 1. Bhasha Chunein (Language Toggle)
+# Language Selection
 lang_mode = st.radio(
-    "🌐 अपनी पसंदीदा भाषा चुनें / Choose Language:",
-    ["🇮🇳 हिन्दी (Hindi)", "🇬🇧 English (Global)"],
+    "🌐 भाषा चुनें / Select Language:",
+    ["🇮🇳 हिन्दी (Hindi)", "🇬🇧 English"],
     horizontal=True
 )
 is_hindi = "हिन्दी" in lang_mode
 
-# Header Title Card
+# App Header
 if is_hindi:
     st.markdown("""
-    <div style="text-align:center; padding: 18px 10px; margin-bottom: 20px; background: #0B1329; border: 2px solid #38BDF8; border-radius: 16px;">
-        <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:800;">लाखों की कमाई वाला बिज़नेस सिस्टम</span>
-        <h1 style="font-size:24px; color:#FFF; margin:8px 0 0 0;">APEX SOVEREIGN AI</h1>
-        <p style="color:#38BDF8; font-size:13px; margin:4px 0 0 0;">क्लाइंट ऑटोमेशन • डायरेक्ट बिलिंग • तुरंत पेमेंट वसूली</p>
+    <div class="top-badge">
+        <h2 style="font-size:22px; margin:0; color:#38BDF8;">⚡ स्मार्ट डिजिटल बिलिंग व पेमेंट सिस्टम</h2>
+        <p style="font-size:13px; color:#94A3B8; margin:4px 0 0 0;">दुकान, गैरेज, क्लिनिक और किसी भी बिज़नेस के लिए</p>
     </div>
     """, unsafe_allow_html=True)
 else:
     st.markdown("""
-    <div style="text-align:center; padding: 18px 10px; margin-bottom: 20px; background: #0B1329; border: 2px solid #38BDF8; border-radius: 16px;">
-        <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:800;">HIGH-TICKET REVENUE ARCHITECTURE</span>
-        <h1 style="font-size:24px; color:#FFF; margin:8px 0 0 0;">APEX SOVEREIGN AI</h1>
-        <p style="color:#38BDF8; font-size:13px; margin:4px 0 0 0;">Client Acquisition • Instant Deals • Automated WhatsApp Pay</p>
+    <div class="top-badge">
+        <h2 style="font-size:22px; margin:0; color:#38BDF8;">⚡ Smart Digital Billing & Pay System</h2>
+        <p style="font-size:13px; color:#94A3B8; margin:4px 0 0 0;">For Shops, Garages, Clinics & All Businesses</p>
     </div>
     """, unsafe_allow_html=True)
 
-# Form Fields based on Language
-if is_hindi:
-    c_name = st.text_input("🏢 बिज़नेस या दुकान का नाम:", value="Ahmad Super Auto Center")
-    service_options = [
-        "AI ऑटोमेशन और सॉफ़्टवेयर सेटअप (₹25,000 पैकेज)",
-        "मासिक डिजिटल मेंटेनेंस व ग्रोथ (₹10,000 प्रति माह)",
-        "कस्टमर केयर व ऑटो-WhatsApp सिस्टम (₹15,000 पैकेज)",
-        "कंप्लीट एंटरप्राइज इंफ्रास्ट्रक्चर (₹50,000 पैकेज)"
-    ]
-    c_service = st.selectbox("💼 डील या सर्विस पैकेज चुनें:", service_options)
-    c_client = st.text_input("👤 ग्राहक का नाम (Client Name):", value="रमेश कुमार")
-    c_phone = st.text_input("📱 ग्राहक का WhatsApp नंबर (10 अंक):", value="7484878440")
-    btn_text = "⚡ 1-क्लिक में प्रपोजल तैयार करें और डील लॉक करें"
-else:
-    c_name = st.text_input("🏢 Business or Store Name:", value="Ahmad Super Auto Center")
-    service_options = [
-        "Full AI Automation & Software Setup (₹25,000 Package)",
-        "Monthly Digital Growth & Maintenance (₹10,000 / Month)",
-        "Customer Care & Auto-WhatsApp Protocol (₹15,000 Package)",
-        "Complete Enterprise Infrastructure (₹50,000 Package)"
-    ]
-    c_service = st.selectbox("💼 Select Deal / Service Package:", service_options)
-    c_client = st.text_input("👤 Client / Party Name:", value="Ramesh Kumar")
-    c_phone = st.text_input("📱 Client WhatsApp Number (10 Digits):", value="7484878440")
-    btn_text = "⚡ GENERATE DEAL PROPOSAL & LOCK IN 1-CLICK"
+# Form Section
+st.write("---")
 
-# Action Execution
-if st.button(btn_text):
-    clean_p = c_phone.strip() if c_phone.strip() else "7484878440"
-    deal_code = f"NX-{datetime.now().strftime('%d%H%M')}"
+if is_hindi:
+    shop_name = st.text_input("🏪 दुकान / बिज़नेस का नाम:", value="Ahmad Super Auto Center")
+    col1, col2 = st.columns(2)
+    with col1:
+        cust_name = st.text_input("👤 ग्राहक का नाम:", value="रमेश कुमार")
+    with col2:
+        cust_phone = st.text_input("📱 ग्राहक का WhatsApp नंबर:", value="7484878440")
     
-    # Amount parsing
-    amt = "₹25,000"
-    amt_num = "25000"
-    if "10,000" in c_service: 
-        amt = "₹10,000"
-        amt_num = "10000"
-    elif "15,000" in c_service: 
-        amt = "₹15,000"
-        amt_num = "15000"
-    elif "50,000" in c_service: 
-        amt = "₹50,000"
-        amt_num = "50000"
+    item_desc = st.text_input("🔧 काम या सामान का विवरण:", value="कार सर्विसिंग + नया मोबिल आयल")
+    bill_amt = st.text_input("💰 कुल बिल राशि (रुपये में):", value="2500")
+    btn_label = "✅ 1-क्लिक में डिजिटल बिल व पर्ची तैयार करें"
+else:
+    shop_name = st.text_input("🏪 Store / Business Name:", value="Ahmad Super Auto Center")
+    col1, col2 = st.columns(2)
+    with col1:
+        cust_name = st.text_input("👤 Customer Name:", value="Ramesh Kumar")
+    with col2:
+        cust_phone = st.text_input("📱 Customer WhatsApp Number:", value="7484878440")
+    
+    item_desc = st.text_input("🔧 Work or Product Details:", value="Full Car Servicing + Engine Oil")
+    bill_amt = st.text_input("💰 Total Bill Amount (in ₹):", value="2500")
+    btn_label = "✅ Generate Digital Bill & Receipt in 1-Click"
+
+# Button Click
+if st.button(btn_label):
+    clean_phone = cust_phone.strip() if cust_phone.strip() else "7484878440"
+    clean_amt = bill_amt.strip() if bill_amt.strip() else "0"
+    bill_no = f"INV-{datetime.now().strftime('%d%H%M')}"
 
     if is_hindi:
-        spoken_line = f"नमस्ते {c_client} जी! {c_name} की तरफ से आपका {amt} का आधिकारिक बिजनेस प्रपोजल और पेमेंट लिंक तैयार है।"
-        doc_header = "आधिकारिक बिजनेस प्रपोजल व इनवॉइस"
-        doc_content = f"""==================================================
-{doc_header}
-डील आईडी: {deal_code} | दिनांक: {today_str} | समय: {time_now}
+        spoken_text = f"नमस्ते {cust_name} जी! {shop_name} की तरफ से आपका {clean_amt} रुपये का डिजिटल बिल तैयार है।"
+        receipt_text = f"""==================================================
+              डिजिटल रसीद एवं बिल
+दुकान: {shop_name}
+बिल नंबर: {bill_no} | दिनांक: {today_str} ({time_now})
 --------------------------------------------------
-जारीकर्ता: {c_name}
-चीफ टेक्नोलॉजी आर्किटेक्ट: साहिल अहमद (Apex AI)
-क्लाइंट का नाम: {c_client} (+91 {clean_p})
-
-अनुबंध विवरण:
-• सर्विस पैकेज: {c_service}
-• कुल निवेश राशि: {amt}
-• सिस्टम स्टेटस: 100% सत्यापित एवं क्लाउड लॉक ✅
-• भुगतान माध्यम: PhonePe / Google Pay / UPI ({UPI_ID})
+ग्राहक का नाम: {cust_name}
+WhatsApp नंबर: +91 {clean_phone}
+काम/सामान का विवरण: {item_desc}
+--------------------------------------------------
+कुल भुगतान राशि: ₹{clean_amt}
+भुगतान माध्यम: PhonePe / Google Pay / UPI ({MY_UPI_ID})
+सॉफ्टवेयर आर्किटेक्ट: साहिल अहमद
 =================================================="""
-        wa_msg = f"नमस्ते {c_client} जी!\n\n{c_name} द्वारा आपका बिजनेस डील प्रपोजल तैयार है।\n\n📌 सर्विस: {c_service}\n💰 कुल रकम: {amt}\n\n💳 UPI Payment ID: {UPI_ID}\n\nचीफ आर्किटेक्ट: साहिल अहमद"
+        wa_text = f"नमस्ते {cust_name} जी!\n\n*{shop_name}* की तरफ से आपका डिजिटल बिल तैयार है:\n\n📄 *बिल नंबर:* {bill_no}\n🔧 *विवरण:* {item_desc}\n💰 *कुल राशि:* ₹{clean_amt}\n\n💳 *ऑनलाइन पेमेंट करें (PhonePe/GPay UPI):* {MY_UPI_ID}\n\nधन्यवाद!"
     else:
-        spoken_line = f"Hello {c_client}! Your official executive deal proposal of {amt} from {c_name} is locked and ready."
-        doc_header = "OFFICIAL EXECUTIVE DEAL PROPOSAL & INVOICE"
-        doc_content = f"""==================================================
-{doc_header}
-DEAL ID: {deal_code} | DATE: {today_str} | TIME: {time_now}
+        spoken_text = f"Hello {cust_name}! Your bill of rupees {clean_amt} from {shop_name} is ready."
+        receipt_text = f"""==================================================
+              DIGITAL BILL RECEIPT
+Store: {shop_name}
+Bill No: {bill_no} | Date: {today_str} ({time_now})
 --------------------------------------------------
-ISSUER: {c_name}
-CHIEF TECHNOLOGY ARCHITECT: SAHIL AHMAD (Apex AI)
-CLIENT: {c_client} (+91 {clean_p})
-
-CONTRACT DETAILS:
-• Service Scope: {c_service}
-• Investment Amount: {amt}
-• System Status: 100% VERIFIED & CLOUD SECURED ✅
-• Settlement Protocol: PhonePe / Google Pay / UPI ({UPI_ID})
+Customer: {cust_name}
+WhatsApp: +91 {clean_phone}
+Work/Item: {item_desc}
+--------------------------------------------------
+TOTAL AMOUNT: ₹{clean_amt}
+Payment Mode: PhonePe / Google Pay / UPI ({MY_UPI_ID})
+Software Architect: Sahil Ahmad
 =================================================="""
-        wa_msg = f"Hello {c_client}!\n\nYour official deal proposal from {c_name} is ready.\n\n📌 Service: {c_service}\n💰 Investment: {amt}\n\n💳 UPI Payment ID: {UPI_ID}\n\nChief Architect: Sahil Ahmad"
+        wa_text = f"Hello {cust_name}!\n\nYour digital bill from *{shop_name}* is ready:\n\n📄 *Bill No:* {bill_no}\n🔧 *Details:* {item_desc}\n💰 *Total Amount:* ₹{clean_amt}\n\n💳 *Pay via UPI:* {MY_UPI_ID}\n\nThank you!"
 
-    st.success("🟢 " + ("सत्यापित प्रपोजल तैयार हो गया है:" if is_hindi else "Verified Deal Proposal Locked:"))
+    st.success("🟢 " + ("बिल सफलतापूर्वक तैयार हो गया!" if is_hindi else "Digital Bill Generated Successfully!"))
 
-    # High Quality Voice Engine
-    voice_html = f"""
-    <div style="background:#0F172A; padding:14px; border-radius:12px; border-left:5px solid #10B981; margin:10px 0;">
-        <p style="color:#10B981; margin:0 0 6px 0; font-size:13px; font-weight:bold;">🔊 {"AI वॉइस पुष्टि:" if is_hindi else "AI Vocal Confirmation:"}</p>
-        <p style="color:#FFF; margin:0 0 10px 0; font-size:14px; font-weight:bold;">"{spoken_line}"</p>
-        <button onclick="playVoiceNow()" style="background:#10B981; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:13px;">
-            ▶️ {"आवाज़ सुनें (Play Voice)" if is_hindi else "Play Vocal Output"}
+    # Audio Confirmation
+    audio_box = f"""
+    <div style="background:#0F172A; padding:12px; border-radius:10px; border-left:4px solid #10B981; margin:10px 0;">
+        <p style="color:#10B981; margin:0 0 4px 0; font-size:13px; font-weight:bold;">🔊 {"बोलकर पुष्टि (वॉयस):" if is_hindi else "Voice Confirmation:"}</p>
+        <p style="color:#FFF; margin:0 0 8px 0; font-size:14px;">"{spoken_text}"</p>
+        <button onclick="playVoice()" style="background:#10B981; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer;">
+            ▶️ {"आवाज़ सुनें" if is_hindi else "Play Audio"}
         </button>
     </div>
     <script>
-        function playVoiceNow() {{
+        function playVoice() {{
             window.speechSynthesis.cancel();
-            var u = new SpeechSynthesisUtterance("{spoken_line}");
+            var u = new SpeechSynthesisUtterance("{spoken_text}");
             u.lang = "{"hi-IN" if is_hindi else "en-US"}";
             u.rate = 0.95;
             window.speechSynthesis.speak(u);
         }}
-        setTimeout(playVoiceNow, 300);
+        setTimeout(playVoice, 300);
     </script>
     """
-    components.html(voice_html, height=125)
+    components.html(audio_box, height=115)
 
-    # Document Box with Bright Neon Styling
-    st.text_area("📄 " + ("आधिकारिक दस्तावेज रिकॉर्ड:" if is_hindi else "Official Executed Document:"), doc_content, height=200)
+    # Receipt Box
+    st.text_area("📋 " + ("तैयार डिजिटल रसीद:" if is_hindi else "Digital Receipt Card:"), receipt_text, height=200)
 
-    # WhatsApp Push
-    enc_wa = urllib.parse.quote(wa_msg)
-    wa_label = "📲 1. WhatsApp पर प्रपोजल व पेमेंट लिंक भेजें" if is_hindi else "📲 1. Dispatch Proposal & Payment on WhatsApp"
-    st.markdown(f'<a href="https://wa.me/91{clean_p}?text={enc_wa}" target="_blank" class="btn-deal">{wa_label}</a>', unsafe_allow_html=True)
+    # WhatsApp Button
+    enc_wa = urllib.parse.quote(wa_text)
+    wa_btn_label = "📲 सीधे ग्राहक के WhatsApp पर बिल भेजें" if is_hindi else "📲 Dispatch Bill to Customer's WhatsApp"
+    st.markdown(f'<a href="https://wa.me/91{clean_phone}?text={enc_wa}" target="_blank" class="btn-wa">{wa_btn_label}</a>', unsafe_allow_html=True)
 
-    # Direct UPI Payment QR Code
-    upi_pay_link = f"upi://pay?pa={UPI_ID}&pn=Sahil%20Ahmad&am={amt_num}&cu=INR"
-    qr_img_url = f"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={urllib.parse.quote(upi_pay_link)}"
-    
+    # UPI QR Code
+    upi_url = f"upi://pay?pa={MY_UPI_ID}&pn=Sahil%20Ahmad&am={clean_amt}&cu=INR"
+    qr_img = f"https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={urllib.parse.quote(upi_url)}"
+
     st.markdown(f"""
-    <div class="qr-card">
-        <h3 style="color:#10B981; margin:0 0 8px 0; font-size:18px;">💳 {"तुरंत पेमेंट स्कैन करें (PhonePe / Google Pay / Paytm)" if is_hindi else "Instant Payment QR Code (PhonePe / GPay)"}</h3>
-        <p style="color:#94A3B8; font-size:13px; margin:0 0 12px 0;">{"क्लाइंट यह QR कोड स्कैन करके सीधे आपके बैंक खाते में पैसे भेज सकता है:" if is_hindi else "Client scans to pay directly into your bank account:"}</p>
-        <img src="{qr_img_url}" style="border: 4px solid #38BDF8; border-radius: 12px; margin: 0 auto; display: block;" />
-        <p style="color:#38BDF8; font-size:15px; margin-top:10px; font-weight:800;">UPI ID: {UPI_ID}</p>
-        <p style="color:#10B981; font-size:16px; margin:4px 0 0 0; font-weight:900;">{"रकम:" if is_hindi else "Amount:"} {amt}</p>
+    <div style="background:#0F172A; border:2px solid #10B981; border-radius:12px; padding:16px; text-align:center; margin-top:14px;">
+        <h3 style="color:#10B981; margin:0 0 6px 0; font-size:18px;">💳 {"PhonePe / Google Pay से पेमेंट करें" if is_hindi else "Pay via PhonePe / Google Pay / Paytm"}</h3>
+        <p style="color:#94A3B8; font-size:13px; margin:0 0 10px 0;">{"ग्राहक इस QR कोड को स्कैन करके सीधे भुगतान कर सकता है:" if is_hindi else "Customer scans this to pay directly into your account:"}</p>
+        <img src="{qr_img}" style="border: 3px solid #38BDF8; border-radius: 10px; margin:0 auto; display:block;" />
+        <p style="color:#38BDF8; font-size:14px; margin-top:8px; font-weight:bold;">UPI ID: {MY_UPI_ID}</p>
+        <p style="color:#10B981; font-size:16px; margin:2px 0 0 0; font-weight:bold;">{"कुल रकम:" if is_hindi else "Total Amount:"} ₹{clean_amt}</p>
     </div>
     """, unsafe_allow_html=True)
 
-# Founder Status Footer
+# Founder Branding Footer
 st.markdown("---")
 st.markdown(f"""
-<div style="text-align: center; background: #0B1329; padding: 18px; border-radius: 14px; border: 2px solid #38BDF8; box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);">
-    <p style="color:#38BDF8; font-family:'Space Grotesk', monospace; font-size:11px; margin:0; letter-spacing:2px;">🏛️ CHIEF TECHNOLOGY ARCHITECT</p>
-    <h2 style="color:#FFF; margin:4px 0; font-size:22px;">साहिल अहमद (Sahil Ahmad)</h2>
-    <p style="color:#94A3B8; font-size:13px; margin:0 0 12px 0;">Apex AI Sovereign Infrastructure • Direct Business Closures</p>
-    <a href="https://wa.me/{MY_WA_NUMBER}" target="_blank" style="background:#10B981; color:#fff; padding:10px 22px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">💬 Connect on WhatsApp (+91 {MY_WA_NUMBER[-10:]})</a>
+<div style="text-align: center; background: #0F172A; padding: 16px; border-radius: 12px; border: 1px solid #38BDF8;">
+    <p style="color:#38BDF8; font-size:11px; margin:0; letter-spacing:1px;">🏛️ सॉफ्टवेयर डेवलपर एवं सिस्टम आर्किटेक्ट</p>
+    <h2 style="color:#FFF; margin:4px 0; font-size:20px;">साहिल अहमद (Sahil Ahmad)</h2>
+    <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">अपनी दुकान या बिज़नेस के लिए ऐसा स्मार्ट बिलिंग सॉफ्टवेयर बनवाने हेतु संपर्क करें</p>
+    <a href="https://wa.me/{MY_WA_NUMBER}" target="_blank" style="background:#0284C7; color:#fff; padding:8px 18px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">💬 WhatsApp पर बात करें (+91 {MY_WA_NUMBER[-10:]})</a>
 </div>
 """, unsafe_allow_html=True)
