@@ -137,7 +137,6 @@ st.markdown("""
 MY_WA_NUMBER = "917484878440"
 today_str = datetime.now().strftime("%d-%m-%Y")
 
-# ALL INDIA 12 LANGUAGES DICTIONARY
 LANG_DICT = {
     "🇮🇳 हिन्दी": {
         "title": "महा-सेवा AI (MAHA SEVA AI)",
@@ -393,7 +392,6 @@ LANG_DICT = {
     }
 }
 
-# 1. TOP PAN-INDIA LANGUAGE SELECTOR
 all_langs = list(LANG_DICT.keys())
 chosen_lang = st.radio(
     "🌐 भाषा चुनें / Select Language / ভাষা বাছুন / भाषा निवडा / மொழியைத் தேர்ந்தெடுக்கவும்:",
@@ -402,7 +400,6 @@ chosen_lang = st.radio(
 )
 T = LANG_DICT.get(chosen_lang, LANG_DICT["🇮🇳 हिन्दी"])
 
-# Header with Selected Language
 st.markdown(f"""
 <div style="background: radial-gradient(circle at center, #1E3A8A 0%, #030712 100%); border: 2px solid #38BDF8; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 14px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);">
     <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800;">
@@ -428,28 +425,31 @@ nav_choice = st.radio(
 
 st.markdown("---")
 
-# ================= TAB 1: 14 LEGAL RIGHTS & COMPLAINTS =================
 if nav_choice == T["sec_rights"]:
     st.write(f"### {T['r_title']}")
     st.caption(T['r_sub'])
 
     LEGAL_CASES = {
-        "1. ठेकेदार / कंपनी ने मजदूरी या वेतन दबा लिया (Wage Theft)": {
-            "act": "पेमेंट ऑफ वेजेस एक्ट 1936 व इंडस्ट्रियल डिस्प्यूट्स एक्ट",
-            "authority": "श्रम आयुक्त (Labour Commissioner) व जिलाधिकारी (DM)",
-            "rule": "मजदूरी दबाना गैर-कानूनी अपराध है। श्रम विभाग में शिकायत जाते ही कंपनी पर 10 गुना हर्जाना और 18% ब्याज का आदेश होता है।",
-            "default_det": "मैंने कार्यस्थल पर 2 महीने पूरी ईमानदारी से मजदूरी की, जिसका कुल ₹24,000 बकाया है। माँगने पर गाली-गलौज व धमकी दी जा रही है।"
+        "1. Thekedar ya Company ne majdoori/salary roki (Wage Theft)": {
+            "act": "Payment of Wages Act 1936 & Industrial Disputes Act",
+            "authority": "Labour Commissioner & DM",
+            "rule": "Majdoori dabana gair-kanooni hai. Shram vibhag 10 guna harjana aur 18% byaj dilata hai.",
+            "default_det": "Maine karyasthal par 2 mahine imaandari se kaam kiya, jiska kul Rs 24,000 bakaya hai. Mangne par gaali-galauj aur dhamki di ja rahi hai."
         },
-        "2. पुलिस द्वारा गैर-कानूनी मारपीट, गाली-गलौज या फर्जी चालान (Police Harassment)": {
-            "act": "भारतीय नागरिक सुरक्षा संहिता (BNSS) व सुप्रीम कोर्ट डी.के. बसु गाइडलाइन्स",
-            "authority": "पुलिस अधीक्षक (SP), राज्य पुलिस शिकायत प्राधिकरण (SPCA) व NHRC",
-            "rule": "पुलिस को बिना जुर्म किसी नागरिक पर हाथ उठाने या गाली देने का कोई हक नहीं है। धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व मुकदमा बनता है।",
-            "default_det": "संबंधित पुलिसकर्मी द्वारा बिना किसी अपराध के मेरे साथ सार्वजनिक रूप से अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।"
+        "2. Police dwara gair-kanooni maarpeet ya farzi challan": {
+            "act": "Bharatiya Nagarik Suraksha Sanhita (BNSS) & DK Basu Guidelines",
+            "authority": "SP, State Police Complaints Authority (SPCA) & NHRC",
+            "rule": "Bina jurm maarpeet ya gaali-galauj karne par Section 166A BNS ke tahet FIR aur suspension hota hai.",
+            "default_det": "Sambandhit policekarmi dwara bina jurm abhadra vyavhar, maarpeet aur farzi challan ki dhamki di gayi."
         },
-        "3. अस्पताल द्वारा इमरजेंसी में भर्ती न करना या लाश/मरीज रोकना": {
-            "act": "सुप्रीम कोर्ट परमानंद कटारा फैसला व क्लिनिकल एस्टेब्लिशमेंट एक्ट",
-            "authority": "मुख्य चिकित्सा अधिकारी (CMO), स्वास्थ्य विभाग व उपभोक्ता आयोग",
-            "rule": "कोई भी अस्पताल आपात स्थिति में पहले पैसे माँगकर इलाज से मना नहीं कर सकता। बिल विवाद में मरीज को बंधक बनाना संज्ञेय अपराध है।",
-            "default_det": "इमरजेंसी में अस्पताल द्वारा पहले अग्रिम राशि जमा करने का दबाव बनाकर इलाज में जानबूझकर देरी की गई।"
+        "3. Hospital dwara emergency me bharti na karna ya dead body rokna": {
+            "act": "Supreme Court Parmanand Katara Verdict & Clinical Establishments Act",
+            "authority": "CMO, Health Department & Consumer Forum",
+            "rule": "Emergency me advance paise mang kar ilaaj se inkar nahi kiya ja sakta. Mareez ya body ko bandhak banana kanoonan jurm hai.",
+            "default_det": "Emergency me hospital dwara pehle advance paise mang kar ilaaj me jaanboojhkar deri ki gayi."
         },
-        "4. फैक्ट्री/कार्यस्थल पर हादसा व हाथ-पैर कटना (Employees' Compensa
+        "4. Karyasthal par hadsa aur sharirik apangta (Workplace Injury)": {
+            "act": "Employees Compensation Act 1923",
+            "authority": "Compensation Commissioner & Labour Court",
+            "rule": "Duty ke dauran hadsa hone par malik ko Rs 5 se 20 lakh ka muavza aur pension dena anivarya hai.",
+            "default_det": "Suraksha upkaran ke abhav me gambhir hadsa hua jisse sthayi divyangta aayi
