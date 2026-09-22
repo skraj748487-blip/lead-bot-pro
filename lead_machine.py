@@ -137,7 +137,6 @@ st.markdown("""
 MY_WA_NUMBER = "917484878440"
 today_str = datetime.now().strftime("%d-%m-%Y")
 
-# ALL INDIA 12 LANGUAGES
 LANG_DICT = {
     "🇮🇳 हिन्दी": {
         "title": "महा-सेवा AI (MAHA SEVA AI)",
@@ -157,7 +156,7 @@ LANG_DICT = {
         "city_lbl": "जिला व राज्य:",
         "phone_lbl": "पीड़ित का मोबाइल नंबर:",
         "accused_lbl": "दोषी पक्ष / कंपनी / अधिकारी / थाना का नाम:",
-        "detail_lbl": "घटना का विवरण:",
+        "detail_lbl": "घटना का विवरण (पूरी बात लिखें):",
         "send_wa": "📲 शिकायत पत्र WhatsApp पर भेजें"
     },
     "🇬🇧 English": {
@@ -178,7 +177,7 @@ LANG_DICT = {
         "city_lbl": "District & State:",
         "phone_lbl": "Complainant Mobile Number:",
         "accused_lbl": "Accused Party / Company / Police Station:",
-        "detail_lbl": "Incident Details:",
+        "detail_lbl": "Incident Details (Factual Summary):",
         "send_wa": "📲 Send Legal Notice via WhatsApp"
     },
     "বাংলা (Bengali)": {
@@ -222,187 +221,17 @@ LANG_DICT = {
         "accused_lbl": "दोषी कंत्राटदार / पोलीस ठाणे:",
         "detail_lbl": "घटनेचा संपूर्ण तपशील:",
         "send_wa": "📲 WhatsApp वर अर्ज पाठवा"
-    },
-    "தமிழ் (Tamil)": {
-        "title": "மகா-சேவா AI (MAHA SEVA AI)",
-        "sub": "14 சட்ட உரிமைகள் • இரவு நேர பாதுகாப்பு • வேலைவாய்ப்பு • மருத்துவம்",
-        "tag": "⚡ 24x7 குடிமக்கள் உரிமைகள் மற்றும் சட்டப் பாதுகாப்பு தளம்",
-        "nav_lbl": "📂 சேவையைத் தேர்ந்தெடுக்கவும்:",
-        "sec_rights": "⚖️ 14 சட்ட உரிமைகள் & புகார்",
-        "sec_sos": "🚨 இரவு பாதுகாப்பு & SOS",
-        "sec_health": "🏥 மருத்துவம் & ஆம்புலன்ஸ்",
-        "sec_job": "💼 வேலைவாய்ப்பு தகவல்",
-        "sec_scheme": "🏛️ அரசு நலத்திட்டங்கள்",
-        "sec_fraud": "🛡️ இணைய பாதுகாப்பு & போதை ஒழிப்பு",
-        "r_title": "⚖️ குடிமக்கள் உரிமைகள் மற்றும் ஊழல் தடுப்பு போர்டல்",
-        "r_sub": "அநீதியை தேர்வு செய்யவும் — சட்டப்பூர்வ அறிவிப்பு உடனடியாக தயாராகும்.",
-        "btn_rights": "⚡ சட்டப்பூர்வ நோட்டீஸ் உருவாக்கவும்",
-        "name_lbl": "உங்கள் பெயர்:",
-        "city_lbl": "மாவட்டம் & மாநிலம்:",
-        "phone_lbl": "மொபைல் எண்:",
-        "accused_lbl": "எதிர்தரப்பு நிறுவனம் / காவல் நிலையம்:",
-        "detail_lbl": "நிகழ்வின் முழு விவரம்:",
-        "send_wa": "📲 வாட்ஸ்அப்பில் பகிரவும்"
-    },
-    "తెలుగు (Telugu)": {
-        "title": "మహా-సేవా AI (MAHA SEVA AI)",
-        "sub": "14 చట్టపరమైన హక్కులు • రాత్రి రక్షణ • ఉపాధి • అంబులెన్స్ • పథకాలు",
-        "tag": "⚡ 24x7 పౌర హక్కులు మరియు చట్టపరమైన రక్షణ మిషన్",
-        "nav_lbl": "📂 సేవను ఎంచుకోండి:",
-        "sec_rights": "⚖️ 14 చట్టపరమైన హక్కులు & ఫిర్యాదు",
-        "sec_sos": "🚨 రాత్రి రక్షణ & SOS",
-        "sec_health": "🏥 మందులు & అంబులెన్స్",
-        "sec_job": "💼 ఉపాధి & ఉద్యోగాలు",
-        "sec_scheme": "🏛️ ప్రభుత్వ పథకాలు",
-        "sec_fraud": "🛡️ సైబర్ రక్షణ & వ్యసన విముక్తి",
-        "r_title": "⚖️ పౌర హక్కులు & అవినీతి వ్యతిరేక పోర్టల్",
-        "r_sub": "మీ సమస్యను ఎంచుకోండి — వెంటనే చట్టపరమైన నోటీస్ రూపొందించబడుతుంది.",
-        "btn_rights": "⚡ చట్టపరమైన నోటీసు రూపొందించండి",
-        "name_lbl": "ఫిర్యాదుదారు పేరు:",
-        "city_lbl": "జిల్లా & రాష్ట్రం:",
-        "phone_lbl": "ఫోన్ నంబర్:",
-        "accused_lbl": "కాంట్రాక్టర్ / పోలీస్ స్టేషన్:",
-        "detail_lbl": "పూర్తి వివరాలు:",
-        "send_wa": "📲 వాట్సాప్‌లో పంపండి"
-    },
-    "ગુજરાતી (Gujarati)": {
-        "title": "મહા-સેવા AI (MAHA SEVA AI)",
-        "sub": "૧૪ કાનૂની અધિકાર • રાત્રિ સુરક્ષા • રોજગાર • એમ્બ્યુલન્સ • સરકારી યોજના",
-        "tag": "⚡ ૨૪x૭ અખંડ ભારત નાગરિક કાનૂની સુરક્ષા મિશન",
-        "nav_lbl": "📂 સેવા પસંદ કરો:",
-        "sec_rights": "⚖️ ૧૪ કાનૂની અધિકાર અને ફરિયાદ",
-        "sec_sos": "🚨 રાત્રિ સુરક્ષા અને SOS",
-        "sec_health": "🏥 દવા અને એમ્બ્યુલન્સ",
-        "sec_job": "💼 સીધી નોકરી અને રોજગાર",
-        "sec_scheme": "🏛️ સરકારી યોજનાઓ",
-        "sec_fraud": "🛡️ સાયબર સુરક્ષા અને વ્યસન મુક્તિ",
-        "r_title": "⚖️ નાગરિક અધિકાર અને ભ્રષ્ટાચાર વિરોધી કાનૂની મંચ",
-        "r_sub": "તમારી સમસ્યા પસંદ કરો — સિસ્ટમ તરત જ કાનૂની નોટિસ તૈયાર કરશે.",
-        "btn_rights": "⚡ કાનૂની નોટિસ અને ફરિયાદ તૈયાર કરો",
-        "name_lbl": "અરજદારનું નામ:",
-        "city_lbl": "જિલ્લો અને રાજ્ય:",
-        "phone_lbl": "મોબાઇલ નંબર:",
-        "accused_lbl": "સામેવાળા કોન્ટ્રાક્ટર / પોલીસ મથક:",
-        "detail_lbl": "સમગ્ર વિગત:",
-        "send_wa": "📲 WhatsApp પર મોકલો"
-    },
-    "ಕನ್ನಡ (Kannada)": {
-        "title": "ಮಹಾ-ಸೇವಾ AI (MAHA SEVA AI)",
-        "sub": "14 ಕಾನೂನು ಹಕ್ಕುಗಳು • ರಾತ್ರಿ ಭದ್ರತೆ • ಉದ್ಯೋಗ • ಆಂಬ್ಯುಲೆನ್ಸ್ • ಯೋಜನೆಗಳು",
-        "tag": "⚡ 24x7 ಸಾರ್ವಭೌಮ ನಾಗರಿಕ ಕಾನೂನು ರಕ್ಷಣೆ ಮಿಷನ್",
-        "nav_lbl": "📂 ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
-        "sec_rights": "⚖️ 14 ಕಾನೂನು ಹಕ್ಕುಗಳು & ದೂರು",
-        "sec_sos": "🚨 ರಾತ್ರಿ ಸುರಕ್ಷತೆ & SOS",
-        "sec_health": "🏥 ಔಷಧಿ & ಆಂಬ್ಯುಲೆನ್ಸ್",
-        "sec_job": "💼 ಉದ್ಯೋಗ ಮಾಹಿತಿ",
-        "sec_scheme": "🏛️ ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು",
-        "sec_fraud": "🛡️ ಸೈಬರ್ ಭದ್ರತೆ & ವ್ಯಸನ ಮುಕ್ತಿ",
-        "r_title": "⚖️ ನಾಗರಿಕ ಹಕ್ಕುಗಳು ಮತ್ತು ಭ್ರಷ್ಟಾಚಾರ ವಿರೋಧಿ ಪೋರ್ಟಲ್",
-        "r_sub": "ಸಮಸ್ಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ — ತಕ್ಷಣವೇ ಕಾನೂನು ನೋಟಿಸ್ ಸಿದ್ಧವಾಗುತ್ತದೆ.",
-        "btn_rights": "⚡ ಕಾನೂನು ನೋಟಿಸ್ ರಚಿಸಿ",
-        "name_lbl": "ದೂರುದಾರರ ಹೆಸರು:",
-        "city_lbl": "ಜಿಲ್ಲೆ & ರಾಜ್ಯ:",
-        "phone_lbl": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ:",
-        "accused_lbl": "ಗುತ್ತಿಗೆದಾರ / ಪೊಲೀಸ್ ಠಾಣೆ:",
-        "detail_lbl": "ಸಂಪೂರ್ಣ ವಿವರ:",
-        "send_wa": "📲 ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಕಳುಹಿಸಿ"
-    },
-    "മലയാളം (Malayalam)": {
-        "title": "മഹാ-സേവ AI (MAHA SEVA AI)",
-        "sub": "14 നിയമപരമായ അവകാശങ്ങൾ • രാത്രികാല സുരക്ഷ • തൊഴിൽ • ആംബുലൻസ്",
-        "tag": "⚡ 24x7 പൗരാവകാശ നിയമ സംരക്ഷണ ദൗത്യം",
-        "nav_lbl": "📂 സേവനം തിരഞ്ഞെടുക്കുക:",
-        "sec_rights": "⚖️ 14 നിയമപരമായ അവകാശങ്ങളും പരാതിയും",
-        "sec_sos": "🚨 രാത്രി സുരക്ഷയും SOS",
-        "sec_health": "🏥 മരുന്നുകളും ആംബുലൻസും",
-        "sec_job": "💼 തൊഴിൽ വിവരങ്ങൾ",
-        "sec_scheme": "🏛️ സർക്കാർ ക്ഷേമപദ്ധതികൾ",
-        "sec_fraud": "🛡️ സൈബർ സുരക്ഷ",
-        "r_title": "⚖️ പൗരാവകാശ നിയമ സഹായ വേദി",
-        "r_sub": "നിങ്ങൾ നേരിട്ട അനീതി തിരഞ്ഞെടുക്കുക — ഔദ്യോഗിക നിയമ നോട്ടീസ് ഉടൻ തയ്യാറാകും.",
-        "btn_rights": "⚡ നിയമപരമായ നോട്ടീസ് തയ്യാറാക്കുക",
-        "name_lbl": "പരാതിക്കാരന്റെ പേര്:",
-        "city_lbl": "ജില്ലയും സംസ്ഥാനവും:",
-        "phone_lbl": "മൊബൈൽ നമ്പർ:",
-        "accused_lbl": "എതിർകക്ഷി / പോലീസ് സ്റ്റേഷൻ:",
-        "detail_lbl": "പൂർണ്ണ വിവരങ്ങൾ:",
-        "send_wa": "📲 വാട്ട്‌സ്ആപ്പിൽ അയക്കുക"
-    },
-    "ਪੰਜਾਬੀ (Punjabi)": {
-        "title": "ਮਹਾ-ਸੇਵਾ AI (MAHA SEVA AI)",
-        "sub": "14 ਕਾਨੂੰਨੀ ਹੱਕ • ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ • ਰੋਜ਼ਗਾਰ • ਐਂਬੂਲੈਂਸ • ਸਰਕਾਰੀ ਸਕੀਮਾਂ",
-        "tag": "⚡ 24x7 ਅਖੰਡ ਭਾਰਤ ਨਾਗਰਿਕ ਕਾਨੂੰਨੀ ਸੁਰੱਖਿਆ ਮਿਸ਼ਨ",
-        "nav_lbl": "📂 ਸੇਵਾ ਚੁਣੋ:",
-        "sec_rights": "⚖️ 14 ਕਾਨੂੰਨੀ ਹੱਕ ਤੇ ਸ਼ਿਕਾਇਤ",
-        "sec_sos": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ ਤੇ SOS",
-        "sec_health": "🏥 ਦਵਾਈ ਤੇ ਐਂਬੂਲੈਂਸ",
-        "sec_job": "💼 ਰੋਜ਼ਗਾਰ ਤੇ ਨੌਕਰੀ",
-        "sec_scheme": "🏛️ ਸਰਕਾਰੀ ਸਕੀਮਾਂ",
-        "sec_fraud": "🛡️ ਸਾਈਬਰ ਸੁਰੱਖਿਆ ਤੇ ਨਸ਼ਾ ਮੁਕਤੀ",
-        "r_title": "⚖️ ਨਾਗਰਿਕ ਹੱਕ ਤੇ ਭ੍ਰਿਸ਼ਟਾਚਾਰ ਵਿਰੋਧੀ ਕਾਨੂੰਨੀ ਮੰਚ",
-        "r_sub": "ਆਪਣੀ ਸਮੱਸਿਆ ਚੁਣੋ — ਸਿਸਟਮ ਤੁਰੰਤ ਕਾਨੂੰਨੀ ਨੋਟਿਸ ਤਿਆਰ ਕਰੇਗਾ।",
-        "btn_rights": "⚡ ਕਾਨੂੰਨੀ ਨੋਟਿਸ ਤਿਆਰ ਕਰੋ",
-        "name_lbl": "ਪੀੜਤ ਦਾ ਨਾਮ:",
-        "city_lbl": "ਜ਼ਿਲ੍ਹਾ ਤੇ ਰਾਜ:",
-        "phone_lbl": "ਮੋਬਾਈਲ ਨੰਬਰ:",
-        "accused_lbl": "ਦੋਸ਼ੀ ਠੇਕੇਦਾਰ / ਥਾਣਾ:",
-        "detail_lbl": "ਘਟਨਾ ਦਾ ਪੂਰਾ ਵੇਰਵਾ:",
-        "send_wa": "📲 WhatsApp ਤੇ ਭੇਜੋ"
-    },
-    "ଓଡ଼ିଆ (Odia)": {
-        "title": "ମହା-ସେବା AI (MAHA SEVA AI)",
-        "sub": "୧୪ଟି ଆଇନଗତ ଅଧିକାର • ରାତ୍ରି ସୁରକ୍ଷା • ନିଯୁକ୍ତି • ଆମ୍ବୁଲାନ୍ସ • ଯୋଜନା",
-        "tag": "⚡ ୨୪x୭ ନାଗରିକ ଆଇନଗତ ସୁରକ୍ଷା ମିଶନ",
-        "nav_lbl": "📂 ସେବା ବାଛନ୍ତୁ:",
-        "sec_rights": "⚖️ ୧୪ ଆଇନଗତ ଅଧିକାର ଓ ଅଭିଯୋଗ",
-        "sec_sos": "🚨 ରାତ୍ରି ସୁରକ୍ଷା ଓ SOS",
-        "sec_health": "🏥 ଔଷଧ ଓ ଆମ୍ବୁଲାନ୍ସ",
-        "sec_job": "💼 ନିଯୁକ୍ତି ସୂଚନା",
-        "sec_scheme": "🏛️ ସରକାରୀ ଯୋଜନା",
-        "sec_fraud": "🛡️ ସାଇବର ସୁରକ୍ଷା",
-        "r_title": "⚖️ ନାଗରିକ ଅଧିକାର ଓ ଦୁର୍ନୀତି ନିବାରଣ ପୋର୍ଟାଲ",
-        "r_sub": "ସମସ୍ୟା ଚୟନ କରନ୍ତୁ — ଆଇନଗତ ନୋଟିସ୍ ତୁରନ୍ତ ପ୍ରସ୍ତୁତ ହେବ।",
-        "btn_rights": "⚡ ଆଇନଗତ ନୋଟିସ୍ ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
-        "name_lbl": "ଅଭିଯୋଗକାରୀଙ୍କ ନାମ:",
-        "city_lbl": "ଜିଲ୍ଲା ଓ ରାଜ୍ୟ:",
-        "phone_lbl": "ମୋବାଇଲ୍ ନମ୍ବର:",
-        "accused_lbl": "ଦୋଷୀ ପକ୍ଷ / ଥାନା:",
-        "detail_lbl": "ସମ୍ପୂର୍ଣ୍ଣ ବିବରଣୀ:",
-        "send_wa": "📲 WhatsApp ରେ ପଠାନ୍ତୁ"
-    },
-    "অসমীয়া (Assamese)": {
-        "title": "মহা-সেৱা AI (MAHA SEVA AI)",
-        "sub": "১৪টা আইনী অধিকাৰ • ৰাতিৰ সুৰক্ষা • নিয়োগ • এম্বুলেন্স • আঁচনি",
-        "tag": "⚡ ২৪x৭ অখণ্ড ভাৰত নাগৰিক আইনী সুৰক্ষা অভিযান",
-        "nav_lbl": "📂 সেৱা বাছক:",
-        "sec_rights": "⚖️ ১৪টা আইনী অধিকাৰ আৰু অভিযোগ",
-        "sec_sos": "🚨 ৰাতিৰ সুৰক্ষা আৰু SOS",
-        "sec_health": "🏥 ঔষধ আৰু এম্বুলেন্স",
-        "sec_job": "💼 নিয়োগ আৰু সাহায্য কেন্দ্ৰ",
-        "sec_scheme": "🏛️ চৰকাৰী আঁচনি",
-        "sec_fraud": "🛡️ চাইবাৰ সুৰক্ষা",
-        "r_title": "⚖️ নাগৰিক অধিকাৰ আৰু দুৰ্নীতি বিৰোধী মঞ্চ",
-        "r_sub": "সমস্যা বাছক — ব্যৱস্থাই ততালিকে আইনী জাননী প্ৰস্তুত কৰিব।",
-        "btn_rights": "⚡ আইনী জাননী প্ৰস্তুত কৰক",
-        "name_lbl": "অভিযোগকাৰীৰ নাম:",
-        "city_lbl": "জিলা আৰু ৰাজ্য:",
-        "phone_lbl": "মোবাইল নম্বৰ:",
-        "accused_lbl": "অভিযুক্ত পক্ষ / থানা:",
-        "detail_lbl": "সম্পূৰ্ণ বিৱৰণ:",
-        "send_wa": "📲 WhatsAppত পঠিয়াওক"
     }
 }
 
-# Language Picker
 all_langs = list(LANG_DICT.keys())
 chosen_lang = st.radio(
-    "🌐 भाषा चुनें / Select Language / ভাষা বাছুন / भाषा निवडा / மொழியைத் தேர்ந்தெடுக்கவும்:",
+    "🌐 भाषा चुनें / Select Language / ভাষা বাছুন / भाषा निवडा:",
     all_langs,
     horizontal=True
 )
 T = LANG_DICT.get(chosen_lang, LANG_DICT["🇮🇳 हिन्दी"])
 
-# Header
 st.markdown(f"""
 <div style="background: radial-gradient(circle at center, #1E3A8A 0%, #030712 100%); border: 2px solid #38BDF8; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 14px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);">
     <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800;">
@@ -428,102 +257,102 @@ nav_choice = st.radio(
 
 st.markdown("---")
 
-# 14 CASES WITH SAFE LITERAL STRINGS
+# 14 LEGAL CASES IN PURE HINDI (DEVANAGARI)
 if nav_choice == T["sec_rights"]:
     st.write(f"### {T['r_title']}")
     st.caption(T['r_sub'])
 
     LEGAL_CASES = {
-        "1. Thekedar ya Company ne majdoori/salary roki (Wage Theft)": {
-            "act": "Payment of Wages Act 1936 and Industrial Disputes Act",
-            "authority": "Labour Commissioner and DM",
-            "rule": "Majdoori dabana gair-kanooni hai. Shram vibhag 10 guna harjana dilata hai.",
-            "default_det": "Maine 2 mahine imaandari se kaam kiya, jiska kul Rs 24000 bakaya hai. Mangne par gaali aur dhamki di ja rahi hai."
+        "1. ठेकेदार या कंपनी ने मजदूरी/वेतन रोक लिया (Wage Theft)": {
+            "act": "पेमेंट ऑफ वेजेस एक्ट 1936 एवं औद्योगिक विवाद अधिनियम",
+            "authority": "श्रम आयुक्त (Labour Commissioner) एवं जिलाधिकारी (DM)",
+            "rule": "मजदूरी दबाना गैर-कानूनी अपराध है। श्रम विभाग 10 गुना हर्जाना और 18% ब्याज दिलवाता है।",
+            "default_det": "मैंने कार्यस्थल पर 2 महीने पूरी ईमानदारी से कार्य किया, जिसकी कुल बकाया राशि ₹24,000 है। मांगने पर गाली-गलौज व धमकी दी जा रही है।"
         },
-        "2. Police dwara gair-kanooni maarpeet ya farzi challan": {
-            "act": "BNSS and Supreme Court DK Basu Guidelines",
-            "authority": "SP, State Police Complaints Authority and NHRC",
-            "rule": "Bina jurm maarpeet ya gaali dene par Section 166A BNS ke tahet FIR aur suspension hota hai.",
-            "default_det": "Police dwara bina kisi apradh ke abhadra vyavhar, maarpeet aur farzi challan ki dhamki di gayi."
+        "2. पुलिस द्वारा गैर-कानूनी मारपीट, अभद्रता या फर्जी चालान": {
+            "act": "भारतीय नागरिक सुरक्षा संहिता (BNSS) एवं सुप्रीम कोर्ट डी.के. बसु गाइडलाइन्स",
+            "authority": "पुलिस अधीक्षक (SP), राज्य पुलिस शिकायत प्राधिकरण एवं NHRC",
+            "rule": "बिना जुर्म मारपीट या गाली-गलौज करने पर धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व FIR होती है।",
+            "default_det": "संबंधित पुलिसकर्मी द्वारा बिना किसी अपराध के मेरे साथ सार्वजनिक रूप से अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।"
         },
-        "3. Hospital dwara emergency me bharti na karna ya dead body rokna": {
-            "act": "Supreme Court Parmanand Katara Verdict and Clinical Establishments Act",
-            "authority": "CMO, Health Department and Consumer Forum",
-            "rule": "Emergency me advance paise mang kar ilaaj se inkar nahi kiya ja sakta. Body rokna gair-kanooni jurm hai.",
-            "default_det": "Emergency me hospital dwara pehle advance paise mang kar ilaaj me jaanboojhkar deri ki gayi."
+        "3. अस्पताल द्वारा इमरजेंसी में भर्ती न करना या शव/मरीज को बंधक बनाना": {
+            "act": "सुप्रीम कोर्ट परमानंद कटारा फैसला एवं क्लिनिकल एस्टेब्लिशमेंट एक्ट",
+            "authority": "मुख्य चिकित्सा अधिकारी (CMO), स्वास्थ्य विभाग एवं उपभोक्ता आयोग",
+            "rule": "इमरजेंसी में अग्रिम पैसे मांगकर इलाज से इनकार नहीं किया जा सकता। मरीज या शव को रोकना संज्ञेय अपराध है।",
+            "default_det": "इमरजेंसी में अस्पताल द्वारा पहले अग्रिम राशि जमा करने का दबाव बनाकर इलाज में जानबूझकर देरी की गई।"
         },
-        "4. Karyasthal par hadsa aur sharirik apangta (Workplace Injury)": {
-            "act": "Employees Compensation Act 1923",
-            "authority": "Compensation Commissioner and Labour Court",
-            "rule": "Duty ke dauran hadsa hone par malik ko Rs 5 se 20 lakh ka muavza aur pension dena anivarya hai.",
-            "default_det": "Suraksha ke abhav me hadsa hua jisse divyangta aayi. Malik muavza dene se mukar raha hai."
+        "4. कार्यस्थल/फैक्ट्री पर हादसा और शारीरिक अपंगता (मुआवजा)": {
+            "act": "कर्मचारी मुआवजा कानून 1923 (Employees Compensation Act)",
+            "authority": "मुआवजा आयुक्त एवं श्रम न्यायालय",
+            "rule": "ड्यूटी के दौरान दुर्घटना होने पर मालिक को ₹5 लाख से ₹20 लाख का मुआवजा व आजीवन पेंशन देना अनिवार्य है।",
+            "default_det": "कार्यस्थल पर सुरक्षा उपकरणों के अभाव में गंभीर दुर्घटना हुई जिससे स्थायी दिव्यांगता आई है। मालिक मुआवजा देने से मुकर रहा है।"
         },
-        "5. Soodkhor aur farzi loan apps dwara dhamki aur blackmail": {
-            "act": "RBI Guidelines and Extortion Law Section 308 BNS",
-            "authority": "Cyber Crime Cell, SP and RBI Ombudsman",
-            "rule": "Bina license soodkhori aur dhamki dekar vasooli karna gair-kanooni hai. Seedhe FIR hoti hai.",
-            "default_det": "Avadh byaj vasooli ke liye loan agent dwara dhamki aur photo viral karne ka blackmail kiya ja raha hai."
+        "5. सूदखोरों व फर्जी लोन ऐप्स द्वारा धमकी, गाली-गलौज और ब्लैकमेल": {
+            "act": "RBI रिकवरी गाइडलाइन्स एवं जबरन वसूली कानून (धारा 308 BNS)",
+            "authority": "साइबर क्राइम सेल, पुलिस अधीक्षक (SP) एवं RBI लोकपाल",
+            "rule": "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है। सीधे FIR और गिरफ्तारी होती है।",
+            "default_det": "अवैध ब्याज वसूली हेतु लोन एजेंट द्वारा धमकी, घर आकर गाली-गलौज और फोटो वायरल करने का ब्लैकमेल किया जा रहा है।"
         },
-        "6. Sarkari daftar me ghuskhori aur line me bhaga dena (RTPS)": {
-            "act": "Right to Public Services Act and Anti-Corruption Act",
-            "authority": "Vigilance Bureau and CM Helpline",
-            "rule": "Samay par kaam na karne par karmchari ki salary se rozana jurmana katne ka niyam hai.",
-            "default_det": "Zaroori dastavez dene ke bawajood bina rishwat ke babu dwara baar-baar chakkar lagwaye ja rahe hain."
+        "6. सरकारी दफ्तर में घूसखोरी, 'कल आना' और लाइन में भगा देना (RTPS)": {
+            "act": "सेवा का अधिकार कानून (RTPS Act) एवं भ्रष्टाचार निवारण अधिनियम",
+            "authority": "निगरानी ब्यूरो (Vigilance Bureau) एवं मुख्यमंत्री हेल्पलाइन",
+            "rule": "तय समय में काम न करने पर संबंधित सरकारी कर्मचारी के वेतन से प्रतिदिन ₹250 से ₹5,000 जुर्माना कटता है।",
+            "default_det": "आवश्यक वैध दस्तावेज देने के बावजूद बिना रिश्वत के संबंधित कर्मचारी द्वारा बार-बार चक्कर लगवाए जा रहे हैं।"
         },
-        "7. Dukandar ya ration dealer dwara MRP se zyada dam aur chori": {
-            "act": "Legal Metrology Act 2009 and NFSA",
-            "authority": "Consumer Affairs and DSO",
-            "rule": "MRP se zyada dam lena ya ration kam tolna gair-kanooni hai. Rs 25000 jurmana aur license radd hota hai.",
-            "default_det": "Dukandar dwara MRP se zyada dam vasoola gaya aur kam quantity di gayi."
+        "7. दुकानदार या राशन डीलर द्वारा MRP से ज्यादा दाम व घटतौली": {
+            "act": "लीगल मेट्रोलॉजी एक्ट 2009 एवं राष्ट्रीय खाद्य सुरक्षा कानून (NFSA)",
+            "authority": "उपभोक्ता मामले विभाग एवं जिला आपूर्ति पदाधिकारी (DSO)",
+            "rule": "MRP से ₹1 भी ज्यादा लेना या राशन कम तौलना गैर-कानूनी है। ₹25,000 जुर्माना और लाइसेंस रद्द होता है।",
+            "default_det": "दुकानदार/कोटेदार द्वारा तय मूल्य से अधिक राशि वसूली गई और निर्धारित मात्रा से कम सामग्री दी गई।"
         },
-        "8. Train me TTE ya kisi dwara avadh vasooli aur badsulooki": {
-            "act": "Indian Railway Act and Rail Safety Rules",
-            "authority": "Railway Board Vigilance, RPF and RailMadad 139",
-            "rule": "TTE ko badtameezi karne ya train se nikalne ka haq nahi. Sirf receipt di ja sakti hai.",
-            "default_det": "Yatra ke dauran TTE dwara niyam viruddh paise ki mang aur virodh karne par badsulooki ki gayi."
+        "8. ट्रेन में टीटीई (TTE) या किसी द्वारा अवैध वसूली व बदसलूकी": {
+            "act": "भारतीय रेलवे अधिनियम एवं रेल सुरक्षा नियम",
+            "authority": "रेलवे बोर्ड विजिलेंस, आरपीएफ (RPF) एवं रेल मदद 139",
+            "rule": "टीटीई को यात्री से बदतमीजी करने या ट्रेन से धक्का देने का कोई हक नहीं। केवल सरकारी रसीद (EFT) दी जा सकती है।",
+            "default_det": "यात्रा के दौरान टीटीई द्वारा नियम विरुद्ध अतिरिक्त पैसे की मांग और विरोध करने पर बदसलूकी की गई।"
         },
-        "9. Thane me FIR darj na karna (Zero FIR ka adhikar)": {
-            "act": "Supreme Court Lalita Kumari Guidelines and Section 173 BNSS",
-            "authority": "SSP, DGP and CJM Court",
-            "rule": "FIR na likhne wale police adhikari par Section 166A BNS ke tahet seedhe FIR darj hoti hai.",
-            "default_det": "Ghatna ki written complaint dene ke bawajood thana incharge dwara FIR darj karne se mana kiya gaya."
+        "9. थाने में एफआईआर (FIR) दर्ज न करना (Zero FIR का अधिकार)": {
+            "act": "सुप्रीम कोर्ट ललिता कुमारी दिशा-निर्देश एवं धारा 173 BNSS",
+            "authority": "वरिष्ठ पुलिस अधीक्षक (SSP), डीजीपी एवं सीजेएम कोर्ट",
+            "rule": "संज्ञेय अपराध में FIR न लिखने वाले पुलिस अधिकारी पर धारा 166A BNS के तहत खुद FIR दर्ज होती है।",
+            "default_det": "घटना की लिखित सूचना देने के बावजूद थाना प्रभारी द्वारा प्रथम सूचना रिपोर्ट (FIR) दर्ज करने से मना किया गया।"
         },
-        "10. Zameen par dabangon dwara avadh kabza": {
-            "act": "Section 145/144 BNSS and Protection of Civil Rights Act",
-            "authority": "SDM and Civil Court",
-            "rule": "Garib ki paetrik zameen par kabze ki koshish par police ko suraksha dena aur stay lagana anivarya hai.",
-            "default_det": "Vipakshi dwara prarthi ki paetrik zameen par balpoorvak avadh kabze ki koshish ki ja rahi hai."
+        "10. पैतृक जमीन पर दबंगों द्वारा अवैध कब्जा या मेड़ काटना": {
+            "act": "धारा 145/144 BNSS एवं नागरिक अधिकार संरक्षण कानून",
+            "authority": "उप-विभागीय दंडाधिकारी (SDM) एवं सिविल न्यायालय",
+            "rule": "गरीब की पैतृक भूमि पर जबरन कब्जे की कोशिश पर प्रशासन को तुरंत सुरक्षा देना और स्टे लगाना अनिवार्य है।",
+            "default_det": "विपक्षी द्वारा प्रार्थी की वैध पैतृक जमीन पर बलपूर्वक अवैध कब्जे का प्रयास किया जा रहा है।"
         },
-        "11. Sadak hadse (Hit and Run) me sarkari muavza": {
-            "act": "Motor Vehicles Amendment Act (Hit and Run Scheme)",
-            "authority": "MACT and District Collector Relief Fund",
-            "rule": "Maut par sarkar dwara Rs 2 lakh aur ghayal ko Rs 50000 ki tatkaal rahat di jati hai.",
-            "default_det": "Sadak hadse ke uprant sarkari rahat kosh aur bima claim ki mang ki ja rahi hai."
+        "11. सड़क हादसे (Hit and Run) में सरकारी मुआवजा व राहत": {
+            "act": "मोटर वाहन संशोधन अधिनियम (हिट एंड रन मुआवजा योजना)",
+            "authority": "दावा अधिकरण (MACT) एवं जिला कलेक्टर राहत कोष",
+            "rule": "मृत्यु पर सरकार द्वारा तत्काल ₹2 लाख और गंभीर घायल को ₹50,000 की अंतरिम राहत देने का कानून है।",
+            "default_det": "सड़क दुर्घटना के उपरांत तत्काल सरकारी राहत कोष व बीमा क्लेम की मांग की जा रही है।"
         },
-        "12. Muft sarkari vakeel pane hetu aavedan": {
-            "act": "Legal Services Authorities Act 1987 (Article 39A)",
-            "authority": "DLSA Secretary",
-            "rule": "Garib, mazdoor aur mahila ko case ladne ke liye sarkar apne kharche par vakeel deti hai.",
-            "default_det": "Prarthi arthik roop se asamarth hai aur use court case ladne hetu muft sarkari vakeel chahiye."
+        "12. मुफ्त सरकारी वकील पाने हेतु आवेदन (न्याय सबका अधिकार)": {
+            "act": "विधिक सेवा प्राधिकरण अधिनियम 1987 (अनुच्छेद 39A)",
+            "authority": "जिला विधिक सेवा प्राधिकरण (DLSA) सचिव",
+            "rule": "गरीब, मजदूर और महिला को कोर्ट केस लड़ने के लिए सरकार अपने खर्चे पर मुफ्त वकील उपलब्ध कराती है।",
+            "default_det": "प्रार्थी आर्थिक रूप से असमर्थ है और उसे अपने मुकदमे की पैरवी हेतु मुफ्त सरकारी वकील की आवश्यकता है।"
         },
-        "13. Makan malik dwara bina notice zabardasti bedakhli": {
-            "act": "Rent Control Act and BNS",
-            "authority": "Rent Controller and Local Police",
-            "rule": "Makan malik bina court order ke tala nahi tod sakta, na hi paani-bijli kaat sakta hai.",
-            "default_det": "Makan malik dwara bina notice paani-bijli band kar makaan khali karne ki dhamki di ja rahi hai."
+        "13. मकान मालिक द्वारा बिना नोटिस जबरन बेदखली या बिजली-पानी काटना": {
+            "act": "रेंट कंट्रोल एक्ट एवं भारतीय न्याय संहिता",
+            "authority": "किराया नियंत्रक (Rent Controller) एवं स्थानीय पुलिस",
+            "rule": "मकान मालिक बिना कोर्ट ऑर्डर के ताला नहीं तोड़ सकता, न ही बिजली-पानी काट सकता है।",
+            "default_det": "मकान मालिक द्वारा बिना कानूनी नोटिस पानी-बिजली बंद कर जबरन मकान खाली कराने की धमकी दी जा रही है।"
         },
-        "14. Jatigat bhedbhav aur samajik bahishkar nivaran": {
-            "act": "SC/ST Prevention of Atrocities Act and Article 15",
-            "authority": "SP and Special Court",
-            "rule": "Jati ke aadhar par gaali dene ya raasta rokne par non-bailable arrest hoti hai.",
-            "default_det": "Vipakshi dwara jati-soochak gaaliyan dekar sarvajanik roop se apmanit aur pratatit kiya gaya."
+        "14. जातिगत भेदभाव, गाली-गलौज व सामाजिक बहिष्कार निवारण": {
+            "act": "अनुसूचित जाति/जनजाति अत्याचार निवारण अधिनियम (SC/ST Act) एवं अनुच्छेद 15",
+            "authority": "पुलिस अधीक्षक (SP) एवं विशेष अदालत",
+            "rule": "जाति के आधार पर अपमानित करने, गाली देने या रास्ता रोकने पर गैर-जमानती गिरफ्तारी होती है।",
+            "default_det": "विपक्षी द्वारा जातिसूचक अपशब्दों का प्रयोग कर सार्वजनिक रूप से अपमानित और प्रताड़ित किया गया।"
         }
     }
 
     selected_issue = st.radio("📌 अपनी समस्या का चयन करें:", list(LEGAL_CASES.keys()))
     case_info = LEGAL_CASES[selected_issue]
 
-    st.info(f"⚖️ **Kanoon:** {case_info['act']} | **Adhikari:** {case_info['authority']}")
+    st.info(f"⚖️ **कानून:** {case_info['act']} | **प्राधिकारी:** {case_info['authority']}")
 
     col_v1, col_v2 = st.columns(2)
     with col_v1:
@@ -533,9 +362,12 @@ if nav_choice == T["sec_rights"]:
 
     v_phone = st.text_input(T["phone_lbl"], value="7484878440", key=f"phone_{chosen_lang}")
     v_accused = st.text_input(T["accused_lbl"], value="संबंधित दोषी पक्ष / अधिकारी", key=f"acc_{chosen_lang}")
-    v_details = st.text_area(T["detail_lbl"], value=case_info["default_det"], key=f"det_{chosen_lang}")
+    
+    # ISSUE KEY DYNAMIC: समस्या बदलते ही ब्योरा तुरंत बदलेगा
+    issue_num = selected_issue.split(".")[0].strip()
+    v_details = st.text_area(T["detail_lbl"], value=case_info["default_det"], key=f"det_{chosen_lang}_{issue_num}")
 
-    if st.button(T['btn_rights'], key=f"btn_r_{chosen_lang}"):
+    if st.button(T['btn_rights'], key=f"btn_r_{chosen_lang}_{issue_num}"):
         full_notice = f"""======================================================================
 आधिकारिक कानूनी विधिक शिकायत पत्र व नोटिस
 (अधिनियम: {case_info['act']})
@@ -614,6 +446,7 @@ elif nav_choice == T["sec_sos"]:
     
     st.markdown(f'<a href="https://wa.me/91{family_phone}?text={enc_sos}" target="_blank" class="btn-green">📲 1-क्लिक परिवार को लोकेशन व SOS भेजें</a>', unsafe_allow_html=True)
 
+    # Audio Panic Siren
     st.write("### 🔊 पैनिक सायरन (भीड़ का ध्यान आकर्षित करने हेतु)")
     st.caption("अकेले में खतरा महसूस होने पर यह बटन दबाएँ, फोन से तेज़ सायरन आवाज़ निकलेगी:")
     siren_html = """
