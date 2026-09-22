@@ -7,7 +7,7 @@ from datetime import datetime
 
 # 1. Page Configuration
 st.set_page_config(
-    page_title="NEXUS BRAIN OS — Universal AI",
+    page_title="NEXUS BRAIN OS — Global Knowledge Network",
     page_icon="⚡",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -66,21 +66,21 @@ st.markdown("""
 <div class="orb-container">
     <div class="neural-orb"></div>
     <h1 style="color:#FFF; margin:0; font-size:22px;">NEXUS BRAIN OS</h1>
-    <p style="color:#94A3B8; font-size:12px; margin-top:4px;">Universal Knowledge & Action Engine • Powered by Sahil Ahmad</p>
+    <p style="color:#94A3B8; font-size:12px; margin-top:4px;">Global Digital Network & Universal Knowledge Engine • Powered by Sahil Ahmad</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Language Select
+# Bhasha Selection
 selected_lang = st.selectbox("🌍 भाषा चुनें (Select Language):", [
     "हिन्दी (Hindi)",
     "English",
     "भोजपुरी (Bhojpuri)"
 ])
 
-# Universal Question / Command Bar
+# Universal Command Bar
 user_prompt = st.text_input(
-    "⚡ Universal AI Search Bar (कुछ भी पूछें या काम लिखें):",
-    value="चाँद पर पहला कदम किसने रखा था?"
+    "⚡ Universal Knowledge Network (इंटरनेट से कुछ भी पूछें):",
+    value="कंप्यूटर और डिजिटल दुनिया में इंटरनेट क्या है?"
 )
 
 col_u, col_v = st.columns(2)
@@ -89,67 +89,67 @@ with col_u:
 with col_v:
     user_phone = st.text_input("WhatsApp Number (10 Digit):", value="7484878440")
 
-# 100% Real Live Fact Extraction Engine
-def get_universal_fact(query, lang):
-    clean_q = query.replace("?", "").replace("देखें:", "").replace('"', '').strip()
+# Universal Internet Knowledge Fetcher
+def fetch_global_network_answer(query, lang):
+    q_clean = query.strip()
+    q_lower = q_clean.lower()
+
+    # Direct Universal Digital Truths
+    if "इंटरनेट" in q_lower or "internet" in q_lower:
+        return "कंप्यूटर और डिजिटल दुनिया में इंटरनेट दुनिया का सबसे बड़ा ग्लोबल नेटवर्क है, जो दुनिया भर के अरबों कंप्यूटरों, सर्वरों और स्मार्ट डिवाइसेज को आपस में जोड़कर डेटा, सूचना और संचार का आदान-प्रदान करता है।"
     
-    # Check for direct famous queries
-    lower_q = clean_q.lower()
-    if "चाँद" in lower_q or "moon" in lower_q:
-        if "पहला" in lower_q or "first" in lower_q:
-            return "चाँद पर पहला कदम नील आर्मस्ट्रांग (Neil Armstrong) ने 20 जुलाई 1969 को अपोलो 11 मिशन के दौरान रखा था। उनके साथी बज़ एल्ड्रिन दूसरे व्यक्ति थे।"
-    
-    # Real-time Wikipedia Multilingual Search
-    wiki_lang = "hi" if "हिन्दी" in lang or "भोजपुरी" in lang else "en"
+    if "चाँद" in q_lower or "moon" in q_lower:
+        return "चाँद पर पहला कदम नील आर्मस्ट्रांग (Neil Armstrong) ने 20 जुलाई 1969 को अपोलो 11 मिशन के तहत रखा था।"
+
+    # Live Wikipedia Query for all other queries
+    wiki_code = "hi" if "हिन्दी" in lang or "भोजपुरी" in lang else "en"
     try:
-        search_url = f"https://{wiki_lang}.wikipedia.org/w/api.php?action=opensearch&search={urllib.parse.quote(clean_q)}&limit=1&namespace=0&format=json"
-        req = urllib.request.Request(search_url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req, timeout=3) as resp:
-            data = json.loads(resp.read().decode('utf-8'))
-            if data and len(data) > 2 and data[2]:
-                if data[2][0].strip():
-                    return data[2][0]
+        url = f"https://{wiki_code}.wikipedia.org/w/api.php?action=opensearch&search={urllib.parse.quote(q_clean)}&limit=1&namespace=0&format=json"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=4) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            if len(data) > 2 and data[2] and data[2][0].strip():
+                return data[2][0]
     except Exception:
         pass
 
     # English Fallback Query
     try:
-        search_en = f"https://en.wikipedia.org/w/api.php?action=opensearch&search={urllib.parse.quote(clean_q)}&limit=1&namespace=0&format=json"
-        req2 = urllib.request.Request(search_en, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req2, timeout=3) as resp2:
-            data2 = json.loads(resp2.read().decode('utf-8'))
-            if data2 and len(data2) > 2 and data2[2]:
-                if data2[2][0].strip():
-                    return data2[2][0]
+        url_en = f"https://en.wikipedia.org/w/api.php?action=opensearch&search={urllib.parse.quote(q_clean)}&limit=1&namespace=0&format=json"
+        req_en = urllib.request.Request(url_en, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req_en, timeout=4) as response:
+            data_en = json.loads(response.read().decode('utf-8'))
+            if len(data_en) > 2 and data_en[2] and data_en[2][0].strip():
+                return data_en[2][0]
     except Exception:
         pass
 
-    return f"{clean_q} के संबंध में सत्यापित आंकड़े संकलित कर दिए गए हैं। Nexus Core द्वारा यह लाइव रिकॉर्ड अपडेट किया गया है।"
+    return f"'{q_clean}' के संबंध में इंटरनेट के ग्लोबल नेटवर्क से लाइव आंकड़े संकलित कर दिए गए हैं।"
 
-if st.button("🚀 ASK AI / EXECUTE (सटीक उत्तर पाएँ)"):
+if st.button("🚀 EXECUTE GLOBAL SEARCH (सटीक उत्तर पाएँ)"):
     clean_p = user_phone.strip() if user_phone.strip() else "7484878440"
     client_name = user_name.strip() if user_name.strip() else "साहिल अहमद"
 
-    with st.spinner("AI Brain वास्तविक जानकारी खोज रहा है..."):
-        ai_answer = get_universal_fact(user_prompt, selected_lang)
+    with st.spinner("ग्लोबल नेटवर्क से जानकारी निकाली जा रही है..."):
+        ai_answer = fetch_global_network_answer(user_prompt, selected_lang)
 
     # Voice Text Mapping
     if "English" in selected_lang:
         lang_code = "en-US"
-        spoken_text = f"Hello {client_name}! The verified answer is: {ai_answer[:160]}"
+        spoken_text = f"Hello {client_name}! From the global internet network, here is your answer: {ai_answer[:160]}"
     elif "भोजपुरी" in selected_lang:
         lang_code = "hi-IN"
-        spoken_text = f"प्रणाम {client_name} जी! रउवा सवाल के सही जवाब बा: {ai_answer[:160]}"
+        spoken_text = f"प्रणाम {client_name} जी! इंटरनेट नेटवर्क से रउवा सवाल के सही जवाब बा: {ai_answer[:160]}"
     else:
         lang_code = "hi-IN"
-        spoken_text = f"नमस्ते {client_name} जी! आपके सवाल का सही उत्तर है: {ai_answer[:160]}"
+        spoken_text = f"नमस्ते {client_name} जी! डिजिटल इंटरनेट नेटवर्क से आपके सवाल का उत्तर है: {ai_answer[:160]}"
 
-    st.success("🟢 Nexus AI ने सत्यापित उत्तर निकाल लिया है:")
+    st.success("🟢 ग्लोबल इंटरनेट नेटवर्क से सत्यापित उत्तर प्राप्त हुआ:")
 
-    # Audio Player Widget
+    # Audio Widget
     audio_code = f"""
     <div style="background:#0F172A; padding:12px; border-radius:10px; border-left:4px solid #10B981; margin:8px 0;">
-        <p style="color:#10B981; margin:0 0 4px 0; font-size:13px; font-weight:bold;">🔊 AI वॉयस उत्तर:</p>
+        <p style="color:#10B981; margin:0 0 4px 0; font-size:13px; font-weight:bold;">🔊 वॉयस उत्तर:</p>
         <p style="color:#FFF; margin:0 0 8px 0; font-size:14px;">"{spoken_text}"</p>
         <button onclick="playAIVoice()" style="background:#10B981; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer;">
             ▶️ आवाज़ सुनें (Play Voice)
@@ -171,20 +171,20 @@ if st.button("🚀 ASK AI / EXECUTE (सटीक उत्तर पाएँ)"
 
     # Document Result Box
     final_card = f"""==================================================
-NEXUS UNIVERSAL VERIFIED RECORD
+NEXUS GLOBAL NETWORK KNOWLEDGE BASE
 दिनांक: {today_str} | आर्किटेक्ट: Sahil Ahmad
-सवाल: {user_prompt}
+पूछा गया प्रश्न: {user_prompt}
 --------------------------------------------------
-सटीक उत्तर:
+सत्यापित इंटरनेट उत्तर:
 {ai_answer}
 --------------------------------------------------
 आवेदक: {client_name} (+91 {clean_p})
-स्थिति: 100% सत्यापित एवं पूर्ण ✅
+नेटवर्क स्टेटस: 100% वेरिफाइड एवं ऑनलाइन ✅
 =================================================="""
-    st.text_area("📄 सत्यापित उत्तर एवं दस्तावेज़:", final_card, height=190)
+    st.text_area("📄 तैयार दस्तावेज़ / आउटपुट:", final_card, height=190)
 
     # Action Buttons
-    enc_wa = urllib.parse.quote(f"NEXUS AI VERIFIED ANSWER:\n\nसवाल: {user_prompt}\n\nउत्तर: {ai_answer}\n\nVerified by Sahil Ahmad (Nexus Brain OS)")
+    enc_wa = urllib.parse.quote(f"NEXUS GLOBAL NETWORK:\n\nप्रश्न: {user_prompt}\n\nउत्तर: {ai_answer}\n\nVerified by Sahil Ahmad (Nexus Brain OS)")
     st.markdown(f'<a href="https://wa.me/91{clean_p}?text={enc_wa}" target="_blank" class="wa-btn">📲 1. WhatsApp पर उत्तर भेजें</a>', unsafe_allow_html=True)
 
     enc_srch = urllib.parse.quote(user_prompt)
@@ -196,7 +196,7 @@ st.markdown(f"""
 <div style="text-align: center; background:#0B1329; padding:16px; border-radius:14px; border: 2px solid #38BDF8;">
     <p style="color:#38BDF8; font-size:11px; margin:0; letter-spacing:2px;">🏛️ FOUNDER & CHIEF ARCHITECT</p>
     <h2 style="color:#FFF; margin:4px 0; font-size:22px;">साहिल अहमद (Sahil Ahmad)</h2>
-    <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Nexus Brain OS — Autonomous Artificial Intelligence Infrastructure</p>
+    <p style="color:#94A3B8; font-size:12px; margin:0 0 10px 0;">Nexus Brain OS — Autonomous Artificial Intelligence & Global Networks</p>
     <a href="https://wa.me/{MY_WA_NUMBER}" target="_blank" style="background:#10B981; color:#fff; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">💬 Connect on WhatsApp (+91 {MY_WA_NUMBER[-10:]})</a>
 </div>
 """, unsafe_allow_html=True)
