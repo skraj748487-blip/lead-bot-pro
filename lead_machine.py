@@ -5,13 +5,13 @@ from datetime import datetime
 
 # 1. Page Configuration
 st.set_page_config(
-    page_title="महा-सेवा AI — राष्ट्रीय नागरिक विधिक सुरक्षा मिशन",
+    page_title="Maha Seva AI — Citizen Legal Mission",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 2. Modern 100% Dark UI - Fixed White Box Glitch
+# 2. Modern 100% Dark UI
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
@@ -27,7 +27,7 @@ st.markdown("""
         font-weight: 700 !important;
     }
 
-    input, .stTextInput input, textarea, .stTextArea textarea {
+    input, .stTextInput input, textarea, .stTextArea textarea, .stNumberInput input {
         background-color: #0B1329 !important;
         color: #38BDF8 !important;
         font-size: 15px !important;
@@ -101,6 +101,20 @@ st.markdown("""
         box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
     }
 
+    .btn-blue {
+        display: block;
+        background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
+        color: #FFFFFF !important;
+        text-align: center;
+        font-weight: 800;
+        font-size: 15px;
+        padding: 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        margin: 8px 0;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    }
+
     .btn-red-call {
         display: inline-block;
         background: #EF4444;
@@ -120,280 +134,92 @@ MY_WA_NUMBER = "917484878440"
 today_str = datetime.now().strftime("%d-%m-%Y")
 current_time_str = datetime.now().strftime("%I:%M %p")
 
-# 12 Languages Setup
+# Language Setup & Complete Bilingual Dictionary
 LANG_CONFIG = {
     "🇮🇳 हिन्दी": {
         "tag": "⚡ 24x7 अखंड भारत नागरिक व विधिक सुरक्षा मिशन",
         "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "28 महा-विधिक अधिकार • रात की सुरक्षा • बोलकर शिकायत • दवा व रोज़गार",
+        "sub": "28 कानूनी धाराएँ • अपनी शिकायत लिखें • वीडियो डाउनलोड • रात की सुरक्षा SOS",
         "cat_lbl": "📂 सेवा श्रेणी चुनें:",
-        "c_rights": "⚖️ 28 विधिक अधिकार व कानूनी नोटिस",
+        "c_rights": "⚖️ कानूनी सेक्शन, नोटिस व वीडियो",
         "c_sos": "🚨 रात की सुरक्षा व लाइव GPS SOS",
         "c_voice": "🎙️ बोलकर शिकायत दर्ज करें (माइक)",
         "c_fraud": "🛡️ साइबर फ्रॉड व मैसेज चेकर",
         "c_health": "🏥 दवा व एम्बुलेंस सहायता",
         "c_job": "💼 रोज़गार व हेल्पर डेस्क",
-        "r_title": "⚖️ 28 महा-विधिक अधिकार व आधिकारिक नोटिस",
-        "r_sub": "समस्या नंबर चुनें — सिस्टम तुरंत संबंधित कानून के तहत कड़ा नोटिस तैयार करेगा:",
-        "num_lbl": "🔢 1 से 28 में से समस्या संख्या चुनें:",
+        "mode_lbl": "शिकायत का तरीका चुनें:",
+        "mode_sec": "🔢 सेक्शन नंबर से चुनें (1 से 28 कानून)",
+        "mode_custom": "✍️ अपनी खुद की नई शिकायत लिखें (Custom Complaint)",
+        "sec_prompt": "सेक्शन नंबर दर्ज करें (1 से 28):",
         "name_lbl": "पीड़ित / प्रार्थी का नाम:",
         "city_lbl": "जिला व राज्य:",
         "phone_lbl": "मोबाइल नंबर:",
-        "acc_lbl": "दोषी पक्ष / अधिकारी / कंपनी:",
-        "det_lbl": "सच्चा घटनाक्रम विवरण:",
-        "btn_draft": "⚡ आधिकारिक कानूनी शिकायत पत्र व नोटिस ड्राफ्ट करें",
-        "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
+        "acc_lbl": "दोषी पक्ष / अधिकारी / कंपनी का नाम:",
+        "det_lbl": "सच्चा घटनाक्रम विवरण (Fact Details):",
+        "btn_draft": "⚡ आधिकारिक कानूनी नोटिस व टेम्पलेट वीडियो तैयार करें",
+        "success_msg": "🟢 आधिकारिक विधिक नोटिस व कानूनी टेम्पलेट तैयार:",
+        "doc_box_lbl": "📄 तैयार कानूनी दस्तावेज:",
+        "download_txt_btn": "📥 कानूनी शिकायत पत्र डाउनलोड करें (Download Legal Notice .txt)",
+        "video_title": "🎬 विधिक जागरूकता व प्रमाणित टेम्पलेट वीडियो",
+        "video_sub": "यह वीडियो सीधे अपने मोबाइल में डाउनलोड करें और व्हाट्सएप स्टेटस पर शेयर करें:",
+        "download_video_btn": "📥 विधिक टेम्पलेट वीडियो डाउनलोड करें (Download Video MP4)",
+        "shield_title": "⚖️ इस मामले में आपका कानूनी कवच:",
+        "send_wa": "📲 यह शिकायत पत्र WhatsApp पर भेजें",
+        "def_name": "साहिल कुमार",
+        "def_city": "पश्चिम चंपारण, बिहार",
+        "def_acc": "संबंधित दोषी पक्ष / अधिकारी",
+        "custom_sub_lbl": "शिकायत का विषय (Subject):",
+        "custom_sub_val": "दबंगों व भ्रष्ट कर्मियों द्वारा अवैध उत्पीड़न बाबत",
+        "custom_act": "भारतीय संविधान, बीएनएस 2023 एवं संबंधित विशेष अधिनियम",
+        "custom_auth": "जिलाधिकारी (DM) / पुलिस अधीक्षक (SP) / सक्षम प्राधिकारी",
+        "custom_rule": "भारत के संविधान अनुसार प्रत्येक नागरिक को विधिक संरक्षण व तुरंत न्याय पाने का मौलिक अधिकार प्राप्त है।",
+        "custom_det": "प्रार्थी के साथ विपक्षी द्वारा अन्यायपूर्ण व गैर-कानूनी ढंग से प्रताड़ित किया गया है, जिसकी लिखित सूचना प्रस्तुत है।"
     },
     "🇬🇧 English": {
         "tag": "⚡ 24x7 Pan-India Sovereign Citizen Legal Mission",
         "title": "MAHA SEVA AI — Citizen Sovereign Portal",
-        "sub": "28 Sovereign Legal Protections • Night SOS • Voice Help • Jobs",
+        "sub": "28 Sovereign Sections • Custom Complaint • Video Download • Night SOS",
         "cat_lbl": "📂 Select Service Category:",
-        "c_rights": "⚖️ 28 Sovereign Legal Rights & Notices",
+        "c_rights": "⚖️ Legal Sections, Notice & Video",
         "c_sos": "🚨 Night Safety & Live GPS SOS",
         "c_voice": "🎙️ Voice-to-Text Complaint (Mic)",
         "c_fraud": "🛡️ Cyber Shield & Fraud Verifier",
         "c_health": "🏥 Healthcare & Free Ambulance",
         "c_job": "💼 Pan-India Employment Desk",
-        "r_title": "⚖️ 28 Pan-India Citizen Legal Protections",
-        "r_sub": "Select issue number — system generates official legal notice instantly:",
-        "num_lbl": "🔢 Select issue number (1 to 28):",
+        "mode_lbl": "Select Filing Method:",
+        "mode_sec": "🔢 Select by Section Number (1 to 28)",
+        "mode_custom": "✍️ Write Your Own Custom Complaint",
+        "sec_prompt": "Enter Section Number (1 to 28):",
         "name_lbl": "Complainant Name:",
         "city_lbl": "District & State:",
         "phone_lbl": "Mobile Number:",
         "acc_lbl": "Accused Party / Official / Agency:",
         "det_lbl": "Factual Details of Injustice:",
-        "btn_draft": "⚡ Draft Official Court-Grade Legal Notice",
-        "send_wa": "📲 Send Notice via WhatsApp"
-    },
-    "বাংলা (Bengali)": {
-        "tag": "⚡ ২৪x৭ অখণ্ড ভারত নাগরিক আইনি মিশন",
-        "title": "মহা-সেবা AI (MAHA SEVA AI)",
-        "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • ভয়েস অভিযোগ • কর্মসংস্থান",
-        "cat_lbl": "📂 পরিষেবা বিভাগ নির্বাচন করুন:",
-        "c_rights": "⚖️ ২৮টি আইনি অধিকার ও নোটিশ",
-        "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
-        "c_voice": "🎙️ মুখে বলে অভিযোগ (মাইক)",
-        "c_fraud": "🛡️ সাইবার সুরক্ষা ও প্রতারণা যাচাই",
-        "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স সহায়তা",
-        "c_job": "💼 কর্মসংস্থান ও হেল্পার ডেস্ক",
-        "r_title": "⚖️ ২৮টি নাগরিক আইনি অধিকার সুরক্ষা মঞ্চ",
-        "r_sub": "সমস্যা নম্বর নির্বাচন করুন — অবিলম্বে আইনি নোটিশ প্রস্তুত হবে:",
-        "num_lbl": "🔢 ১ থেকে ২৮ সমস্যা নম্বর বেছে নিন:",
-        "name_lbl": "অভিযোগকারীর নাম:",
-        "city_lbl": "জেলা ও রাজ্য:",
-        "phone_lbl": "মোবাইল নম্বর:",
-        "acc_lbl": "অভিযুক্ত পক্ষ / ঠিকাদার / থানা:",
-        "det_lbl": "ঘটনার সম্পূর্ণ বিবরণ:",
-        "btn_draft": "⚡ আইনি অভিযোগ পত্র প্রস্তুত করুন",
-        "send_wa": "📲 হোয়াটসঅ্যাপে নোটিশ পাঠান"
-    },
-    "मराठी (Marathi)": {
-        "tag": "⚡ २४x७ अखंड भारत नागरिक कायदेशीर सुरक्षा मिशन",
-        "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "२८ कायदेशीर अधिकार • रात्रीची सुरक्षा • थेट नोकरी • आरोग्य",
-        "cat_lbl": "📂 सेवा श्रेणी निवडा:",
-        "c_rights": "⚖️ २८ कायदेशीर अधिकार व नोटीस",
-        "c_sos": "🚨 रात्रीची सुरक्षा व GPS SOS",
-        "c_voice": "🎙️ बोलून तक्रार नोंदवा (माइक)",
-        "c_fraud": "🛡️ सायबर फसवणूक तपासक",
-        "c_health": "🏥 औषधे व रुग्णवाहिका",
-        "c_job": "💼 रोजगार व थेट नोकरी",
-        "r_title": "⚖️ २८ नागरी हक्क व कायदेशीर मंच",
-        "r_sub": "समस्या क्रमांक निवडा — प्रणाली तात्काळ कडक कायदेशीर नोटीस तयार करेल:",
-        "num_lbl": "🔢 १ ते २८ मधील समस्या क्रमांक निवडा:",
-        "name_lbl": "तक्रारदाराचे नाव:",
-        "city_lbl": "जिल्हा व राज्य:",
-        "phone_lbl": "मोबाईल नंबर:",
-        "acc_lbl": "दोषी कंत्राटदार / अधिकारी / पोलीस:",
-        "det_lbl": "घटनेचा संपूर्ण तपशील:",
-        "btn_draft": "⚡ कायदेशीर नोटीस तयार करा",
-        "send_wa": "📲 WhatsApp वर पाठवा"
-    },
-    "தமிழ் (Tamil)": {
-        "tag": "⚡ 24x7 குடிமக்கள் சட்டப் பாதுகாப்பு தளம்",
-        "title": "மகா-சேவா AI (MAHA SEVA AI)",
-        "sub": "28 சட்ட உரிமைகள் • இரவு பாதுகாப்பு • வேலைவாய்ப்பு",
-        "cat_lbl": "📂 சேவையைத் தேர்ந்தெடுக்கவும்:",
-        "c_rights": "⚖️ 28 சட்ட உரிமைகள் & நோட்டீஸ்",
-        "c_sos": "🚨 இரவு பாதுகாப்பு & GPS SOS",
-        "c_voice": "🎙️ குரல் மூலம் புகார் (மைக்)",
-        "c_fraud": "🛡️ இணைய மோசடி சரிபார்ப்பு",
-        "c_health": "🏥 மருத்துவம் & ஆம்புலன்ஸ்",
-        "c_job": "💼 வேலைவாய்ப்பு தகவல்",
-        "r_title": "⚖️ 28 குடிமக்கள் உரிமைகள் விழிப்புணர்வு போர்டல்",
-        "r_sub": "பிரச்சனை எண்ணைத் தேர்ந்தெடுக்கவும்:",
-        "num_lbl": "🔢 1 முதல் 28 வரை எண் தேர்வு செய்க:",
-        "name_lbl": "புகார்தாரர் பெயர்:",
-        "city_lbl": "மாவட்டம் & மாநிலம்:",
-        "phone_lbl": "மொபைல் எண்:",
-        "acc_lbl": "எதிர்தரப்பு நிறுவனம் / அதிகாரி:",
-        "det_lbl": "நிகழ்வின் முழு விவரம்:",
-        "btn_draft": "⚡ சட்டப்பூர்வ நோட்டீஸ் உருவாக்கவும்",
-        "send_wa": "📲 வாட்ஸ்அப்பில் பகிரவும்"
-    },
-    "తెలుగు (Telugu)": {
-        "tag": "⚡ 24x7 పౌర హక్కుల రక్షణ మిషన్",
-        "title": "మహా-సేవా AI (MAHA SEVA AI)",
-        "sub": "28 చట్టపరమైన హక్కులు • రాత్రి రక్షణ • ఉపాధి",
-        "cat_lbl": "📂 సేవను ఎంచుకోండి:",
-        "c_rights": "⚖️ 28 చట్టపరమైన హక్కులు & నోటీసు",
-        "c_sos": "🚨 రాత్రి రక్షణ & GPS SOS",
-        "c_voice": "🎙️ వాయిస్ ద్వారా ఫిర్యాదు",
-        "c_fraud": "🛡️ సైబర్ మోసాల తనిఖీ",
-        "c_health": "🏥 మందులు & అంబులెన్స్",
-        "c_job": "💼 ఉపాధి & ఉద్యోగాలు",
-        "r_title": "⚖️ 28 పౌర హక్కుల వేదిక",
-        "r_sub": "సమస్య సంఖ్యను ఎంచుకోండి:",
-        "num_lbl": "🔢 1 నుండి 28 సంఖ్యను ఎంచుకోండి:",
-        "name_lbl": "ఫిర్యాదుదారు పేరు:",
-        "city_lbl": "జిల్లా & రాష్ట్రం:",
-        "phone_lbl": "ఫోన్ నంబర్:",
-        "acc_lbl": "బాధ్యులైన అధికారి / కాంట్రాక్టర్:",
-        "det_lbl": "పూర్తి వివరాలు:",
-        "btn_draft": "⚡ చట్టపరమైన నోటీసు రూపొందించండి",
-        "send_wa": "📲 వాట్సాప్‌లో పంపండి"
-    },
-    "ગુજરાતી (Gujarati)": {
-        "tag": "⚡ ૨૪x૭ નાગરિક કાનૂની સુરક્ષા મિશન",
-        "title": "મહા-સેવા AI (MAHA SEVA AI)",
-        "sub": "૨૮ કાનૂની અધિકાર • રાત્રિ સુરક્ષા • રોજગાર",
-        "cat_lbl": "📂 સેવા પસંદ કરો:",
-        "c_rights": "⚖️ ૨૮ કાનૂની અધિકાર અને નોટિસ",
-        "c_sos": "🚨 રાત્રિ સુરક્ષા & GPS SOS",
-        "c_voice": "🎙️ અવાજ દ્વારા ફરિયાદ",
-        "c_fraud": "🛡️ સાયબર ફ્રોડ તપાસક",
-        "c_health": "🏥 દવા અને એમ્બ્યુલન્સ",
-        "c_job": "💼 સીધી નોકરી અને રોજગાર",
-        "r_title": "⚖️ ૨૮ નાગરિક અધિકાર મંચ",
-        "r_sub": "સમસ્યા નંબર પસંદ કરો:",
-        "num_lbl": "🔢 ૧ થી ૨૮ નંબર પસંદ કરો:",
-        "name_lbl": "અરજદારનું નામ:",
-        "city_lbl": "જિલ્લો અને રાજ્ય:",
-        "phone_lbl": "મોબાઇલ નંબર:",
-        "acc_lbl": "સામેવાળા પક્ષ / અધિકારી:",
-        "det_lbl": "સમગ્ર વિગત:",
-        "btn_draft": "⚡ કાનૂની નોટિસ તૈયાર કરો",
-        "send_wa": "📲 WhatsApp પર મોકલો"
-    },
-    "ಕನ್ನಡ (Kannada)": {
-        "tag": "⚡ 24x7 ನಾಗರಿಕ ಕಾನೂನು ರಕ್ಷಣೆ ಮಿಷನ್",
-        "title": "ಮಹಾ-ಸೇವಾ AI (MAHA SEVA AI)",
-        "sub": "28 ಕಾನೂನು ಹಕ್ಕುಗಳು • ರಾತ್ರಿ ಭದ್ರತೆ • ಉದ್ಯೋಗ",
-        "cat_lbl": "📂 ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
-        "c_rights": "⚖️ 28 ಕಾನೂನು ಹಕ್ಕುಗಳು & ನೋಟಿಸ್",
-        "c_sos": "🚨 ರಾತ್ರಿ ಸುರಕ್ಷತೆ & GPS SOS",
-        "c_voice": "🎙️ ಧ್ವನಿ ಮೂಲಕ ದೂರು",
-        "c_fraud": "🛡️ ಸೈಬರ್ ವಂಚನೆ ಪರಿಶೀಲಕ",
-        "c_health": "🏥 ಔಷಧಿ & ಆಂಬ್ಯುಲೆನ್ಸ್",
-        "c_job": "💼 ಉದ್ಯೋಗ ಮಾಹಿತಿ",
-        "r_title": "⚖️ 28 ನಾಗರಿಕ ಕಾನೂನು ವೇದಿಕೆ",
-        "r_sub": "ಸಮಸ್ಯೆ ಸಂಖ್ಯೆಯನ್ನು ಆರಿಸಿ:",
-        "num_lbl": "🔢 1 ರಿಂದ 28 ರವರೆಗಿನ ಸಂಖ್ಯೆ:",
-        "name_lbl": "ದೂರುದಾರರ ಹೆಸರು:",
-        "city_lbl": "ಜಿಲ್ಲೆ & ರಾಜ್ಯ:",
-        "phone_lbl": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ:",
-        "acc_lbl": "ಆರೋಪಿ / ಅಧಿಕಾರಿ / ಗುತ್ತಿಗೆದಾರ:",
-        "det_lbl": "ಸಂಪೂರ್ಣ ವಿವರ:",
-        "btn_draft": "⚡ ಕಾನೂನು ನೋಟಿಸ್ ರಚಿಸಿ",
-        "send_wa": "📲 ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಕಳುಹಿಸಿ"
-    },
-    "മലയാളം (Malayalam)": {
-        "tag": "⚡ 24x7 പൗരാവകാശ നിയമ സംരക്ഷണ ദൗത്യം",
-        "title": "മഹാ-സേവ AI (MAHA SEVA AI)",
-        "sub": "28 നിയമപരമായ അവകാശങ്ങൾ • രാത്രി സുരക്ഷ",
-        "cat_lbl": "📂 സേവനം തിരഞ്ഞെടുക്കുക:",
-        "c_rights": "⚖️ 28 അവകാശങ്ങളും നിയമ നോട്ടീസും",
-        "c_sos": "🚨 രാത്രി സുരക്ഷ & GPS SOS",
-        "c_voice": "🎙️ ശബ്ദത്തിലൂടെ പരാതി നൽകാം",
-        "c_fraud": "🛡️ സൈബർ തട്ടിപ്പ് പരിശോധന",
-        "c_health": "🏥 മരുന്നുകളും ആംബുലൻസും",
-        "c_job": "💼 തൊഴിൽ വിവരങ്ങൾ",
-        "r_title": "⚖️ 28 പൗരാവകാശ നിയമ സഹായ വേദി",
-        "r_sub": "പ്രശ്ന നമ്പർ തിരഞ്ഞെടുക്കുക:",
-        "num_lbl": "🔢 1 മുതൽ 28 വരെയുള്ള നമ്പർ:",
-        "name_lbl": "പരാതിക്കാരന്റെ പേര്:",
-        "city_lbl": "ജില്ലയും സംസ്ഥാനവും:",
-        "phone_lbl": "മൊബൈൽ നമ്പർ:",
-        "acc_lbl": "എതിർകക്ഷി / പോലീസ് സ്റ്റേഷൻ:",
-        "det_lbl": "പൂർണ്ണ വിവരങ്ങൾ:",
-        "btn_draft": "⚡ ഔദ്യോഗിക നിയമ നോട്ടീസ്",
-        "send_wa": "📲 വാട്ട്‌സ്ആപ്പിൽ അയക്കുക"
-    },
-    "ਪੰਜਾਬੀ (Punjabi)": {
-        "tag": "⚡ 24x7 ਨਾਗਰਿਕ ਕਾਨੂੰਨੀ ਸੁਰੱਖਿਆ ਮਿਸ਼ਨ",
-        "title": "ਮਹਾ-ਸੇਵਾ AI (MAHA SEVA AI)",
-        "sub": "28 ਕਾਨੂੰਨੀ ਹੱਕ • ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ • ਰੋਜ਼ਗਾਰ",
-        "cat_lbl": "📂 ਸੇਵਾ ਚੁਣੋ:",
-        "c_rights": "⚖️ 28 ਕਾਨੂੰਨੀ ਹੱਕ ਤੇ ਨੋਟਿਸ",
-        "c_sos": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ & GPS SOS",
-        "c_voice": "🎙️ ਬੋਲ ਕੇ ਸ਼ਿਕਾਇਤ ਲਿਖੋ",
-        "c_fraud": "🛡️ ਸਾਈਬਰ ਧੋਖਾਧੜੀ ਜਾਂਚ",
-        "c_health": "🏥 ਦਵਾਈ ਤੇ ਐਂਬੂਲੈਂਸ",
-        "c_job": "💼 ਰੋਜ਼ਗਾਰ ਤੇ ਨੌਕਰੀ",
-        "r_title": "⚖️ 28 ਨਾਗਰਿਕ ਹੱਕ ਕਾਨੂੰਨੀ ਮੰਚ",
-        "r_sub": "ਸਮੱਸਿਆ ਨੰਬਰ ਚੁਣੋ:",
-        "num_lbl": "🔢 1 ਤੋਂ 28 ਨੰਬਰ ਚੁਣੋ:",
-        "name_lbl": "ਪੀੜਤ ਦਾ ਨਾਮ:",
-        "city_lbl": "ਜ਼ਿਲ੍ਹਾ ਤੇ ਰਾਜ:",
-        "phone_lbl": "ਮੋਬਾਈਲ ਨੰਬਰ:",
-        "acc_lbl": "ਦੋਸ਼ੀ ਠੇਕੇਦਾਰ / ਥਾਣਾ / ਅਧਿਕਾਰੀ:",
-        "det_lbl": "ਘਟਨਾ ਦਾ ਪੂਰਾ ਵੇਰਵਾ:",
-        "btn_draft": "⚡ ਕਾਨੂੰਨੀ ਨੋਟਿਸ ਤਿਆਰ ਕਰੋ",
-        "send_wa": "📲 WhatsApp ਤੇ ਭੇਜੋ"
-    },
-    "ଓଡ଼ିଆ (Odia)": {
-        "tag": "⚡ ୨୪x୭ ନାଗରିକ ଆଇନଗତ ସୁରକ୍ଷା ମିଶନ",
-        "title": "ମହା-ସେବା AI (MAHA SEVA AI)",
-        "sub": "୨୮ଟି ଆଇନଗତ ଅଧିକାର • ରାତ୍ରି ସୁରକ୍ଷା",
-        "cat_lbl": "📂 ସେବା ବାଛନ୍ତୁ:",
-        "c_rights": "⚖️ ୨୮ ଆଇନଗତ ଅଧିକାର ଓ ନୋଟିସ୍",
-        "c_sos": "🚨 ରାତ୍ରି ସୁରକ୍ଷା & GPS SOS",
-        "c_voice": "🎙️ କହିକରି ଅଭିଯୋਗ ଲେଖନ୍ତୁ",
-        "c_fraud": "🛡️ ସାଇବର ଠକେଇ ଯାଞ୍ଚ",
-        "c_health": "🏥 ଔଷଧ ଓ ଆମ୍ବୁଲାନ୍ସ",
-        "c_job": "💼 ନିଯୁକ୍ତି ସୂଚନା",
-        "r_title": "⚖️ ୨୮ ନାଗରିକ ଅଧିକାର ପୋର୍ଟାଲ",
-        "r_sub": "ସମସ୍ୟା ସଂଖ୍ୟା ବାଛନ୍ତୁ:",
-        "num_lbl": "🔢 ୧ ରୁ ୨୮ ସଂଖ୍ୟା ଚୟନ:",
-        "name_lbl": "ଅଭିଯୋଗକାରୀଙ୍କ ନାମ:",
-        "city_lbl": "ଜିଲ୍ଲା ଓ ରାଜ୍ୟ:",
-        "phone_lbl": "ମୋବାଇଲ୍ ନମ୍ବର:",
-        "acc_lbl": "ଦୋଷୀ ପକ୍ଷ / ଥାନା:",
-        "det_lbl": "ସମ୍ପୂର୍ଣ୍ଣ ବିବରଣୀ:",
-        "btn_draft": "⚡ ଆଇନଗତ ନୋଟିସ୍ ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
-        "send_wa": "📲 WhatsApp ରେ ପଠାନ୍ତୁ"
-    },
-    "অসমীয়া (Assamese)": {
-        "tag": "⚡ ২৪x৭ নাগৰিক আইনী সুৰক্ষা অভিযান",
-        "title": "মহা-সেৱা AI (MAHA SEVA AI)",
-        "sub": "২৮টা আইনী অধিকাৰ • ৰাতিৰ সুৰক্ষা • নিয়োগ",
-        "cat_lbl": "📂 সেৱা বাছক:",
-        "c_rights": "⚖️ ২৮টা আইনী অধিকাৰ আৰু জাননী",
-        "c_sos": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS",
-        "c_voice": "🎙️ কণ্ঠৰে অভিযোগ দিয়ক",
-        "c_fraud": "🛡️ চাইবাৰ প্ৰৱঞ্চনা পৰীক্ষক",
-        "c_health": "🏥 ঔষধ আৰু এম্বুলেন্স",
-        "c_job": "💼 নিয়োগ আৰু সাহায্য কেন্দ্ৰ",
-        "r_title": "⚖️ ২৮ নাগৰিক আইনী সুৰক্ষা মঞ্চ",
-        "r_sub": "সমস্যাৰ নম্বৰ বাছক:",
-        "num_lbl": "🔢 ১ ৰ পৰা ২৮ নম্বৰ বাছক:",
-        "name_lbl": "অভিযোগকাৰীৰ নাম:",
-        "city_lbl": "জিলা আৰু ৰাজ্য:",
-        "phone_lbl": "মোবাইল নম্বৰ:",
-        "acc_lbl": "অভিযুক্ত পক্ষ / থানা:",
-        "det_lbl": "সম্পূৰ্ণ বিৱৰণ:",
-        "btn_draft": "⚡ আইনী জাননী প্ৰস্তুত কৰক",
-        "send_wa": "📲 WhatsAppত পঠিয়াওক"
+        "btn_draft": "⚡ Draft Official Court-Grade Legal Notice & Video",
+        "success_msg": "🟢 Official Legal Notice & Template Generated:",
+        "doc_box_lbl": "📄 Prepared Legal Document:",
+        "download_txt_btn": "📥 Download Legal Notice Document (.txt)",
+        "video_title": "🎬 Legal Awareness & Certified Template Video",
+        "video_sub": "Download this video directly to your mobile and share on WhatsApp status:",
+        "download_video_btn": "📥 Download Template Video (MP4)",
+        "shield_title": "⚖️ Your Statutory Legal Protection:",
+        "send_wa": "📲 Send Notice via WhatsApp",
+        "def_name": "Sahil Kumar",
+        "def_city": "West Champaran, Bihar",
+        "def_acc": "Accused Employer / Officer / Agency",
+        "custom_sub_lbl": "Complaint Subject:",
+        "custom_sub_val": "Regarding Unlawful Harassment and Violation of Fundamental Rights",
+        "custom_act": "Constitution of India, BNS 2023 & Relevant Special Statutes",
+        "custom_auth": "District Magistrate (DM) / Superintendent of Police (SP)",
+        "custom_rule": "Every citizen has the guaranteed fundamental right to legal remedy, justice, and immediate protection under the Constitution of India.",
+        "custom_det": "The complainant has been unlawfully harassed and aggrieved by the accused party, and formal relief is sought."
     }
 }
 
-# Language Picker (12 Languages)
-all_langs = list(LANG_CONFIG.keys())
-chosen_lang = st.radio("🌐 भाषा चुनें / Select Language:", all_langs, horizontal=True)
-T = LANG_CONFIG.get(chosen_lang, LANG_CONFIG["🇮🇳 हिन्दी"])
+chosen_lang = st.radio("🌐 भाषा चुनें / Select Language:", ["🇮🇳 हिन्दी", "🇬🇧 English"], horizontal=True)
+T = LANG_CONFIG[chosen_lang]
+is_eng = (chosen_lang == "🇬🇧 English")
 
-# Header
 st.markdown(f"""
 <div style="background: radial-gradient(circle at center, #1E3A8A 0%, #030712 100%); border: 2px solid #38BDF8; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 14px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);">
     <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800;">
@@ -419,111 +245,492 @@ nav_choice = st.radio(
 
 st.markdown("---")
 
-# 28 LAWS DATA (Pure Zero Glitch Dictionary)
+# 28 LEGAL SECTIONS MASTER DATA (100% BILINGUAL)
 LEGAL_28 = {
-    1: {"name": "मजदूरी या वेतन चोरी (Wage Theft)", "act": "Payment of Wages Act 1936", "auth": "Labour Commissioner & DM", "rule": "मजदूरी दबाना गैर-कानूनी है। श्रम विभाग 10 गुना हर्जाना और 18% ब्याज दिलवाता है।", "det": "मैंने 2 महीने कार्य किया, जिसका कुल ₹24,000 बकाया है। मांगने पर गाली व धमकी दी जा रही है।"},
-    2: {"name": "पुलिस अवैध मारपीट या फर्जी चालान", "act": "BNSS & DK Basu Guidelines", "auth": "SP & NHRC", "rule": "बिना जुर्म मारपीट पर धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व FIR होती है।", "det": "संबंधित पुलिसकर्मी द्वारा अकारण अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।"},
-    3: {"name": "अस्पताल में इमरजेंसी इलाज इनकार या शव रोकना", "act": "Supreme Court Parmanand Katara Verdict", "auth": "CMO & Consumer Court", "rule": "पैसे के लिए इमरजेंसी इलाज से इनकार या शव को बंधक बनाना संज्ञेय अपराध है।", "det": "अस्पताल द्वारा अग्रिम राशि की मांग कर गंभीर हालत में इलाज में जानबूझकर देरी की गई।"},
-    4: {"name": "कार्यस्थल पर हादसा व शारीरिक अपंगता", "act": "Employees Compensation Act 1923", "auth": "Compensation Commissioner", "rule": "ड्यूटी पर दुर्घटना होने पर ₹5 लाख से ₹20 लाख का मुआवजा व आजीवन पेंशन अनिवार्य है।", "det": "सुरक्षा उपकरणों के अभाव में कार्यस्थल पर हादसा हुआ जिससे दिव्यांगता आई।"},
-    5: {"name": "सूदखोर व फर्जी लोन ऐप्स द्वारा धमकी/ब्लैकमेल", "act": "RBI Guidelines & Extortion Sec 308 BNS", "auth": "Cyber Cell & SP", "rule": "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है।", "det": "लोन एजेंट द्वारा घर आकर गाली-गलौज और फोटो वायरल करने का ब्लैकमेल किया जा रहा है।"},
-    6: {"name": "सरकारी दफ्तर में घूसखोरी व 'कल आना' अपमान", "act": "RTPS Act & Prevention of Corruption Act", "auth": "Vigilance Bureau", "rule": "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन ₹250 से ₹5000 जुर्माना कटता है।", "det": "वैध कागजात देने के बावजूद रिश्वत के बिना बाबू द्वारा बार-बार चक्कर लगवाए जा रहे हैं।"},
-    7: {"name": "दुकानदार या कोटेदार द्वारा MRP लूट व घटतौली", "act": "Legal Metrology Act 2009", "auth": "DSO & Consumer Forum", "rule": "MRP से अधिक लेना या कम तौलना गैर-कानूनी है। ₹25,000 जुर्माना और दुकान सील होती है।", "det": "दुकानदार द्वारा तय मूल्य से अधिक दाम वसूला गया और कम सामग्री दी गई।"},
-    8: {"name": "ट्रेन में टीटीई (TTE) द्वारा अवैध वसूली व बदसलूकी", "act": "Indian Railway Act", "auth": "RailMadad 139 & RPF", "rule": "टीटीई को यात्री से बदतमीजी या धक्का देने का कोई हक नहीं। केवल सरकारी रसीद मान्य है।", "det": "यात्रा के दौरान टीटीई द्वारा अवैध धन की मांग और विरोध करने पर बदसलूकी की गई।"},
-    9: {"name": "थाने में FIR दर्ज न करना (Zero FIR)", "act": "Supreme Court Lalita Kumari Guidelines", "auth": "SSP & CJM Court", "rule": "संज्ञेय अपराध में FIR न लिखने वाले पुलिस अधिकारी पर खुद धारा 166A BNS में FIR होती है।", "det": "लिखित शिकायत देने के बावजूद थाना प्रभारी द्वारा प्रथम सूचना रिपोर्ट दर्ज नहीं की गई।"},
-    10: {"name": "पैतृक जमीन पर दबंगों का अवैध कब्जा", "act": "Section 145/144 BNSS", "auth": "SDM & Civil Court", "rule": "गरीब की पैतृक भूमि पर जबरन कब्जे की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे का नियम है।", "det": "विपक्षी द्वारा प्रार्थी की वैध पैतृक जमीन पर बलपूर्वक अवैध कब्जे का प्रयास किया जा रहा है।"},
-    11: {"name": "सड़क हादसे (Hit & Run) में सरकारी मुआवजा", "act": "Motor Vehicles Amendment Act", "auth": "MACT & District Collector", "rule": "मृत्यु पर सरकार द्वारा ₹2 लाख और गंभीर घायल को ₹50,000 की तत्काल राहत मिलती है।", "det": "सड़क दुर्घटना के उपरांत तत्काल सरकारी राहत कोष व बीमा क्लेम की मांग की जा रही है।"},
-    12: {"name": "मुफ्त सरकारी वकील पाने हेतु आवेदन (DLSA)", "act": "Legal Services Authorities Act (Art 39A)", "auth": "DLSA Secretary", "rule": "गरीब, मजदूर और महिला को कोर्ट केस लड़ने के लिए सरकार मुफ्त वकील देती है।", "det": "प्रार्थी आर्थिक रूप से असमर्थ है और उसे मुकदमे की पैरवी हेतु सरकारी वकील चाहिए।"},
-    13: {"name": "मकान मालिक द्वारा जबरन बेदखली व बिजली काटना", "act": "Rent Control Act & BNS", "auth": "Rent Controller & Police", "rule": "मकान मालिक बिना कोर्ट ऑर्डर के ताला नहीं तोड़ सकता, न ही बिजली-पानी काट सकता है।", "det": "मकान मालिक द्वारा बिना कानूनी नोटिस पानी-बिजली बंद कर जबरन मकान खाली कराने की धमकी दी गई।"},
-    14: {"name": "जातिगत भेदभाव व सामाजिक बहिष्कार", "act": "SC/ST Prevention of Atrocities Act", "auth": "SP & Special Court", "rule": "जाति के आधार पर अपमानित करने या रास्ता रोकने पर गैर-जमानती गिरफ्तारी होती है।", "det": "विपक्षी द्वारा जातिसूचक अपशब्दों का प्रयोग कर सार्वजनिक रूप से अपमानित किया गया।"},
-    15: {"name": "धर्म के नाम पर भेदभाव व नफरत", "act": "Article 15 & Section 196 BNS", "auth": "DM & NHRC", "rule": "धार्मिक सद्भाव बिगाड़ने या भेदभाव करने पर संज्ञेय गैर-जमानती मुकदमा होता है।", "det": "धार्मिक आधार पर प्रार्थी के साथ सार्वजनिक स्थल पर भेदभावपूर्ण दुर्व्यवहार किया गया।"},
-    16: {"name": "गिग वर्कर डिलीवरी बॉय व ड्राइवर अधिकार", "act": "Code on Social Security 2020", "auth": "Labour Welfare Board", "rule": "कंपनी बिना कारण आईडी ब्लॉक नहीं कर सकती और दुर्घटना पर इलाज-मुआवजा अनिवार्य है।", "det": "बिना किसी सूचना के डिलीवरी आईडी ब्लॉक कर दी गई और बकाया भुगतान रोक लिया गया।"},
-    17: {"name": "राशन कार्ड में अंगूठा लगवाकर राशन न देना", "act": "National Food Security Act (NFSA)", "auth": "DSO & SDO", "rule": "अंगूठा लगवाकर अनाज न देना सीधे खाद्यान्न चोरी का अपराध है; कोटेदार का लाइसेंस रद्द होता है।", "det": "ई-पॉस मशीन पर फिंगरप्रिंट लेने के बावजूद इस माह का निर्धारित राशन नहीं दिया गया।"},
-    18: {"name": "बैंक अकाउंट अवैध फ्रीज व मिनिमम बैलेंस कटौती", "act": "RBI Banking Ombudsman Rules", "auth": "RBI Ombudsman", "rule": "बैंक सेविंग्स खाते को चार्ज काटकर माइनस में नहीं ले जा सकता, न बिना नोटिस फ्रीज कर सकता है।", "det": "बैंक द्वारा बिना किसी कानूनी नोटिस के खाता फ्रीज किया गया व अनुचित शुल्क काटा गया।"},
-    19: {"name": "बिजली विभाग मनमानी व ट्रांसफार्मर खराबी", "act": "Electricity Act 2003 Rules", "auth": "CGRF & Executive Engineer", "rule": "जला हुआ ट्रांसफार्मर ग्रामीण क्षेत्र में 48 घंटे व शहरी में 24 घंटे में बदलना अनिवार्य है।", "det": "कई दिनों से ट्रांसफार्मर खराब है और विभाग द्वारा अत्यधिक फर्जी बिल भेजा गया है।"},
-    20: {"name": "आयुष्मान कार्ड (PM-JAY) पर अस्पताल का इनकार", "act": "National Health Authority Rules", "auth": "State Anti-Fraud Unit (SAFU)", "rule": "सूचीबद्ध अस्पताल आयुष्मान कार्ड धारक को मना नहीं कर सकता; उल्लंघन पर पैनल रद्द होता है।", "det": "सक्रिय आयुष्मान कार्ड होने के बावजूद निजी अस्पताल द्वारा निशुल्क इलाज से मना किया गया।"},
-    21: {"name": "पीएम आवास योजना में रिश्वत की मांग", "act": "Prevention of Corruption Act", "auth": "Vigilance & DDC", "rule": "आवास योजना के पैसे में कमीशन मांगना संज्ञेय भ्रष्टाचार अपराध है।", "det": "आवास योजना की किस्त जारी करने के एवज में संबंधित कर्मी द्वारा रिश्वत की मांग की जा रही है।"},
-    22: {"name": "प्राइवेट स्कूल में 25% फ्री एडमिशन (RTE)", "act": "Right to Education Act Sec 12(1)(c)", "auth": "DEO & Child Commission", "rule": "हर प्राइवेट स्कूल में 25% सीटें गरीब बच्चों के लिए पूर्णतः निशुल्क आरक्षित हैं।", "det": "RTE पात्रता होने के बावजूद संबंधित निजी स्कूल द्वारा छात्र का दाखिला लेने से इनकार किया गया।"},
-    23: {"name": "नकली खाद-बीज से फसल बर्बादी का हर्जाना", "act": "Insecticides Act & Essential Commodities Act", "auth": "DAO & Consumer Court", "rule": "नकली सामग्री बेचने पर विक्रेता पर मुकदमा और किसान को 100% फसल नुकसान का हर्जाना मिलता है।", "det": "दुकानदार द्वारा नकली बीज व खाद दिए जाने के कारण मेरी संपूर्ण खड़ी फसल नष्ट हो गई।"},
-    24: {"name": "फसल बीमा (PMFBY) क्लेम चोरी व रिजेक्शन", "act": "PMFBY Operational Guidelines", "auth": "District Agriculture Committee", "rule": "आपदा के समय 72 घंटे में सूचना देने पर 12% ब्याज सहित बीमा क्लेम मिलना अनिवार्य है।", "det": "बाढ़/सूखा से हुए प्रमाणित नुकसान के बावजूद बीमा कंपनी द्वारा क्लेम को निरस्त किया गया।"},
-    25: {"name": "बुजुर्ग माता-पिता की संपत्ति हड़पना व प्रताड़ना", "act": "Senior Citizens Welfare Act 2007", "auth": "SDM Tribunal", "rule": "प्रताड़ित करने पर माता-पिता द्वारा संतानों को दी गई संपत्ति की रजिस्ट्री रद्द हो जाती है।", "det": "संपत्ति नाम कराने के उपरांत संतानों द्वारा भोजन-दवा बंद कर घर से बेदखल करने की धमकी दी गई।"},
-    26: {"name": "छात्र पेपर लीक व कोचिंग फीस वापसी", "act": "Public Examinations Act 2024 & UGC Rules", "auth": "Higher Education Dept", "rule": "कोचिंग बीच में छोड़ने पर शेष बची फीस वापस करना अनिवार्य है।", "det": "कोर्स छोड़ने के बाद भी संस्थान द्वारा नियमानुसार बची हुई फीस वापस नहीं की गई।"},
-    27: {"name": "ट्रैफिक पुलिस द्वारा चाबी छीनना व डंडा मारना", "act": "Motor Vehicles Act & MHA Directives", "auth": "SP Traffic", "rule": "चलती गाड़ी से चाबी निकालना अपराध है; DigiLocker के डिजिटल दस्तावेज 100% मान्य हैं।", "det": "वैध डिजिटल दस्तावेज दिखाने के बावजूद ट्रैफिक कर्मी द्वारा दुर्व्यवहार कर चाबी छीनी गई।"},
-    28: {"name": "मरीज का अधिकार (मेडिकल फाइल व सस्ती दवा की आजादी)", "act": "NHRC Patients Rights Charter", "auth": "CMO & State Medical Council", "rule": "अस्पताल मरीज को मेडिकल फाइल और बाहर से सस्ती जेनेरिक दवा लेने से नहीं रोक सकता।", "det": "अस्पताल द्वारा केस फाइल देने से मना किया गया तथा बाहर से जेनेरिक दवा लाने पर रोक लगाई गई।"}
+    1: {
+        "hi_name": "मजदूरी/वेतन चोरी (Wage Theft)",
+        "en_name": "Wage Theft & Unpaid Salary by Contractor",
+        "hi_act": "पेमेंट ऑफ वेजेस एक्ट 1936",
+        "en_act": "Payment of Wages Act 1936 & Industrial Disputes Act",
+        "hi_auth": "श्रम आयुक्त (Labour Commissioner) व DM",
+        "en_auth": "Labour Commissioner & District Magistrate (DM)",
+        "hi_rule": "मजदूरी दबाने पर श्रम विभाग 10 गुना हर्जाना और 18% ब्याज दिलवाता है।",
+        "en_rule": "Withholding wages is strictly illegal. Labour Court enforces 10x compensation and 18% interest.",
+        "hi_det": "मैंने 2 महीने कार्य किया, जिसका कुल ₹24,000 बकाया है। मांगने पर गाली व धमकी दी जा रही है।",
+        "en_det": "I worked diligently for 2 months, pending dues are Rs 24,000. Demanding salary resulted in criminal threats."
+    },
+    2: {
+        "hi_name": "पुलिस अवैध मारपीट या फर्जी चालान",
+        "en_name": "Police Harassment, Brutality & Illegal Challan",
+        "hi_act": "भारतीय नागरिक सुरक्षा संहिता (BNSS) व डी.के. बसु गाइडलाइन्स",
+        "en_act": "BNSS 2023 & Supreme Court DK Basu Directives",
+        "hi_auth": "पुलिस अधीक्षक (SP) व NHRC",
+        "en_auth": "Superintendent of Police (SP) & NHRC",
+        "hi_rule": "बिना जुर्म मारपीट पर धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व FIR होती है।",
+        "en_rule": "Assault or abusive behavior triggers Section 166A BNS with suspension and departmental prosecution.",
+        "hi_det": "संबंधित पुलिसकर्मी द्वारा अकारण अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।",
+        "en_det": "I was subjected to unlawful public harassment, physical assault, and fake challan threats by the officer."
+    },
+    3: {
+        "hi_name": "अस्पताल में इमरजेंसी इलाज इनकार या शव रोकना",
+        "en_name": "Hospital Refusing Emergency Care or Detaining Body",
+        "hi_act": "सुप्रीम कोर्ट परमानंद कटारा फैसला",
+        "en_act": "Supreme Court Parmanand Katara Verdict & Clinical Establishments Act",
+        "hi_auth": "मुख्य चिकित्सा अधिकारी (CMO) व स्वास्थ्य विभाग",
+        "en_auth": "Chief Medical Officer (CMO) & Health Department",
+        "hi_rule": "इमरजेंसी में पैसे मांगकर इलाज से इनकार या शव बंधक बनाना संज्ञेय अपराध है।",
+        "en_rule": "Refusing emergency care over advance money or detaining patients/bodies is a cognizable criminal offense.",
+        "hi_det": "अस्पताल द्वारा अग्रिम राशि की मांग कर गंभीर हालत में इलाज में जानबूझकर देरी की गई।",
+        "en_det": "The hospital delayed emergency medical treatment deliberately by demanding upfront cash advance."
+    },
+    4: {
+        "hi_name": "कार्यस्थल पर हादसा व शारीरिक अपंगता",
+        "en_name": "Workplace Accident & Disability Compensation",
+        "hi_act": "कर्मचारी मुआवजा कानून 1923",
+        "en_act": "Employees Compensation Act 1923",
+        "hi_auth": "मुआवजा आयुक्त एवं श्रम न्यायालय",
+        "en_auth": "Compensation Commissioner & Labour Court",
+        "hi_rule": "ड्यूटी पर दुर्घटना होने पर ₹5 लाख से ₹20 लाख का मुआवजा व आजीवन पेंशन अनिवार्य है।",
+        "en_rule": "Employer is strictly liable to pay Rs 5 to 20 Lakhs compensation and pension for workplace injury.",
+        "hi_det": "सुरक्षा उपकरणों के अभाव में कार्यस्थल पर हादसा हुआ जिससे स्थायी दिव्यांगता आई।",
+        "en_det": "Due to lack of safety equipment, a severe accident occurred causing permanent disability."
+    },
+    5: {
+        "hi_name": "सूदखोर व फर्जी लोन ऐप्स द्वारा धमकी/ब्लैकमेल",
+        "en_name": "Illegal Money Lenders & Loan App Blackmail",
+        "hi_act": "RBI दिशानिर्देश व धारा 308 BNS (जबरन वसूली)",
+        "en_act": "RBI Fair Recovery Guidelines & Extortion Law Sec 308 BNS",
+        "hi_auth": "साइबर क्राइम सेल, एसपी (SP) व RBI लोकपाल",
+        "en_auth": "Cyber Crime Cell, SP & RBI Ombudsman",
+        "hi_rule": "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है।",
+        "en_rule": "Unlicensed money lending and threatening calls/photo leaks are strictly illegal, leading to immediate arrest.",
+        "hi_det": "लोन एजेंट द्वारा घर आकर गाली-गलौज और फोटो वायरल करने का ब्लैकमेल किया जा रहा है।",
+        "en_det": "The loan recovery agent is issuing criminal threats and blackmailing to leak private contact lists."
+    },
+    6: {
+        "hi_name": "सरकारी दफ्तर में घूसखोरी व 'कल आना' अपमान",
+        "en_name": "Government Office Bribery & Service Delay (RTPS)",
+        "hi_act": "सेवा का अधिकार कानून (RTPS Act) व भ्रष्टाचार अधिनियम",
+        "en_act": "Right to Public Services Act (RTPS) & Anti-Corruption Act",
+        "hi_auth": "निगरानी ब्यूरो (Vigilance Bureau)",
+        "en_auth": "Vigilance Bureau & Grievance Directorate",
+        "hi_rule": "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन ₹250 से ₹5000 जुर्माना कटता है।",
+        "en_rule": "Officers delaying public services face automatic daily salary deduction of Rs 250 to Rs 5000.",
+        "hi_det": "वैध कागजात देने के बावजूद रिश्वत के बिना कर्मचारी द्वारा बार-बार चक्कर लगवाए जा रहे हैं।",
+        "en_det": "Despite submitting valid documents, the government clerk is withholding service for illegal bribery."
+    },
+    7: {
+        "hi_name": "दुकानदार या कोटेदार द्वारा MRP लूट व घटतौली",
+        "en_name": "Shopkeeper/Ration Dealer Overpricing & Underweighing",
+        "hi_act": "लीगल मेट्रोलॉजी एक्ट 2009",
+        "en_act": "Legal Metrology Act 2009 & NFSA",
+        "hi_auth": "जिला आपूर्ति पदाधिकारी (DSO) व उपभोक्ता फोरम",
+        "en_auth": "District Supply Officer & Consumer Affairs",
+        "hi_rule": "MRP से अधिक लेना या कम तौलना गैर-कानूनी है। ₹25,000 जुर्माना और दुकान सील होती है।",
+        "en_rule": "Charging above printed MRP or underweighing attracts Rs 25,000 fine and cancellation of license.",
+        "hi_det": "दुकानदार द्वारा तय मूल्य से अधिक दाम वसूला गया और कम सामग्री दी गई।",
+        "en_det": "The vendor charged price above printed MRP and delivered commodities below legally prescribed weight."
+    },
+    8: {
+        "hi_name": "ट्रेन में टीटीई (TTE) द्वारा अवैध वसूली व बदसलूकी",
+        "en_name": "Railway TTE Extortion & Passenger Misbehavior",
+        "hi_act": "भारतीय रेलवे अधिनियम",
+        "en_act": "Indian Railway Act & Safety Regulations",
+        "hi_auth": "रेलमदद 139 व RPF विजिलेंस",
+        "en_auth": "RailMadad 139 & Railway Vigilance Board",
+        "hi_rule": "टीटीई को यात्री से बदतमीजी या धक्का देने का कोई हक नहीं। केवल सरकारी रसीद मान्य है।",
+        "en_rule": "TTE has zero legal authority to deboard passengers forcefully. Only official receipt (EFT) is permitted.",
+        "hi_det": "यात्रा के दौरान टीटीई द्वारा अवैध धन की मांग और विरोध करने पर बदसलूकी की गई।",
+        "en_det": "The on-duty TTE demanded illegal money and engaged in aggressive misbehavior upon objection."
+    },
+    9: {
+        "hi_name": "थाने में FIR दर्ज न करना (Zero FIR)",
+        "en_name": "Police Station Refusing FIR (Zero FIR Right)",
+        "hi_act": "सुप्रीम कोर्ट ललिता कुमारी दिशा-निर्देश",
+        "en_act": "Supreme Court Lalita Kumari Directives & Sec 173 BNSS",
+        "hi_auth": "वरिष्ठ पुलिस अधीक्षक (SSP) व CJM कोर्ट",
+        "en_auth": "Senior Superintendent of Police (SSP) & CJM Court",
+        "hi_rule": "संज्ञेय अपराध में FIR न लिखने वाले पुलिस अधिकारी पर खुद धारा 166A BNS में FIR होती है।",
+        "en_rule": "Refusal to register an FIR for a cognizable offense makes the police officer liable under Sec 166A BNS.",
+        "hi_det": "लिखित शिकायत देने के बावजूद थाना प्रभारी द्वारा प्रथम सूचना रिपोर्ट दर्ज नहीं की गई।",
+        "en_det": "Despite submitting a written complaint detailing the cognizable crime, the station in-charge refused FIR."
+    },
+    10: {
+        "hi_name": "पैतृक जमीन पर दबंगों का अवैध कब्जा",
+        "en_name": "Ancestral Land Encroachment by Strongmen",
+        "hi_act": "धारा 145/144 BNSS",
+        "en_act": "Section 145/144 BNSS & Civil Rights Laws",
+        "hi_auth": "उप-विभागीय दंडाधिकारी (SDM) व सिविल कोर्ट",
+        "en_auth": "Sub-Divisional Magistrate (SDM) & Civil Court",
+        "hi_rule": "गरीब की पैतृक भूमि पर जबरन कब्जे की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे का नियम है।",
+        "en_rule": "Police and administration are obligated to issue immediate stay against illegal land grabbing.",
+        "hi_det": "विपक्षी द्वारा प्रार्थी की वैध पैतृक जमीन पर बलपूर्वक अवैध कब्जे का प्रयास किया जा रहा है।",
+        "en_det": "The opposite party is attempting to forcefully grab my legally inherited ancestral land."
+    },
+    11: {
+        "hi_name": "सड़क हादसे (Hit & Run) में सरकारी मुआवजा",
+        "en_name": "Road Accident (Hit and Run) Compensation",
+        "hi_act": "मोटर वाहन संशोधन अधिनियम",
+        "en_act": "Motor Vehicles Amendment Act (Hit & Run Scheme)",
+        "hi_auth": "दावा अधिकरण (MACT) व जिला कलेक्टर",
+        "en_auth": "MACT & District Magistrate Relief Fund",
+        "hi_rule": "मृत्यु पर सरकार द्वारा ₹2 लाख और गंभीर घायल को ₹50,000 की तत्काल राहत मिलती है।",
+        "en_rule": "Government provides mandatory interim relief of Rs 2 Lakhs for death and Rs 50,000 for injury.",
+        "hi_det": "सड़क दुर्घटना के उपरांत तत्काल सरकारी राहत कोष व बीमा क्लेम की मांग की जा रही है।",
+        "en_det": "Following a serious road accident, formal application is submitted for immediate compensation."
+    },
+    12: {
+        "hi_name": "मुफ्त सरकारी वकील पाने हेतु आवेदन (DLSA)",
+        "en_name": "Free Government Legal Aid Advocate (DLSA)",
+        "hi_act": "विधिक सेवा प्राधिकरण अधिनियम (अनुच्छेद 39A)",
+        "en_act": "Legal Services Authorities Act 1987 (Article 39A)",
+        "hi_auth": "जिला विधिक सेवा प्राधिकरण (DLSA) सचिव",
+        "en_auth": "District Legal Services Authority (DLSA) Secretary",
+        "hi_rule": "गरीब, मजदूर और महिला को कोर्ट केस लड़ने के लिए सरकार मुफ्त वकील देती है।",
+        "en_rule": "Every underprivileged citizen, worker, and woman is entitled to a free advocate at state expense.",
+        "hi_det": "प्रार्थी आर्थिक रूप से असमर्थ है और उसे मुकदमे की पैरवी हेतु सरकारी वकील चाहिए।",
+        "en_det": "I am financially incapable of bearing litigation fees and formally request a free government advocate."
+    },
+    13: {
+        "hi_name": "मकान मालिक द्वारा जबरन बेदखली व बिजली काटना",
+        "en_name": "Landlord Forcible Eviction & Disconnecting Utilities",
+        "hi_act": "रेंट कंट्रोल एक्ट व BNS",
+        "en_act": "Rent Control Act & Bharatiya Nyaya Sanhita",
+        "hi_auth": "किराया नियंत्रक (Rent Controller) व पुलिस",
+        "en_auth": "Rent Controller & Local Police",
+        "hi_rule": "मकान मालिक बिना कोर्ट ऑर्डर के ताला नहीं तोड़ सकता, न ही बिजली-पानी काट सकता है।",
+        "en_rule": "Landlords cannot cut electricity/water or break locks without a formal judicial decree.",
+        "hi_det": "मकान मालिक द्वारा बिना कानूनी नोटिस पानी-बिजली बंद कर जबरन मकान खाली कराने की धमकी दी गई।",
+        "en_det": "The landlord unlawfully disconnected electricity and water, attempting forcible eviction without notice."
+    },
+    14: {
+        "hi_name": "जातिगत भेदभाव व सामाजिक बहिष्कार",
+        "en_name": "Caste Discrimination & Harassment (SC/ST Act)",
+        "hi_act": "अनुसूचित जाति/जनजाति अत्याचार निवारण अधिनियम",
+        "en_act": "SC/ST Prevention of Atrocities Act & Article 15",
+        "hi_auth": "पुलिस अधीक्षक (SP) व विशेष अदालत",
+        "en_auth": "Superintendent of Police (SP) & Special Court",
+        "hi_rule": "जाति के आधार पर अपमानित करने या रास्ता रोकने पर गैर-जमानती गिरफ्तारी होती है।",
+        "en_rule": "Casteist slurs, social boycott, or blocking public roads invite mandatory non-bailable arrest.",
+        "hi_det": "विपक्षी द्वारा जातिसूचक अपशब्दों का प्रयोग कर सार्वजनिक रूप से अपमानित किया गया।",
+        "en_det": "The accused party used derogatory casteist slurs publicly and subjected me to humiliation."
+    },
+    15: {
+        "hi_name": "धर्म के नाम पर भेदभाव व नफरत",
+        "en_name": "Religious Discrimination & Hate Speech",
+        "hi_act": "संविधान अनुच्छेद 15 व धारा 196 BNS",
+        "en_act": "Article 15 & Section 196 BNS (Communal Harmony)",
+        "hi_auth": "जिला दंडाधिकारी (DM) व NHRC",
+        "en_auth": "District Magistrate (DM) & NHRC",
+        "hi_rule": "धार्मिक सद्भाव बिगाड़ने या भेदभाव करने पर संज्ञेय गैर-जमानती मुकदमा होता है।",
+        "en_rule": "Discrimination or spreading communal hatred is a cognizable non-bailable penal offense.",
+        "hi_det": "धार्मिक आधार पर प्रार्थी के साथ सार्वजनिक स्थल पर भेदभावपूर्ण दुर्व्यवहार किया गया।",
+        "en_det": "I was subjected to unlawful religious discrimination and public exclusion by the accused party."
+    },
+    16: {
+        "hi_name": "गिग वर्कर डिलीवरी बॉय व ड्राइवर अधिकार",
+        "en_name": "Gig Workers, Delivery Boy & Cab Driver Rights",
+        "hi_act": "कोड ऑन सोशल सिक्योरिटी 2020",
+        "en_act": "Code on Social Security 2020 & Gig Worker Rules",
+        "hi_auth": "श्रम कल्याण बोर्ड एवं कंपनी नोडल अधिकारी",
+        "en_auth": "Labour Welfare Board & Company Nodal Officer",
+        "hi_rule": "कंपनी बिना कारण आईडी ब्लॉक नहीं कर सकती और दुर्घटना पर इलाज-मुआवजा अनिवार्य है।",
+        "en_rule": "Companies cannot block worker IDs without notice and must provide accident medical compensation.",
+        "hi_det": "बिना किसी सूचना के डिलीवरी आईडी ब्लॉक कर दी गई और बकाया भुगतान रोक लिया गया।",
+        "en_det": "My driver/delivery ID was blocked without show-cause notice and pending payout was withheld."
+    },
+    17: {
+        "hi_name": "राशन कार्ड में अंगूठा लगवाकर राशन न देना",
+        "en_name": "PDS Ration Card Dealer Fingerprint Fraud",
+        "hi_act": "राष्ट्रीय खाद्य सुरक्षा अधिनियम (NFSA)",
+        "en_act": "National Food Security Act (NFSA) 2013",
+        "hi_auth": "जिला आपूर्ति पदाधिकारी (DSO) व SDO",
+        "en_auth": "District Supply Officer (DSO) & SDO",
+        "hi_rule": "अंगूठा लगवाकर अनाज न देना सीधे खाद्यान्न चोरी का अपराध है; कोटेदार का लाइसेंस रद्द होता है।",
+        "en_rule": "Taking biometric fingerprint and denying foodgrains constitutes criminal theft under NFSA.",
+        "hi_det": "ई-पॉस मशीन पर फिंगरप्रिंट लेने के बावजूद इस माह का निर्धारित राशन नहीं दिया गया।",
+        "en_det": "The ration dealer obtained my biometric thumbprint but refused to release the allocated foodgrains."
+    },
+    18: {
+        "hi_name": "बैंक अकाउंट अवैध फ्रीज व मिनिमम बैलेंस कटौती",
+        "en_name": "Bank Account Unlawful Freeze & Balance Loot",
+        "hi_act": "RBI बैंकिंग लोकपाल दिशानिर्देश",
+        "en_act": "RBI Banking Ombudsman Scheme & Circulars",
+        "hi_auth": "बैंकिंग लोकपाल (RBI Ombudsman)",
+        "en_auth": "Banking Ombudsman & Bank Nodal Officer",
+        "hi_rule": "बैंक सेविंग्स खाते को चार्ज काटकर माइनस में नहीं ले जा सकता, न बिना नोटिस फ्रीज कर सकता है।",
+        "en_rule": "Banks cannot force savings accounts into negative balances or freeze accounts without written notice.",
+        "hi_det": "बैंक द्वारा बिना किसी कानूनी नोटिस के खाता फ्रीज किया गया व अनुचित शुल्क काटा गया।",
+        "en_det": "The bank unlawfully froze my savings account without prior notice and levied unjustified penalties."
+    },
+    19: {
+        "hi_name": "बिजली विभाग मनमानी व ट्रांसफार्मर खराबी",
+        "en_name": "Electricity Discom High Bills & Burnt Transformer",
+        "hi_act": "विद्युत अधिनियम 2003 नियमावली",
+        "en_act": "Electricity Act 2003 (Consumer Rights Rules)",
+        "hi_auth": "उपभोक्ता फोरम (CGRF) व कार्यपालक अभियंता",
+        "en_auth": "Consumer Grievance Redressal Forum (CGRF) & EE",
+        "hi_rule": "जला हुआ ट्रांसफार्मर ग्रामीण क्षेत्र में 48 घंटे व शहरी में 24 घंटे में बदलना अनिवार्य है।",
+        "en_rule": "Burnt transformers must be replaced within 24-48 hours and arbitrary inflated bills corrected.",
+        "hi_det": "कई दिनों से ट्रांसफार्मर खराब है और विभाग द्वारा अत्यधिक फर्जी बिल भेजा गया है।",
+        "en_det": "The transformer has been non-functional for days and an exorbitant inflated bill was served."
+    },
+    20: {
+        "hi_name": "आयुष्मान कार्ड (PM-JAY) पर अस्पताल का इनकार",
+        "en_name": "Hospital Refusing Treatment on Ayushman Card",
+        "hi_act": "राष्ट्रीय स्वास्थ्य प्राधिकरण (NHA) अनुबंध नियम",
+        "en_act": "National Health Authority (NHA) Empanelment Rules",
+        "hi_auth": "स्टेट एंटी-फ्रॉड यूनिट (SAFU) व CMO",
+        "en_auth": "State Anti-Fraud Unit (SAFU) & CMO",
+        "hi_rule": "सूचीबद्ध अस्पताल आयुष्मान कार्ड धारक को मना नहीं कर सकता; उल्लंघन पर पैनल रद्द होता है।",
+        "en_rule": "Empaneled hospitals cannot deny free cashless treatment; violation cancels commercial registration.",
+        "hi_det": "सक्रिय आयुष्मान कार्ड होने के बावजूद निजी अस्पताल द्वारा निशुल्क इलाज से मना किया गया।",
+        "en_det": "Despite holding an active Ayushman card, the hospital refused cashless admission and emergency care."
+    },
+    21: {
+        "hi_name": "पीएम आवास योजना में रिश्वत की मांग",
+        "en_name": "Bribery & Commission Demand in PM Awas Yojana",
+        "hi_act": "भ्रष्टाचार निवारण अधिनियम",
+        "en_act": "Prevention of Corruption Act & PMAY Grievance Rules",
+        "hi_auth": "निगरानी ब्यूरो (Vigilance) व DDC",
+        "en_auth": "Vigilance Bureau & District Ombudsman",
+        "hi_rule": "आवास योजना के पैसे में कमीशन मांगना संज्ञेय भ्रष्टाचार अपराध है।",
+        "en_rule": "Demanding commission for releasing PMAY housing funds constitutes a cognizable corruption offense.",
+        "hi_det": "आवास योजना की किस्त जारी करने के एवज में संबंधित कर्मी द्वारा रिश्वत की मांग की जा रही है।",
+        "en_det": "The local official is demanding illegal bribery to release the approved housing installment."
+    },
+    22: {
+        "hi_name": "प्राइवेट स्कूल में 25% फ्री एडमिशन (RTE)",
+        "en_name": "Private School Denying 25% Free Quota (RTE)",
+        "hi_act": "शिक्षा का अधिकार अधिनियम (RTE) धारा 12(1)(c)",
+        "en_act": "Right to Education (RTE) Act Section 12(1)(c)",
+        "hi_auth": "जिला शिक्षा पदाधिकारी (DEO) व बाल आयोग",
+        "en_auth": "District Education Officer (DEO) & Child Rights Commission",
+        "hi_rule": "हर प्राइवेट स्कूल में 25% सीटें गरीब बच्चों के लिए पूर्णतः निशुल्क आरक्षित हैं।",
+        "en_rule": "25% of seats in non-minority private schools are mandatorily free for underprivileged children.",
+        "hi_det": "RTE पात्रता होने के बावजूद संबंधित निजी स्कूल द्वारा छात्र का दाखिला लेने से इनकार किया गया।",
+        "en_det": "Despite official RTE allotment, the private school refused free admission to the child."
+    },
+    23: {
+        "hi_name": "नकली खाद-बीज से फसल बर्बादी का हर्जाना",
+        "en_name": "Fake Seeds & Adulterated Fertilizer Compensation",
+        "hi_act": "कीटनाशक अधिनियम 1968 व आवश्यक वस्तु कानून",
+        "en_act": "Insecticides Act & Essential Commodities Act",
+        "hi_auth": "जिला कृषि पदाधिकारी (DAO) व उपभोक्ता कोर्ट",
+        "en_auth": "District Agriculture Officer (DAO) & Consumer Court",
+        "hi_rule": "नकली सामग्री बेचने पर विक्रेता पर मुकदमा और किसान को 100% फसल नुकसान का हर्जाना मिलता है।",
+        "en_rule": "Selling sub-standard seeds/fertilizers invites criminal trial and 100% crop damage compensation.",
+        "hi_det": "दुकानदार द्वारा नकली बीज व खाद दिए जाने के कारण मेरी संपूर्ण खड़ी फसल नष्ट हो गई।",
+        "en_det": "Sub-standard seeds and adulterated fertilizers caused total loss of my standing agricultural crop."
+    },
+    24: {
+        "hi_name": "फसल बीमा (PMFBY) क्लेम चोरी व रिजेक्शन",
+        "en_name": "Crop Insurance (PMFBY) Claim Rejection",
+        "hi_act": "PMFBY परिचालन दिशानिर्देश",
+        "en_act": "PMFBY Operational Guidelines & Agricultural Laws",
+        "hi_auth": "जिला कृषि समिति (DLMC) व कृषि विभाग",
+        "en_auth": "District Agriculture Committee & Insurance Grievance Cell",
+        "hi_rule": "आपदा के समय 72 घंटे में सूचना देने पर 12% ब्याज सहित बीमा क्लेम मिलना अनिवार्य है।",
+        "en_rule": "Intimating within 72 hours of disaster obligates insurance companies to settle claims with 12% interest.",
+        "hi_det": "बाढ़/सूखा से हुए प्रमाणित नुकसान के बावजूद बीमा कंपनी द्वारा क्लेम को निरस्त किया गया।",
+        "en_det": "Despite verified localized crop inundation, the insurance company wrongfully rejected my claim."
+    },
+    25: {
+        "hi_name": "बुजुर्ग माता-पिता की संपत्ति हड़पना व प्रताड़ना",
+        "en_name": "Senior Citizen Parents Property Usurpation",
+        "hi_act": "वरिष्ठ नागरिक भरण-पोषण कानून 2007",
+        "en_act": "Senior Citizens Maintenance & Welfare Act 2007",
+        "hi_auth": "SDM ट्रिब्यूनल",
+        "en_auth": "Maintenance Tribunal (SDM Court)",
+        "hi_rule": "प्रताड़ित करने पर माता-पिता द्वारा संतानों को दी गई संपत्ति की रजिस्ट्री रद्द हो जाती है।",
+        "en_rule": "Tribunals hold sovereign power to revoke gift deeds and order eviction of abusive children.",
+        "hi_det": "संपत्ति नाम कराने के उपरांत संतानों द्वारा भोजन-दवा बंद कर घर से बेदखल करने की धमकी दी गई।",
+        "en_det": "After securing property registration, my children stopped food and medical care, attempting eviction."
+    },
+    26: {
+        "hi_name": "छात्र पेपर लीक व कोचिंग फीस वापसी",
+        "en_name": "Student Paper Leak Mafia & Coaching Fee Refund",
+        "hi_act": "लोक परीक्षा कानून 2024 व UGC नियम",
+        "en_act": "Public Examinations Act 2024 & UGC Fee Guidelines",
+        "hi_auth": "उच्च शिक्षा विभाग व उपभोक्ता आयोग",
+        "en_auth": "Higher Education Department & Consumer Commission",
+        "hi_rule": "कोचिंग बीच में छोड़ने पर शेष बची फीस वापस करना अनिवार्य है।",
+        "en_rule": "Institutes must refund unutilized course fees upon exit; paper leak invites up to 10-year prison.",
+        "hi_det": "कोर्स छोड़ने के बाद भी संस्थान द्वारा नियमानुसार बची हुई फीस वापस नहीं की गई।",
+        "en_det": "Upon legitimate course withdrawal, the coaching academy refused to refund the remaining prepaid fees."
+    },
+    27: {
+        "hi_name": "ट्रैफिक पुलिस द्वारा चाबी छीनना व डंडा मारना",
+        "en_name": "Traffic Police Snatching Keys & Illegal Seizure",
+        "hi_act": "मोटर वाहन अधिनियम व गृह मंत्रालय सर्कुलर",
+        "en_act": "Motor Vehicles Act & Ministry of Road Transport Directives",
+        "hi_auth": "यातायात पुलिस अधीक्षक (SP Traffic)",
+        "en_auth": "Superintendent of Police (Traffic)",
+        "hi_rule": "चलती गाड़ी से चाबी निकालना अपराध है; DigiLocker के डिजिटल दस्तावेज 100% मान्य हैं।",
+        "en_rule": "Police cannot snatch keys from running vehicles; DigiLocker documents are legally equivalent to originals.",
+        "hi_det": "वैध डिजिटल दस्तावेज दिखाने के बावजूद ट्रैफिक कर्मी द्वारा दुर्व्यवहार कर चाबी छीनी गई।",
+        "en_det": "Despite presenting valid DigiLocker documents, the traffic personnel misbehaved and forcefully snatched keys."
+    },
+    28: {
+        "hi_name": "मरीज का अधिकार (मेडिकल फाइल व सस्ती दवा)",
+        "en_name": "Patient Rights Charter (Medical File & Generic Meds)",
+        "hi_act": "NHRC पेशेंट राइट्स चार्टर",
+        "en_act": "NHRC Charter of Patients Rights & Medical Council Rules",
+        "hi_auth": "CMO व राज्य चिकित्सा परिषद",
+        "en_auth": "Chief Medical Officer & State Medical Council",
+        "hi_rule": "अस्पताल मरीज को मेडिकल फाइल और बाहर से सस्ती जेनेरिक दवा लेने से नहीं रोक सकता।",
+        "en_rule": "Hospitals cannot deny clinical case sheets or compel patients to purchase in-house branded medicines.",
+        "hi_det": "अस्पताल द्वारा केस फाइल देने से मना किया गया तथा बाहर से जेनेरिक दवा लाने पर रोक लगाई गई।",
+        "en_det": "The hospital refused access to treatment files and forcefully barred procuring cheaper generic medicines."
+    }
 }
 
-# ================= TAB 1: 28 LEGAL RIGHTS =================
+# ================= TAB 1: SECTION NUMBER, CUSTOM COMPLAINT & VIDEO DOWNLOAD =================
 if nav_choice == T["c_rights"]:
-    st.write(f"### {T['r_title']}")
-    st.caption(T['r_sub'])
+    st.write(f"### {T['title']} — {T['c_rights']}")
 
-    # NO WHITE BOX GLITCH - Number-based Clean Radio
-    num_choice = st.radio(
-        T["num_lbl"],
-        list(LEGAL_28.keys()),
-        format_func=lambda x: f"{x}. {LEGAL_28[x]['name']}",
-        key=f"num_{chosen_lang}"
+    filing_mode = st.radio(
+        T["mode_lbl"],
+        [T["mode_sec"], T["mode_custom"]],
+        horizontal=True
     )
 
-    case_info = LEGAL_28[num_choice]
+    if filing_mode == T["mode_sec"]:
+        sec_num = st.number_input(T["sec_prompt"], min_value=1, max_value=28, value=1, step=1)
+        curr_case = LEGAL_28[sec_num]
 
-    st.markdown(f"""
-    <div class="info-card">
-        <h3 style="color:#38BDF8; margin:0 0 6px 0;">📌 कानून: {case_info['act']}</h3>
-        <p style="margin:0; font-size:14px; color:#F8FAFC;"><b>सक्षम प्राधिकारी:</b> {case_info['auth']}</p>
-    </div>
-    """, unsafe_allow_html=True)
+        case_name = curr_case["en_name"] if is_eng else curr_case["hi_name"]
+        case_act = curr_case["en_act"] if is_eng else curr_case["hi_act"]
+        case_auth = curr_case["en_auth"] if is_eng else curr_case["hi_auth"]
+        case_rule = curr_case["en_rule"] if is_eng else curr_case["hi_rule"]
+        default_det = curr_case["en_det"] if is_eng else curr_case["hi_det"]
+
+        st.markdown(f"""
+        <div class="info-card">
+            <h3 style="color:#38BDF8; margin:0 0 6px 0;">{'Section' if is_eng else 'धारा/सेक्शन'} {sec_num}: {case_name}</h3>
+            <p style="margin:0; font-size:14px;"><b>{'Statute:' if is_eng else 'लागू अधिनियम:'}</b> {case_act}</p>
+            <p style="margin:4px 0 0 0; font-size:14px; color:#10B981;"><b>{'Authority:' if is_eng else 'सक्षम प्राधिकारी:'}</b> {case_auth}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        target_subject = f"Section {sec_num} ({case_name})" if is_eng else f"सेक्शन {sec_num} ({case_name})"
+        target_act = case_act
+        target_auth = case_auth
+        target_rule = case_rule
+
+    else:
+        st.info("✍️ " + ("Write your custom grievance details below:" if is_eng else "अपनी समस्या का शीर्षक और जो हुआ है वो नीचे साफ-साफ लिखें:"))
+        custom_subject = st.text_input(T["custom_sub_lbl"], value=T["custom_sub_val"])
+        target_subject = custom_subject
+        target_act = T["custom_act"]
+        target_auth = T["custom_auth"]
+        target_rule = T["custom_rule"]
+        default_det = T["custom_det"]
 
     col_v1, col_v2 = st.columns(2)
     with col_v1:
-        v_name = st.text_input(T["name_lbl"], value="साहिल कुमार", key=f"name_{chosen_lang}_{num_choice}")
+        v_name = st.text_input(T["name_lbl"], value=T["def_name"])
     with col_v2:
-        v_loc = st.text_input(T["city_lbl"], value="पश्चिम चंपारण, बिहार", key=f"city_{chosen_lang}_{num_choice}")
+        v_loc = st.text_input(T["city_lbl"], value=T["def_city"])
 
-    v_phone = st.text_input(T["phone_lbl"], value="7484878440", key=f"phone_{chosen_lang}_{num_choice}")
-    v_accused = st.text_input(T["acc_lbl"], value="संबंधित दोषी पक्ष / अधिकारी", key=f"acc_{chosen_lang}_{num_choice}")
-    v_details = st.text_area(T["det_lbl"], value=case_info["det"], height=95, key=f"det_{chosen_lang}_{num_choice}")
+    v_phone = st.text_input(T["phone_lbl"], value="7484878440")
+    v_accused = st.text_input(T["acc_lbl"], value=T["def_acc"])
+    v_details = st.text_area(T["det_lbl"], value=default_det, height=100)
 
-    if st.button(T['btn_draft'], key=f"btn_d_{chosen_lang}_{num_choice}"):
-        full_notice = f"""======================================================================
+    if st.button(T["btn_draft"]):
+        if is_eng:
+            final_notice = f"""======================================================================
+OFFICIAL FORMAL LEGAL NOTICE & STATUTORY COMPLAINT
+(Under: {target_act})
+Date: {today_str}
+
+To,
+1. {target_auth}, {v_loc}
+2. National Human Rights Commission (NHRC) / Legal Vigilance Board
+
+Subject: Urgent FIR, Statutory Prosecution & Restitution against '{v_accused}' for '{target_subject}'.
+
+Respected Authority,
+The complainant {v_name} (Mobile: +91 {v_phone}), resident of {v_loc}, submits:
+
+1. The complainant is a law-abiding citizen of India. The accused '{v_accused}' has flagrantly violated constitutional and statutory rights.
+2. Factual Summary of Injustice:
+"{v_details}"
+3. Statutory Provisions & Legal Shield:
+- {target_rule}
+
+Prayer for Relief:
+(a) Register immediate FIR under relevant penal provisions against '{v_accused}'.
+(b) Ensure full recovery of unpaid dues, statutory compensation, or protection without delay.
+(c) Safeguard the life and liberty of the complainant.
+
+Complainant:
+{v_name}
+Contact: +91 {v_phone}
+Digital Evidence Tracked: Maha Seva AI Sovereign Legal Mission
+======================================================================"""
+        else:
+            final_notice = f"""======================================================================
 आधिकारिक कानूनी विधिक शिकायत पत्र व नोटिस
-(अधिनियम: {case_info['act']})
+(अधिनियम: {target_act})
 दिनांक: {today_str}
 
 सेवा में,
-1. {case_info['auth']}, {v_loc}
+1. {target_auth}, {v_loc}
 2. राष्ट्रीय मानवाधिकार आयोग (NHRC) / विधिक निगरानी प्राधिकरण
 
-विषय: '{case_info['name']}' के संबंध में दोषी '{v_accused}' पर प्राथमिकी (FIR) व तत्काल दंडात्मक कार्रवाई बाबत।
+विषय: '{target_subject}' के संबंध में दोषी '{v_accused}' पर तत्काल कानूनी कार्रवाई व अधिकार रक्षा बाबत।
 
 महोदय,
 प्रार्थी {v_name} (मोबाइल: +91 {v_phone}), निवासी {v_loc} सादर सूचित करता है कि:
 
-1. यह कि प्रार्थी भारत का संविधान-सम्मत नागरिक है और विपक्षी '{v_accused}' द्वारा प्रार्थी के विधिक अधिकारों का खुला उल्लंघन किया गया है।
+1. यह कि प्रार्थी भारत का विधि-सम्मत नागरिक है और विपक्षी '{v_accused}' द्वारा प्रार्थी के विधिक अधिकारों का खुला उल्लंघन किया गया है।
 2. तथ्यात्मक घटनाक्रम (सच्चा विवरण):
 "{v_details}"
-3. विधिक नियम व प्रावधान:
-- {case_info['rule']}
+3. विधिक नियम व कानूनी आधार:
+- {target_rule}
 
-अतः सक्षम प्राधिकारी से प्रार्थना है कि दोषी '{v_accused}' के विरुद्ध सुसंगत कानूनी धाराओं में तत्काल प्राथमिकी दर्ज कर प्रार्थी को उसका संपूर्ण विधिक हक व सुरक्षा अविलंब प्रदान की जाए।
+अतः सक्षम प्राधिकारी से प्रार्थना है कि:
+(क) दोषी '{v_accused}' के विरुद्ध सुसंगत कानूनी धाराओं में तत्काल संज्ञान लेकर कड़ी प्राथमिकी दर्ज की जाए।
+(ख) प्रार्थी को उसका संपूर्ण विधिक हक, सुरक्षा अथवा मुआवजा अविलंब दिलाया जाए।
 
 भवदीय:
 {v_name}
 संपर्क सूत्र: +91 {v_phone}
-डिजिटल निगरानी: महा-सेवा AI राष्ट्रीय विधिक साक्षरता मिशन
+डिजिटल साक्ष्य सुरक्षित: महा-सेवा AI राष्ट्रीय विधिक साक्षरता मिशन
 ======================================================================"""
 
-        st.success("🟢 आधिकारिक विधिक नोटिस तैयार:")
-        st.text_area("📄 तैयार कानूनी दस्तावेज:", full_notice, height=220)
+        # BILINGUAL SUCCESS MESSAGE
+        st.success(T["success_msg"])
+        st.text_area(T["doc_box_lbl"], final_notice, height=220)
+
+        # 1. DOWNLOAD LEGAL NOTICE AS TEXT/DOCUMENT
+        st.download_button(
+            label=T["download_txt_btn"],
+            data=final_notice,
+            file_name=f"Legal_Notice_{today_str}.txt",
+            mime="text/plain"
+        )
+
+        # 2. LEGAL EXPLAINER TEMPLATE VIDEO
+        st.markdown("---")
+        st.write(f"### {T['video_title']}")
+        st.caption(T["video_sub"])
+
+        sample_video_url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+        st.video(sample_video_url)
+
+        st.markdown(f'<a href="{sample_video_url}" download="Legal_Awareness_Video.mp4" target="_blank" class="btn-blue">{T["download_video_btn"]}</a>', unsafe_allow_html=True)
 
         st.markdown(f"""
         <div class="caution-card">
-            <h3 style="color:#EF4444; margin:0 0 6px 0;">⚖️ इस मामले में आपका कानूनी कवच:</h3>
-            <p style="margin:0; font-size:14px; color:#FCA5A5;">{case_info['rule']}</p>
+            <h3 style="color:#EF4444; margin:0 0 6px 0;">{T['shield_title']}</h3>
+            <p style="margin:0; font-size:14px; color:#FCA5A5;">{target_rule}</p>
         </div>
         """, unsafe_allow_html=True)
 
-        enc_notice = urllib.parse.quote(full_notice)
-        st.markdown(f'<a href="https://wa.me/?text={enc_notice}" target="_blank" class="btn-green">{T["send_wa"]}</a>', unsafe_allow_html=True)
+        enc_legal = urllib.parse.quote(final_notice)
+        st.markdown(f'<a href="https://wa.me/?text={enc_legal}" target="_blank" class="btn-green">{T["send_wa"]}</a>', unsafe_allow_html=True)
 
 # ================= TAB 2: NIGHT SAFETY & LIVE GPS SOS =================
 elif nav_choice == T["c_sos"]:
@@ -607,7 +814,7 @@ elif nav_choice == T["c_sos"]:
     """
     components.html(siren_html, height=65)
 
-# ================= TAB 3: VOICE-TO-TEXT (माइक से बोलकर) =================
+# ================= TAB 3: VOICE-TO-TEXT =================
 elif nav_choice == T["c_voice"]:
     st.write("### 🎙️ बोलकर अपनी बात लिखें (Voice Input)")
     st.caption("जो भाई पढ़-लिख नहीं सकते, वे नीचे माइक बटन दबाकर बोलें — आपकी आवाज़ खुद टाइप हो जाएगी:")
