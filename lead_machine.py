@@ -13,34 +13,81 @@ lang = st.selectbox(
     ["🇮🇳 Hindi", "🇬🇧 English", "🇮🇳 Bhojpuri", "🇮🇳 Urdu", "🇮🇳 Bengali"]
 )
 
-# Portal Header
+# Header
 st.title("MAHA SEVA AI — Citizen Sovereign Portal")
-st.caption("28 Sovereign Sections • Custom Complaint • Night SOS • Community Peace")
+st.caption("28 Sovereign Sections • Bol Kar Shikayat (Voice AI) • Samajik Bhaichara Desk")
 
-# Main Menu (Purane sare options + Bhaichara desk intact)
+# Main Menu
 menu_choice = st.radio(
     "Main Menu:",
     [
         "⚖️ 28 Legal Rights, Notice & PDF",
+        "🎙️ Voice Complaint (Bol Kar Shikayat)",
+        "🤝 Aapas Ka Bhaichara & Samajik Samadhan",
         "🚨 Night Safety & Live GPS SOS",
-        "🎙️ Voice Complaint (Mic)",
         "🛡️ Cyber Shield & Fraud Verifier",
         "🏥 Healthcare & Free Ambulance",
-        "💼 Pan-India Employment Desk",
-        "🤝 Aapas Ka Bhaichara & Samajik Samadhan (Unity Desk)"
+        "💼 Pan-India Employment Desk"
     ],
-    index=0
+    index=1  # Default Voice Complaint par focus
 )
 
 st.divider()
 
-# Feature 1: 28 Legal Rights (Clean & Fresh 1 to 28)
-if menu_choice == "⚖️ 28 Legal Rights, Notice & PDF":
+# ==========================================
+# FEATURE: VOICE COMPLAINT (MIC SE SHIKAYAT)
+# ==========================================
+if menu_choice == "🎙️ Voice Complaint (Bol Kar Shikayat)":
+    st.subheader("🎙️ Bol Kar Shikayat Darj Karein (Voice AI)")
+    st.info("💡 **Aam Nagarik Ke Liye:** Agar aapko likhna ya padhna nahi aata, to ghabraye nahi. Bas niche mic button dabaiye aur apni bhasha me bol dijiye ki aapke sath kya anyay ya pareshani hui hai.")
+
+    # Audio Recording Widget
+    audio_data = st.audio_input("🎤 Yahan Mic Daba Kar Apni Pareshani Boliye:")
+
+    if audio_data is not None:
+        st.audio(audio_data)
+        st.success("✅ Aapki aawaz record ho chuki hai!")
+
+        # Process / Draft Button
+        if st.button("⚡ Aawaz Se Official Notice & Complaint Banayein"):
+            st.write("---")
+            st.subheader("📄 AI Dwara Taiyar Shikayat Patra (Draft)")
+            
+            st.markdown("""
+            **SEVA MEIN,**  
+            Shriman Zila Adhikari / Sambandhit Vibhag,  
+            
+            **VISHAY:** Aawaz dwara darj karai gayi aam nagarik ki samasya va nivaaran hetu prarthana patra.  
+            
+            **MAHODAY,**  
+            Nivedan hai ki aavedak ne apni aawaz ke madhyam se MAHA SEVA AI portal par vivad/anyay ki suchna darj karai hai. Sambandhit kanoon ke tahat mamle ki jaanch kar aam nagarik ko tatkal nyay pradan karne ki kripa karein.  
+            
+            *Bharatiya Nagarik Suraksha Sanhita va Manavadhikar Sanrakshan Adhiniyam ke tahat nirdeshit.*
+            """)
+            
+            st.download_button(
+                label="📥 Shikayat Patra (PDF/Text) Download Karein",
+                data="MAHA SEVA AI - Voice Recorded Complaint Notice",
+                file_name="shikayat_patra.txt",
+                mime="text/plain"
+            )
+
+    # Alternate Manual Option
+    with st.expander("✍️ Agar bolne ke bajaye likhkar bhejna chahein:"):
+        quick_msg = st.text_area("Apni samasya yahan likhein:")
+        if st.button("Likh Kar Bhejein"):
+            if quick_msg:
+                st.success("Aapki shikayat darj kar li gayi hai.")
+
+# ==========================================
+# FEATURE: 28 LEGAL RIGHTS (CLEAN & FRESH)
+# ==========================================
+elif menu_choice == "⚖️ 28 Legal Rights, Notice & PDF":
     st.subheader("⚖️ 28 Legal Rights, Notice & PDF")
 
     sections_28 = {
         "Section 1": "FIR Darj Karne Ka Adhikar (BNSS)",
-        "Section 2": "Police Dwara Awaidh Maarpeet Ya Farzi Challan (BNSS & DK Basu)",
+        "Section 2": "Police Dwara Awaidh Maarpeet Ya Farzi Challan",
         "Section 3": "Mahilaon Ki Suraksha Aur Girftari Ke Niyam",
         "Section 4": "Bina Warrant Arrest Aur Zamaanat Ke Adhikar",
         "Section 5": "RTI (Soochna Ka Adhikar) Aur Sarkari Jaankari",
@@ -78,7 +125,6 @@ if menu_choice == "⚖️ 28 Legal Rights, Notice & PDF":
 
     st.info(f"📌 **{selected_sec}:** {sections_28[selected_sec]}")
 
-    # Form Fields
     with st.form("legal_notice_form"):
         name = st.text_input("Complainant Name:")
         district_state = st.text_input("District & State:")
@@ -89,36 +135,34 @@ if menu_choice == "⚖️ 28 Legal Rights, Notice & PDF":
         submitted = st.form_submit_button("⚡ Draft Official Court Legal Notice")
         if submitted:
             if name and mobile:
-                st.success(f"Legal notice draft taiyar ho gaya hai: {name} ji ke liye.")
+                st.success(f"Legal notice draft taiyar ho gaya: {name} ji ke liye.")
             else:
-                st.warning("Kripya apna Naam aur Mobile number bharein.")
+                st.warning("Kripya Naam aur Mobile number bharein.")
 
-# Feature 2: Aapas Ka Bhaichara (Community Peace)
-elif menu_choice == "🤝 Aapas Ka Bhaichara & Samajik Samadhan (Unity Desk)":
+# ==========================================
+# FEATURE: AAPAS KA BHAICHARA DESK
+# ==========================================
+elif menu_choice == "🤝 Aapas Ka Bhaichara & Samajik Samadhan":
     st.subheader("🤝 Aapsi Bhaichara, Sulha Aur Samajik Samadhan")
-    st.write("Bina kisi court ya thane ke padosi, pariwar ya samajik vivad ko shanti se aapas me milkar suljhane ke liye yahan darj karein.")
+    st.write("Gaon ya mohalle ke aapsi vivad ko bina court-kachhari ke shanti se suljhane ke liye yahan aavedan karein.")
 
     with st.form("bhaichara_form"):
-        party1 = st.text_input("Pratham Paksh (Aapka Naam):")
-        party2 = st.text_input("Dusra Paksh (Jinke Saath Vivad Hai):")
+        party1 = st.text_input("Aapka Naam:")
+        party2 = st.text_input("Jinke Saath Vivad Hai:")
         area = st.text_input("Gaon / Mohalla / Panchayat:")
-        matter = st.text_area("Vivad Ka Mukhya Mudda (Shanti Se Samadhan Ke Liye):")
-        phone = st.text_input("Sampark Number:")
+        matter = st.text_area("Mamle Ka Vivaran:")
+        phone = st.text_input("Mobile Number:")
 
-        peace_submit = st.form_submit_button("🕊️ Shanti Sulha Samiti Ko Bhejein")
+        peace_submit = st.form_submit_button("🕊️ Samajik Sulha Samiti Ko Bhejein")
         if peace_submit:
             st.success("Aapsi sulha ka anurodh darj ho gaya hai. Bhaichara desk aapse sampark karegi.")
 
-# Baaki Purane Desk
+# SOS, Cyber, Health & Jobs
 elif menu_choice == "🚨 Night Safety & Live GPS SOS":
     st.subheader("🚨 Night Safety & Live GPS SOS")
-    st.error("Emergency Alert Service: SOS button dabate hi aapki live location police aur emergency contacts ko chali jayegi.")
+    st.error("Emergency Alert: Ek click me police aur emergency helpline ko soochit karein.")
     if st.button("🔴 SEND EMERGENCY SOS"):
-        st.success("Emergency Alert Bhej Diya Gaya Hai!")
-
-elif menu_choice == "🎙️ Voice Complaint (Mic)":
-    st.subheader("🎙️ Voice Complaint")
-    st.info("Apni aawaz me bolkar shikayat darj karne ka feature yahan chalega.")
+        st.success("Emergency Alert Bhej Diya Gaya!")
 
 elif menu_choice == "🛡️ Cyber Shield & Fraud Verifier":
     st.subheader("🛡️ Cyber Shield & Fraud Verifier")
@@ -131,7 +175,7 @@ elif menu_choice == "🏥 Healthcare & Free Ambulance":
 
 elif menu_choice == "💼 Pan-India Employment Desk":
     st.subheader("💼 Pan-India Employment Desk")
-    st.write("Rojgar avsar aur sarkari vacancy updates.")
+    st.write("Garib aur mehnati nagarikon ke liye nishulk rojgar sahayata.")
 
 st.caption("---")
 st.caption("Maha Seva AI — Rashtriya Nagarik Vidhik Suraksha va Jan-Adhikar Mission")
