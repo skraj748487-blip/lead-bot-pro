@@ -4,7 +4,7 @@ import urllib.parse
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Maha Seva AI",
+    page_title="Maha Seva AI — Gareebi & Shoshan Mukti Mission",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -17,13 +17,13 @@ current_time_str = datetime.now().strftime("%I:%M %p")
 LANG_UI = {
     "🇮🇳 हिन्दी": {
         "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "28 कानूनी धाराएँ • अपनी शिकायत • रात की सुरक्षा • PDF",
-        "c_rights": "⚖️ 28 विधिक अधिकार, नोटिस व PDF",
+        "sub": "गरीबी व शोषण मुक्ति मिशन • सरकारी हक • 28 कानूनी धाराएँ • रोजगार • PDF",
+        "c_rights": "⚖️ कानूनी हक व नोटिस जनरेटर",
+        "c_schemes": "🏛️ सरकारी योजना व राशन सहायता",
         "c_sos": "🚨 रात की सुरक्षा व लाइव GPS SOS",
         "c_voice": "🎙️ बोलकर शिकायत (माइक)",
         "c_fraud": "🛡️ साइबर फ्रॉड व मैसेज चेकर",
-        "c_health": "🏥 दवा व एम्बुलेंस सहायता",
-        "c_job": "💼 रोज़गार व हेल्पर डेस्क",
+        "c_job": "💼 सीधी नौकरी व ठेकेदार संपर्क",
         "sos_h": "🚨 24x7 रात की सुरक्षा व लाइव GPS SOS",
         "gps_btn": "📡 मेरा सटीक लाइव GPS पता निकालें",
         "victim_lbl": "आपका नाम:",
@@ -36,7 +36,7 @@ LANG_UI = {
         "name_lbl": "प्रार्थी का नाम:",
         "city_lbl": "जिला व राज्य:",
         "phone_lbl": "मोबाइल नंबर:",
-        "acc_lbl": "दोषी पक्ष / अधिकारी / कंपनी:",
+        "acc_lbl": "दोषी पक्ष / अधिकारी / ठेकेदार:",
         "det_lbl": "सच्चा घटनाक्रम विवरण:",
         "btn_draft": "⚡ आधिकारिक कानूनी नोटिस तैयार करें",
         "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार:",
@@ -45,13 +45,13 @@ LANG_UI = {
         "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
     },
     "🇬🇧 English": {
-        "title": "MAHA SEVA AI — Citizen Portal",
-        "sub": "28 Sovereign Sections • Custom Complaint • Night SOS • PDF",
-        "c_rights": "⚖️ 28 Legal Rights, Notice & PDF",
+        "title": "MAHA SEVA AI — Anti-Poverty & Rights Mission",
+        "sub": "Citizen Rights • Welfare Schemes • Legal Notices • Jobs • PDF",
+        "c_rights": "⚖️ Legal Rights & Notice Generator",
+        "c_schemes": "🏛️ Govt Schemes & PDS Ration Help",
         "c_sos": "🚨 Night Safety & Live GPS SOS",
         "c_voice": "🎙️ Voice Complaint (Mic)",
         "c_fraud": "🛡️ Cyber Shield & Fraud Verifier",
-        "c_health": "🏥 Healthcare & Free Ambulance",
         "c_job": "💼 Pan-India Employment Desk",
         "sos_h": "🚨 24x7 Night Safety & Live GPS SOS",
         "gps_btn": "📡 Fetch Live GPS Location Link",
@@ -65,7 +65,7 @@ LANG_UI = {
         "name_lbl": "Complainant Name:",
         "city_lbl": "District & State:",
         "phone_lbl": "Mobile Number:",
-        "acc_lbl": "Accused Party / Official / Agency:",
+        "acc_lbl": "Accused Party / Official / Contractor:",
         "det_lbl": "Factual Injustice Details:",
         "btn_draft": "⚡ Draft Official Court Legal Notice",
         "success_msg": "🟢 Official Legal Notice Ready:",
@@ -83,7 +83,7 @@ st.caption(T["sub"])
 
 nav_choice = st.radio(
     "Menu:",
-    [T["c_rights"], T["c_sos"], T["c_voice"], T["c_fraud"], T["c_health"], T["c_job"]],
+    [T["c_rights"], T["c_schemes"], T["c_sos"], T["c_voice"], T["c_fraud"], T["c_job"]],
     horizontal=True
 )
 
@@ -183,6 +183,15 @@ if nav_choice == T["c_rights"]:
         enc_legal = urllib.parse.quote(final_notice)
         st.markdown(f"[{T['send_wa']}](https://wa.me/?text={enc_legal})")
 
+elif nav_choice == T["c_schemes"]:
+    st.subheader(T["c_schemes"])
+    st.markdown("""
+    * **राशन कार्ड व अनाज अधिकार (NFSA):** कोटेदार अगर कम अनाज दे या अंगूठा लगवाकर राशन न दे तो सीधे 1967 या DSO को शिकायत करें।
+    * **पीएम आवास योजना (PMAY):** पक्के मकान की किस्त में अगर कोई घूस मांगे, तो तुरंत विजीलेंस पोर्टल पर शिकायत दर्ज कराएं।
+    * **आयुष्मान भारत (PM-JAY):** प्रति परिवार ₹5 लाख तक का सालाना मुफ्त इलाज। प्राइवेट अस्पताल मना करे तो 14555 पर शिकायत दर्ज करें।
+    * **पीएम किसान सम्मान निधि:** हर 4 महीने में ₹2,000 की सीधी बैंक किस्त। रुका हुआ पैसा निकालने के लिए e-KYC चेक करें।
+    """)
+
 elif nav_choice == T["c_sos"]:
     st.subheader(T["sos_h"])
     st.write("Emergency Helpline: **112** (Police) | **1090** (Women)")
@@ -250,13 +259,6 @@ elif nav_choice == T["c_fraud"]:
         else:
             st.success("🟢 कोई सीधा फ्रॉड लिंक नहीं मिला। फिर भी सतर्क रहें।")
 
-elif nav_choice == T["c_health"]:
-    st.subheader(T["c_health"])
-    st.write("फ्री एम्बुलेंस: **108** | मातृ-शिशु: **102**")
-    m_name = st.text_input("दवा का नाम:", value="Azithromycin 500")
-    if st.button("दवा भाव देखें"):
-        st.success(f"{m_name} जन औषधि केंद्र पर 70-80% सस्ती उपलब्ध है।")
-
 elif nav_choice == T["c_job"]:
     st.subheader(T["c_job"])
     city_in = st.text_input("नौकरी का शहर:", value="Surat")
@@ -267,4 +269,4 @@ elif nav_choice == T["c_job"]:
 
 st.markdown("---")
 st.caption("महा-सेवा AI — राष्ट्रीय नागरिक विधिक सुरक्षा व जन-अधिकार मिशन")
-    
+                                   
