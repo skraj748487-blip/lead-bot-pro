@@ -4,7 +4,7 @@ import urllib.parse
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Maha Seva AI",
+    page_title="महा-सेवा AI — राष्ट्रीय नागरिक विधिक सुरक्षा मिशन",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
@@ -42,10 +42,11 @@ LANG_UI = {
         "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार:",
         "download_txt": "📥 कानूनी शिकायत पत्र डाउनलोड करें (.txt)",
         "pdf_btn": "🖨️ कानूनी नोटिस को PDF में सेव/प्रिंट करें",
+        "shield_title": "⚖️ आपका कानूनी कवच:",
         "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
     },
     "🇬🇧 English": {
-        "title": "MAHA SEVA AI — Citizen Portal",
+        "title": "MAHA SEVA AI — Citizen Sovereign Portal",
         "sub": "28 Sovereign Sections • Custom Complaint • Night SOS • PDF",
         "c_rights": "⚖️ 28 Legal Rights, Notice & PDF",
         "c_sos": "🚨 Night Safety & Live GPS SOS",
@@ -71,69 +72,12 @@ LANG_UI = {
         "success_msg": "🟢 Official Legal Notice Ready:",
         "download_txt": "📥 Download Legal Notice (.txt)",
         "pdf_btn": "🖨️ Save as PDF / Print Notice",
+        "shield_title": "⚖️ Statutory Legal Protection:",
         "send_wa": "📲 Send Notice via WhatsApp"
-    },
-    "অসমীয়া (Assamese)": {
-        "title": "মহা-সেৱা AI",
-        "sub": "২৮টা আইনী অধিকাৰ • ৰাতিৰ সুৰক্ষা • PDF",
-        "c_rights": "⚖️ ২৮টা অধিকাৰ & PDF",
-        "c_sos": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS",
-        "c_voice": "🎙️ কণ্ঠৰে অভিযোগ",
-        "c_fraud": "🛡️ চাইবাৰ প্ৰৱঞ্চনা পৰীক্ষা",
-        "c_health": "🏥 ঔষধ & এম্বুলেন্স",
-        "c_job": "💼 নিয়োগ কেন্দ্ৰ",
-        "sos_h": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS",
-        "gps_btn": "📡 GPS স্থান চাওক",
-        "victim_lbl": "আপোনাৰ নাম:",
-        "loc_lbl": "স্থান:",
-        "sos_wa": "📲 SOS পঠিয়াওক",
-        "siren_btn": "🚨 ছাইৰেন বজাওক",
-        "mode_sec": "🔢 ধাৰা নম্বৰ (১-২৮)",
-        "mode_custom": "✍️ নিজৰ অভিযোগ",
-        "sec_prompt": "ধাৰা নম্বৰ (১-২৮):",
-        "name_lbl": "নাম:",
-        "city_lbl": "জিলা আৰু ৰাজ্য:",
-        "phone_lbl": "মবাইল:",
-        "acc_lbl": "অভিযুক্ত:",
-        "det_lbl": "বিৱৰণ:",
-        "btn_draft": "⚡ জাননী প্ৰস্তুত কৰক",
-        "success_msg": "🟢 জাননী প্ৰস্তুত হ'ল:",
-        "download_txt": "📥 ডাউনলোড (.txt)",
-        "pdf_btn": "🖨️ PDF প্ৰিণ্ট কৰক",
-        "send_wa": "📲 WhatsAppত পঠিয়াওক"
-    },
-    "বাংলা (Bengali)": {
-        "title": "মহা-সেবা AI",
-        "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • PDF",
-        "c_rights": "⚖️ ২৮টি আইনি অধিকার ও PDF",
-        "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
-        "c_voice": "🎙️ মুখে বলে অভিযোগ",
-        "c_fraud": "🛡️ সাইবার সুরক্ষা যাচাই",
-        "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স",
-        "c_job": "💼 কর্মসংস্থান ডেস্ক",
-        "sos_h": "🚨 ২৪x৭ নৈশ নিরাপত্তা ও লাইভ GPS SOS",
-        "gps_btn": "📡 আমার লাইভ GPS অবস্থান বের করুন",
-        "victim_lbl": "আপনার নাম:",
-        "loc_lbl": "বর্তমান অবস্থান:",
-        "sos_wa": "📲 ১-ক্লিকে SOS পাঠান",
-        "siren_btn": "🚨 সাইরেন বাজান",
-        "mode_sec": "🔢 ধারা নম্বর (১ থেকে ২৮)",
-        "mode_custom": "✍️ নিজের অভিযোগ লিখুন",
-        "sec_prompt": "ধারা নম্বর (১ থেকে ২৮):",
-        "name_lbl": "নাম:",
-        "city_lbl": "জেলা ও রাজ্য:",
-        "phone_lbl": "মোবাইল নম্বর:",
-        "acc_lbl": "অভিযুক্ত পক্ষ:",
-        "det_lbl": "ঘটনার বিবরণ:",
-        "btn_draft": "⚡ আইনি নোটিশ তৈরি করুন",
-        "success_msg": "🟢 আইনি নোটিশ তৈরি হয়েছে:",
-        "download_txt": "📥 ডাউনলোড করুন (.txt)",
-        "pdf_btn": "🖨️ PDF এ প্রিন্ট করুন",
-        "send_wa": "📲 হোয়াটসঅ্যাপে পাঠান"
     }
 }
 
-chosen_lang = st.radio("🌐 भाषा / Language:", list(LANG_UI.keys()), horizontal=True)
+chosen_lang = st.radio("🌐 भाषा चुनें / Select Language:", list(LANG_UI.keys()), horizontal=True)
 T = LANG_UI[chosen_lang]
 
 st.header(T["title"])
@@ -148,69 +92,130 @@ nav_choice = st.radio(
 st.markdown("---")
 
 SECTIONS = {
-    1: {"name": "Wage Theft / মজদूरी चोरी", "act": "Payment of Wages Act 1936", "auth": "Labour Commissioner & DM", "rule": "Withholding wages is illegal; 10x penalty and 18% interest.", "det": "2 months wages pending. Abuses and threats upon demanding payment."},
-    2: {"name": "Police Brutality / অবৈধ মাৰপিট", "act": "BNSS 2023 & DK Basu Directives", "auth": "SP & NHRC", "rule": "Assault without legal order attracts FIR under Sec 166A BNS.", "det": "Wrongful physical assault and false challan threats."},
-    3: {"name": "Hospital Refusing Emergency Care", "act": "Supreme Court Parmanand Katara Verdict", "auth": "CMO & Health Dept", "rule": "Refusing emergency treatment over advance money is illegal.", "det": "Hospital delayed emergency treatment demanding cash advance."},
-    4: {"name": "Workplace Injury & Disability", "act": "Employees Compensation Act 1923", "auth": "Compensation Commissioner", "rule": "Employer strictly liable for compensation and medical cost.", "det": "Duty injury occurred due to absence of safety equipment."},
-    5: {"name": "Loan App Extortion", "act": "RBI Fair Rules & Sec 308 BNS", "auth": "Cyber Cell & SP", "rule": "Unlicensed money lending and blackmailing are non-bailable.", "det": "Recovery agent threatening and blackmailing with private data."},
-    6: {"name": "Government Office Bribery (RTPS)", "act": "Right to Public Services Act", "auth": "Vigilance Bureau", "rule": "Deliberate delay attracts Rs 250-5000 daily penalty on official.", "det": "Services delayed demanding illegal gratification despite all papers."},
-    7: {"name": "MRP Overcharging", "act": "Legal Metrology Act 2009", "auth": "DSO & Consumer Affairs", "rule": "Charging above printed MRP invites penalty and license cancellation.", "det": "Vendor charged above printed MRP and delivered commodities under-weight."},
-    8: {"name": "Railway TTE Misconduct", "act": "Indian Railway Act", "auth": "RailMadad 139 & RPF", "rule": "TTE cannot misbehave or deboard forcefully.", "det": "TTE demanded illegal money and misbehaved aggressively."},
-    9: {"name": "Refusal to Register FIR", "act": "Supreme Court Lalita Kumari Guidelines", "auth": "SSP & CJM Court", "rule": "Refusing cognizable FIR invites penal action under Sec 166A BNS.", "det": "Station in-charge refused to register formal FIR on written complaint."},
-    10: {"name": "Land Grabbing", "act": "Section 145/144 BNSS", "auth": "SDM & Civil Court", "rule": "Administration must provide immediate stay against land grabbing.", "det": "Opposite party attempting forcible illegal land encroachment."}
+    1: {
+        "name": "मजदूरी या वेतन चोरी (Wage Theft)",
+        "act": "पेमेंट ऑफ वेजेस एक्ट 1936",
+        "auth": "श्रम आयुक्त (Labour Commissioner) व DM",
+        "rule": "मजदूरी दबाने पर श्रम विभाग 10 गुना हर्जाना और 18% ब्याज दिलवाता है।",
+        "det": "मैंने 2 महीने कार्य किया, जिसका कुल ₹24,000 बकाया है। मांगने पर गाली व धमकी दी जा रही है।"
+    },
+    2: {
+        "name": "पुलिस द्वारा अवैध मारपीट या फर्जी चालान",
+        "act": "भारतीय नागरिक सुरक्षा संहिता (BNSS) व डी.के. बसु गाइडलाइन्स",
+        "auth": "पुलिस अधीक्षक (SP) व NHRC",
+        "rule": "बिना जुर्म मारपीट पर धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व FIR होती है।",
+        "det": "संबंधित पुलिसकर्मी द्वारा अकारण अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।"
+    },
+    3: {
+        "name": "अस्पताल में इमरजेंसी इलाज से इनकार या शव रोकना",
+        "act": "सुप्रीम कोर्ट परमानंद कटारा फैसला",
+        "auth": "मुख्य चिकित्सा अधिकारी (CMO) व स्वास्थ्य विभाग",
+        "rule": "इमरजेंसी में पैसे मांगकर इलाज से इनकार या शव बंधक बनाना संज्ञेय अपराध है।",
+        "det": "अस्पताल द्वारा अग्रिम राशि की मांग कर गंभीर हालत में इलाज में जानबूझकर देरी की गई।"
+    },
+    4: {
+        "name": "कार्यस्थल पर हादसा व शारीरिक अपंगता",
+        "act": "कर्मचारी मुआवजा कानून 1923",
+        "auth": "मुआवजा आयुक्त एवं श्रम न्यायालय",
+        "rule": "ड्यूटी पर दुर्घटना होने पर ₹5 लाख से ₹20 लाख का मुआवजा व आजीवन पेंशन अनिवार्य है।",
+        "det": "सुरक्षा उपकरणों के अभाव में कार्यस्थल पर हादसा हुआ जिससे स्थायी दिव्यांगता आई।"
+    },
+    5: {
+        "name": "सूदखोर व फर्जी लोन ऐप्स द्वारा धमकी व ब्लैकमेल",
+        "act": "RBI दिशानिर्देश व धारा 308 BNS",
+        "auth": "साइबर सेल व पुलिस अधीक्षक (SP)",
+        "rule": "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है। सीधे FIR होती है।",
+        "det": "लोन एजेंट द्वारा घर आकर गाली-गलौज और फोटो वायरल करने का ब्लैकमेल किया जा रहा है।"
+    },
+    6: {
+        "name": "सरकारी दफ्तर में घूसखोरी व काम लटकाना (RTPS)",
+        "act": "सेवा का अधिकार कानून (RTPS Act)",
+        "auth": "निगरानी ब्यूरो (Vigilance Bureau)",
+        "rule": "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन ₹250 से ₹5000 जुर्माना कटता है।",
+        "det": "वैध कागजात देने के बावजूद रिश्वत के बिना कर्मचारी द्वारा बार-बार चक्कर लगवाए जा रहे हैं।"
+    },
+    7: {
+        "name": "दुकानदार या कोटेदार द्वारा MRP लूट व घटतौली",
+        "act": "लीगल मेट्रोलॉजी एक्ट 2009",
+        "auth": "जिला आपूर्ति पदाधिकारी (DSO) व उपभोक्ता फोरम",
+        "rule": "MRP से अधिक लेना या कम तौलना गैर-कानूनी है। ₹25,000 जुर्माना और दुकान सील होती है।",
+        "det": "दुकानदार द्वारा तय मूल्य से अधिक दाम वसूला गया और कम सामग्री दी गई।"
+    },
+    8: {
+        "name": "ट्रेन में टीटीई (TTE) द्वारा अवैध वसूली व बदसलूकी",
+        "act": "भारतीय रेलवे अधिनियम",
+        "auth": "रेलमदद 139 व RPF विजिलेंस",
+        "rule": "टीटीई को यात्री से बदतमीजी या धक्का देने का कोई हक नहीं। केवल सरकारी रसीद मान्य है।",
+        "det": "यात्रा के दौरान टीटीई द्वारा अवैध धन की मांग और विरोध करने पर बदसलूकी की गई।"
+    },
+    9: {
+        "name": "थाने में FIR दर्ज न करना (Zero FIR)",
+        "act": "सुप्रीम कोर्ट ललिता कुमारी दिशा-निर्देश",
+        "auth": "वरिष्ठ पुलिस अधीक्षक (SSP) व CJM कोर्ट",
+        "rule": "संज्ञेय अपराध में FIR न लिखने वाले पुलिस अधिकारी पर खुद धारा 166A BNS में FIR होती है।",
+        "det": "लिखित शिकायत देने के बावजूद थाना प्रभारी द्वारा प्रथम सूचना रिपोर्ट दर्ज नहीं की गई।"
+    },
+    10: {
+        "name": "पैतृक जमीन पर दबंगों का अवैध कब्जा",
+        "act": "धारा 145/144 BNSS",
+        "auth": "उप-विभागीय दंडाधिकारी (SDM) व सिविल कोर्ट",
+        "rule": "गरीब की पैतृक भूमि पर जबरन कब्जे की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे का नियम है।",
+        "det": "विपक्षी द्वारा प्रार्थी की वैध पैतृक जमीन पर बलपूर्वक अवैध कब्जे का प्रयास किया जा रहा है।"
+    }
 }
 
 if nav_choice == T["c_rights"]:
     st.subheader(T["c_rights"])
-    filing_mode = st.radio("Options:", [T["mode_sec"], T["mode_custom"]], horizontal=True)
+    filing_mode = st.radio("विकल्प चुनें:", [T["mode_sec"], T["mode_custom"]], horizontal=True)
 
     if filing_mode == T["mode_sec"]:
         sec_num = st.number_input(T["sec_prompt"], min_value=1, max_value=10, value=1, step=1)
         curr = SECTIONS[sec_num]
-        st.info("Section " + str(sec_num) + ": " + curr["name"] + "\n\nStatute: " + curr["act"])
-        target_sub = "Section " + str(sec_num) + " (" + curr["name"] + ")"
+        st.info("सेक्शन " + str(sec_num) + ": " + curr["name"] + "\n\nकानून: " + curr["act"])
+        target_sub = "सेक्शन " + str(sec_num) + " (" + curr["name"] + ")"
         target_act = curr["act"]
         target_auth = curr["auth"]
         target_rule = curr["rule"]
         default_det = curr["det"]
     else:
-        custom_sub = st.text_input(T["mode_custom"], value="Grievance / অভিযোগ")
+        custom_sub = st.text_input(T["mode_custom"], value="उत्पीड़न व अधिकार हनन बाबत")
         target_sub = custom_sub
-        target_act = "Constitution of India, BNS 2023"
-        target_auth = "District Magistrate (DM) / SP / Court"
-        target_rule = "Citizens are guaranteed statutory protection and speedy justice."
-        default_det = "The complainant is aggrieved by unlawful acts of accused party."
+        target_act = "भारतीय संविधान, बीएनएस 2023"
+        target_auth = "जिलाधिकारी (DM) / पुलिस अधीक्षक (SP) / सक्षम न्यायालय"
+        target_rule = "संविधान अनुसार प्रत्येक नागरिक को तुरंत कानूनी राहत व न्याय पाने का मौलिक अधिकार है।"
+        default_det = "प्रार्थी के साथ विपक्षी द्वारा अन्यायपूर्ण व गैर-कानूनी ढंग से प्रताड़ित किया गया है।"
 
     col1, col2 = st.columns(2)
     with col1:
-        v_name = st.text_input(T["name_lbl"], value="Sahil Kumar")
+        v_name = st.text_input(T["name_lbl"], value="साहिल कुमार")
     with col2:
-        v_loc = st.text_input(T["city_lbl"], value="West Champaran, Bihar")
+        v_loc = st.text_input(T["city_lbl"], value="पश्चिम चंपारण, बिहार")
 
     v_phone = st.text_input(T["phone_lbl"], value="7484878440")
-    v_accused = st.text_input(T["acc_lbl"], value="Opposite Accused Party")
+    v_accused = st.text_input(T["acc_lbl"], value="संबंधित दोषी पक्ष / अधिकारी")
     v_details = st.text_area(T["det_lbl"], value=default_det, height=90)
 
     if st.button(T["btn_draft"]):
         final_notice = (
             "======================================================================\n"
-            "FORMAL STATUTORY LEGAL NOTICE\n"
-            "Statute: " + target_act + "\n"
-            "Date: " + today_str + "\n\n"
-            "To,\n"
+            "आधिकारिक कानूनी विधिक शिकायत पत्र व नोटिस\n"
+            "अधिनियम: " + target_act + "\n"
+            "दिनांक: " + today_str + "\n\n"
+            "सेवा में,\n"
             "1. " + target_auth + ", " + v_loc + "\n\n"
-            "Subject: Legal action against '" + v_accused + "' regarding " + target_sub + "\n\n"
-            "Complainant: " + v_name + " (+91 " + v_phone + "), " + v_loc + "\n\n"
-            "Factual Summary:\n"
+            "विषय: '" + v_accused + "' के विरुद्ध " + target_sub + " बाबत कानूनी कार्रवाई।\n\n"
+            "प्रार्थी: " + v_name + " (+91 " + v_phone + "), " + v_loc + "\n\n"
+            "घटना का सच्चा विवरण:\n"
             + v_details + "\n\n"
-            "Statutory Rule:\n"
+            "लागू कानूनी नियम:\n"
             + target_rule + "\n\n"
-            "Complainant Signature: " + v_name + "\n"
+            "प्रार्थी हस्ताक्षर: " + v_name + "\n"
+            "डिजिटल ट्रैकिंग: महा-सेवा AI राष्ट्रीय विधिक साक्षरता मिशन\n"
             "======================================================================"
         )
 
         st.success(T["success_msg"])
-        st.text_area("Notice:", final_notice, height=200)
+        st.text_area("तैयार नोटिस:", final_notice, height=200)
 
         st.download_button(
             label=T["download_txt"],
@@ -228,7 +233,7 @@ if nav_choice == T["c_rights"]:
             "<script>"
             "function printDoc() {"
             "var win = window.open('', '', 'height=700,width=800');"
-            "win.document.write('<html><head><title>Legal Notice</title></head><body style=\"font-family:monospace; padding:20px;\">');"
+            "win.document.write('<html><head><title>कानूनी नोटिस</title></head><body style=\"font-family:monospace; padding:20px;\">');"
             "win.document.write('" + clean_print + "');"
             "win.document.write('</body></html>');"
             "win.document.close();"
@@ -243,7 +248,7 @@ if nav_choice == T["c_rights"]:
 
 elif nav_choice == T["c_sos"]:
     st.subheader(T["sos_h"])
-    st.write("Emergency Helpline: **112** (Police) | **1090** (Women)")
+    st.write("आपातकालीन नंबर: **112** (पुलिस) | **1090** (महिला सुरक्षा)")
 
     gps_comp = (
         "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
@@ -260,29 +265,29 @@ elif nav_choice == T["c_sos"]:
         "if (navigator.geolocation) {"
         "navigator.geolocation.getCurrentPosition(function(pos) {"
         "var mapUrl = 'https://maps.google.com/?q=' + pos.coords.latitude + ',' + pos.coords.longitude;"
-        "stat.innerHTML = 'Location found:';"
+        "stat.innerHTML = 'लोकेशन मिल गई:';"
         "val.style.display = 'block';"
         "val.value = mapUrl;"
-        "}, function(err) { stat.innerHTML = 'Please enable GPS/Location'; });"
-        "} else { stat.innerHTML = 'GPS not supported'; }"
+        "}, function(err) { stat.innerHTML = 'कृपया Location/GPS अनुमति दें'; });"
+        "} else { stat.innerHTML = 'GPS सपोर्ट नहीं है'; }"
         "}"
         "</script>"
     )
     components.html(gps_comp, height=120)
 
-    v_person_name = st.text_input(T["victim_lbl"], value="Sahil")
-    road_location = st.text_input(T["loc_lbl"], value="Main Road")
+    v_person_name = st.text_input(T["victim_lbl"], value="साहिल")
+    road_location = st.text_input(T["loc_lbl"], value="मुख्य सड़क / तिराहा")
 
-    sos_msg = "EMERGENCY SOS! Name: " + v_person_name + ". Location: " + road_location + ". Time: " + current_time_str
+    sos_msg = "आपातकालीन SOS अलर्ट! नाम: " + v_person_name + "। स्थान: " + road_location + "। समय: " + current_time_str
     enc_sos = urllib.parse.quote(sos_msg)
     st.markdown("[ " + T["sos_wa"] + " ](https://wa.me/917484878440?text=" + enc_sos + ")")
 
 elif nav_choice == T["c_voice"]:
     st.subheader(T["c_voice"])
-    st.info("Click mic and speak / মাইকত ক্লিক কৰি কথা কওক:")
+    st.info("माइक बटन दबाकर बोलें — आपकी आवाज़ यहाँ टाइप हो जाएगी:")
     voice_comp = (
         "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
-        "<button onclick='recVoice()' style='background:#EF4444; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>🎤 Speak</button>"
+        "<button onclick='recVoice()' style='background:#EF4444; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>🎤 बोलें (Click to Speak)</button>"
         "<textarea id='v_out' style='width:95%; height:70px; margin-top:8px; background:#030712; color:#38BDF8; padding:6px;'></textarea>"
         "</div>"
         "<script>"
@@ -300,28 +305,28 @@ elif nav_choice == T["c_voice"]:
 
 elif nav_choice == T["c_fraud"]:
     st.subheader(T["c_fraud"])
-    susp_msg = st.text_area("Check Message / বাৰ্তা পৰীক্ষা:", value="Electricity disconnected tonight at 9:30 PM. Call this number.")
-    if st.button("🚨 Verify"):
+    susp_msg = st.text_area("संदिग्ध मैसेज यहाँ डालें:", value="बिजली बिल जमा न होने के कारण आज रात 9:30 बजे बिजली काट दी जाएगी।")
+    if st.button("🚨 मैसेज की सच्चाई जाँचें"):
         low = susp_msg.lower()
-        if any(w in low for w in ["electricity", "बिजली", "lottery", "লটাৰী", "apk", "telegram"]):
-            st.error("🚨 100% PROVEN CYBER SCAM DETECTED!")
+        if any(w in low for w in ["electricity", "बिजली", "lottery", "लॉटरी", "apk", "telegram"]):
+            st.error("🚨 100% प्रमाणित साइबर फ्रॉड (SCAM DETECTED!) — किसी अनजान नंबर या लिंक पर क्लिक न करें।")
         else:
-            st.success("🟢 No obvious scam link found.")
+            st.success("🟢 कोई सीधा फ्रॉड लिंक नहीं मिला। फिर भी सतर्क रहें।")
 
 elif nav_choice == T["c_health"]:
     st.subheader(T["c_health"])
-    st.write("Emergency Ambulance: **108** | Mother & Child: **102**")
-    m_name = st.text_input("Medicine Salt:", value="Azithromycin 500")
-    if st.button("Check Price"):
-        st.success(m_name + " generic salt available at Jan Aushadhi Kendra (70-80% cheaper).")
+    st.write("फ्री एम्बुलेंस: **108** | मातृ-शिशु: **102**")
+    m_name = st.text_input("दवा का नाम:", value="Azithromycin 500")
+    if st.button("दवा भाव देखें"):
+        st.success(m_name + " जन औषधि केंद्र पर 70-80% सस्ती उपलब्ध है।")
 
 elif nav_choice == T["c_job"]:
     st.subheader(T["c_job"])
-    city_in = st.text_input("City:", value="Surat")
-    role_in = st.text_input("Role:", value="Factory Worker")
-    if st.button("Search Contractors"):
+    city_in = st.text_input("नौकरी का शहर:", value="Surat")
+    role_in = st.text_input("काम का पद:", value="Factory Worker")
+    if st.button("ठेकेदार लिस्ट देखें"):
         link = "https://www.google.com/maps/search/" + urllib.parse.quote(role_in + " contractor in " + city_in)
-        st.markdown("[ Open Directory ](" + link + ")")
+        st.markdown("[ ठेकेदार डायरेक्टरी खोलें ](" + link + ")")
 
 st.markdown("---")
-st.caption("Maha Seva AI — All-India Sovereign Citizen Legal & Welfare Infrastructure")
+st.caption("महा-सेवा AI — राष्ट्रीय नागरिक विधिक सुरक्षा व जन-अधिकार मिशन")
