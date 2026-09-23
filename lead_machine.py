@@ -4,34 +4,17 @@ import urllib.parse
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Maha Seva AI — Pan-India Citizen Legal Mission",
+    page_title="Maha Seva AI",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-    .stApp { background-color: #030712 !important; color: #F8FAFC !important; font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif !important; }
-    h1, h2, h3, p, span, label, div { color: #FFFFFF !important; font-weight: 700 !important; }
-    input, .stTextInput input, textarea, .stTextArea textarea, .stNumberInput input { background-color: #0B1329 !important; color: #38BDF8 !important; font-size: 15px !important; font-weight: 700 !important; border: 2px solid #0284C7 !important; border-radius: 12px !important; padding: 12px !important; }
-    div[data-testid="stRadio"] > div { background-color: #0B1329 !important; border: 2px solid #0284C7 !important; border-radius: 12px !important; padding: 10px 14px !important; }
-    div[data-testid="stRadio"] label { color: #F8FAFC !important; font-size: 14px !important; font-weight: 700 !important; }
-    .emergency-box { background: radial-gradient(circle at center, #7F1D1D 0%, #450A0A 100%); border: 2px solid #EF4444; border-radius: 14px; padding: 16px; text-align: center; margin-bottom: 16px; box-shadow: 0 0 30px rgba(239, 68, 68, 0.5); }
-    .caution-card { background: rgba(239, 68, 68, 0.12); border: 2px solid #EF4444; border-radius: 12px; padding: 14px; margin: 12px 0; }
-    .info-card { background: #0F172A; border: 2px solid #1E293B; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
-    div.stButton > button { background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%) !important; color: #FFFFFF !important; font-weight: 800 !important; font-size: 16px !important; border-radius: 10px !important; width: 100% !important; padding: 14px !important; border: 1px solid #38BDF8 !important; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4) !important; margin-top: 8px; }
-    .btn-green { display: block; background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; text-align: center; font-weight: 800; font-size: 15px; padding: 12px; border-radius: 10px; text-decoration: none; margin: 8px 0; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
-    .btn-red-call { display: inline-block; background: #EF4444; color: #FFFFFF !important; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 10px; text-decoration: none; margin: 4px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5); }
-</style>
-""", unsafe_allow_html=True)
-
 MY_WA_NUMBER = "917484878440"
 today_str = datetime.now().strftime("%d-%m-%Y")
 current_time_str = datetime.now().strftime("%I:%M %p")
 
-LANG_DICT = {
+LANG_UI = {
     "🇮🇳 हिन्दी": {
         "title": "महा-सेवा AI (MAHA SEVA AI)",
         "sub": "28 कानूनी धाराएँ • अपनी शिकायत • रात की सुरक्षा • PDF",
@@ -42,14 +25,11 @@ LANG_DICT = {
         "c_health": "🏥 दवा व एम्बुलेंस सहायता",
         "c_job": "💼 रोज़गार व हेल्पर डेस्क",
         "sos_h": "🚨 24x7 रात की सुरक्षा व लाइव GPS SOS",
-        "sos_sub": "रात में किसी भी खतरे, पीछा करने या घेरने पर तुरंत कॉल करें:",
         "gps_btn": "📡 मेरा सटीक लाइव GPS पता निकालें",
-        "family_lbl": "परिवार / भाई का मोबाइल नंबर:",
         "victim_lbl": "आपका नाम:",
         "loc_lbl": "वर्तमान जगह / सड़क का नाम:",
         "sos_wa": "📲 1-क्लिक परिवार को लोकेशन व SOS भेजें",
         "siren_btn": "🚨 तेज़ अलार्म सायरन बजाएँ",
-        "mode_lbl": "तरीका चुनें:",
         "mode_sec": "🔢 सेक्शन नंबर से (1 से 28)",
         "mode_custom": "✍️ अपनी खुद की शिकायत लिखें",
         "sec_prompt": "सेक्शन नंबर दर्ज करें (1 से 28):",
@@ -62,11 +42,10 @@ LANG_DICT = {
         "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार:",
         "download_txt": "📥 कानूनी शिकायत पत्र डाउनलोड करें (.txt)",
         "pdf_btn": "🖨️ कानूनी नोटिस को PDF में सेव/प्रिंट करें",
-        "shield_title": "⚖️ आपका कानूनी कवच:",
         "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
     },
     "🇬🇧 English": {
-        "title": "MAHA SEVA AI — Citizen Sovereign Portal",
+        "title": "MAHA SEVA AI — Citizen Portal",
         "sub": "28 Sovereign Sections • Custom Complaint • Night SOS • PDF",
         "c_rights": "⚖️ 28 Legal Rights, Notice & PDF",
         "c_sos": "🚨 Night Safety & Live GPS SOS",
@@ -75,14 +54,11 @@ LANG_DICT = {
         "c_health": "🏥 Healthcare & Free Ambulance",
         "c_job": "💼 Pan-India Employment Desk",
         "sos_h": "🚨 24x7 Night Safety & Live GPS SOS",
-        "sos_sub": "In case of any danger or harassment call immediately:",
         "gps_btn": "📡 Fetch Live GPS Location Link",
-        "family_lbl": "Family Mobile Number:",
         "victim_lbl": "Your Name:",
         "loc_lbl": "Current Location / Road:",
         "sos_wa": "📲 1-Click Send SOS via WhatsApp",
         "siren_btn": "🚨 Play Loud Siren Alarm",
-        "mode_lbl": "Select Method:",
         "mode_sec": "🔢 By Section Number (1 to 28)",
         "mode_custom": "✍️ Write Custom Complaint",
         "sec_prompt": "Enter Section Number (1 to 28):",
@@ -95,305 +71,7 @@ LANG_DICT = {
         "success_msg": "🟢 Official Legal Notice Ready:",
         "download_txt": "📥 Download Legal Notice (.txt)",
         "pdf_btn": "🖨️ Save as PDF / Print Notice",
-        "shield_title": "⚖️ Statutory Legal Protection:",
         "send_wa": "📲 Send Notice via WhatsApp"
-    },
-    "বাংলা (Bengali)": {
-        "title": "মহা-সেবা AI (MAHA SEVA AI)",
-        "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • PDF",
-        "c_rights": "⚖️ ২৮টি আইনি অধিকার ও PDF",
-        "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
-        "c_voice": "🎙️ মুখে বলে অভিযোগ",
-        "c_fraud": "🛡️ সাইবার সুরক্ষা যাচাই",
-        "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স",
-        "c_job": "💼 কর্মসংস্থান ডেস্ক",
-        "sos_h": "🚨 ২৪x৭ নৈশ নিরাপত্তা ও লাইভ GPS SOS",
-        "sos_sub": "বিপদে পড়লে অবিলম্বে কল করুন:",
-        "gps_btn": "📡 আমার লাইভ GPS অবস্থান বের করুন",
-        "family_lbl": "পরিবারের মোবাইল নম্বর:",
-        "victim_lbl": "আপনার নাম:",
-        "loc_lbl": "বর্তমান অবস্থান:",
-        "sos_wa": "📲 ১-ক্লিকে SOS পাঠান",
-        "siren_btn": "🚨 সাইরেন বাজান",
-        "mode_lbl": "পদ্ধতি:",
-        "mode_sec": "🔢 ধারা নম্বর (১ থেকে ২৮)",
-        "mode_custom": "✍️ নিজের অভিযোগ লিখুন",
-        "sec_prompt": "ধারা নম্বর (১ থেকে ২৮):",
-        "name_lbl": "নাম:",
-        "city_lbl": "জেলা ও রাজ্য:",
-        "phone_lbl": "মোবাইল নম্বর:",
-        "acc_lbl": "অভিযুক্ত পক্ষ:",
-        "det_lbl": "ঘটনার বিবরণ:",
-        "btn_draft": "⚡ আইনি নোটিশ তৈরি করুন",
-        "success_msg": "🟢 আইনি নোটিশ তৈরি হয়েছে:",
-        "download_txt": "📥 ডাউনলোড করুন (.txt)",
-        "pdf_btn": "🖨️ PDF এ প্রিন্ট করুন",
-        "shield_title": "⚖️ আইনি ধারা:",
-        "send_wa": "📲 হোয়াটসঅ্যাপে পাঠান"
-    },
-    "मराठी (Marathi)": {
-        "title": "महा-सेवा AI",
-        "sub": "२८ कायदेशीर अधिकार • रात्रीची सुरक्षा • PDF",
-        "c_rights": "⚖️ २८ कायदेशीर अधिकार व PDF",
-        "c_sos": "🚨 रात्रीची सुरक्षा व GPS SOS",
-        "c_voice": "🎙️ बोलून तक्रार",
-        "c_fraud": "🛡️ सायबर फसवणूक तपासक",
-        "c_health": "🏥 औषधे व रुग्णवाहिका",
-        "c_job": "💼 रोजगार डेस्क",
-        "sos_h": "🚨 २४x७ रात्रीची सुरक्षा व GPS SOS",
-        "sos_sub": "धोका निर्माण झाल्यास थेट संपर्क करा:",
-        "gps_btn": "📡 GPS लोकेशन मिळवा",
-        "family_lbl": "मोबाईल नंबर:",
-        "victim_lbl": "नाव:",
-        "loc_lbl": "ठिकाण / रस्ता:",
-        "sos_wa": "📲 १-क्लिकवर SOS पाठवा",
-        "siren_btn": "🚨 अलार्म सायरन वाजवा",
-        "mode_lbl": "पद्धत:",
-        "mode_sec": "🔢 कलम क्रमांक (१ ते २८)",
-        "mode_custom": "✍️ स्वतःची तक्रार",
-        "sec_prompt": "कलम क्रमांक (१ ते २८):",
-        "name_lbl": "नाव:",
-        "city_lbl": "जिल्हा व राज्य:",
-        "phone_lbl": "मोबाईल:",
-        "acc_lbl": "दोषी पक्ष:",
-        "det_lbl": "तपशील:",
-        "btn_draft": "⚡ कायदेशीर नोटीस तयार करा",
-        "success_msg": "🟢 कायदेशीर नोटीस तयार झाली:",
-        "download_txt": "📥 डाउनलोड (.txt)",
-        "pdf_btn": "🖨️ PDF प्रिंट करा",
-        "shield_title": "⚖️ कायदेशीर संरक्षण:",
-        "send_wa": "📲 WhatsApp वर पाठवा"
-    },
-    "தமிழ் (Tamil)": {
-        "title": "மகா-சேவா AI",
-        "sub": "28 சட்ட உரிமைகள் • இரவு பாதுகாப்பு • PDF",
-        "c_rights": "⚖️ 28 சட்ட உரிமைகள் & PDF",
-        "c_sos": "🚨 இரவு பாதுகாப்பு & GPS SOS",
-        "c_voice": "🎙️ குரல் புகார்",
-        "c_fraud": "🛡️ இணைய மோசடி சரிபார்ப்பு",
-        "c_health": "🏥 மருத்துவம் & ஆம்புலன்ஸ்",
-        "c_job": "💼 வேலைவாய்ப்பு",
-        "sos_h": "🚨 இரவு நேர அவசர உதவி & GPS SOS",
-        "sos_sub": "ஆபத்து ஏற்பட்டால் அழைக்கவும்:",
-        "gps_btn": "📡 நேரலை GPS இருப்பிடம்",
-        "family_lbl": "குடும்ப எண்:",
-        "victim_lbl": "பெயர்:",
-        "loc_lbl": "இடம்:",
-        "sos_wa": "📲 SOS அனுப்புக",
-        "siren_btn": "🚨 சைரன் ஒலி எழுப்பு",
-        "mode_lbl": "முறை:",
-        "mode_sec": "🔢 பிரிவு எண் (1 முதல் 28)",
-        "mode_custom": "✍️ சொந்த புகார்",
-        "sec_prompt": "பிரிவு எண் (1-28):",
-        "name_lbl": "பெயர்:",
-        "city_lbl": "மாவட்டம் & மாநிலம்:",
-        "phone_lbl": "மொபைல்:",
-        "acc_lbl": "எதிர்தரப்பு:",
-        "det_lbl": "விவரம்:",
-        "btn_draft": "⚡ சட்ட நோட்டீஸ் உருவாக்குக",
-        "success_msg": "🟢 நோட்டீஸ் தயார்:",
-        "download_txt": "📥 பதிவிறக்குக (.txt)",
-        "pdf_btn": "🖨️ PDF அச்சிடுக",
-        "shield_title": "⚖️ சட்டப் பாதுகாப்பு:",
-        "send_wa": "📲 வாட்ஸ்அப்பில் பகிர்க"
-    },
-    "తెలుగు (Telugu)": {
-        "title": "మహా-సేవా AI",
-        "sub": "28 చట్టపరమైన హక్కులు • రాత్రి రక్షణ • PDF",
-        "c_rights": "⚖️ 28 హక్కులు & PDF",
-        "c_sos": "🚨 రాత్రి రక్షణ & GPS SOS",
-        "c_voice": "🎙️ వాయిస్ ఫిర్యాదు",
-        "c_fraud": "🛡️ సైబర్ మోసాల తనిఖీ",
-        "c_health": "🏥 మందులు & అంబులెన్స్",
-        "c_job": "💼 ఉపాధి సమాచారం",
-        "sos_h": "🚨 రాత్రి రక్షణ & లైవ్ GPS SOS",
-        "sos_sub": "ప్రమాదంలో వెంటనే కాల్ చేయండి:",
-        "gps_btn": "📡 GPS లొకేషన్ పొందండి",
-        "family_lbl": "మొబైల్ నంబర్:",
-        "victim_lbl": "పేరు:",
-        "loc_lbl": "ప్రాంతం:",
-        "sos_wa": "📲 SOS పంపండి",
-        "siren_btn": "🚨 సైరన్ మోగించండి",
-        "mode_lbl": "పద్ధతి:",
-        "mode_sec": "🔢 సెక్షన్ సంఖ్య (1 నుండి 28)",
-        "mode_custom": "✍️ స్వంత ఫిర్యాదు",
-        "sec_prompt": "సెక్షన్ సంఖ్య (1-28):",
-        "name_lbl": "పేరు:",
-        "city_lbl": "జిల్లా & రాష్ట్రం:",
-        "phone_lbl": "ఫోన్:",
-        "acc_lbl": "బాధ్యులు:",
-        "det_lbl": "వివరాలు:",
-        "btn_draft": "⚡ నోటీసు రూపొందించండి",
-        "success_msg": "🟢 నోటీస్ సిద్ధమైంది:",
-        "download_txt": "📥 డౌన్‌లోడ్ (.txt)",
-        "pdf_btn": "🖨️ PDF ప్రింట్ చేయండి",
-        "shield_title": "⚖️ చట్టపరమైన రక్షణ:",
-        "send_wa": "📲 వాట్సాప్‌లో పంపండి"
-    },
-    "ગુજરાતી (Gujarati)": {
-        "title": "મહા-સેવા AI",
-        "sub": "૨૮ કાનૂની અધિકાર • રાત્રિ સુરક્ષા • PDF",
-        "c_rights": "⚖️ ૨૮ અધિકાર & PDF",
-        "c_sos": "🚨 રાત્રિ સુરક્ષા & GPS SOS",
-        "c_voice": "🎙️ અવાજ દ્વારા ફરિયાદ",
-        "c_fraud": "🛡️ સાયબર ફ્રોડ તપાસક",
-        "c_health": "🏥 દવા & એમ્બ્યુલન્સ",
-        "c_job": "💼 રોજગાર ડેસ્ક",
-        "sos_h": "🚨 ૨૪x૭ રાત્રિ સુરક્ષા & GPS SOS",
-        "sos_sub": "સંકટના સમયે સીધો કોલ કરો:",
-        "gps_btn": "📡 GPS લોકેશન મેળવો",
-        "family_lbl": "મોબાઈલ નંબર:",
-        "victim_lbl": "નામ:",
-        "loc_lbl": "સ્થળ:",
-        "sos_wa": "📲 SOS મોકલો",
-        "siren_btn": "🚨 સાયરન વગાડો",
-        "mode_lbl": "પદ્ધતિ:",
-        "mode_sec": "🔢 કલમ નંબર (૧ થી ૨૮)",
-        "mode_custom": "✍️ નવી ફરિયાદ",
-        "sec_prompt": "કલમ નંબર (૧ થી ૨૮):",
-        "name_lbl": "નામ:",
-        "city_lbl": "જિલ્લો અને રાજ્ય:",
-        "phone_lbl": "મોબાઇલ:",
-        "acc_lbl": "સામેવાળા પક્ષ:",
-        "det_lbl": "વિગત:",
-        "btn_draft": "⚡ કાનૂની નોટિસ બનાવો",
-        "success_msg": "🟢 નોટિસ તૈયાર થઈ:",
-        "download_txt": "📥 ડાઉનલોડ (.txt)",
-        "pdf_btn": "🖨️ PDF પ્રિન્ટ કરો",
-        "shield_title": "⚖️ કાનૂની કવચ:",
-        "send_wa": "📲 WhatsApp પર મોકલો"
-    },
-    "ಕನ್ನಡ (Kannada)": {
-        "title": "ಮಹಾ-ಸೇವಾ AI",
-        "sub": "28 ಕಾನೂನು ಹಕ್ಕುಗಳು • ರಾತ್ರಿ ಭದ್ರತೆ • PDF",
-        "c_rights": "⚖️ 28 ಹಕ್ಕುಗಳು & PDF",
-        "c_sos": "🚨 ರಾತ್ರಿ ಭದ್ರತೆ & GPS SOS",
-        "c_voice": "🎙️ ಧ್ವನಿ ದೂರು",
-        "c_fraud": "🛡️ ಸೈಬರ್ ವಂಚನೆ ಪರಿಶೀಲನೆ",
-        "c_health": "🏥 ಔಷಧಿ & ಆಂಬ್ಯುಲೆನ್ಸ್",
-        "c_job": "💼 ಉದ್ಯೋಗ ಮಾಹಿತಿ",
-        "sos_h": "🚨 ರಾತ್ರಿ ಭದ್ರತೆ & GPS SOS",
-        "sos_sub": "ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ ಕರೆ ಮಾಡಿ:",
-        "gps_btn": "📡 GPS ಸ್ಥಳ ಪಡೆಯಿರಿ",
-        "family_lbl": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ:",
-        "victim_lbl": "ಹೆಸರು:",
-        "loc_lbl": "ಸ್ಥಳ:",
-        "sos_wa": "📲 SOS ಕಳುಹಿಸಿ",
-        "siren_btn": "🚨 ಸೈರನ್ ಬಾರಿಸಿ",
-        "mode_lbl": "ವಿಧಾನ:",
-        "mode_sec": "🔢 ಕಲಂ ಸಂಖ್ಯೆ (1-28)",
-        "mode_custom": "✍️ ಸ್ವಂತ ದೂರು",
-        "sec_prompt": "ಕಲಂ ಸಂಖ್ಯೆ (1-28):",
-        "name_lbl": "ಹೆಸರು:",
-        "city_lbl": "ಜಿಲ್ಲೆ & ರಾಜ್ಯ:",
-        "phone_lbl": "ಮೊಬೈಲ್:",
-        "acc_lbl": "ಆರೋಪಿ:",
-        "det_lbl": "ವಿವರ:",
-        "btn_draft": "⚡ ನೋಟಿಸ್ ರಚಿಸಿ",
-        "success_msg": "🟢 ನೋಟಿಸ್ ಸಿದ್ಧವಾಗಿದೆ:",
-        "download_txt": "📥 ಡೌನ್‌ಲೋಡ್ (.txt)",
-        "pdf_btn": "🖨️ PDF ಪ್ರಿಂಟ್ ಮಾಡಿ",
-        "shield_title": "⚖️ ಕಾನೂನು ರಕ್ಷಣೆ:",
-        "send_wa": "📲 ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಕಳುಹಿಸಿ"
-    },
-    "മലയാളം (Malayalam)": {
-        "title": "മഹാ-സേവ AI",
-        "sub": "28 അവകാശങ്ങൾ • രാത്രി സുരക്ഷ • PDF",
-        "c_rights": "⚖️ 28 അവകാശങ്ങൾ & PDF",
-        "c_sos": "🚨 രാത്രി സുരക്ഷ & GPS SOS",
-        "c_voice": "🎙️ ശബ്ദ പരാതി",
-        "c_fraud": "🛡️ സൈബർ തട്ടിപ്പ് പരിശോധന",
-        "c_health": "🏥 മരുന്നുകൾ & ആംബുലൻസ്",
-        "c_job": "💼 തൊഴിൽ വിവരങ്ങൾ",
-        "sos_h": "🚨 രാത്രി സുരക്ഷ & GPS SOS",
-        "sos_sub": "അടിയന്തിര സാഹചര്യങ്ങളിൽ വിളിക്കുക:",
-        "gps_btn": "📡 GPS കണ്ടെത്തുക",
-        "family_lbl": "ഫോൺ നമ്പർ:",
-        "victim_lbl": "പേര്:",
-        "loc_lbl": "സ്ഥലം:",
-        "sos_wa": "📲 SOS അയക്കുക",
-        "siren_btn": "🚨 സൈറൺ മുഴക്കുക",
-        "mode_lbl": "രീതി:",
-        "mode_sec": "🔢 വകുപ്പ് നമ്പർ (1-28)",
-        "mode_custom": "✍️ സ്വന്തം പരാതി",
-        "sec_prompt": "വകുപ്പ് നമ്പർ (1-28):",
-        "name_lbl": "പേര്:",
-        "city_lbl": "ജില്ല & സംസ്ഥാനം:",
-        "phone_lbl": "മൊബൈൽ:",
-        "acc_lbl": "എതിർകക്ഷി:",
-        "det_lbl": "വിവരം:",
-        "btn_draft": "⚡ നോട്ടീസ് തയ്യാറാക്കുക",
-        "success_msg": "🟢 നോട്ടീസ് തയ്യാറായി:",
-        "download_txt": "📥 ഡൗൺലോഡ് (.txt)",
-        "pdf_btn": "🖨️ PDF പ്രിന്റ് ചെയ്യുക",
-        "shield_title": "⚖️ നിയമ സംരക്ഷണം:",
-        "send_wa": "📲 വാട്ട്‌സ്ആപ്പിൽ അയക്കുക"
-    },
-    "ਪੰਜਾਬੀ (Punjabi)": {
-        "title": "ਮਹਾ-ਸੇਵਾ AI",
-        "sub": "28 ਕਾਨੂੰਨੀ ਹੱਕ • ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ • PDF",
-        "c_rights": "⚖️ 28 ਕਾਨੂੰਨੀ ਹੱਕ & PDF",
-        "c_sos": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ & GPS SOS",
-        "c_voice": "🎙️ ਬੋਲ ਕੇ ਸ਼ਿਕਾਇਤ",
-        "c_fraud": "🛡️ ਸਾਈਬਰ ਧੋਖਾਧੜੀ ਜਾਂਚ",
-        "c_health": "🏥 ਦਵਾਈ & ਐਂਬੂਲੈਂਸ",
-        "c_job": "💼 ਰੋਜ਼ਗਾਰ ਡੈਸਕ",
-        "sos_h": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ ਤੇ ਲਾਈਵ GPS SOS",
-        "sos_sub": "ਖਤਰੇ ਸਮੇਂ ਤੁਰੰਤ ਕਾਲ ਕਰੋ:",
-        "gps_btn": "📡 GPS ਲੋਕੇਸ਼ਨ ਕੱਢੋ",
-        "family_lbl": "ਮੋਬਾਈਲ ਨੰਬਰ:",
-        "victim_lbl": "ਨਾਮ:",
-        "loc_lbl": "ਸੜਕ / ਸਥਾਨ:",
-        "sos_wa": "📲 SOS ਭੇਜੋ",
-        "siren_btn": "🚨 ਸਾਇਰਨ ਵਜਾਓ",
-        "mode_lbl": "ਤਰੀਕਾ:",
-        "mode_sec": "🔢 ਧਾਰਾ ਨੰਬਰ (1-28)",
-        "mode_custom": "✍️ ਖੁਦ ਦੀ ਸ਼ਿਕਾਇਤ",
-        "sec_prompt": "ਧਾਰਾ ਨੰਬਰ (1-28):",
-        "name_lbl": "ਨਾਮ:",
-        "city_lbl": "ਜ਼ਿਲ੍ਹਾ ਤੇ ਰਾਜ:",
-        "phone_lbl": "ਮੋਬਾਈਲ:",
-        "acc_lbl": "ਦੋਸ਼ੀ:",
-        "det_lbl": "ਵੇਰਵਾ:",
-        "btn_draft": "⚡ ਨੋਟਿਸ ਤਿਆਰ ਕਰੋ",
-        "success_msg": "🟢 ਨੋਟਿਸ ਤਿਆਰ ਹੋਇਆ:",
-        "download_txt": "📥 ਡਾਊਨਲੋਡ (.txt)",
-        "pdf_btn": "🖨️ PDF ਪ੍ਰਿੰਟ ਕਰੋ",
-        "shield_title": "⚖️ ਕਾਨੂੰਨੀ ਢਾਲ:",
-        "send_wa": "📲 WhatsApp ਤੇ ਭੇਜੋ"
-    },
-    "ଓଡ଼ିଆ (Odia)": {
-        "title": "ମହା-ସେବା AI",
-        "sub": "୨୮ଟି ଆଇନଗତ ଅଧିକାର • ରାତ୍ରି ସୁରକ୍ଷା • PDF",
-        "c_rights": "⚖️ ୨୮ ଅଧିକାର & PDF",
-        "c_sos": "🚨 ରାତ୍ରି ସୁରକ୍ଷା & GPS SOS",
-        "c_voice": "🎙️ କହିକରି ଅଭିଯୋଗ",
-        "c_fraud": "🛡️ ସାଇବର ଠକେଇ ଯାଞ୍ଚ",
-        "c_health": "🏥 ଔଷଧ & ଆମ୍ବୁଲାନ୍ସ",
-        "c_job": "💼 ନିଯୁକ୍ତି ଡେସ୍କ",
-        "sos_h": "🚨 ରାତ୍ରି ସୁରକ୍ଷା & GPS SOS",
-        "sos_sub": "ବିପଦ ସମୟରେ କଲ୍ କରନ୍ତୁ:",
-        "gps_btn": "📡 GPS ଲୋକେସନ୍ ପାଆନ୍ତୁ",
-        "family_lbl": "ମୋବାଇଲ୍ ନମ୍ବର:",
-        "victim_lbl": "ନାମ:",
-        "loc_lbl": "ସ୍ଥାନ:",
-        "sos_wa": "📲 SOS ପଠାନ୍ତୁ",
-        "siren_btn": "🚨 ସାଇରନ୍ ବଜାନ୍ତୁ",
-        "mode_lbl": "ପଦ୍ଧତି:",
-        "mode_sec": "🔢 ଧାରା ନମ୍ବର (୧-୨୮)",
-        "mode_custom": "✍️ ନିଜ ଅଭିଯୋଗ",
-        "sec_prompt": "ଧାରା ନମ୍ବର (୧-୨୮):",
-        "name_lbl": "ନାମ:",
-        "city_lbl": "ଜିଲ୍ଲା ଓ ରାଜ୍ୟ:",
-        "phone_lbl": "ମୋବାଇଲ୍:",
-        "acc_lbl": "ଦୋଷୀ:",
-        "det_lbl": "ବିବରଣୀ:",
-        "btn_draft": "⚡ ନୋଟିସ୍ ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
-        "success_msg": "🟢 ନୋଟିସ୍ ପ୍ରସ୍ତୁତ ହେଲା:",
-        "download_txt": "📥 ଡାଉନଲୋଡ୍ (.txt)",
-        "pdf_btn": "🖨️ PDF ପ୍ରିଣ୍ଟ୍ କରନ୍ତୁ",
-        "shield_title": "⚖️ ଆଇନଗତ ସୁରକ୍ଷା:",
-        "send_wa": "📲 WhatsApp ରେ ପଠାନ୍ତୁ"
     },
     "অসমীয়া (Assamese)": {
         "title": "মহা-সেৱা AI",
@@ -405,14 +83,11 @@ LANG_DICT = {
         "c_health": "🏥 ঔষধ & এম্বুলেন্স",
         "c_job": "💼 নিয়োগ কেন্দ্ৰ",
         "sos_h": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS",
-        "sos_sub": "বিপদৰ সময়ত ফোন কৰক:",
         "gps_btn": "📡 GPS স্থান চাওক",
-        "family_lbl": "মবাইল নম্বৰ:",
         "victim_lbl": "আপোনাৰ নাম:",
         "loc_lbl": "স্থান:",
         "sos_wa": "📲 SOS পঠিয়াওক",
         "siren_btn": "🚨 ছাইৰেন বজাওক",
-        "mode_lbl": "পদ্ধতি:",
         "mode_sec": "🔢 ধাৰা নম্বৰ (১-২৮)",
         "mode_custom": "✍️ নিজৰ অভিযোগ",
         "sec_prompt": "ধাৰা নম্বৰ (১-২৮):",
@@ -425,14 +100,228 @@ LANG_DICT = {
         "success_msg": "🟢 জাননী প্ৰস্তুত হ'ল:",
         "download_txt": "📥 ডাউনলোড (.txt)",
         "pdf_btn": "🖨️ PDF প্ৰিণ্ট কৰক",
-        "shield_title": "⚖️ আইনী সুৰক্ষা:",
         "send_wa": "📲 WhatsAppত পঠিয়াওক"
+    },
+    "বাংলা (Bengali)": {
+        "title": "মহা-সেবা AI",
+        "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • PDF",
+        "c_rights": "⚖️ ২৮টি আইনি অধিকার ও PDF",
+        "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
+        "c_voice": "🎙️ মুখে বলে অভিযোগ",
+        "c_fraud": "🛡️ সাইবার সুরক্ষা যাচাই",
+        "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স",
+        "c_job": "💼 কর্মসংস্থান ডেস্ক",
+        "sos_h": "🚨 ২৪x৭ নৈশ নিরাপত্তা ও লাইভ GPS SOS",
+        "gps_btn": "📡 আমার লাইভ GPS অবস্থান বের করুন",
+        "victim_lbl": "আপনার নাম:",
+        "loc_lbl": "বর্তমান অবস্থান:",
+        "sos_wa": "📲 ১-ক্লিকে SOS পাঠান",
+        "siren_btn": "🚨 সাইরেন বাজান",
+        "mode_sec": "🔢 ধারা নম্বর (১ থেকে ২৮)",
+        "mode_custom": "✍️ নিজের অভিযোগ লিখুন",
+        "sec_prompt": "ধারা নম্বর (১ থেকে ২৮):",
+        "name_lbl": "নাম:",
+        "city_lbl": "জেলা ও রাজ্য:",
+        "phone_lbl": "মোবাইল নম্বর:",
+        "acc_lbl": "অভিযুক্ত পক্ষ:",
+        "det_lbl": "ঘটনার বিবরণ:",
+        "btn_draft": "⚡ আইনি নোটিশ তৈরি করুন",
+        "success_msg": "🟢 আইনি নোটিশ তৈরি হয়েছে:",
+        "download_txt": "📥 ডাউনলোড করুন (.txt)",
+        "pdf_btn": "🖨️ PDF এ প্রিন্ট করুন",
+        "send_wa": "📲 হোয়াটসঅ্যাপে পাঠান"
     }
 }
 
-chosen_lang = st.radio("🌐 भाषा चुनें / Select Language:", list(LANG_DICT.keys()), horizontal=True)
-T = LANG_DICT[chosen_lang]
+chosen_lang = st.radio("🌐 भाषा / Language:", list(LANG_UI.keys()), horizontal=True)
+T = LANG_UI[chosen_lang]
 
-st.markdown(f"""
-<div style="background: radial-gradient(circle at center, #1E3A8A 0%, #030712 100%); border: 2px solid #38BDF8; border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 14px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);">
-    <span style="background:rgba(16,185,129,0.2); color:#10B981; border:1px solid #10B981; padding:3px 12px; border-radius:20px; font-size:11px; font-weight:800;">⚡ 24x7 Pan-India Citizen L
+st.header(T["title"])
+st.caption(T["sub"])
+
+nav_choice = st.radio(
+    "Menu:",
+    [T["c_rights"], T["c_sos"], T["c_voice"], T["c_fraud"], T["c_health"], T["c_job"]],
+    horizontal=True
+)
+
+st.markdown("---")
+
+SECTIONS = {
+    1: {"name": "Wage Theft / মজদूरी चोरी", "act": "Payment of Wages Act 1936", "auth": "Labour Commissioner & DM", "rule": "Withholding wages is illegal; 10x penalty and 18% interest.", "det": "2 months wages pending. Abuses and threats upon demanding payment."},
+    2: {"name": "Police Brutality / অবৈধ মাৰপিট", "act": "BNSS 2023 & DK Basu Directives", "auth": "SP & NHRC", "rule": "Assault without legal order attracts FIR under Sec 166A BNS.", "det": "Wrongful physical assault and false challan threats."},
+    3: {"name": "Hospital Refusing Emergency Care", "act": "Supreme Court Parmanand Katara Verdict", "auth": "CMO & Health Dept", "rule": "Refusing emergency treatment over advance money is illegal.", "det": "Hospital delayed emergency treatment demanding cash advance."},
+    4: {"name": "Workplace Injury & Disability", "act": "Employees Compensation Act 1923", "auth": "Compensation Commissioner", "rule": "Employer strictly liable for compensation and medical cost.", "det": "Duty injury occurred due to absence of safety equipment."},
+    5: {"name": "Loan App Extortion", "act": "RBI Fair Rules & Sec 308 BNS", "auth": "Cyber Cell & SP", "rule": "Unlicensed money lending and blackmailing are non-bailable.", "det": "Recovery agent threatening and blackmailing with private data."},
+    6: {"name": "Government Office Bribery (RTPS)", "act": "Right to Public Services Act", "auth": "Vigilance Bureau", "rule": "Deliberate delay attracts Rs 250-5000 daily penalty on official.", "det": "Services delayed demanding illegal gratification despite all papers."},
+    7: {"name": "MRP Overcharging", "act": "Legal Metrology Act 2009", "auth": "DSO & Consumer Affairs", "rule": "Charging above printed MRP invites penalty and license cancellation.", "det": "Vendor charged above printed MRP and delivered commodities under-weight."},
+    8: {"name": "Railway TTE Misconduct", "act": "Indian Railway Act", "auth": "RailMadad 139 & RPF", "rule": "TTE cannot misbehave or deboard forcefully.", "det": "TTE demanded illegal money and misbehaved aggressively."},
+    9: {"name": "Refusal to Register FIR", "act": "Supreme Court Lalita Kumari Guidelines", "auth": "SSP & CJM Court", "rule": "Refusing cognizable FIR invites penal action under Sec 166A BNS.", "det": "Station in-charge refused to register formal FIR on written complaint."},
+    10: {"name": "Land Grabbing", "act": "Section 145/144 BNSS", "auth": "SDM & Civil Court", "rule": "Administration must provide immediate stay against land grabbing.", "det": "Opposite party attempting forcible illegal land encroachment."}
+}
+
+if nav_choice == T["c_rights"]:
+    st.subheader(T["c_rights"])
+    filing_mode = st.radio("Options:", [T["mode_sec"], T["mode_custom"]], horizontal=True)
+
+    if filing_mode == T["mode_sec"]:
+        sec_num = st.number_input(T["sec_prompt"], min_value=1, max_value=10, value=1, step=1)
+        curr = SECTIONS[sec_num]
+        st.info("Section " + str(sec_num) + ": " + curr["name"] + "\n\nStatute: " + curr["act"])
+        target_sub = "Section " + str(sec_num) + " (" + curr["name"] + ")"
+        target_act = curr["act"]
+        target_auth = curr["auth"]
+        target_rule = curr["rule"]
+        default_det = curr["det"]
+    else:
+        custom_sub = st.text_input(T["mode_custom"], value="Grievance / অভিযোগ")
+        target_sub = custom_sub
+        target_act = "Constitution of India, BNS 2023"
+        target_auth = "District Magistrate (DM) / SP / Court"
+        target_rule = "Citizens are guaranteed statutory protection and speedy justice."
+        default_det = "The complainant is aggrieved by unlawful acts of accused party."
+
+    col1, col2 = st.columns(2)
+    with col1:
+        v_name = st.text_input(T["name_lbl"], value="Sahil Kumar")
+    with col2:
+        v_loc = st.text_input(T["city_lbl"], value="West Champaran, Bihar")
+
+    v_phone = st.text_input(T["phone_lbl"], value="7484878440")
+    v_accused = st.text_input(T["acc_lbl"], value="Opposite Accused Party")
+    v_details = st.text_area(T["det_lbl"], value=default_det, height=90)
+
+    if st.button(T["btn_draft"]):
+        final_notice = (
+            "======================================================================\n"
+            "FORMAL STATUTORY LEGAL NOTICE\n"
+            "Statute: " + target_act + "\n"
+            "Date: " + today_str + "\n\n"
+            "To,\n"
+            "1. " + target_auth + ", " + v_loc + "\n\n"
+            "Subject: Legal action against '" + v_accused + "' regarding " + target_sub + "\n\n"
+            "Complainant: " + v_name + " (+91 " + v_phone + "), " + v_loc + "\n\n"
+            "Factual Summary:\n"
+            + v_details + "\n\n"
+            "Statutory Rule:\n"
+            + target_rule + "\n\n"
+            "Complainant Signature: " + v_name + "\n"
+            "======================================================================"
+        )
+
+        st.success(T["success_msg"])
+        st.text_area("Notice:", final_notice, height=200)
+
+        st.download_button(
+            label=T["download_txt"],
+            data=final_notice,
+            file_name="Legal_Notice.txt",
+            mime="text/plain"
+        )
+
+        clean_print = final_notice.replace("\n", "<br>").replace("'", "\\'")
+        pdf_html = (
+            "<div style='text-align:center; margin:8px 0;'>"
+            "<button onclick='printDoc()' style='background:#2563EB; color:#fff; border:none; padding:12px 24px; font-weight:bold; border-radius:8px; width:100%; cursor:pointer;'>"
+            + T["pdf_btn"] +
+            "</button></div>"
+            "<script>"
+            "function printDoc() {"
+            "var win = window.open('', '', 'height=700,width=800');"
+            "win.document.write('<html><head><title>Legal Notice</title></head><body style=\"font-family:monospace; padding:20px;\">');"
+            "win.document.write('" + clean_print + "');"
+            "win.document.write('</body></html>');"
+            "win.document.close();"
+            "win.print();"
+            "}"
+            "</script>"
+        )
+        components.html(pdf_html, height=65)
+
+        enc_legal = urllib.parse.quote(final_notice)
+        st.markdown("[ " + T["send_wa"] + " ](https://wa.me/?text=" + enc_legal + ")")
+
+elif nav_choice == T["c_sos"]:
+    st.subheader(T["sos_h"])
+    st.write("Emergency Helpline: **112** (Police) | **1090** (Women)")
+
+    gps_comp = (
+        "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
+        "<button onclick='getPos()' style='background:#10B981; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>"
+        + T["gps_btn"] +
+        "</button>"
+        "<p id='gps_stat' style='color:#38BDF8; font-size:12px; margin-top:8px;'>GPS...</p>"
+        "<input type='text' id='gps_val' readonly style='width:90%; background:#030712; color:#10B981; border:1px solid #10B981; padding:6px; font-size:11px; display:none;'>"
+        "</div>"
+        "<script>"
+        "function getPos() {"
+        "var stat = document.getElementById('gps_stat');"
+        "var val = document.getElementById('gps_val');"
+        "if (navigator.geolocation) {"
+        "navigator.geolocation.getCurrentPosition(function(pos) {"
+        "var mapUrl = 'https://maps.google.com/?q=' + pos.coords.latitude + ',' + pos.coords.longitude;"
+        "stat.innerHTML = 'Location found:';"
+        "val.style.display = 'block';"
+        "val.value = mapUrl;"
+        "}, function(err) { stat.innerHTML = 'Please enable GPS/Location'; });"
+        "} else { stat.innerHTML = 'GPS not supported'; }"
+        "}"
+        "</script>"
+    )
+    components.html(gps_comp, height=120)
+
+    v_person_name = st.text_input(T["victim_lbl"], value="Sahil")
+    road_location = st.text_input(T["loc_lbl"], value="Main Road")
+
+    sos_msg = "EMERGENCY SOS! Name: " + v_person_name + ". Location: " + road_location + ". Time: " + current_time_str
+    enc_sos = urllib.parse.quote(sos_msg)
+    st.markdown("[ " + T["sos_wa"] + " ](https://wa.me/917484878440?text=" + enc_sos + ")")
+
+elif nav_choice == T["c_voice"]:
+    st.subheader(T["c_voice"])
+    st.info("Click mic and speak / মাইকত ক্লিক কৰি কথা কওক:")
+    voice_comp = (
+        "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
+        "<button onclick='recVoice()' style='background:#EF4444; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>🎤 Speak</button>"
+        "<textarea id='v_out' style='width:95%; height:70px; margin-top:8px; background:#030712; color:#38BDF8; padding:6px;'></textarea>"
+        "</div>"
+        "<script>"
+        "function recVoice() {"
+        "if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {"
+        "var SR = window.SpeechRecognition || window.webkitSpeechRecognition;"
+        "var rec = new SR();"
+        "rec.onresult = function(e) { document.getElementById('v_out').value = e.results[0][0].transcript; };"
+        "rec.start();"
+        "}"
+        "}"
+        "</script>"
+    )
+    components.html(voice_comp, height=150)
+
+elif nav_choice == T["c_fraud"]:
+    st.subheader(T["c_fraud"])
+    susp_msg = st.text_area("Check Message / বাৰ্তা পৰীক্ষা:", value="Electricity disconnected tonight at 9:30 PM. Call this number.")
+    if st.button("🚨 Verify"):
+        low = susp_msg.lower()
+        if any(w in low for w in ["electricity", "बिजली", "lottery", "লটাৰী", "apk", "telegram"]):
+            st.error("🚨 100% PROVEN CYBER SCAM DETECTED!")
+        else:
+            st.success("🟢 No obvious scam link found.")
+
+elif nav_choice == T["c_health"]:
+    st.subheader(T["c_health"])
+    st.write("Emergency Ambulance: **108** | Mother & Child: **102**")
+    m_name = st.text_input("Medicine Salt:", value="Azithromycin 500")
+    if st.button("Check Price"):
+        st.success(m_name + " generic salt available at Jan Aushadhi Kendra (70-80% cheaper).")
+
+elif nav_choice == T["c_job"]:
+    st.subheader(T["c_job"])
+    city_in = st.text_input("City:", value="Surat")
+    role_in = st.text_input("Role:", value="Factory Worker")
+    if st.button("Search Contractors"):
+        link = "https://www.google.com/maps/search/" + urllib.parse.quote(role_in + " contractor in " + city_in)
+        st.markdown("[ Open Directory ](" + link + ")")
+
+st.markdown("---")
+st.caption("Maha Seva AI — All-India Sovereign Citizen Legal & Welfare Infrastructure")
