@@ -31,15 +31,22 @@ is_en = (c_lang == "🇬🇧 English")
 
 if is_en:
     UI = {
-        "title": "MAHA SEVA AI — Citizen Welfare Portal",
-        "sub": "Legal Protections • Artisan Jobs • Food Rescue • Medicine Desk • SOS",
-        "menu": ["⚖️ Legal Notice", "🛠️ Artisan Desk", "🍲 Food Rescue", "💊 Medicine Checker", "🌙 Direct Aid", "🚨 Night SOS", "🎙️ Voice Help"],
+        "title": "MAHA SEVA AI — Citizen & Worker Sovereign Portal",
+        "sub": "28 Legal Notices • Factory Accident Claim • Artisan Desk • Medicine Desk • SOS",
+        "menu": ["⚖️ Legal Notice", "🏭 Factory Injury & Compensation", "🛠️ Artisan Desk", "🍲 Food Rescue", "💊 Medicine Checker", "🌙 Direct Aid", "🚨 Night SOS", "🎙️ Voice Help"],
         "sec_h": "⚖️ Statutory Legal Notice Generator",
         "sec_prompt": "Select Section (1 to 10):",
         "name_lbl": "Complainant Name:", "city_lbl": "District & State:", "phone_lbl": "Mobile Number:",
         "acc_lbl": "Accused Party / Officer:", "det_lbl": "Factual Details:", "btn_draft": "⚡ Draft Court Legal Notice",
         "notice_success": "🟢 Legal Notice Drafted & Data Saved:",
         "dl_txt": "📥 Download Notice (.txt)", "pdf_btn": "🖨️ Print / Save PDF",
+        "inj_title": "🏭 Factory Accident & Injury Compensation Claim",
+        "inj_company": "Company / Factory Name & Address:",
+        "inj_post": "Designation / Department:",
+        "inj_date": "Date & Time of Accident:",
+        "inj_body": "Nature of Injury / Disability:",
+        "inj_evidence": "Available Evidence (CCTV / Doctor MLC / Colleagues / Gate Pass):",
+        "inj_btn": "⚡ Draft Statutory Compensation Claim Notice",
         "k_title": "🛠️ Artisan Desk (Welder, Plumber, Electrician)",
         "k_name": "Artisan Name:", "k_work": "Skill / Trade:", "k_city": "City / Town:",
         "k_save": "✅ Register Artisan", "k_success": "Saved directly to Founder Database!",
@@ -56,14 +63,21 @@ if is_en:
 else:
     UI = {
         "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "अखंड भारत जन-कल्याण • 28 कानूनी अधिकार • कारीगर रोजगार • दवा सहायता • SOS",
-        "menu": ["⚖️ 28 कानूनी नोटिस", "🛠️ कारीगर मंच", "🍲 लंगर व अन्न सेवा", "💊 दवा व जेनेरिक भाव", "🌙 सीधी मदद", "🚨 रात की सुरक्षा SOS", "🎙️ बोलकर शिकायत"],
+        "sub": "अखंड भारत जन-कल्याण • फैक्ट्री हादसा व मुआवजा दावा • 28 कानूनी धाराएँ • कारीगर मंच • SOS",
+        "menu": ["⚖️ 28 कानूनी नोटिस", "🏭 फैक्ट्री हादसा व मुआवजा दावा", "🛠️ कारीगर मंच", "🍲 लंगर व अन्न सेवा", "💊 दवा व जेनेरिक भाव", "🌙 सीधी मदद", "🚨 रात की सुरक्षा SOS", "🎙️ बोलकर शिकायत"],
         "sec_h": "⚖️ कानूनी नोटिस जनरेटर",
         "sec_prompt": "धारा संख्या चुनें (1 से 10):",
         "name_lbl": "प्रार्थी का नाम:", "city_lbl": "जिला व राज्य:", "phone_lbl": "मोबाइल नंबर:",
         "acc_lbl": "दोषी पक्ष / अधिकारी का नाम:", "det_lbl": "घटनाक्रम विवरण:", "btn_draft": "⚡ कानूनी नोटिस तैयार करें",
         "notice_success": "🟢 विधिक नोटिस तैयार और डेटाबेस में सुरक्षित:",
         "dl_txt": "📥 नोटिस डाउनलोड करें (.txt)", "pdf_btn": "🖨️ PDF प्रिंट / सेव करें",
+        "inj_title": "🏭 कंपनी/फैक्ट्री में चोट व कानूनी मुआवजा क्लेम (Employees Compensation Act)",
+        "inj_company": "कंपनी / फैक्ट्री का नाम व पता:",
+        "inj_post": "पद / कार्य विभाग (उदा: ऑपरेटर / वेल्डर / हेल्पर):",
+        "inj_date": "हादसे की तारीख व समय:",
+        "inj_body": "चोट / अंग क्षति का विवरण (उदा: हाथ फ्रैक्चर / उंगली कटना):",
+        "inj_evidence": "मौजूद सबूत (CCTV फुटेज / डॉक्टर MLC पर्ची / साथी मजदूर गवाह / हाजिरी रजिस्टर):",
+        "inj_btn": "⚡ सरकारी मुआवजा व कानूनी नोटिस तैयार करें",
         "k_title": "🛠️ हुनरमंद साथी — कारीगर मंच (वेल्डर/प्लंबर/इलेक्ट्रीशियन)",
         "k_name": "कारीगर का नाम:", "k_work": "काम का प्रकार:", "k_city": "शहर / कस्बा:",
         "k_save": "✅ नाम सुरक्षित सेव करें", "k_success": "बधाई! आपका नाम सीधे संस्थापक के डेटाबेस में दर्ज हो गया है।",
@@ -138,8 +152,60 @@ if choice == UI["menu"][0]:
         q_text = urllib.parse.quote(notice)
         st.markdown("[📲 Send via WhatsApp](https://wa.me/?text=" + q_text + ")")
 
-# 2. KARIGAR
+# 2. FACTORY ACCIDENT & COMPENSATION CLAIM
 elif choice == UI["menu"][1]:
+    st.subheader(UI["inj_title"])
+    st.info("कानूनी अधिकार: Employees' Compensation Act 1923 के तहत ड्यूटी पर घायल होने पर कंपनी को 100% इलाज, छुट्टी का पूरा वेतन और ₹3 से ₹20 लाख तक का कानूनी मुआवजा 30 दिन में देना अनिवार्य है।")
+
+    c1, c2 = st.columns(2)
+    w_name = c1.text_input("घायल मजदूर / पीड़ित का नाम:", value="साहिल कुमार")
+    w_city = c2.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
+    w_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
+    w_company = st.text_input(UI["inj_company"], value="ABC Manufacturing Pvt. Ltd., Industrial Area")
+    w_post = st.text_input(UI["inj_post"], value="मशीन ऑपरेटर / हेल्पर")
+    w_time = st.text_input(UI["inj_date"], value=f"{today}, सुबह 11:30 बजे")
+    w_injury = st.text_area(UI["inj_body"], value="मशीन में सुरक्षा गार्ड न होने के कारण दाहिने हाथ की उंगलियों में गंभीर चोट व फ्रैक्चर।")
+    w_evid = st.text_area(UI["inj_evidence"], value="अस्पताल की इमरजेंसी MLC पर्ची, ड्यूटी गेट पास, सीसीटीवी फुटेज और साथी मजदूर की गवाही मौजूद है।")
+
+    if st.button(UI["inj_btn"]):
+        save_entry("Accident Claim", w_name, w_phone, w_city, f"Company: {w_company} | Post: {w_post} | Injury: {w_injury}")
+        claim_notice = (
+            "======================================================================\n"
+            "STATUTORY WORKPLACE INJURY & COMPENSATION DEMAND NOTICE\n"
+            "(Under Section 10, Employees' Compensation Act, 1923 & ESI Act)\n"
+            "Date: " + today + "\n\n"
+            "To,\n"
+            "1. Managing Director / Factory Manager, " + w_company + "\n"
+            "2. The Commissioner for Employees' Compensation / Labour Court, " + w_city + "\n"
+            "3. Chief Inspector of Factories, State Labour Department\n\n"
+            "Subject: Immediate Cashless Treatment, Full Leave Wages & Statutory Disability Compensation regarding workplace accident.\n\n"
+            "Respected Authority / Management,\n"
+            "I, " + w_name + " (Mobile: +91 " + w_phone + "), employed as '" + w_post + "' at " + w_company + ", state as under:\n\n"
+            "1. FACTUAL OCCURRENCE: On " + w_time + ", while performing official duty, I sustained serious injuries: " + w_injury + "\n"
+            "2. PROVEN EVIDENCE ON RECORD: " + w_evid + "\n"
+            "3. STATUTORY LIABILITY: Under the Employees' Compensation Act 1923, the employer is strictly liable for 100% medical expenses, full salary for temporary disability period, and statutory compensation computed under Section 4 with 12% penal interest.\n\n"
+            "PRAYER / DEMAND:\n"
+            "(a) Bear all current and future medical treatment expenses without deduction.\n"
+            "(b) Disburse full leave wages and deposit statutory compensation before the Commissioner within 30 days.\n"
+            "(c) Strictly bar any unlawful termination or job harassment during recovery.\n\n"
+            "Aggrieved Worker: " + w_name + "\n"
+            "Contact: +91 " + w_phone + " | Resident: " + w_city + "\n"
+            "Certified via Maha Seva AI Sovereign Legal Welfare Mission\n"
+            "======================================================================"
+        )
+        st.success("🟢 फैक्ट्री हादसा कानूनी दावा तैयार व डेटाबेस में सुरक्षित:")
+        st.text_area("तैयार क्लेम नोटिस:", claim_notice, height=200)
+        st.download_button("📥 कानूनी क्लेम पत्र डाउनलोड करें (.txt)", claim_notice, file_name=f"Accident_Claim_{today}.txt")
+
+        c_claim = claim_notice.replace("\n", "<br>").replace("'", "\\'")
+        claim_pdf_html = "<div style='text-align:center;'><button onclick='pDoc()' style='background:#2563EB;color:#fff;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;'>🖨️ PDF प्रिंट / सेव करें</button></div><script>function pDoc(){var w=window.open('','','width=800,height=700');w.document.write('<html><body style=\"font-family:monospace;padding:20px;\">'+'" + c_claim + "'+'</body></html>');w.document.close();w.print();}</script>"
+        components.html(claim_pdf_html, height=50)
+
+        q_claim = urllib.parse.quote(claim_notice)
+        st.markdown("[📲 यह क्लेम नोटिस कंपनी व लेबर कमिश्नर को WhatsApp पर भेजें](https://wa.me/?text=" + q_claim + ")")
+
+# 3. KARIGAR
+elif choice == UI["menu"][2]:
     st.subheader(UI["k_title"])
     st.write("• **अकबर अली** — वेल्डर (Welder) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543210)\n• **राकेश शर्मा** — इलेक्ट्रीशियन (Electrician) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543211)\n• **मोहम्मद सलीम** — प्लंबर (Plumber) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543212)")
     st.markdown("---")
@@ -154,8 +220,8 @@ elif choice == UI["menu"][1]:
         else:
             st.error("Name & Phone required!")
 
-# 3. FOOD RESCUE
-elif choice == UI["menu"][2]:
+# 4. FOOD RESCUE
+elif choice == UI["menu"][3]:
     st.subheader(UI["l_title"])
     l_food = st.text_input(UI["l_desc"])
     l_place = st.text_input(UI["l_loc"], value="मेन मार्केट")
@@ -166,8 +232,8 @@ elif choice == UI["menu"][2]:
         st.success("Food Alert Registered!")
         st.markdown(f"[📲 Share on WhatsApp](https://wa.me/?text={urllib.parse.quote(msg)})")
 
-# 4. MEDICINE & GENERIC CHECKER
-elif choice == UI["menu"][3]:
+# 5. MEDICINE & GENERIC CHECKER
+elif choice == UI["menu"][4]:
     st.subheader(UI["m_title"])
     st.write("📞 **108** (मुफ्त एम्बुलेंस) | **102** (मातृ-शिशु एम्बुलेंस)")
     med_q = st.text_input(UI["m_input"], value="Azithromycin 500")
@@ -192,8 +258,8 @@ elif choice == UI["menu"][3]:
         </div>
         """, unsafe_allow_html=True)
 
-# 5. DIRECT AID
-elif choice == UI["menu"][4]:
+# 6. DIRECT AID
+elif choice == UI["menu"][5]:
     st.subheader(UI["aid_title"])
     d_type = st.selectbox("Type of Support:", ["कारीगर को औजार दिलाना", "गरीब परिवार को राशन", "दवा व इलाज सहायता"])
     d_amt = st.text_input("Amount (₹):", value="1000")
@@ -202,8 +268,8 @@ elif choice == UI["menu"][4]:
         save_entry("Aid Pledge", "Donor", d_phone, "Local", f"{d_type} | ₹{d_amt}")
         st.success("Pledge saved in Founder Database.")
 
-# 6. NIGHT SAFETY SOS
-elif choice == UI["menu"][5]:
+# 7. NIGHT SAFETY SOS
+elif choice == UI["menu"][6]:
     st.subheader(UI["sos_h"])
     st.write("Emergency Call: **112** (Police) | **1090** (Women Helpline)")
     
@@ -218,26 +284,7 @@ elif choice == UI["menu"][5]:
     s_html = "<div style='text-align:center;margin-top:10px;'><button onclick='sPlay()' style='background:#EF4444;color:#fff;padding:10px 20px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;'>🚨 Play Alarm Siren</button></div><script>function sPlay(){var a=new (window.AudioContext||window.webkitAudioContext)();var o=a.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(800,a.currentTime);o.frequency.linearRampToValueAtTime(1400,a.currentTime+0.3);o.connect(a.destination);o.start();o.stop(a.currentTime+3);}</script>"
     components.html(s_html, height=50)
 
-# 7. VOICE
-elif choice == UI["menu"][6]:
+# 8. VOICE
+elif choice == UI["menu"][7]:
     st.subheader(UI["voice_h"])
-    v_html = "<div style='text-align:center;'><button onclick='rVoice()' style='background:#EF4444;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;'>🎤 Click to Speak</button><br><textarea id='v_box' style='width:95%;height:70px;margin-top:8px;'></textarea></div><script>function rVoice(){var R=window.SpeechRecognition||window.webkitSpeechRecognition;var r=new R();r.onresult=function(e){document.getElementById('v_box').value=e.results[0][0].transcript;};r.start();}</script>"
-    components.html(v_html, height=130)
-
-# ADMIN PANEL
-st.markdown("---")
-with st.expander("🔐 संस्थापक गुप्त एडमिन पैनल (केवल साहिल अहमद के लिए)"):
-    adm_pass = st.text_input("पासवर्ड डालें:", type="password")
-    if adm_pass == "sahil786":
-        st.success("🟢 स्वागत है साहil भाई! आपका डेटाबेस सक्रिय है:")
-        if os.path.exists(DB_NAME):
-            df_view = pd.read_csv(DB_NAME)
-            st.dataframe(df_view, use_container_width=True)
-            st.download_button("📥 संपूर्ण एक्सेल डेटाबेस डाउनलोड करें", df_view.to_csv(index=False).encode('utf-8'), file_name="Maha_Seva_Master.csv", mime="text/csv")
-        else:
-            st.info("डेटाबेस अभी खाली है।")
-    elif adm_pass:
-        st.error("गलत पासवर्ड!")
-
-st.markdown("---")
-st.caption("🏛️ संस्थापक: साहिल अहमद (Sahil Ahmad) • महा-सेवा AI राष्ट्रीय विधिक व जन-कल्याण मिशन")
+    v_html = "<div style='text-align:center;'><button onclick='rVoice()' style='background:#EF4444;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;'>🎤 Click to Speak</button><br><textarea id='v_box' style='width:95%;height:70px;margin-top:8px;'></textarea></div><script>function rVoice(){var R=window.SpeechRecognition||window.webki
