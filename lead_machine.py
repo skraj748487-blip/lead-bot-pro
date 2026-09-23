@@ -3,130 +3,27 @@ import streamlit.components.v1 as components
 import urllib.parse
 from datetime import datetime
 
-# 1. Page Configuration
 st.set_page_config(
-    page_title="Maha Seva AI — Pan-India Citizen Legal Mission",
+    page_title="Maha Seva AI — Citizen Legal Mission",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 2. Universal Dark Theme CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
-
-    .stApp {
-        background-color: #030712 !important;
-        color: #F8FAFC !important;
-        font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif !important;
-    }
-
-    h1, h2, h3, p, span, label, div {
-        color: #FFFFFF !important;
-        font-weight: 700 !important;
-    }
-
-    input, .stTextInput input, textarea, .stTextArea textarea, .stNumberInput input {
-        background-color: #0B1329 !important;
-        color: #38BDF8 !important;
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        border: 2px solid #0284C7 !important;
-        border-radius: 12px !important;
-        padding: 12px !important;
-    }
-
-    div[data-testid="stRadio"] > div {
-        background-color: #0B1329 !important;
-        border: 2px solid #0284C7 !important;
-        border-radius: 12px !important;
-        padding: 10px 14px !important;
-    }
-    div[data-testid="stRadio"] label {
-        color: #F8FAFC !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-    }
-
-    .emergency-box {
-        background: radial-gradient(circle at center, #7F1D1D 0%, #450A0A 100%);
-        border: 2px solid #EF4444;
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
-        margin-bottom: 16px;
-        box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
-    }
-    .caution-card {
-        background: rgba(239, 68, 68, 0.12);
-        border: 2px solid #EF4444;
-        border-radius: 12px;
-        padding: 14px;
-        margin-top: 12px;
-        margin-bottom: 12px;
-    }
-    .info-card {
-        background: #0F172A;
-        border: 2px solid #1E293B;
-        border-radius: 12px;
-        padding: 14px;
-        margin-bottom: 12px;
-    }
-
-    div.stButton > button {
-        background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%) !important;
-        color: #FFFFFF !important;
-        font-weight: 800 !important;
-        font-size: 16px !important;
-        border-radius: 10px !important;
-        width: 100% !important;
-        padding: 14px !important;
-        border: 1px solid #38BDF8 !important;
-        box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4) !important;
-        margin-top: 8px;
-    }
-
-    .btn-green {
-        display: block;
-        background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-        color: #FFFFFF !important;
-        text-align: center;
-        font-weight: 800;
-        font-size: 15px;
-        padding: 12px;
-        border-radius: 10px;
-        text-decoration: none;
-        margin: 8px 0;
-        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-    }
-
-    .btn-blue {
-        display: block;
-        background: linear-gradient(90deg, #2563EB 0%, #1D4ED8 100%);
-        color: #FFFFFF !important;
-        text-align: center;
-        font-weight: 800;
-        font-size: 15px;
-        padding: 12px;
-        border-radius: 10px;
-        text-decoration: none;
-        margin: 8px 0;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-    }
-
-    .btn-red-call {
-        display: inline-block;
-        background: #EF4444;
-        color: #FFFFFF !important;
-        font-weight: 800;
-        font-size: 13px;
-        padding: 8px 14px;
-        border-radius: 10px;
-        text-decoration: none;
-        margin: 4px;
-        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5);
-    }
+    .stApp { background-color: #030712 !important; color: #F8FAFC !important; font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif !important; }
+    h1, h2, h3, p, span, label, div { color: #FFFFFF !important; font-weight: 700 !important; }
+    input, .stTextInput input, textarea, .stTextArea textarea, .stNumberInput input { background-color: #0B1329 !important; color: #38BDF8 !important; font-size: 15px !important; font-weight: 700 !important; border: 2px solid #0284C7 !important; border-radius: 12px !important; padding: 12px !important; }
+    div[data-testid="stRadio"] > div { background-color: #0B1329 !important; border: 2px solid #0284C7 !important; border-radius: 12px !important; padding: 10px 14px !important; }
+    div[data-testid="stRadio"] label { color: #F8FAFC !important; font-size: 14px !important; font-weight: 700 !important; }
+    .emergency-box { background: radial-gradient(circle at center, #7F1D1D 0%, #450A0A 100%); border: 2px solid #EF4444; border-radius: 14px; padding: 16px; text-align: center; margin-bottom: 16px; box-shadow: 0 0 30px rgba(239, 68, 68, 0.5); }
+    .caution-card { background: rgba(239, 68, 68, 0.12); border: 2px solid #EF4444; border-radius: 12px; padding: 14px; margin: 12px 0; }
+    .info-card { background: #0F172A; border: 2px solid #1E293B; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    div.stButton > button { background: linear-gradient(135deg, #0284C7 0%, #2563EB 100%) !important; color: #FFFFFF !important; font-weight: 800 !important; font-size: 16px !important; border-radius: 10px !important; width: 100% !important; padding: 14px !important; border: 1px solid #38BDF8 !important; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4) !important; margin-top: 8px; }
+    .btn-green { display: block; background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #FFFFFF !important; text-align: center; font-weight: 800; font-size: 15px; padding: 12px; border-radius: 10px; text-decoration: none; margin: 8px 0; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+    .btn-red-call { display: inline-block; background: #EF4444; color: #FFFFFF !important; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 10px; text-decoration: none; margin: 4px; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.5); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -134,296 +31,153 @@ MY_WA_NUMBER = "917484878440"
 today_str = datetime.now().strftime("%d-%m-%Y")
 current_time_str = datetime.now().strftime("%I:%M %p")
 
-# ALL 12 LANGUAGES COMPLETE MAPPING
-LANGUAGES = {
+LANG_UI = {
     "🇮🇳 हिन्दी": {
         "tag": "⚡ 24x7 अखंड भारत नागरिक व विधिक सुरक्षा मिशन",
         "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "28 कानूनी धाराएँ • अपनी शिकायत • रात की सुरक्षा • बोलकर शिकायत • PDF",
+        "sub": "28 कानूनी धाराएँ • अपनी शिकायत • रात की सुरक्षा • PDF",
         "cat_lbl": "📂 सेवा श्रेणी चुनें:",
         "c_rights": "⚖️ 28 विधिक अधिकार, नोटिस व PDF",
         "c_sos": "🚨 रात की सुरक्षा व लाइव GPS SOS",
-        "c_voice": "🎙️ बोलकर शिकायत दर्ज करें (माइक)",
+        "c_voice": "🎙️ बोलकर शिकायत (माइक)",
         "c_fraud": "🛡️ साइबर फ्रॉड व मैसेज चेकर",
         "c_health": "🏥 दवा व एम्बुलेंस सहायता",
         "c_job": "💼 रोज़गार व हेल्पर डेस्क",
         "sos_h": "🚨 24x7 रात की सुरक्षा व लाइव GPS SOS",
         "sos_sub": "रात में किसी भी खतरे, पीछा करने या घेरने पर तुरंत कॉल करें:",
-        "sos_c1": "📞 112 पुलिस आपातकाल",
-        "sos_c2": "📞 1090 वीमेन पावर लाइन",
-        "sos_c3": "📞 181 महिला हेल्पलाइन",
+        "sos_c1": "📞 112 पुलिस आपातकाल", "sos_c2": "📞 1090 वीमेन पावर लाइन", "sos_c3": "📞 181 महिला हेल्पलाइन",
         "sos_note": "(बिना इंटरनेट के भी सीधी कॉल लगेगी - 100% फ्री 24 घंटे)",
         "gps_btn": "📡 मेरा सटीक लाइव GPS पता निकालें",
-        "family_lbl": "परिवार / भाई / पिता का मोबाइल नंबर:",
-        "victim_lbl": "पीड़ित / आपका नाम:",
-        "loc_lbl": "वर्तमान जगह / सड़क का नाम:",
-        "sos_wa_btn": "📲 1-क्लिक परिवार को लोकेशन व SOS भेजें",
-        "siren_h": "🔊 पैनिक सायरन (हमलावर को भगाने हेतु)",
-        "siren_btn": "🚨 तेज़ अलार्म सायरन बजाएँ (Play Siren)",
-        "mode_lbl": "शिकायत दर्ज करने का तरीका चुनें:",
-        "mode_sec": "🔢 सेक्शन नंबर से चुनें (1 से 28 कानून)",
-        "mode_custom": "✍️ अपनी खुद की नई शिकायत लिखें (Custom Complaint)",
-        "sec_prompt": "सेक्शन नंबर दर्ज करें (1 से 28):",
-        "name_lbl": "पीड़ित / प्रार्थी का नाम:",
-        "city_lbl": "जिला व राज्य:",
-        "phone_lbl": "मोबाइल नंबर:",
-        "acc_lbl": "दोषी पक्ष / अधिकारी / कंपनी का नाम:",
-        "det_lbl": "सच्चा घटनाक्रम विवरण (Fact Details):",
-        "btn_draft": "⚡ आधिकारिक कानूनी नोटिस तैयार करें",
-        "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार:",
-        "doc_box_lbl": "📄 तैयार कानूनी दस्तावेज:",
-        "download_txt_btn": "📥 कानूनी शिकायत पत्र डाउनलोड करें (.txt)",
-        "pdf_btn": "🖨️ कानूनी नोटिस को PDF में सेव/प्रिंट करें",
-        "shield_title": "⚖️ इस मामले में आपका कानूनी कवच:",
-        "send_wa": "📲 यह शिकायत WhatsApp पर भेजें",
-        "def_name": "साहिल कुमार",
-        "def_city": "पश्चिम चंपारण, बिहार",
-        "def_acc": "संबंधित दोषी पक्ष / अधिकारी",
-        "custom_sub_lbl": "शिकायत का विषय (Subject):",
-        "custom_sub_val": "दबंगों व भ्रष्ट कर्मियों द्वारा अवैध उत्पीड़न बाबत",
-        "custom_act": "भारतीय संविधान, बीएनएस 2023 एवं संबंधित विशेष अधिनियम",
-        "custom_auth": "जिलाधिकारी (DM) / पुलिस अधीक्षक (SP) / सक्षम प्राधिकारी",
-        "custom_rule": "भारत के संविधान अनुसार प्रत्येक नागरिक को विधिक संरक्षण व तुरंत न्याय पाने का मौलिक अधिकार प्राप्त है।",
-        "custom_det": "प्रार्थी के साथ विपक्षी द्वारा अन्यायपूर्ण व गैर-कानूनी ढंग से प्रताड़ित किया गया है, जिसकी लिखित सूचना प्रस्तुत है।"
+        "family_lbl": "परिवार / भाई का मोबाइल नंबर:", "victim_lbl": "आपका नाम:", "loc_lbl": "वर्तमान जगह / सड़क का नाम:",
+        "sos_wa_btn": "📲 1-क्लिक परिवार को लोकेशन व SOS भेजें", "siren_btn": "🚨 तेज़ अलार्म सायरन बजाएँ",
+        "mode_lbl": "तरीका चुनें:", "mode_sec": "🔢 सेक्शन नंबर से (1 से 28)", "mode_custom": "✍️ अपनी खुद की शिकायत लिखें",
+        "sec_prompt": "सेक्शन नंबर दर्ज करें (1 से 28):", "name_lbl": "प्रार्थी का नाम:", "city_lbl": "जिला व राज्य:",
+        "phone_lbl": "मोबाइल नंबर:", "acc_lbl": "दोषी पक्ष / अधिकारी / कंपनी:", "det_lbl": "सच्चा घटनाक्रम विवरण:",
+        "btn_draft": "⚡ आधिकारिक कानूनी नोटिस तैयार करें", "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार:",
+        "download_txt_btn": "📥 कानूनी शिकायत पत्र डाउनलोड करें (.txt)", "pdf_btn": "🖨️ कानूनी नोटिस को PDF में सेव/प्रिंट करें",
+        "shield_title": "⚖️ आपका कानूनी कवच:", "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
     },
     "🇬🇧 English": {
         "tag": "⚡ 24x7 Pan-India Sovereign Citizen Legal Mission",
         "title": "MAHA SEVA AI — Citizen Sovereign Portal",
-        "sub": "28 Sovereign Sections • Custom Complaint • Night SOS • Voice Help • PDF",
+        "sub": "28 Sovereign Sections • Custom Complaint • Night SOS • PDF",
         "cat_lbl": "📂 Select Service Category:",
         "c_rights": "⚖️ 28 Legal Rights, Notice & PDF",
         "c_sos": "🚨 Night Safety & Live GPS SOS",
-        "c_voice": "🎙️ Voice-to-Text Complaint (Mic)",
+        "c_voice": "🎙️ Voice Complaint (Mic)",
         "c_fraud": "🛡️ Cyber Shield & Fraud Verifier",
         "c_health": "🏥 Healthcare & Free Ambulance",
         "c_job": "💼 Pan-India Employment Desk",
         "sos_h": "🚨 24x7 Night Safety & Live GPS SOS",
-        "sos_sub": "In case of any danger, stalking, or road harassment call immediately:",
-        "sos_c1": "📞 112 National Police",
-        "sos_c2": "📞 1090 Women Power Line",
-        "sos_c3": "📞 181 Women Crisis Line",
+        "sos_sub": "In case of any danger or harassment call immediately:",
+        "sos_c1": "📞 112 National Police", "sos_c2": "📞 1090 Women Power Line", "sos_c3": "📞 181 Women Crisis Line",
         "sos_note": "(Works without internet directly via SIM - 100% Free 24/7)",
-        "gps_btn": "📡 Fetch My Live GPS Location Link",
-        "family_lbl": "Family / Father / Brother Mobile Number:",
-        "victim_lbl": "Victim / Your Name:",
-        "loc_lbl": "Current Road / Landmark Location:",
-        "sos_wa_btn": "📲 1-Click Send SOS & Location via WhatsApp",
-        "siren_h": "🔊 Panic Alarm Siren (Deter Attackers)",
-        "siren_btn": "🚨 Play Loud Siren Alarm",
-        "mode_lbl": "Select Filing Method:",
-        "mode_sec": "🔢 Select by Section Number (1 to 28)",
-        "mode_custom": "✍️ Write Your Own Custom Complaint",
-        "sec_prompt": "Enter Section Number (1 to 28):",
-        "name_lbl": "Complainant Name:",
-        "city_lbl": "District & State:",
-        "phone_lbl": "Mobile Number:",
-        "acc_lbl": "Accused Party / Official / Agency:",
-        "det_lbl": "Factual Details of Injustice:",
-        "btn_draft": "⚡ Draft Official Court-Grade Legal Notice",
-        "success_msg": "🟢 Official Legal Notice & Document Ready:",
-        "doc_box_lbl": "📄 Prepared Legal Document:",
-        "download_txt_btn": "📥 Download Legal Notice File (.txt)",
-        "pdf_btn": "🖨️ Save as PDF / Print Official Notice",
-        "shield_title": "⚖️ Your Statutory Legal Protection:",
-        "send_wa": "📲 Send Notice via WhatsApp",
-        "def_name": "Sahil Kumar",
-        "def_city": "West Champaran, Bihar",
-        "def_acc": "Accused Employer / Officer / Agency",
-        "custom_sub_lbl": "Complaint Subject:",
-        "custom_sub_val": "Regarding Unlawful Harassment and Violation of Fundamental Rights",
-        "custom_act": "Constitution of India, BNS 2023 & Relevant Special Statutes",
-        "custom_auth": "District Magistrate (DM) / Superintendent of Police (SP)",
-        "custom_rule": "Every citizen has the guaranteed fundamental right to legal remedy and justice under the Constitution of India.",
-        "custom_det": "The complainant has been unlawfully aggrieved and harassed by the accused party, and formal relief is sought."
+        "gps_btn": "📡 Fetch Live GPS Location Link",
+        "family_lbl": "Family Mobile Number:", "victim_lbl": "Your Name:", "loc_lbl": "Current Location / Road:",
+        "sos_wa_btn": "📲 1-Click Send SOS via WhatsApp", "siren_btn": "🚨 Play Loud Siren Alarm",
+        "mode_lbl": "Select Method:", "mode_sec": "🔢 By Section Number (1 to 28)", "mode_custom": "✍️ Write Custom Complaint",
+        "sec_prompt": "Enter Section Number (1 to 28):", "name_lbl": "Complainant Name:", "city_lbl": "District & State:",
+        "phone_lbl": "Mobile Number:", "acc_lbl": "Accused Party / Official / Agency:", "det_lbl": "Factual Injustice Details:",
+        "btn_draft": "⚡ Draft Official Court Legal Notice", "success_msg": "🟢 Official Legal Notice Ready:",
+        "download_txt_btn": "📥 Download Legal Notice (.txt)", "pdf_btn": "🖨️ Save as PDF / Print Notice",
+        "shield_title": "⚖️ Statutory Legal Protection:", "send_wa": "📲 Send Notice via WhatsApp"
     },
     "বাংলা (Bengali)": {
-        "tag": "⚡ ২৪x৭ অখণ্ড ভারত নাগরিক আইনি মিশন",
-        "title": "মহা-সেবা AI (MAHA SEVA AI)",
-        "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • ভয়েস অভিযোগ • কর্মসংস্থান • PDF",
-        "cat_lbl": "📂 পরিষেবা বিভাগ নির্বাচন করুন:",
-        "c_rights": "⚖️ ২৮টি আইনি অধিকার ও নোটিশ",
-        "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
-        "c_voice": "🎙️ মুখে বলে অভিযোগ (মাইক)",
-        "c_fraud": "🛡️ সাইবার সুরক্ষা ও প্রতারণা যাচাই",
-        "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স সহায়তা",
-        "c_job": "💼 কর্মসংস্থান ও হেল্পার ডেস্ক",
-        "sos_h": "🚨 ২৪x৭ নৈশ নিরাপত্তা ও লাইভ GPS SOS",
-        "sos_sub": "রাস্তায় বিপদে পড়লে অবিলম্বে কল করুন:",
-        "sos_c1": "📞 ১১২ পুলিশ জরুরি সেবা",
-        "sos_c2": "📞 ১০৯০ মহিলা সুরক্ষা লাইন",
-        "sos_c3": "📞 ১৮১ মহিলা হেল্পলাইন",
-        "sos_note": "(ইন্টারনেট ছাড়াও সরাসরি কল করা যাবে - সম্পূর্ণ ফ্রি)",
-        "gps_btn": "📡 আমার লাইভ GPS অবস্থান বের করুন",
-        "family_lbl": "পরিবারের মোবাইল নম্বর:",
-        "victim_lbl": "আপনার নাম:",
-        "loc_lbl": "বর্তমান অবস্থান বা রাস্তার নাম:",
-        "sos_wa_btn": "📲 ১-ক্লিকে পরিবারকে লোকেশন ও SOS পাঠান",
-        "siren_h": "🔊 প্যানিক অ্যালার্ম সাইরেন",
-        "siren_btn": "🚨 জোরে সাইরেন বাজান (Play Siren)",
-        "mode_lbl": "অভিযোগের পদ্ধতি বেছে নিন:",
-        "mode_sec": "🔢 ধারা নম্বর অনুযায়ী (১ থেকে ২৮)",
-        "mode_custom": "✍️ নিজের নতুন অভিযোগ লিখুন",
-        "sec_prompt": "ধারা নম্বর লিখুন (১ থেকে ২৮):",
-        "name_lbl": "অভিযোগকারীর নাম:",
-        "city_lbl": "জেলা ও রাজ্য:",
-        "phone_lbl": "মোবাইল নম্বর:",
-        "acc_lbl": "অভিযুক্ত পক্ষ / থানা / ঠিকাদার:",
-        "det_lbl": "ঘটনার সম্পূর্ণ বিবরণ:",
-        "btn_draft": "⚡ আইনি অভিযোগ পত্র তৈরি করুন",
-        "success_msg": "🟢 আইনি নোটিশ সফলভাবে তৈরি হয়েছে:",
-        "doc_box_lbl": "📄 প্রস্তুতকৃত আইনি নোটিশ:",
-        "download_txt_btn": "📥 আইনি নোটিশ ডাউনলোড করুন (.txt)",
-        "pdf_btn": "🖨️ নোটিশটি PDF এ প্রিন্ট / সেভ করুন",
-        "shield_title": "⚖️ আপনার আইনি সুরক্ষার ধারা:",
-        "send_wa": "📲 হোয়াটসঅ্যাপে নোটিশ পাঠান",
-        "def_name": "সাহিল কুমার",
-        "def_city": "পশ্চিম চম্পারণ, বিহার",
-        "def_acc": "অভিযুক্ত পক্ষ / সংশ্লিষ্ট কর্মকর্তা",
-        "custom_sub_lbl": "অভিযোগের বিষয়:",
-        "custom_sub_val": "বেআইনি হয়রানি এবং অধিকার লঙ্ঘন প্রসঙ্গে",
-        "custom_act": "ভারতীয় সংবিধান ও বিএনএস ২০২৩ আইন",
-        "custom_auth": "জেলা শাসক (DM) / পুলিশ সুপার (SP)",
-        "custom_rule": "সংবিধানের অধীনে প্রতিটি নাগরিকের আইনি সুরক্ষা পাওয়ার পূর্ণ অধিকার রয়েছে।",
-        "custom_det": "অভিযুক্ত পক্ষ কর্তৃক অন্যায়ভাবে ক্ষতিগ্রস্ত হওয়ায় এই অভিযোগ দায়ের করা হচ্ছে।"
+        "tag": "⚡ ২৪x৭ অখণ্ড ভারত নাগরিক আইনি মিশন", "title": "মহা-সেবা AI (MAHA SEVA AI)", "sub": "২৮টি আইনি অধিকার • নৈশ নিরাপত্তা • PDF",
+        "cat_lbl": "📂 পরিষেবা বিভাগ:", "c_rights": "⚖️ ২৮টি আইনি অধিকার ও PDF", "c_sos": "🚨 নৈশ নিরাপত্তা ও GPS SOS",
+        "c_voice": "🎙️ মুখে বলে অভিযোগ", "c_fraud": "🛡️ সাইবার সুরক্ষা যাচাই", "c_health": "🏥 ওষুধ ও অ্যাম্বুলেন্স", "c_job": "💼 কর্মসংস্থান ডেস্ক",
+        "sos_h": "🚨 ২৪x৭ নৈশ নিরাপত্তা ও লাইভ GPS SOS", "sos_sub": "বিপদে পড়লে অবিলম্বে কল করুন:", "sos_c1": "📞 ১১২ পুলিশ", "sos_c2": "📞 ১০৯০ মহিলা সুরক্ষা", "sos_c3": "📞 ১৮১ হেল্পলাইন",
+        "sos_note": "(ইন্টারনেট ছাড়াও সরাসরি কল করা যাবে)", "gps_btn": "📡 আমার লাইভ GPS অবস্থান বের করুন", "family_lbl": "পরিবারের মোবাইল নম্বর:", "victim_lbl": "আপনার নাম:", "loc_lbl": "বর্তমান অবস্থান:",
+        "sos_wa_btn": "📲 ১-ক্লিকে SOS পাঠান", "siren_btn": "🚨 সাইরেন বাজান", "mode_lbl": "পদ্ধতি:", "mode_sec": "🔢 ধারা নম্বর (১ থেকে ২৮)", "mode_custom": "✍️ নিজের অভিযোগ লিখুন",
+        "sec_prompt": "ধারা নম্বর (১ থেকে ২৮):", "name_lbl": "নাম:", "city_lbl": "জেলা ও রাজ্য:", "phone_lbl": "মোবাইল নম্বর:", "acc_lbl": "অভিযুক্ত পক্ষ:", "det_lbl": "ঘটনার বিবরণ:",
+        "btn_draft": "⚡ আইনি নোটিশ তৈরি করুন", "success_msg": "🟢 আইনি নোটিশ তৈরি হয়েছে:", "download_txt_btn": "📥 ডাউনলোড করুন (.txt)", "pdf_btn": "🖨️ PDF এ প্রিন্ট করুন", "shield_title": "⚖️ আইনি ধারা:", "send_wa": "📲 হোয়াটসঅ্যাপে পাঠান"
     },
     "मराठी (Marathi)": {
-        "tag": "⚡ २४x७ अखंड भारत नागरिक कायदेशीर सुरक्षा मिशन",
-        "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "२८ कायदेशीर अधिकार • रात्रीची सुरक्षा • थेट नोकरी • PDF",
-        "cat_lbl": "📂 सेवा श्रेणी निवडा:",
-        "c_rights": "⚖️ २८ कायदेशीर अधिकार व नोटीस",
-        "c_sos": "🚨 रात्रीची सुरक्षा व GPS SOS",
-        "c_voice": "🎙️ बोलून तक्रार नोंदवा (माइक)",
-        "c_fraud": "🛡️ सायबर फसवणूक तपासक",
-        "c_health": "🏥 औषधे व रुग्णवाहिका",
-        "c_job": "💼 रोजगार व थेट नोकरी",
-        "sos_h": "🚨 २४x७ रात्रीची सुरक्षा व लाइव्ह GPS SOS",
-        "sos_sub": "रात्रीच्या वेळी कोणताही धोका निर्माण झाल्यास थेट संपर्क करा:",
-        "sos_c1": "📞 ११२ पोलीस आपत्कालीन",
-        "sos_c2": "📞 १०९० महिला हेल्पलाइन",
-        "sos_c3": "📞 १८१ महिला सुरक्षा",
-        "sos_note": "(इंटरनेट नसतानाही थेट कॉल लागेल - पूर्णपणे मोफत)",
-        "gps_btn": "📡 माझे लाइव्ह GPS लोकेशन मिळवा",
-        "family_lbl": "कुटुंबातील सदस्याचा मोबाईल नंबर:",
-        "victim_lbl": "तुमचे पूर्ण नाव:",
-        "loc_lbl": "सध्याचे ठिकाण / रस्ता:",
-        "sos_wa_btn": "📲 १-क्लिकवर कुटुंबाला SOS पाठवा",
-        "siren_h": "🔊 मोठ्या आवाजाचा सायरन",
-        "siren_btn": "🚨 अलार्म सायरन वाजवा (Play Siren)",
-        "mode_lbl": "तक्रार पद्धत निवडा:",
-        "mode_sec": "🔢 कलम क्रमांकानुसार (१ ते २८)",
-        "mode_custom": "✍️ स्वतःची तक्रार नोंदवा",
-        "sec_prompt": "कलम क्रमांक टाका (१ ते २८):",
-        "name_lbl": "तक्रारदाराचे नाव:",
-        "city_lbl": "जिल्हा व राज्य:",
-        "phone_lbl": "मोबाईल नंबर:",
-        "acc_lbl": "दोषी कंत्राटदार / अधिकारी:",
-        "det_lbl": "घटनेचा संपूर्ण तपशील:",
-        "btn_draft": "⚡ कायदेशीर नोटीस तयार करा",
-        "success_msg": "🟢 कायदेशीर नोटीस तयार झाली आहे:",
-        "doc_box_lbl": "📄 तयार कायदेशीर नोटीस:",
-        "download_txt_btn": "📥 कायदेशीर नोटीस डाउनलोड करा (.txt)",
-        "pdf_btn": "🖨️ PDF म्हणून सेव्ह / प्रिंट करा",
-        "shield_title": "⚖️ आपले कायदेशीर संरक्षण:",
-        "send_wa": "📲 WhatsApp वर पाठवा",
-        "def_name": "साहिल कुमार",
-        "def_city": "पश्चिम चंपारण, बिहार",
-        "def_acc": "संबंधित दोषी व्यक्ती / अधिकारी",
-        "custom_sub_lbl": "तक्रारीचा विषय:",
-        "custom_sub_val": "बेकायदेशीर छळ व हक्क उल्लंघनाबाबत",
-        "custom_act": "भारतीय संविधान आणि बीएनएस २०२३",
-        "custom_auth": "जिल्हाधिकारी (DM) / पोलीस अधीक्षक (SP)",
-        "custom_rule": "संविधानानुसार प्रत्येक नागरिकाला कायदेशीर न्यायाचा मूलभूत अधिकार आहे.",
-        "custom_det": "माझ्यावर झालेल्या अन्यायाविरुद्ध तात्काळ कायदेशीर कारवाई करण्यात यावी."
+        "tag": "⚡ २४x७ अखंड भारत नागरिक कायदेशीर सुरक्षा", "title": "महा-सेवा AI", "sub": "२८ कायदेशीर अधिकार • रात्रीची सुरक्षा • PDF",
+        "cat_lbl": "📂 सेवा श्रेणी:", "c_rights": "⚖️ २८ कायदेशीर अधिकार व PDF", "c_sos": "🚨 रात्रीची सुरक्षा व GPS SOS",
+        "c_voice": "🎙️ बोलून तक्रार", "c_fraud": "🛡️ सायबर फसवणूक तपासक", "c_health": "🏥 औषधे व रुग्णवाहिका", "c_job": "💼 रोजगार डेस्क",
+        "sos_h": "🚨 २४x७ रात्रीची सुरक्षा व GPS SOS", "sos_sub": "धोका निर्माण झाल्यास थेट संपर्क करा:", "sos_c1": "📞 ११२ पोलीस", "sos_c2": "📞 १०९० महिला मदत", "sos_c3": "📞 १८१ हेल्पलाइन",
+        "sos_note": "(इंटरनेट नसतानाही कॉल लागेल)", "gps_btn": "📡 GPS लोकेशन मिळवा", "family_lbl": "मोबाईल नंबर:", "victim_lbl": "नाव:", "loc_lbl": "ठिकाण / रस्ता:",
+        "sos_wa_btn": "📲 १-क्लिकवर SOS पाठवा", "siren_btn": "🚨 अलार्म सायरन वाजवा", "mode_lbl": "पद्धत:", "mode_sec": "🔢 कलम क्रमांक (१ ते २८)", "mode_custom": "✍️ स्वतःची तक्रार",
+        "sec_prompt": "कलम क्रमांक (१ ते २८):", "name_lbl": "नाव:", "city_lbl": "जिल्हा व राज्य:", "phone_lbl": "मोबाईल:", "acc_lbl": "दोषी पक्ष:", "det_lbl": "तपशील:",
+        "btn_draft": "⚡ कायदेशीर नोटीस तयार करा", "success_msg": "🟢 कायदेशीर नोटीस तयार झाली:", "download_txt_btn": "📥 डाउनलोड (.txt)", "pdf_btn": "🖨️ PDF प्रिंट करा", "shield_title": "⚖️ कायदेशीर संरक्षण:", "send_wa": "📲 WhatsApp वर पाठवा"
     },
     "தமிழ் (Tamil)": {
-        "tag": "⚡ 24x7 குடிமக்கள் சட்டப் பாதுகாப்பு தளம்",
-        "title": "மகா-சேவா AI (MAHA SEVA AI)",
-        "sub": "28 சட்ட உரிமைகள் • இரவு பாதுகாப்பு • வேலைவாய்ப்பு • PDF",
-        "cat_lbl": "📂 சேவையைத் தேர்ந்தெடுக்கவும்:",
-        "c_rights": "⚖️ 28 சட்ட உரிமைகள் & நோட்டீஸ்",
-        "c_sos": "🚨 இரவு பாதுகாப்பு & GPS SOS",
-        "c_voice": "🎙️ குரல் மூலம் புகார் (மைக்)",
-        "c_fraud": "🛡️ இணைய மோசடி சரிபார்ப்பு",
-        "c_health": "🏥 மருத்துவம் & ஆம்புலன்ஸ்",
-        "c_job": "💼 வேலைவாய்ப்பு தகவல்",
-        "sos_h": "🚨 24x7 இரவு நேர அவசர உதவி & GPS SOS",
-        "sos_sub": "ஆபத்து ஏற்பட்டால் உடனடியாக அழைக்கவும்:",
-        "sos_c1": "📞 112 காவல் உதவி",
-        "sos_c2": "📞 1090 பெண்கள் உதவி எண்",
-        "sos_c3": "📞 181 பெண்கள் உதவி மையம்",
-        "sos_note": "(இணையம் இல்லாமலும் நேரடியாக அழைப்பு செல்லும் - முற்றிலும் இலவசம்)",
-        "gps_btn": "📡 எனது நேரலை GPS இருப்பிடத்தைப் பெறு",
-        "family_lbl": "குடும்பத்தினர் மொபைல் எண்:",
-        "victim_lbl": "உங்கள் பெயர்:",
-        "loc_lbl": "தற்போதைய இடம் / சாலையின் பெயர்:",
-        "sos_wa_btn": "📲 1-கிளிக்கில் SOS அனுப்புக",
-        "siren_h": "🔊 எச்சரிக்கை சைரன் ஒலி",
-        "siren_btn": "🚨 சைரன் ஒலி எழுப்பு",
-        "mode_lbl": "புகார் பதிவு செய்யும் முறை:",
-        "mode_sec": "🔢 பிரிவு எண் மூலம் (1 முதல் 28 வரை)",
-        "mode_custom": "✍️ உங்கள் சொந்த புகாரை எழுதவும்",
-        "sec_prompt": "பிரிவு எண் உள்ளிடவும் (1 முதல் 28):",
-        "name_lbl": "புகார்தாரர் பெயர்:",
-        "city_lbl": "மாவட்டம் & மாநிலம்:",
-        "phone_lbl": "மொபைல் எண்:",
-        "acc_lbl": "எதிர்தரப்பு நிறுவனம் / அதிகாரி:",
-        "det_lbl": "நிகழ்வின் முழு விவரம்:",
-        "btn_draft": "⚡ சட்டப்பூர்வ நோட்டீஸ் உருவாக்கவும்",
-        "success_msg": "🟢 சட்டப்பூர்வ நோட்டீஸ் தயாராக உள்ளது:",
-        "doc_box_lbl": "📄 தயாரான சட்ட ஆவணம்:",
-        "download_txt_btn": "📥 நோட்டீஸை பதிவிறக்குக (.txt)",
-        "pdf_btn": "🖨️ PDF ஆக சேமி / அச்சிடுக",
-        "shield_title": "⚖️ உங்கள் சட்டப் பாதுகாப்பு:",
-        "send_wa": "📲 வாட்ஸ்அப்பில் பகிரவும்",
-        "def_name": "சாஹில் குமார்",
-        "def_city": "மேற்கு சம்பரான், பீகார்",
-        "def_acc": "எதிர்தரப்பு அதிகாரி / நிறுவனம்",
-        "custom_sub_lbl": "புகாரின் தலைப்பு:",
-        "custom_sub_val": "சட்டவிரோத அத்துமீறல் மற்றும் உரிமை மீறல் குறித்து",
-        "custom_act": "இந்திய அரசியலமைப்பு மற்றும் BNS 2023",
-        "custom_auth": "மாவட்ட ஆட்சியர் (DM) / காவல் கண்காணிப்பாளர் (SP)",
-        "custom_rule": "ஒவ்வொரு குடிமகனுக்கும் உடனடி நீதி பெற சட்டப்பூர்வ உரிமை உண்டு.",
-        "custom_det": "எதிர்தரப்பினரால் இழைக்கப்பட்ட அநீதி குறித்து உடனடியாக நடவடிக்கை எடுக்க வேண்டுகிறேன்."
+        "tag": "⚡ 24x7 குடிமக்கள் சட்டப் பாதுகாப்பு", "title": "மகா-சேவா AI", "sub": "28 சட்ட உரிமைகள் • இரவு பாதுகாப்பு • PDF",
+        "cat_lbl": "📂 சேவை:", "c_rights": "⚖️ 28 சட்ட உரிமைகள் & PDF", "c_sos": "🚨 இரவு பாதுகாப்பு & GPS SOS",
+        "c_voice": "🎙️ குரல் புகார்", "c_fraud": "🛡️ இணைய மோசடி சரிபார்ப்பு", "c_health": "🏥 மருத்துவம் & ஆம்புலன்ஸ்", "c_job": "💼 வேலைவாய்ப்பு",
+        "sos_h": "🚨 இரவு நேர அவசர உதவி & GPS SOS", "sos_sub": "ஆபத்து ஏற்பட்டால் அழைக்கவும்:", "sos_c1": "📞 112 காவல்", "sos_c2": "📞 1090 பெண்கள் உதவி", "sos_c3": "📞 181 உதவி மையம்",
+        "sos_note": "(இணையம் இல்லாமலும் இலவச அழைப்பு)", "gps_btn": "📡 நேரலை GPS இருப்பிடம்", "family_lbl": "குடும்ப எண்:", "victim_lbl": "பெயர்:", "loc_lbl": "இடம்:",
+        "sos_wa_btn": "📲 SOS அனுப்புக", "siren_btn": "🚨 சைரன் ஒலி எழுப்பு", "mode_lbl": "முறை:", "mode_sec": "🔢 பிரிவு எண் (1 முதல் 28)", "mode_custom": "✍️ சொந்த புகார்",
+        "sec_prompt": "பிரிவு எண் (1-28):", "name_lbl": "பெயர்:", "city_lbl": "மாவட்டம் & மாநிலம்:", "phone_lbl": "மொபைல்:", "acc_lbl": "எதிர்தரப்பு:", "det_lbl": "விவரம்:",
+        "btn_draft": "⚡ சட்ட நோட்டீஸ் உருவாக்குக", "success_msg": "🟢 நோட்டீஸ் தயார்:", "download_txt_btn": "📥 பதிவிறக்குக (.txt)", "pdf_btn": "🖨️ PDF அச்சிடுக", "shield_title": "⚖️ சட்டப் பாதுகாப்பு:", "send_wa": "📲 வாட்ஸ்அப்பில் பகிர்க"
     },
     "తెలుగు (Telugu)": {
-        "tag": "⚡ 24x7 పౌర హక్కుల రక్షణ మిషన్",
-        "title": "మహా-సేవా AI (MAHA SEVA AI)",
-        "sub": "28 చట్టపరమైన హక్కులు • రాత్రి రక్షణ • ఉపాధి • PDF",
-        "cat_lbl": "📂 సేవను ఎంచుకోండి:",
-        "c_rights": "⚖️ 28 చట్టపరమైన హక్కులు & నోటీసు",
-        "c_sos": "🚨 రాత్రి రక్షణ & GPS SOS",
-        "c_voice": "🎙️ వాయిస్ ద్వారా ఫిర్యాదు",
-        "c_fraud": "🛡️ సైబర్ మోసాల తనిఖీ",
-        "c_health": "🏥 మందులు & అంబులెన్స్",
-        "c_job": "💼 ఉపాధి & ఉద్యోగాలు",
-        "sos_h": "🚨 24x7 రాత్రి రక్షణ & లైవ్ GPS SOS",
-        "sos_sub": "ఏదైనా ప్రమాదం జరిగితే వెంటనే కాల్ చేయండి:",
-        "sos_c1": "📞 112 పోలీసు అత్యవసర సహాయం",
-        "sos_c2": "📞 1090 మహిళా భద్రత",
-        "sos_c3": "📞 181 మహిళా హెల్ప్‌లైన్",
-        "sos_note": "(ఇంటర్నెట్ లేకుండా నేరుగా కాల్ చేయవచ్చు - ఉచితం)",
-        "gps_btn": "📡 నా లైవ్ GPS లొకేషన్ పొందండి",
-        "family_lbl": "కుటుంబ సభ్యుల మొబైల్ నంబర్:",
-        "victim_lbl": "మీ పేరు:",
-        "loc_lbl": "ప్రస్తుత ప్రాంతం లేదా రహదారి పేరు:",
-        "sos_wa_btn": "📲 1-క్లిక్‌తో SOS పంపండి",
-        "siren_h": "🔊 పానిక్ అలారం సైరన్",
-        "siren_btn": "🚨 సైరన్ మోగించండి (Play Siren)",
-        "mode_lbl": "ఫిర్యాదు విధానాన్ని ఎంచుకోండి:",
-        "mode_sec": "🔢 సెక్షన్ సంఖ్య ద్వారా (1 నుండి 28)",
-        "mode_custom": "✍️ మీ స్వంత సమస్యను నమోదు చేయండి",
-        "sec_prompt": "సెక్షన్ సంఖ్యను నమోదు చేయండి (1 నుండి 28):",
-        "name_lbl": "ఫిర్యాదుదారు పేరు:",
-        "city_lbl": "జిల్లా & రాష్ట్రం:",
-        "phone_lbl": "ఫోన్ నంబర్:",
-        "acc_lbl": "బాధ్యులైన అధికారి / కాంట్రాక్టర్:",
-        "det_lbl": "పూర్తి వివరాలు:",
-        "btn_draft": "⚡ లీగల్ నోటీసు రూపొందించండి",
-        "success_msg": "🟢 లీగల్ నోటీస్ సిద్ధమైంది:",
-        "doc_box_lbl": "📄 సిద్ధమైన చట్టపరమైన నోటీసు:",
-        "download_txt_btn": "📥 నోటీసు డౌన్‌లోడ్ చేయండి (.txt)",
-        "pdf_btn": "🖨️ PDF గా సేవ్ / ప్రింట్ చేయండి",
-        "shield_title": "⚖️ చట్టపరమైన రక్షణ:",
-        "send_wa": "📲 వాట్సాప్‌లో పంపండి",
-        "def_name
+        "tag": "⚡ 24x7 పౌర హక్కుల రక్షణ", "title": "మహా-సేవా AI", "sub": "28 చట్టపరమైన హక్కులు • రాత్రి రక్షణ • PDF",
+        "cat_lbl": "📂 సేవ:", "c_rights": "⚖️ 28 హక్కులు & PDF", "c_sos": "🚨 రాత్రి రక్షణ & GPS SOS",
+        "c_voice": "🎙️ వాయిస్ ఫిర్యాదు", "c_fraud": "🛡️ సైబర్ మోసాల తనిఖీ", "c_health": "🏥 మందులు & అంబులెన్స్", "c_job": "💼 ఉపాధి సమాచారం",
+        "sos_h": "🚨 రాత్రి రక్షణ & లైవ్ GPS SOS", "sos_sub": "ప్రమాదంలో వెంటనే కాల్ చేయండి:", "sos_c1": "📞 112 పోలీసు", "sos_c2": "📞 1090 మహిళా భద్రత", "sos_c3": "📞 181 హెల్ప్‌లైన్",
+        "sos_note": "(ఇంటర్నెట్ లేకుండా ఉచిత కాల్)", "gps_btn": "📡 GPS లొకేషన్ పొందండి", "family_lbl": "మొబైల్ నంబర్:", "victim_lbl": "పేరు:", "loc_lbl": "ప్రాంతం:",
+        "sos_wa_btn": "📲 SOS పంపండి", "siren_btn": "🚨 సైరన్ మోగించండి", "mode_lbl": "పద్ధతి:", "mode_sec": "🔢 సెక్షన్ సంఖ్య (1 నుండి 28)", "mode_custom": "✍️ స్వంత ఫిర్యాదు",
+        "sec_prompt": "సెక్షన్ సంఖ్య (1-28):", "name_lbl": "పేరు:", "city_lbl": "జిల్లా & రాష్ట్రం:", "phone_lbl": "ఫోన్:", "acc_lbl": "బాధ్యులు:", "det_lbl": "వివరాలు:",
+        "btn_draft": "⚡ నోటీసు రూపొందించండి", "success_msg": "🟢 నోటీస్ సిద్ధమైంది:", "download_txt_btn": "📥 డౌన్‌లోడ్ (.txt)", "pdf_btn": "🖨️ PDF ప్రింట్ చేయండి", "shield_title": "⚖️ చట్టపరమైన రక్షణ:", "send_wa": "📲 వాట్సాప్‌లో పంపండి"
+    },
+    "ગુજરાતી (Gujarati)": {
+        "tag": "⚡ ૨૪x૭ નાગરિક કાનૂની સુરક્ષા", "title": "મહા-સેવા AI", "sub": "૨૮ કાનૂની અધિકાર • રાત્રિ સુરક્ષા • PDF",
+        "cat_lbl": "📂 સેવા:", "c_rights": "⚖️ ૨૮ અધિકાર & PDF", "c_sos": "🚨 રાત્રિ સુરક્ષા & GPS SOS",
+        "c_voice": "🎙️ અવાજ દ્વારા ફરિયાદ", "c_fraud": "🛡️ સાયબર ફ્રોડ તપાસક", "c_health": "🏥 દવા & એમ્બ્યુલન્સ", "c_job": "💼 રોજગાર ડેસ્ક",
+        "sos_h": "🚨 ૨૪x૭ રાત્રિ સુરક્ષા & GPS SOS", "sos_sub": "સંકટના સમયે સીધો કોલ કરો:", "sos_c1": "📞 ૧૧૨ પોલીસ", "sos_c2": "📞 ૧૦૯૦ સુરક્ષા", "sos_c3": "📞 ૧૮૧ અભયમ",
+        "sos_note": "(ઇન્ટરનેટ વગર પણ મફત કોલ)", "gps_btn": "📡 GPS લોકેશન મેળવો", "family_lbl": "મોબાઈલ નંબર:", "victim_lbl": "નામ:", "loc_lbl": "સ્થળ:",
+        "sos_wa_btn": "📲 SOS મોકલો", "siren_btn": "🚨 સાયરન વગાડો", "mode_lbl": "પદ્ધતિ:", "mode_sec": "🔢 કલમ નંબર (૧ થી ૨૮)", "mode_custom": "✍️ નવી ફરિયાદ",
+        "sec_prompt": "કલમ નંબર (૧ થી ૨૮):", "name_lbl": "નામ:", "city_lbl": "જિલ્લો અને રાજ્ય:", "phone_lbl": "મોબાઇલ:", "acc_lbl": "સામેવાળા પક્ષ:", "det_lbl": "વિગત:",
+        "btn_draft": "⚡ કાનૂની નોટિસ બનાવો", "success_msg": "🟢 નોટિસ તૈયાર થઈ:", "download_txt_btn": "📥 ડાઉનલોડ (.txt)", "pdf_btn": "🖨️ PDF પ્રિન્ટ કરો", "shield_title": "⚖️ કાનૂની કવચ:", "send_wa": "📲 WhatsApp પર મોકલો"
+    },
+    "ಕನ್ನಡ (Kannada)": {
+        "tag": "⚡ 24x7 ನಾಗರಿಕ ಕಾನೂನು ರಕ್ಷಣೆ", "title": "ಮಹಾ-ಸೇವಾ AI", "sub": "28 ಕಾನೂನು ಹಕ್ಕುಗಳು • ರಾತ್ರಿ ಭದ್ರತೆ • PDF",
+        "cat_lbl": "📂 ಸೇವೆ:", "c_rights": "⚖️ 28 ಹಕ್ಕುಗಳು & PDF", "c_sos": "🚨 ರಾತ್ರಿ ಭದ್ರತೆ & GPS SOS",
+        "c_voice": "🎙️ ಧ್ವನಿ ದೂರು", "c_fraud": "🛡️ ಸೈಬರ್ ವಂಚನೆ ಪರಿಶೀಲನೆ", "c_health": "🏥 ಔಷಧಿ & ಆಂಬ್ಯುಲೆನ್ಸ್", "c_job": "💼 ಉದ್ಯೋಗ ಮಾಹಿತಿ",
+        "sos_h": "🚨 ರಾತ್ರಿ ಭದ್ರತೆ & GPS SOS", "sos_sub": "ತುರ್ತು ಪರಿಸ್ಥಿತಿಯಲ್ಲಿ ಕರೆ ಮಾಡಿ:", "sos_c1": "📞 112 ಪೊಲೀಸ್", "sos_c2": "📞 1090 ಸಹಾಯವಾಣಿ", "sos_c3": "📞 181 ಭದ್ರತೆ",
+        "sos_note": "(ಇಂಟರ್ನೆಟ್ ಇಲ್ಲದೆ ಉಚಿತ ಕರೆ)", "gps_btn": "📡 GPS ಸ್ಥಳ ಪಡೆಯಿರಿ", "family_lbl": "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ:", "victim_lbl": "ಹೆಸರು:", "loc_lbl": "ಸ್ಥಳ:",
+        "sos_wa_btn": "📲 SOS ಕಳುಹಿಸಿ", "siren_btn": "🚨 ಸೈರನ್ ಬಾರಿಸಿ", "mode_lbl": "ವಿಧಾನ:", "mode_sec": "🔢 ಕಲಂ ಸಂಖ್ಯೆ (1-28)", "mode_custom": "✍️ ಸ್ವಂತ ದೂರು",
+        "sec_prompt": "ಕಲಂ ಸಂಖ್ಯೆ (1-28):", "name_lbl": "ಹೆಸರು:", "city_lbl": "ಜಿಲ್ಲೆ & ರಾಜ್ಯ:", "phone_lbl": "ಮೊಬೈಲ್:", "acc_lbl": "ಆರೋಪಿ:", "det_lbl": "ವಿವರ:",
+        "btn_draft": "⚡ ನೋಟಿಸ್ ರಚಿಸಿ", "success_msg": "🟢 ನೋಟಿಸ್ ಸಿದ್ಧವಾಗಿದೆ:", "download_txt_btn": "📥 ಡೌನ್‌ಲೋಡ್ (.txt)", "pdf_btn": "🖨️ PDF ಪ್ರಿಂಟ್ ಮಾಡಿ", "shield_title": "⚖️ ಕಾನೂನು ರಕ್ಷಣೆ:", "send_wa": "📲 ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಕಳುಹಿಸಿ"
+    },
+    "മലയാളം (Malayalam)": {
+        "tag": "⚡ 24x7 പൗരാവകാശ നിയമ സംരക്ഷണം", "title": "മഹാ-സേവ AI", "sub": "28 അവകാശങ്ങൾ • രാത്രി സുരക്ഷ • PDF",
+        "cat_lbl": "📂 സേവനം:", "c_rights": "⚖️ 28 അവകാശങ്ങൾ & PDF", "c_sos": "🚨 രാത്രി സുരക്ഷ & GPS SOS",
+        "c_voice": "🎙️ ശബ്ദ പരാതി", "c_fraud": "🛡️ സൈബർ തട്ടിപ്പ് പരിശോധന", "c_health": "🏥 മരുന്നുകൾ & ആംബുലൻസ്", "c_job": "💼 തൊഴിൽ വിവരങ്ങൾ",
+        "sos_h": "🚨 രാത്രി സുരക്ഷ & GPS SOS", "sos_sub": "അടിയന്തിര സാഹചര്യങ്ങളിൽ വിളിക്കുക:", "sos_c1": "📞 112 പോലീസ്", "sos_c2": "📞 1090 വനിതാ ലൈൻ", "sos_c3": "📞 181 സുരക്ഷ",
+        "sos_note": "(ഇന്റർനെറ്റ് ഇല്ലാതെ സൗജന്യ കോൾ)", "gps_btn": "📡 GPS കണ്ടെത്തുക", "family_lbl": "ഫോൺ നമ്പർ:", "victim_lbl": "പേര്:", "loc_lbl": "സ്ഥലം:",
+        "sos_wa_btn": "📲 SOS അയക്കുക", "siren_btn": "🚨 സൈറൺ മുഴക്കുക", "mode_lbl": "രീതി:", "mode_sec": "🔢 വകുപ്പ് നമ്പർ (1-28)", "mode_custom": "✍️ സ്വന്തം പരാതി",
+        "sec_prompt": "വകുപ്പ് നമ്പർ (1-28):", "name_lbl": "പേര്:", "city_lbl": "ജില്ല & സംസ്ഥാനം:", "phone_lbl": "മൊബൈൽ:", "acc_lbl": "എതിർകക്ഷി:", "det_lbl": "വിവരം:",
+        "btn_draft": "⚡ നോട്ടീസ് തയ്യാറാക്കുക", "success_msg": "🟢 നോട്ടീസ് തയ്യാറായി:", "download_txt_btn": "📥 ഡൗൺലോഡ് (.txt)", "pdf_btn": "🖨️ PDF പ്രിന്റ് ചെയ്യുക", "shield_title": "⚖️ നിയമ സംരക്ഷണം:", "send_wa": "📲 വാട്ട്‌സ്ആപ്പിൽ അയക്കുക"
+    },
+    "ਪੰਜਾਬੀ (Punjabi)": {
+        "tag": "⚡ 24x7 ਨਾਗਰਿਕ ਕਾਨੂੰਨੀ ਸੁਰੱਖਿਆ", "title": "ਮਹਾ-ਸੇਵਾ AI", "sub": "28 ਕਾਨੂੰਨੀ ਹੱਕ • ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ • PDF",
+        "cat_lbl": "📂 ਸੇਵਾ:", "c_rights": "⚖️ 28 ਕਾਨੂੰਨੀ ਹੱਕ & PDF", "c_sos": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ & GPS SOS",
+        "c_voice": "🎙️ ਬੋਲ ਕੇ ਸ਼ਿਕਾਇਤ", "c_fraud": "🛡️ ਸਾਈਬਰ ਧੋਖਾਧੜੀ ਜਾਂਚ", "c_health": "🏥 ਦਵਾਈ & ਐਂਬੂਲੈਂਸ", "c_job": "💼 ਰੋਜ਼ਗਾਰ ਡੈਸਕ",
+        "sos_h": "🚨 ਰਾਤ ਦੀ ਸੁਰੱਖਿਆ & GPS SOS", "sos_sub": "ਖਤਰੇ ਸਮੇਂ ਤੁਰੰਤ ਕਾਲ ਕਰੋ:", "sos_c1": "📞 112 ਪੁਲਿਸ", "sos_c2": "📞 1090 ਮਹਿਲਾ ਲਾਈਨ", "sos_c3": "📞 181 ਸੁਰੱਖਿਆ",
+        "sos_note": "(ਬਿਨਾਂ ਇੰਟਰਨੈੱਟ ਦੇ ਮੁਫ਼ਤ ਕਾਲ)", "gps_btn": "📡 GPS ਲੋਕੇਸ਼ਨ ਕੱਢੋ", "family_lbl": "ਮੋਬਾਈਲ ਨੰਬਰ:", "victim_lbl": "ਨਾਮ:", "loc_lbl": "ਸੜਕ / ਸਥਾਨ:",
+        "sos_wa_btn": "📲 SOS ਭੇਜੋ", "siren_btn": "🚨 ਸਾਇਰਨ ਵਜਾਓ", "mode_lbl": "ਤਰੀਕਾ:", "mode_sec": "🔢 ਧਾਰਾ ਨੰਬਰ (1-28)", "mode_custom": "✍️ ਖੁਦ ਦੀ ਸ਼ਿਕਾਇਤ",
+        "sec_prompt": "ਧਾਰਾ ਨੰਬਰ (1-28):", "name_lbl": "ਨਾਮ:", "city_lbl": "ਜ਼ਿਲ੍ਹਾ ਤੇ ਰਾਜ:", "phone_lbl": "ਮੋਬਾਈਲ:", "acc_lbl": "ਦੋਸ਼ੀ:", "det_lbl": "ਵੇਰਵਾ:",
+        "btn_draft": "⚡ ਨੋਟਿਸ ਤਿਆਰ ਕਰੋ", "success_msg": "🟢 ਨੋਟਿਸ ਤਿਆਰ ਹੋਇਆ:", "download_txt_btn": "📥 ਡਾਊਨਲੋਡ (.txt)", "pdf_btn": "🖨️ PDF ਪ੍ਰਿੰਟ ਕਰੋ", "shield_title": "⚖️ ਕਾਨੂੰਨੀ ਢਾਲ:", "send_wa": "📲 WhatsApp ਤੇ ਭੇਜੋ"
+    },
+    "ଓଡ଼ିଆ (Odia)": {
+        "tag": "⚡ ୨୪x୭ ନାଗରିକ ଆଇନଗତ ସୁରକ୍ଷା", "title": "ମହା-ସେବା AI", "sub": "୨୮ଟି ଆଇନଗତ ଅଧିକାର • ରାତ୍ରି ସୁରକ୍ଷା • PDF",
+        "cat_lbl": "📂 ସେବା:", "c_rights": "⚖️ ୨୮ ଅଧିକାର & PDF", "c_sos": "🚨 ରାତ୍ରି ସୁରକ୍ଷା & GPS SOS",
+        "c_voice": "🎙️ କହିକରି ଅଭିଯୋଗ", "c_fraud": "🛡️ ସାଇବର ଠକେଇ ଯାଞ୍ଚ", "c_health": "🏥 ଔଷଧ & ଆମ୍ବୁଲାନ୍ସ", "c_job": "💼 ନିଯୁକ୍ତି ଡେସ୍କ",
+        "sos_h": "🚨 ରାତ୍ରି ସୁରକ୍ଷା & GPS SOS", "sos_sub": "ବିପଦ ସମୟରେ କଲ୍ କରନ୍ତୁ:", "sos_c1": "📞 ୧୧୨ ପୋଲିସ", "sos_c2": "📞 ୧୦୯୦ ମହିଳା ଲାଇନ", "sos_c3": "📞 ୧୮୧ ସୁରକ୍ଷା",
+        "sos_note": "(ଇଣ୍ଟରନେଟ୍ ବିନା ମାଗଣା କଲ୍)", "gps_btn": "📡 GPS ଲୋକେସନ୍ ପାଆନ୍ତୁ", "family_lbl": "ମୋବାଇଲ୍ ନମ୍ବର:", "victim_lbl": "ନାମ:", "loc_lbl": "ସ୍ଥାନ:",
+        "sos_wa_btn": "📲 SOS ପଠାନ୍ତୁ", "siren_btn": "🚨 ସାଇରନ୍ ବଜାନ୍ତୁ", "mode_lbl": "ପଦ୍ଧତି:", "mode_sec": "🔢 ଧାରା ନମ୍ବର (୧-୨୮)", "mode_custom": "✍️ ନିଜ ଅଭିଯୋଗ",
+        "sec_prompt": "ଧାରା ନମ୍ବର (୧-୨୮):", "name_lbl": "ନାମ:", "city_lbl": "ଜିଲ୍ଲା ଓ ରାଜ୍ୟ:", "phone_lbl": "ମୋବାଇଲ୍:", "acc_lbl": "ଦୋଷୀ:", "det_lbl": "ବିବରଣୀ:",
+        "btn_draft": "⚡ ନୋଟିସ୍ ପ୍ରସ୍ତୁତ କରନ୍ତୁ", "success_msg": "🟢 ନୋଟିସ୍ ପ୍ରସ୍ତୁତ ହେଲା:", "download_txt_btn": "📥 ଡାଉନଲୋଡ୍ (.txt)", "pdf_btn": "🖨️ PDF ପ୍ରିଣ୍ଟ୍ କରନ୍ତୁ", "shield_title": "⚖️ ଆଇନଗତ ସୁରକ୍ଷା:", "send_wa": "📲 WhatsApp ରେ ପଠାନ୍ତୁ"
+    },
+    "অসমীয়া (Assamese)": {
+        "tag": "⚡ ২৪x৭ নাগৰিক আইনী সুৰক্ষা", "title": "মহা-সেৱা AI", "sub": "২৮টা আইনী অধিকাৰ • ৰাতিৰ সুৰক্ষা • PDF",
+        "cat_lbl": "📂 সেৱা:", "c_rights": "⚖️ ২৮টা অধিকাৰ & PDF", "c_sos": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS",
+        "c_voice": "🎙️ কণ্ঠৰে অভিযোগ", "c_fraud": "🛡️ চাইবাৰ প্ৰৱঞ্চনা পৰীক্ষা", "c_health": "🏥 ঔষধ & এম্বুলেন্স", "c_job": "💼 নিয়োগ কেন্দ্ৰ",
+        "sos_h": "🚨 ৰাতিৰ সুৰক্ষা & GPS SOS", "sos_sub": "বিপদৰ সময়ত ফোন কৰক:", "sos_c1": "📞 ১১২ আৰক্ষী", "sos_c2": "📞 ১০৯০ মহিলা লাইন", "sos_c3": "📞 ১৮১ হেল্পলাইন",
+        "sos_note": "(ইণ্টাৰনেট নোহোৱাকৈ বিনামূলীয়া কল)", "gps_btn": "📡 GPS স্থান চাওক", "family_lbl": "মবাইল নম্বৰ:", "victim_lbl": "আপোনাৰ নাম:", "loc_lbl": "স্থান:",
+        "sos_wa_btn": "📲 SOS পঠিয়াওক", "siren_btn": "🚨 ছাইৰেন বজাওক", "mode_lbl": "পদ্ধতি:", "mode_sec": "🔢 ধাৰা নম্বৰ (১-২৮)", "mode_custom": "✍️ নিজৰ অভিযোগ",
+        "sec_prompt": "ধাৰা নম্বৰ (১-২৮):", "name_lbl": "নাম:", "city_lbl": "জিলা আৰু ৰাজ্য:", "phone_lbl": "মবাইল:", "acc_lbl": "অভিযুক্ত:", "det_lbl": "বিৱৰণ:",
+        "btn_draft": "⚡ জাননী প্ৰস্তুত কৰক", "success_msg": "🟢 জাননী প্ৰস্তুত হ'ল:", "download_txt_btn": "📥 ডাউনলোড (.txt)", "pdf_btn": "🖨️ PDF প্ৰিণ্ট কৰক", "
