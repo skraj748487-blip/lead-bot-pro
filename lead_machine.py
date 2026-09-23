@@ -6,381 +6,172 @@ import pandas as pd
 import os
 
 st.set_page_config(
-    page_title="महा-सेवा AI — राष्ट्रीय नागरिक डेटा व सुरक्षा मिशन",
+    page_title="महा-सेवा AI",
     page_icon="🇮🇳",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-MY_WA_NUMBER = "917484878440"
-today_str = datetime.now().strftime("%d-%m-%Y")
-current_time_str = datetime.now().strftime("%I:%M %p")
-DB_FILE = "maha_seva_database.csv"
+WA_NUM = "917484878440"
+today = datetime.now().strftime("%d-%m-%Y")
+t_now = datetime.now().strftime("%I:%M %p")
+DB_NAME = "maha_seva_data.csv"
 
-# AUTO-DATA SAVING ENGINE
-def save_citizen_record(rec_type, name, phone, city, details):
-    new_entry = {
-        "Date": today_str,
-        "Time": current_time_str,
-        "Type": rec_type,
-        "Name": name,
-        "Phone": str(phone),
-        "City": city,
-        "Details": details
-    }
-    df_new = pd.DataFrame([new_entry])
-    if not os.path.exists(DB_FILE):
-        df_new.to_csv(DB_FILE, index=False)
+def save_entry(c_type, name, phone, city, details):
+    row = {"Date": today, "Time": t_now, "Type": c_type, "Name": name, "Phone": str(phone), "City": city, "Details": details}
+    df = pd.DataFrame([row])
+    if not os.path.exists(DB_NAME):
+        df.to_csv(DB_NAME, index=False)
     else:
-        df_new.to_csv(DB_FILE, mode='a', header=False, index=False)
+        df.to_csv(DB_NAME, mode='a', header=False, index=False)
 
-LANG_UI = {
-    "🇮🇳 हिन्दी": {
-        "title": "महा-सेवा AI (MAHA SEVA AI)",
-        "sub": "अखंड भारत जन-कल्याण • कारीगर रोज़गार • लंगर सेवा • 28 कानूनी धाराएँ • SOS",
-        "c_rights": "⚖️ 28 कानूनी धाराएँ व नोटिस",
-        "c_karigar": "🛠️ कारीगर मंच (वेल्डर/प्लंबर/इलेक्ट्रीशियन)",
-        "c_langar": "🍲 लंगर, दस्तरख्वान व बचा खाना",
-        "c_barkat": "🌙 बरकत व सीधी मदद (जकात/औजार)",
-        "c_sos": "🚨 रात की सुरक्षा व लाइव GPS SOS",
-        "c_voice": "🎙️ बोलकर शिकायत (माइक)",
-        "c_fraud": "🛡️ साइबर फ्रॉड व मैसेज चेकर",
-        "sos_h": "🚨 24x7 रात की सुरक्षा व लाइव GPS SOS",
-        "gps_btn": "📡 मेरा सटीक लाइव GPS पता निकालें",
-        "victim_lbl": "पीड़ित / आपका नाम:",
-        "loc_lbl": "वर्तमान सड़क / चौराहे का नाम:",
-        "sos_wa": "📲 1-क्लिक परिवार को लोकेशन व SOS भेजें",
-        "siren_btn": "🚨 तेज़ अलार्म सायरन बजाएँ",
-        "mode_sec": "🔢 धारा नंबर से (1 से 28)",
-        "mode_custom": "✍️ अपनी खुद की शिकायत लिखें",
-        "sec_prompt": "धारा नंबर दर्ज करें (1 से 28):",
-        "name_lbl": "प्रार्थी का नाम:",
-        "city_lbl": "जिला व राज्य:",
-        "phone_lbl": "मोबाइल नंबर:",
-        "acc_lbl": "दोषी पक्ष / अधिकारी / ठेकेदार:",
-        "det_lbl": "सच्चा घटनाक्रम विवरण:",
-        "btn_draft": "⚡ आधिकारिक कानूनी नोटिस तैयार करें",
-        "success_msg": "🟢 आधिकारिक विधिक नोटिस तैयार व डेटाबेस में सुरक्षित:",
-        "download_txt": "📥 कानूनी शिकायत पत्र डाउनलोड करें (.txt)",
-        "pdf_btn": "🖨️ कानूनी नोटिस को PDF में सेव/प्रिंट करें",
-        "shield_title": "⚖️ आपका कानूनी कवच:",
-        "send_wa": "📲 यह शिकायत WhatsApp पर भेजें"
-    },
-    "🇬🇧 English": {
-        "title": "MAHA SEVA AI — Citizen Sovereign Portal",
-        "sub": "Citizen Welfare • Artisan Jobs • Food Rescue • 28 Legal Rights • SOS",
-        "c_rights": "⚖️ 28 Legal Rights & Notice",
-        "c_karigar": "🛠️ Artisan Desk (Welder/Plumber/Electrician)",
-        "c_langar": "🍲 Free Food & Surplus Rescue",
-        "c_barkat": "🌙 Direct Aid (Tools & Assistance)",
-        "c_sos": "🚨 Night Safety & Live GPS SOS",
-        "c_voice": "🎙️ Voice Complaint (Mic)",
-        "c_fraud": "🛡️ Cyber Shield & Fraud Verifier",
-        "sos_h": "🚨 24x7 Night Safety & Live GPS SOS",
-        "gps_btn": "📡 Fetch Live GPS Location Link",
-        "victim_lbl": "Victim / Your Name:",
-        "loc_lbl": "Current Location / Road:",
-        "sos_wa": "📲 1-Click Send SOS via WhatsApp",
-        "siren_btn": "🚨 Play Loud Siren Alarm",
-        "mode_sec": "🔢 By Section Number (1 to 28)",
-        "mode_custom": "✍️ Write Custom Complaint",
-        "sec_prompt": "Enter Section Number (1 to 28):",
-        "name_lbl": "Complainant Name:",
-        "city_lbl": "District & State:",
-        "phone_lbl": "Mobile Number:",
-        "acc_lbl": "Accused Party / Official / Agency:",
-        "det_lbl": "Factual Injustice Details:",
-        "btn_draft": "⚡ Draft Official Court Legal Notice",
-        "success_msg": "🟢 Official Legal Notice Ready & Data Saved:",
-        "download_txt": "📥 Download Legal Notice (.txt)",
-        "pdf_btn": "🖨️ Save as PDF / Print Notice",
-        "shield_title": "⚖️ Statutory Legal Protection:",
-        "send_wa": "📲 Send Notice via WhatsApp"
-    }
-}
+LANGS = ["🇮🇳 हिन्दी", "🇬🇧 English", "বাংলা (Bengali)", "मराठी (Marathi)"]
+c_lang = st.radio("🌐 भाषा / Select Language:", LANGS, horizontal=True)
 
-chosen_lang = st.radio("🌐 भाषा / Language:", list(LANG_UI.keys()), horizontal=True)
-T = LANG_UI[chosen_lang]
+is_en = "English" in c_lang
 
-st.header(T["title"])
-st.caption(T["sub"])
+st.title("🇮🇳 महा-सेवा AI (MAHA SEVA AI)")
+st.caption("अखंड भारत जन-कल्याण • 28 कानूनी अधिकार • कारीगर रोजगार • लंगर सेवा • SOS")
 
-nav_choice = st.radio(
-    "Menu:",
-    [
-        T["c_rights"],
-        T["c_karigar"],
-        T["c_langar"],
-        T["c_barkat"],
-        T["c_sos"],
-        T["c_voice"],
-        T["c_fraud"]
-    ],
-    horizontal=True
-)
-
+tabs = ["⚖️ 28 कानूनी नोटिस", "🛠️ कारीगर मंच", "🍲 लंगर व अन्न सेवा", "🌙 सीधी मदद", "🚨 रात की सुरक्षा SOS", "🎙️ बोलकर शिकायत"]
+choice = st.radio("सेवा चुनें:", tabs, horizontal=True)
 st.markdown("---")
 
-SECTIONS = {
-    1: {"name": "मजदूरी या वेतन चोरी (Wage Theft)", "act": "Payment of Wages Act 1936", "auth": "Labour Commissioner & DM", "rule": "मजदूरी दबाना गैर-कानूनी है; 10 गुना हर्जाना और 18% ब्याज मिलता है।", "det": "2 महीने की मजदूरी बाकी है। मांगने पर गाली-गलौज और धमकी दी जा रही है।"},
-    2: {"name": "पुलिस अवैध मारपीट या फर्जी चालान", "act": "BNSS 2023 & DK Basu Directives", "auth": "SP & NHRC", "rule": "अवैध मारपीट करने पर धारा 166A BNS के तहत पुलिसकर्मी पर निलंबन व FIR होती है।", "det": "संबंधित पुलिसकर्मी द्वारा अकारण अभद्रता, मारपीट व अवैध चालान की धमकी दी गई।"},
-    3: {"name": "अस्पताल में इमरजेंसी इलाज से इनकार या शव रोकना", "act": "Supreme Court Parmanand Katara Verdict", "auth": "CMO & Health Dept", "rule": "इमरजेंसी में पैसे मांगकर इलाज से इनकार या शव रोकना गैर-कानूनी संज्ञेय अपराध है।", "det": "अस्पताल द्वारा अग्रिम राशि की मांग कर गंभीर हालत में इलाज में जानबूझकर देरी की गई।"},
-    4: {"name": "कार्यस्थल पर हादसा व शारीरिक अपंगता", "act": "Employees Compensation Act 1923", "auth": "Compensation Commissioner", "rule": "हादसा होने पर मालिक को ₹5 लाख से ₹20 लाख का मुआवजा और आजीवन पेंशन देना अनिवार्य है।", "det": "सुरक्षा उपकरणों के अभाव में कार्यस्थल पर हादसा हुआ जिससे स्थायी दिव्यांगता आई।"},
-    5: {"name": "सूदखोर व फर्जी लोन ऐप्स द्वारा धमकी व ब्लैकमेल", "act": "RBI Fair Rules & Sec 308 BNS", "auth": "Cyber Cell & SP", "rule": "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है। सीधे FIR होती है।", "det": "लोन एजेंट द्वारा घर आकर गाली-गलौज और फोटो वायरल करने का ब्लैकमेल किया जा रहा है।"},
-    6: {"name": "सरकारी दफ्तर में घूसखोरी व काम लटकाना (RTPS)", "act": "Right to Public Services Act", "auth": "Vigilance Bureau", "rule": "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन ₹250 से ₹5000 जुर्माना कटता है।", "det": "वैध कागजात देने के बावजूद रिश्वत के बिना कर्मचारी द्वारा बार-बार चक्कर लगवाए जा रहे हैं।"},
-    7: {"name": "दुकानदार या कोटेदार द्वारा MRP लूट व घटतौली", "act": "Legal Metrology Act 2009", "auth": "DSO & Consumer Affairs", "rule": "MRP से अधिक लेना या कम तौलना गैर-कानूनी है। ₹25,000 जुर्माना और दुकान सील होती है।", "det": "दुकानदार द्वारा तय मूल्य से अधिक दाम वसूला गया और कम सामग्री दी गई।"},
-    8: {"name": "ट्रेन में टीटीई (TTE) द्वारा अवैध वसूली व बदसलूकी", "act": "Indian Railway Act", "auth": "RailMadad 139 & RPF", "rule": "टीटीई को यात्री से बदतमीजी या धक्का देने का कोई हक नहीं। केवल सरकारी रसीद मान्य है।", "det": "यात्रा के दौरान टीटीई द्वारा अवैध धन की मांग और विरोध करने पर बदसलूकी की गई।"},
-    9: {"name": "थाने में FIR दर्ज न करना (Zero FIR)", "act": "Supreme Court Lalita Kumari Guidelines", "auth": "SSP & CJM Court", "rule": "संज्ञेय अपराध में FIR न लिखने वाले पुलिस अधिकारी पर खुद धारा 166A BNS में FIR होती है।", "det": "लिखित शिकायत देने के बावजूद थाना प्रभारी द्वारा प्रथम सूचना रिपोर्ट दर्ज नहीं की गई।"},
-    10: {"name": "पैतृक जमीन पर दबंगों का अवैध कब्जा", "act": "Section 145/144 BNSS", "auth": "SDM & Civil Court", "rule": "गरीब की जमीन पर जबरन कब्जे की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे का नियम है।", "det": "विपक्षी द्वारा प्रार्थी की वैध पैतृक जमीन पर बलपूर्वक अवैध कब्जे का प्रयास किया जा रहा है।"}
+SECTIONS_DATA = {
+    1: ("मजदूरी या वेतन चोरी", "Payment of Wages Act 1936", "Labour Commissioner & DM", "मजदूरी दबाना गैर-कानूनी है; 10 गुना हर्जाना और 18% ब्याज मिलता है।", "2 महीने का वेतन बकाया है, मांगने पर धमकी दी जा रही है।"),
+    2: ("पुलिस अवैध मारपीट या फर्जी चालान", "BNSS 2023 & DK Basu Guidelines", "SP & NHRC", "अवैध मारपीट पर धारा 166A BNS के तहत पुलिसकर्मी पर FIR व निलंबन होता है।", "संबंधित पुलिसकर्मी द्वारा अकारण अभद्रता व चालान की धमकी दी गई।"),
+    3: ("अस्पताल में इमरजेंसी इलाज इनकार", "Supreme Court Parmanand Katara Verdict", "CMO & Health Dept", "इमरजेंसी में पैसे के लिए इलाज से इनकार या शव रोकना संज्ञेय अपराध है।", "अस्पताल द्वारा अग्रिम राशि मांगकर इलाज में जानबूझकर देरी की गई।"),
+    4: ("कार्यस्थल पर हादसा व मुआवजा", "Employees Compensation Act 1923", "Compensation Commissioner", "हादसा होने पर ₹5 से ₹20 लाख मुआवजा व आजीवन पेंशन अनिवार्य है।", "ड्यूटी के दौरान सुरक्षा उपकरण न होने से गंभीर चोट लगी।"),
+    5: ("लोन ऐप ब्लैकमेल व सूदखोरी", "RBI Guidelines & Sec 308 BNS", "Cyber Cell & SP", "बिना लाइसेंस सूदखोरी और धमकी देकर वसूली करना गैर-कानूनी है।", "रिकवरी एजेंट द्वारा घर आकर गाली-गलौज व फोटो से ब्लैकमेल किया जा रहा है।"),
+    6: ("सरकारी दफ्तर घूसखोरी (RTPS)", "Right to Public Services Act", "Vigilance Bureau", "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन ₹250-5000 जुर्माना कटता है।", "कागजात पूरे होने पर भी रिश्वत के बिना काम नहीं किया जा रहा।"),
+    7: ("दुकानदार MRP लूट व घटतौली", "Legal Metrology Act 2009", "DSO & Consumer Court", "MRP से अधिक लेना या कम तौलना गैर-कानूनी है, दुकान सील होती है।", "तय मूल्य से अधिक दाम वसूला गया और कम सामग्री दी गई।"),
+    8: ("रेलवे TTE अवैध वसूली", "Indian Railway Act", "RailMadad 139 & RPF", "TTE को बदसलूकी करने या ट्रेन से धक्का देने का अधिकार नहीं है।", "यात्रा के दौरान नियम विरुद्ध पैसों की मांग व बदसलूकी की गई।"),
+    9: ("थाने में FIR दर्ज न करना", "Supreme Court Lalita Kumari Directives", "SSP & CJM Court", "FIR न लिखने वाले अधिकारी पर धारा 166A BNS में खुद मुकदमा होता है।", "लिखित शिकायत देने पर भी पुलिस द्वारा FIR दर्ज नहीं की गई।"),
+    10: ("पैतृक जमीन पर अवैध कब्जा", "Section 145/144 BNSS", "SDM & Civil Court", "गरीब की भूमि पर कब्जे की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे का नियम है।", "विपक्षी द्वारा वैध पैतृक जमीन पर जबरन कब्जे का प्रयास हो रहा है।")
 }
 
-# 1. LEGAL NOTICE (AUTO SAVES TO YOUR DATABASE)
-if nav_choice == T["c_rights"]:
-    st.subheader(T["c_rights"])
-    filing_mode = st.radio("विकल्प चुनें:", [T["mode_sec"], T["mode_custom"]], horizontal=True)
-
-    if filing_mode == T["mode_sec"]:
-        sec_num = st.number_input(T["sec_prompt"], min_value=1, max_value=10, value=1, step=1)
-        curr = SECTIONS[sec_num]
-        st.info(f"धारा {sec_num}: {curr['name']}\n\nकानून: {curr['act']}")
-        target_sub = f"धारा {sec_num} ({curr['name']})"
-        target_act = curr["act"]
-        target_auth = curr["auth"]
-        target_rule = curr["rule"]
-        default_det = curr["det"]
-    else:
-        custom_sub = st.text_input(T["mode_custom"], value="उत्पीड़न व अधिकार हनन बाबत")
-        target_sub = custom_sub
-        target_act = "भारतीय संविधान, बीएनएस 2023"
-        target_auth = "जिलाधिकारी (DM) / पुलिस अधीक्षक (SP) / सक्षम न्यायालय"
-        target_rule = "संविधान अनुसार प्रत्येक नागरिक को तुरंत कानूनी राहत व न्याय पाने का मौलिक अधिकार है।"
-        default_det = "प्रार्थी के साथ विपक्षी द्वारा अन्यायपूर्ण व गैर-कानूनी ढंग से प्रताड़ित किया गया है।"
-
-    col1, col2 = st.columns(2)
-    with col1:
-        v_name = st.text_input(T["name_lbl"], value="साहिल कुमार")
-    with col2:
-        v_loc = st.text_input(T["city_lbl"], value="पश्चिम चंपारण, बिहार")
-
-    v_phone = st.text_input(T["phone_lbl"], value="7484878440")
-    v_accused = st.text_input(T["acc_lbl"], value="संबंधित दोषी पक्ष / अधिकारी")
-    v_details = st.text_area(T["det_lbl"], value=default_det, height=90)
-
-    if st.button(T["btn_draft"]):
-        # AUTO-SAVE IN YOUR PRIVATE DATABASE
-        save_citizen_record("कानूनी शिकायत", v_name, v_phone, v_loc, f"दोषी: {v_accused} | मामला: {target_sub}")
-
-        final_notice = (
+# 1. LEGAL RIGHTS
+if choice == "⚖️ 28 कानूनी नोटिस":
+    st.subheader("⚖️ कानूनी नोटिस जनरेटर")
+    sec_num = st.number_input("धारा संख्या चुनें (1 से 10):", min_value=1, max_value=10, value=1)
+    s_name, s_act, s_auth, s_rule, s_det = SECTIONS_DATA[sec_num]
+    
+    st.info("📌 विषय: " + s_name + "\n\nलागू कानून: " + s_act + " | सक्षम अधिकारी: " + s_auth)
+    
+    c1, c2 = st.columns(2)
+    v_name = c1.text_input("प्रार्थी का नाम:", value="साहिल कुमार")
+    v_city = c2.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
+    v_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
+    v_acc = st.text_input("दोषी पक्ष / अधिकारी का नाम:", value="संबंधित दोषी पक्ष")
+    v_desc = st.text_area("घटनाक्रम विवरण:", value=s_det, height=80)
+    
+    if st.button("⚡ कानूनी नोटिस तैयार करें"):
+        save_entry("कानूनी नोटिस", v_name, v_phone, v_city, "दोषी: " + v_acc + " | विषय: " + s_name)
+        notice = (
             "======================================================================\n"
             "आधिकारिक कानूनी विधिक शिकायत पत्र व नोटिस\n"
-            f"अधिनियम: {target_act}\n"
-            f"दिनांक: {today_str}\n\n"
-            "सेवा में,\n"
-            f"1. {target_auth}, {v_loc}\n\n"
-            f"विषय: '{v_accused}' के विरुद्ध {target_sub} बाबत कानूनी कार्रवाई।\n\n"
-            f"प्रार्थी: {v_name} (+91 {v_phone}), {v_loc}\n\n"
-            "घटना का सच्चा विवरण:\n"
-            f"{v_details}\n\n"
-            "लागू कानूनी नियम:\n"
-            f"{target_rule}\n\n"
-            f"प्रार्थी हस्ताक्षर: {v_name}\n"
-            "डिजिटल ट्रैकिंग: महा-सेवा AI राष्ट्रीय विधिक साक्षरता मिशन\n"
+            "अधिनियम: " + s_act + " | दिनांक: " + today + "\n\n"
+            "सेवा में: " + s_auth + ", " + v_city + "\n"
+            "विषय: '" + v_acc + "' के विरुद्ध कानूनी कार्रवाई बाबत (" + s_name + ")\n\n"
+            "प्रार्थी: " + v_name + " (+91 " + v_phone + "), निवासी: " + v_city + "\n"
+            "घटना विवरण: " + v_desc + "\n\n"
+            "कानूनी आधार: " + s_rule + "\n\n"
+            "हस्ताक्षर: " + v_name + "\n"
+            "महा-सेवा AI राष्ट्रीय विधिक साक्षरता मिशन\n"
             "======================================================================"
         )
+        st.success("🟢 विधिक नोटिस तैयार और डेटाबेस में सुरक्षित:")
+        st.text_area("नोटिस कॉपी करें:", notice, height=180)
+        st.download_button("📥 नोटिस डाउनलोड करें (.txt)", notice, file_name="Notice.txt")
+        
+        c_print = notice.replace("\n", "<br>").replace("'", "\\'")
+        p_html = "<div style='text-align:center;'><button onclick='pDoc()' style='background:#2563EB;color:#fff;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;'>🖨️ PDF प्रिंट / सेव करें</button></div><script>function pDoc(){var w=window.open('','','width=800,height=700');w.document.write('<html><body style=\"font-family:monospace;padding:20px;\">'+'" + c_print + "'+'</body></html>');w.document.close();w.print();}</script>"
+        components.html(p_html, height=50)
+        
+        q_text = urllib.parse.quote(notice)
+        st.markdown("[📲 यह नोटिस WhatsApp पर भेजें](https://wa.me/?text=" + q_text + ")")
 
-        st.success(T["success_msg"])
-        st.text_area("तैयार नोटिस:", final_notice, height=200)
-
-        st.download_button(
-            label=T["download_txt"],
-            data=final_notice,
-            file_name="Legal_Notice.txt",
-            mime="text/plain"
-        )
-
-        clean_print = final_notice.replace("\n", "<br>").replace("'", "\\'")
-        pdf_html = (
-            "<div style='text-align:center; margin:8px 0;'>"
-            "<button onclick='printDoc()' style='background:#2563EB; color:#fff; border:none; padding:12px 24px; font-weight:bold; border-radius:8px; width:100%; cursor:pointer;'>"
-            f"{T['pdf_btn']}"
-            "</button></div>"
-            "<script>"
-            "function printDoc() {"
-            "var win = window.open('', '', 'height=700,width=800');"
-            "win.document.write('<html><head><title>कानूनी नोटिस</title></head><body style=\"font-family:monospace; padding:20px;\">');"
-            f"win.document.write('{clean_print}');"
-            "win.document.write('</body></html>');"
-            "win.document.close();"
-            "win.print();"
-            "}"
-            "</script>"
-        )
-        components.html(pdf_html, height=65)
-
-        enc_legal = urllib.parse.quote(final_notice)
-        st.markdown(f"[{T['send_wa']}](https://wa.me/?text={enc_legal})")
-
-# 2. KARIGAR DIRECTORY (AUTO SAVES TO YOUR DATABASE)
-elif nav_choice == T["c_karigar"]:
-    st.subheader("🛠️ हुनरमंद साथी — कारीगर डायरेक्टरी")
-    k_name = st.text_input("कारीगर का पूरा नाम:")
-    k_skill = st.selectbox("काम का प्रकार:", ["वेल्डर (Welder)", "प्लंबर (Plumber)", "इलेक्ट्रीशियन (Electrician)", "राजमिस्त्री (Mason)", "बढ़ई (Carpenter)"])
-    k_phone = st.text_input("मोबाइल नंबर:")
+# 2. KARIGAR
+elif choice == "🛠️ कारीगर मंच":
+    st.subheader("🛠️ हुनरमंद साथी — कारीगर मंच")
+    st.caption("वेल्डर, प्लंबर, इलेक्ट्रीशियन, राजमिस्त्री भाई सीधे जुड़ें — बिना किसी दलाल के 100% कमाई आपकी:")
+    
+    st.write("### 📞 स्थानीय कारीगर सूची:")
+    st.markdown("• **अकबर अली** — वेल्डर (गेट/ग्रिल) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543210)\n• **राकेश शर्मा** — इलेक्ट्रीशियन (वायरिंग/मोटर) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543211)\n• **मोहम्मद सलीम** — प्लंबर (फिटिंग/पाइप) | 📍 पश्चिम चंपारण | [📞 कॉल करें](tel:9876543212)")
+    
+    st.markdown("---")
+    st.write("### 📝 अपना नाम डायरेक्टरी में जोड़ें:")
+    k_name = st.text_input("कारीगर का नाम:")
+    k_work = st.selectbox("काम का प्रकार:", ["वेल्डर (Welder)", "प्लंबर (Plumber)", "इलेक्ट्रीशियन (Electrician)", "राजमिस्त्री (Mason)", "बढ़ई (Carpenter)"])
+    k_phone = st.text_input("फोन नंबर:")
     k_city = st.text_input("शहर / कस्बा:", value="पश्चिम चंपारण")
-
-    if st.button("✅ डायरेक्टरी में सुरक्षित सेव करें"):
+    if st.button("✅ नाम सुरक्षित सेव करें"):
         if k_name and k_phone:
-            save_citizen_record("कारीगर पंजीकरण", k_name, k_phone, k_city, f"हुनर: {k_skill}")
-            st.success(f"बधाई! {k_name} ({k_skill}) का डेटा सीधे आपके मास्टर डेटाबेस में सुरक्षित सेव हो गया है।")
+            save_entry("कारीगर", k_name, k_phone, k_city, k_work)
+            st.success("बधाई! आपका नाम सीधे संस्थापक के डेटाबेस में दर्ज हो गया है।")
         else:
-            st.error("कृपया नाम और मोबाइल नंबर दर्ज करें।")
+            st.error("कृपया नाम और फोन नंबर दर्ज करें।")
 
-# 3. LANGAR & RESCUE (AUTO SAVES TO YOUR DATABASE)
-elif nav_choice == T["c_langar"]:
+# 3. LANGAR
+elif choice == "🍲 लंगर व अन्न सेवा":
     st.subheader("🍲 लंगर, दस्तरख्वान व बचा खाना सेवा")
     l_food = st.text_input("खाने का विवरण (उदा: 30 पैकेट पूड़ी-सब्जी):")
-    l_loc = st.text_input("होटल / शादी हॉल / जगह का नाम:", value="मेन मार्केट")
-    l_phone = st.text_input("संपर्क मोबाइल नंबर:", value="7484878440")
+    l_place = st.text_input("होटल / शादी हॉल / जगह:", value="मेन मार्केट")
+    l_phone = st.text_input("संपर्क फोन नंबर:", value="7484878440")
+    if st.button("📢 अन्न-सेवा अलर्ट जारी करें"):
+        save_entry("अन्न-सेवा", "होटल/संस्था", l_phone, l_place, l_food)
+        msg = "अन्न-सेवा अलर्ट! खाना: " + l_food + " उपलब्ध है। स्थान: " + l_place + "। फोन: +91 " + l_phone
+        st.success("अन्न-सेवा अलर्ट सेव हो गया!")
+        st.markdown("[📲 WhatsApp पर शेयर करें](https://wa.me/?text=" + urllib.parse.quote(msg) + ")")
 
-    if st.button("📢 अन्न-सेवा अलर्ट जारी व सेव करें"):
-        save_citizen_record("अन्न-सेवा अलर्ट", "होटल/संस्था", l_phone, l_loc, f"खाना: {l_food}")
-        alert_msg = f"अन्न-सेवा! {l_food} उपलब्ध है। स्थान: {l_loc}। संपर्क: +91 {l_phone}"
-        enc_la = urllib.parse.quote(alert_msg)
-        st.success("डेटा आपके सिस्टम में दर्ज हो गया है!")
-        st.markdown(f"[📲 WhatsApp ग्रुप में प्रसारित करें](https://wa.me/?text={enc_la})")
-
-# 4. BARKAT & DIRECT AID (AUTO SAVES TO YOUR DATABASE)
-elif nav_choice == T["c_barkat"]:
-    st.subheader("🌙 बरकत, जकात व सीधी मदद")
-    donor_city = st.text_input("दाता का शहर:", value="पश्चिम चंपारण")
-    donor_phone = st.text_input("संपर्क नंबर:", value="7484878440")
-    aid_type = st.selectbox("मदद का प्रकार:", ["वेल्डर/प्लंबर को औजार दिलाना", "1 महीने का राशन पैक", "दवा व इलाज सहायता"])
-    aid_amt = st.text_input("अनुमानित राशि (₹):", value="1000")
-
-    if st.button("🤝 संकल्प दर्ज व सुरक्षित करें"):
-        save_citizen_record("मदद संकल्प (जकात/सदका)", "दानदाता", donor_phone, donor_city, f"प्रकार: {aid_type} | राशि: ₹{aid_amt}")
-        st.success("मदद का संकल्प आपके डेटाबेस में दर्ज हो गया है!")
+# 4. DIRECT AID
+elif choice == "🌙 सीधी मदद":
+    st.subheader("🌙 बरकत, जकात व सीधी औजार मदद")
+    st.caption("सीधे गरीब वेल्डर/प्लंबर को औजार या जरूरतमंद तक राशन पहुँचाएं:")
+    d_type = st.selectbox("मदद का प्रकार:", ["कारीगर को औजार दिलाना", "गरीब परिवार को राशन", "दवा व इलाज सहायता"])
+    d_amt = st.text_input("अनुमानित राशि (₹):", value="1000")
+    d_phone = st.text_input("आपका फोन नंबर:", value="7484878440")
+    if st.button("🤝 संकल्प दर्ज करें"):
+        save_entry("दान-संकल्प", "दानदाता", d_phone, "लोकल", d_type + " | ₹" + d_amt)
+        st.success("आपका संकल्प दर्ज कर लिया गया है।")
 
 # 5. NIGHT SAFETY SOS
-elif nav_choice == T["c_sos"]:
-    st.subheader(T["sos_h"])
-    st.write("आपातकालीन नंबर: **112** (पुलिस) | **1090** (महिला सुरक्षा)")
-
-    gps_comp = (
-        "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
-        "<button onclick='getPos()' style='background:#10B981; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>"
-        f"{T['gps_btn']}"
-        "</button>"
-        "<p id='gps_stat' style='color:#38BDF8; font-size:12px; margin-top:8px;'>GPS...</p>"
-        "<input type='text' id='gps_val' readonly style='width:90%; background:#030712; color:#10B981; border:1px solid #10B981; padding:6px; font-size:11px; display:none;'>"
-        "</div>"
-        "<script>"
-        "function getPos() {"
-        "var stat = document.getElementById('gps_stat');"
-        "var val = document.getElementById('gps_val');"
-        "if (navigator.geolocation) {"
-        "navigator.geolocation.getCurrentPosition(function(pos) {"
-        "var mapUrl = 'https://maps.google.com/?q=' + pos.coords.latitude + ',' + pos.coords.longitude;"
-        "stat.innerHTML = 'लोकेशन मिल गई:';"
-        "val.style.display = 'block';"
-        "val.value = mapUrl;"
-        "}, function(err) { stat.innerHTML = 'कृपया GPS अनुमति दें'; });"
-        "} else { stat.innerHTML = 'GPS सपोर्ट नहीं है'; }"
-        "}"
-        "</script>"
-    )
-    components.html(gps_comp, height=120)
-
-    v_name = st.text_input(T["victim_lbl"], value="साहिल")
-    road_loc = st.text_input(T["loc_lbl"], value="मेन रोड")
-    sos_msg = f"आपातकालीन SOS अलर्ट! नाम: {v_name}। स्थान: {road_loc}। समय: {current_time_str}।"
-    enc_sos = urllib.parse.quote(sos_msg)
-    st.markdown(f"[{T['sos_wa']}](https://wa.me/{MY_WA_NUMBER}?text={enc_sos})")
-
-    # Audio Siren
-    siren_html = (
-        "<div style='text-align:center; margin:6px 0;'>"
-        "<button onclick='playAlarm()' style='background:#EF4444; color:#fff; padding:12px 24px; border-radius:10px; border:none; font-weight:800; font-size:15px; cursor:pointer;'>"
-        f"{T['siren_btn']}"
-        "</button></div>"
-        "<script>"
-        "function playAlarm() {"
-        "var ctx = new (window.AudioContext || window.webkitAudioContext)();"
-        "var osc = ctx.createOscillator();"
-        "var gain = ctx.createGain();"
-        "osc.type = 'sawtooth';"
-        "osc.frequency.setValueAtTime(800, ctx.currentTime);"
-        "osc.frequency.linearRampToValueAtTime(1400, ctx.currentTime + 0.3);"
-        "osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.6);"
-        "gain.gain.setValueAtTime(1, ctx.currentTime);"
-        "osc.connect(gain);"
-        "gain.connect(ctx.destination);"
-        "osc.start();"
-        "osc.stop(ctx.currentTime + 3);"
-        "}"
-        "</script>"
-    )
-    components.html(siren_html, height=65)
+elif choice == "🚨 रात की सुरक्षा SOS":
+    st.subheader("🚨 24x7 रात की सुरक्षा व लाइव GPS SOS")
+    st.write("आपातकालीन कॉल: **112** (पुलिस) | **1090** (महिला सुरक्षा)")
+    
+    g_html = "<div style='text-align:center;'><button onclick='fPos()' style='background:#10B981;color:#fff;padding:10px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;'>📡 लाइव GPS निकालें</button><p id='g_res' style='color:#38BDF8;font-size:12px;'></p></div><script>function fPos(){navigator.geolocation.getCurrentPosition(function(p){document.getElementById('g_res').innerHTML='https://maps.google.com/?q='+p.coords.latitude+','+p.coords.longitude;});}</script>"
+    components.html(g_html, height=80)
+    
+    u_name = st.text_input("पीड़ित का नाम:", value="साहिल")
+    u_road = st.text_input("सड़क / तिराहे का नाम:", value="मेन रोड")
+    sos_txt = "आपातकालीन SOS अलर्ट! नाम: " + u_name + "। स्थान: " + u_road + "। समय: " + t_now
+    st.markdown("[📲 परिवार को WhatsApp SOS भेजें](https://wa.me/" + WA_NUM + "?text=" + urllib.parse.quote(sos_txt) + ")")
+    
+    s_html = "<div style='text-align:center;margin-top:10px;'><button onclick='sPlay()' style='background:#EF4444;color:#fff;padding:10px 20px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;'>🚨 अलार्म सायरन बजाएँ</button></div><script>function sPlay(){var a=new (window.AudioContext||window.webkitAudioContext)();var o=a.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(800,a.currentTime);o.frequency.linearRampToValueAtTime(1400,a.currentTime+0.3);o.connect(a.destination);o.start();o.stop(a.currentTime+3);}</script>"
+    components.html(s_html, height=50)
 
 # 6. VOICE
-elif nav_choice == T["c_voice"]:
-    st.subheader(T["c_voice"])
-    st.info("माइक बटन दबाकर बोलें:")
-    voice_comp = (
-        "<div style='background:#0F172A; padding:12px; border-radius:8px; text-align:center;'>"
-        "<button onclick='recVoice()' style='background:#EF4444; color:#fff; border:none; padding:10px 20px; font-weight:bold; border-radius:6px; cursor:pointer;'>🎤 बोलें</button>"
-        "<textarea id='v_out' style='width:95%; height:70px; margin-top:8px; background:#030712; color:#38BDF8; padding:6px;'></textarea>"
-        "</div>"
-        "<script>"
-        "function recVoice() {"
-        "if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {"
-        "var SR = window.SpeechRecognition || window.webkitSpeechRecognition;"
-        "var rec = new SR();"
-        "rec.onresult = function(e) { document.getElementById('v_out').value = e.results[0][0].transcript; };"
-        "rec.start();"
-        "}"
-        "}"
-        "</script>"
-    )
-    components.html(voice_comp, height=150)
+elif choice == "🎙️ बोलकर शिकायत":
+    st.subheader("🎙️ बोलकर शिकायत दर्ज करें")
+    st.caption("माइक बटन दबाएं और बोलें — आवाज़ अपने आप टाइप होगी:")
+    v_html = "<div style='text-align:center;'><button onclick='rVoice()' style='background:#EF4444;color:#fff;padding:8px 16px;border:none;border-radius:6px;cursor:pointer;'>🎤 बोलें</button><br><textarea id='v_box' style='width:95%;height:70px;margin-top:8px;'></textarea></div><script>function rVoice(){var R=window.SpeechRecognition||window.webkitSpeechRecognition;var r=new R();r.onresult=function(e){document.getElementById('v_box').value=e.results[0][0].transcript;};r.start();}</script>"
+    components.html(v_html, height=130)
 
-# 7. CYBER FRAUD
-elif nav_choice == T["c_fraud"]:
-    st.subheader(T["c_fraud"])
-    susp_msg = st.text_area("संदिग्ध मैसेज यहाँ डालें:", value="बिजली बिल जमा न होने के कारण आज रात बिजली काट दी जाएगी।")
-    if st.button("🚨 मैसेज की सच्चाई जाँचें"):
-        low = susp_msg.lower()
-        if any(w in low for w in ["electricity", "बिजली", "lottery", "लॉटरी", "apk", "telegram"]):
-            st.error("🚨 100% प्रमाणित साइबर फ्रॉड (SCAM DETECTED!)")
-        else:
-            st.success("🟢 कोई सीधा फ्रॉड लिंक नहीं मिला।")
-
-# ================= SECRET FOUNDER ADMIN PANEL =================
+# ADMIN PANEL
 st.markdown("---")
 with st.expander("🔐 संस्थापक गुप्त एडमिन पैनल (केवल साहिल अहमद के लिए)"):
-    adm_pass = st.text_input("एडमिन पासवर्ड दर्ज करें:", type="password")
+    adm_pass = st.text_input("पासवर्ड डालें:", type="password")
     if adm_pass == "sahil786":
-        st.success("🟢 अभिवादन साहिल भाई! आपका केंद्रीय डेटाबेस सक्रिय है:")
-        if os.path.exists(DB_FILE):
-            df_admin = pd.read_csv(DB_FILE)
-            st.dataframe(df_admin, use_container_width=True)
-
-            csv_bytes = df_admin.to_csv(index=False).encode('utf-8')
-            st.download_button(
-                label="📥 संपूर्ण नागरिक व कारीगर डेटाबेस डाउनलोड करें (Excel/CSV)",
-                data=csv_bytes,
-                file_name=f"Maha_Seva_Master_Data_{today_str}.csv",
-                mime="text/csv"
-            )
+        st.success("🟢 स्वागत है साहिल भाई! आपका डेटाबेस सक्रिय है:")
+        if os.path.exists(DB_NAME):
+            df_view = pd.read_csv(DB_NAME)
+            st.dataframe(df_view, use_container_width=True)
+            st.download_button("📥 संपूर्ण एक्सेल डेटाबेस डाउनलोड करें", df_view.to_csv(index=False).encode('utf-8'), file_name="Maha_Seva_Master.csv", mime="text/csv")
         else:
-            st.info("डेटाबेस अभी खाली है। जैसे ही लोग फॉर्म भरेंगे, यहाँ पूरा डेटा दिखने लगेगा।")
+            st.info("डेटाबेस अभी खाली है।")
     elif adm_pass:
-        st.error("गलत पासवर्ड! यह केवल संस्थापक के लिए सुरक्षित है।")
+        st.error("गलत पासवर्ड!")
 
-# FOUNDER FOOTER
-st.markdown(f"""
-<div style="text-align: center; background: #0B1329; padding: 14px; border-radius: 12px; border: 1px solid #38BDF8; margin-top: 15px;">
-    <p style="color:#38BDF8; font-size:11px; margin:0; letter-spacing:1px;">🏛️ FOUNDER & CHIEF SYSTEM ARCHITECT</p>
-    <h3 style="color:#FFF; margin:4px 0; font-size:20px;">साहिल अहमद (Sahil Ahmad)</h3>
-    <p style="color:#94A3B8; font-size:12px; margin:0 0 8px 0;">Maha Seva AI — All-India Sovereign Citizen Legal & Welfare Infrastructure</p>
-    <a href="https://wa.me/{MY_WA_
+st.markdown("---")
+st.caption("🏛️ संस्थापक: साहिल अहमद (Sahil Ahmad) • महा-सेवा AI राष्ट्रीय विधिक व जन-कल्याण मिशन")
