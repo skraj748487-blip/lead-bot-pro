@@ -5,7 +5,12 @@ from datetime import datetime
 import pandas as pd
 import os
 
-st.set_page_config(page_title="महा-सेवा AI", page_icon="🇮🇳", layout="centered", initial_sidebar_state="collapsed")
+st.set_page_config(
+    page_title="महा-सेवा AI — अखंड भारत 100% इंसानियत मिशन",
+    page_icon="🇮🇳",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
 
 WA_NUM = "917484878440"
 today = datetime.now().strftime("%d-%m-%Y")
@@ -33,13 +38,38 @@ LANGS = ["🇮🇳 हिन्दी", "🇬🇧 English"]
 c_lang = st.radio("🌐 भाषा / Language:", LANGS, horizontal=True)
 is_en = (c_lang == "🇬🇧 English")
 
-MENU_HI = ["⚖️ 28 कानूनी नोटिस", "🔴 लाइव अन्नदाता बुलेटिन", "💼 ताज़ा रोज़गार व कारीगर", "🏪 दुकानदार व्यापार डेस्क", "🏭 फैक्ट्री हादसा दावा", "💊 दवा व जेनेरिक भाव", "🚨 रात की सुरक्षा SOS"]
-MENU_EN = ["⚖️ 28 Legal Notices", "🔴 Live Food Feed", "💼 Live Jobs & Artisans", "🏪 Merchant Desk", "🏭 Factory Injury Claim", "💊 Medicine Checker", "🚨 Night SOS"]
+MENU_HI = [
+    "🕊️ जात-पात विरोधी व भाईचारा कवच",
+    "⚖️ 28 कानूनी नोटिस", 
+    "👩‍🦰 नारी सुरक्षा व महिला रोजगार",
+    "🧓 बुजुर्ग सम्मान व ब्लड डोनर",
+    "🔴 लाइव अन्नदाता बुलेटिन", 
+    "💼 ताज़ा रोज़गार व कारीगर", 
+    "🌾 किसान मंडी व ड्राइवर सेवा",
+    "🏪 दुकानदार व्यापार डेस्क", 
+    "🏭 फैक्ट्री हादसा दावा", 
+    "💊 दवा व जेनेरिक भाव", 
+    "🚨 रात की सुरक्षा SOS"
+]
+
+MENU_EN = [
+    "🕊️ Anti-Caste & Unity Shield",
+    "⚖️ 28 Legal Notices", 
+    "👩‍🦰 Women Safety & Jobs",
+    "🧓 Senior Care & Blood Donors",
+    "🔴 Live Food Feed", 
+    "💼 Live Jobs & Artisans", 
+    "🌾 Farmer Mandi & Driver Desk",
+    "🏪 Merchant Desk", 
+    "🏭 Factory Injury Claim", 
+    "💊 Medicine Checker", 
+    "🚨 Night SOS"
+]
 
 menu_items = MENU_EN if is_en else MENU_HI
 
-st.title("MAHA SEVA AI — महा-सेवा AI" if is_en else "महा-सेवा AI (MAHA SEVA AI)")
-st.caption("28 Statutory Legal Rights • Live Jobs • Food Rescue • Merchant Tools • Factory Claims • SOS")
+st.title("🇮🇳 महा-सेवा AI (MAHA SEVA AI)")
+st.caption("अखंड भारत जन-कल्याण • 100% इंसानियत, 0% जात-पात • गरीब-अमीर, मजदूर, किसान व नारी का सच्चा मंच")
 
 choice = st.radio("Menu:", menu_items, horizontal=True)
 st.markdown("---")
@@ -75,8 +105,62 @@ LAW_LIST = [
     ("RTI सूचना देने से इनकार", "Right to Information Act 2005", "राज्य सूचना आयोग", "30 दिन में सूचना न देने पर अधिकारी पर जुर्माना लगता है।")
 ]
 
-# 1. 28 LEGAL NOTICES
+# 0. ANTI-CASTE & BROTHERHOOD SHIELD
 if choice in [MENU_HI[0], MENU_EN[0]]:
+    st.subheader("🕊️ राष्ट्रीय सद्भाव, जात-पात विरोधी व भाईचारा सुरक्षा कवच")
+    st.info("भारतीय संविधान व बीएनएस (BNS): किसी भी नागरिक के साथ जाति, धर्म या वर्ग के आधार पर भेदभाव करना, नफ़रत फैलाना या सामाजिक बहिष्कार कराना गैर-जमानती संज्ञेय अपराध है (धारा 196, 197, 299 BNS)।")
+    
+    st.markdown("""
+    * **100% इंसानियत का नियम:** इस मंच पर न कोई ऊँच है, न नीच। सेवा, खाना, खून और रोज़गार सबको बराबर मिलेगा।
+    * **नेताओं व असामाजिक तत्वों की नफरत पर रोक:** यदि कोई नेता या व्यक्ति जात-पात के नाम पर लड़ाने, गालियाँ देने या मंदिर/मस्जिद/सार्वजनिक स्थान पर जाने से रोके, तो तुरंत आधिकारिक कानूनी नोटिस जारी करें।
+    """)
+    
+    c1, c2 = st.columns(2)
+    u_name = c1.text_input("शिकायतकर्ता का नाम:", value="साहिल कुमार")
+    u_city = c2.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
+    u_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
+    accused_leader = st.text_input("नफ़रत/भेदभाव फैलाने वाले व्यक्ति / नेता का नाम:")
+    act_type = st.selectbox("किए गए भेदभाव का प्रकार:", [
+        "जाति/धर्म के आधार पर सार्वजनिक भेदभाव व गालियाँ देना",
+        "दुकान, पानी या सार्वजनिक रास्ते से वंचित करना",
+        "सोशल मीडिया पर दंगा भड़काने व नफरत फैलाने वाला बयान",
+        "वर्कप्लेस या मजदूरी में जातिगत पक्षपात व प्रताड़ना"
+    ])
+    evid_text = st.text_area("घटनाक्रम व मौजूद साक्ष्य (ऑडियो/वीडियो/गवाह):", value="संबंधित व्यक्ति द्वारा सार्वजनिक रूप से जातिसूचक व नफरती शब्दों का प्रयोग कर सामाजिक सौहार्द्र बिगाड़ने का कृत्य किया गया।")
+    
+    if st.button("⚡ नफ़रत व जातिगत भेदभाव विरोधी आधिकारिक कानूनी नोटिस तैयार करें"):
+        if accused_leader:
+            save_entry("सद्भाव शिकायत", u_name, u_phone, u_city, f"आरोपी: {accused_leader} | {act_type}")
+            hate_notice = (
+                "======================================================================\n"
+                "STATUTORY NOTICE AGAINST CASTE DISCRIMINATION & COMMUNAL DISHARMONY\n"
+                "(भारतीय न्याय संहिता 2023 - धारा 196, 197, 299 व SC/ST अत्याचार निवारण अधिनियम)\n"
+                f"दिनांक: {today}\n\n"
+                f"सेवा में:\n1. पुलिस अधीक्षक (SP) / जिलाधिकारी (DM), {u_city}\n"
+                "2. राष्ट्रीय मानवाधिकार आयोग (NHRC), नई दिल्ली\n\n"
+                f"विषय: '{accused_leader}' द्वारा जातिगत नफ़रत, सामाजिक विद्वेष व भेदभाव फैलाने के विरुद्ध गैर-जमानती FIR दर्ज करने बाबत।\n\n"
+                f"महोदय,\n"
+                f"प्रार्थी {u_name} (मोबाइल: +91 {u_phone}), निवासी {u_city}, राज्य करता है:\n"
+                f"1. विपक्षी '{accused_leader}' द्वारा दिनांक {today} को जानबूझकर {act_type} का आपराधिक कृत्य किया गया।\n"
+                f"2. साक्ष्य व घटना विवरण: {evid_text}\n"
+                "3. सर्वोच्च न्यायालय के दिशा-निर्देशों अनुसार किसी भी नागरिक को जाति या धर्म के आधार पर प्रताड़ित करना संविधान के अनुच्छेद 14, 15 और 21 का खुला उल्लंघन है।\n\n"
+                "अतः निवेदन है कि विपक्षी के विरुद्ध अविलंब गैर-जमानती धाराओं में प्राथमिकी (FIR) दर्ज कर कड़ी विधिक कार्रवाई की जाए।\n\n"
+                f"प्रार्थी हस्ताक्षर: {u_name}\n"
+                "प्रमाणित: महा-सेवा AI राष्ट्रीय अखंडता व जन-कल्याण मिशन\n"
+                "======================================================================"
+            )
+            st.success("🟢 आधिकारिक नोटिस तैयार व डेटाबेस में सुरक्षित:")
+            st.text_area("नोटिस कॉपी करें:", hate_notice, height=180)
+            st.download_button("📥 नोटिस डाउनलोड करें (.txt)", hate_notice, file_name="Anti_Discrimination_Notice.txt")
+            c_h = hate_notice.replace("\n", "<br>").replace("'", "\\'")
+            p_html = f"<div style='text-align:center;'><button onclick='pDoc()' style='background:#2563EB;color:#fff;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;'>🖨️ PDF प्रिंट / सेव करें</button></div><script>function pDoc(){{var w=window.open('','','width=800,height=700');w.document.write('<html><body style=\"font-family:monospace;padding:20px;\">{c_h}</body></html>');w.document.close();w.print();}}</script>"
+            components.html(p_html, height=50)
+            st.markdown(f"[📲 यह नोटिस SP व प्रशासन को WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(hate_notice)})")
+        else:
+            st.error("कृपया आरोपी/नेता का नाम दर्ज करें।")
+
+# 1. 28 LEGAL NOTICES
+elif choice in [MENU_HI[1], MENU_EN[1]]:
     st.subheader("⚖️ 28 आधिकारिक कानूनी नोटिस जनरेटर")
     sec_num = st.number_input("धारा संख्या चुनें (1 से 28):", min_value=1, max_value=28, value=1, step=1)
     s_name, s_act, s_auth, s_rule = LAW_LIST[sec_num - 1]
@@ -112,8 +196,68 @@ if choice in [MENU_HI[0], MENU_EN[0]]:
         components.html(p_html, height=50)
         st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(notice)})")
 
-# 2. LIVE FOOD FEED
-elif choice in [MENU_HI[1], MENU_EN[1]]:
+# 2. WOMEN SAFETY & HOME JOBS
+elif choice in [MENU_HI[2], MENU_EN[2]]:
+    st.subheader("👩‍🦰 नारी शक्ति व महिला स्वावलंबन डेस्क")
+    st.info("हेल्पलाइन: 1090 (महिला हेल्पलाइन) | 181 (घरेलू हिंसा) | 112 (इमरजेंसी पुलिस)")
+    
+    w_tab1, w_tab2 = st.tabs(["🛡️ महिला सुरक्षा व कानूनी सहायता", "🧵 घर बैठे महिला रोजगार"])
+    
+    with w_tab1:
+        st.write("### त्वरित महिला सुरक्षा शिकायत:")
+        wm_name = st.text_input("पीड़िता / बहन का नाम:")
+        wm_phone = st.text_input("संपर्क नंबर:")
+        wm_city = st.text_input("जिला व पता:", value="पश्चिम चंपारण")
+        wm_prob = st.selectbox("समस्या का प्रकार:", ["दहेज उत्पीड़न व मारपीट", "ससुराल में प्रताड़ना", "छेड़छाड़ / पीछा करना (Stalking)", "साइबर ब्लैकमेल व फर्जी फोटो"])
+        wm_details = st.text_area("सच्चा विवरण दर्ज करें:")
+        if st.button("⚡ महिला सुरक्षा विधिक आवेदन बनाएं"):
+            if wm_name and wm_phone:
+                save_entry("महिला शिकायत", wm_name, wm_phone, wm_city, f"{wm_prob} | {wm_details}")
+                wm_notice = f"महिला सुरक्षा आवेदन\nदिनांक: {today}\nसेवा में: महिला थाना प्रभारी / संरक्षण अधिकारी, {wm_city}\nविषय: {wm_prob} बाबत सुरक्षा व कानूनी कार्रवाई।\nआवेदिका: {wm_name} (+91 {wm_phone})\nविवरण: {wm_details}\nहस्ताक्षर: {wm_name}"
+                st.success("आवेदन तैयार:")
+                st.text_area("आवेदन पत्र:", wm_notice, height=130)
+                st.markdown(f"[📲 महिला सेल को WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(wm_notice)})")
+
+    with w_tab2:
+        st.write("### स्वरोजगार / हुनर दर्ज करें (सिलाई, बुनाई, टिफिन):")
+        w_art = st.text_input("बहन का नाम:")
+        w_skill = st.selectbox("आपका काम:", ["सिलाई व बुनाई (Tailoring)", "टिफिन / होम कुकिंग", "हैंडीक्राफ्ट / ब्यूटीशियन", "होम ट्यूशन"])
+        w_contact = st.text_input("ऑर्डर संपर्क नंबर:")
+        if st.button("✅ महिला उद्यमी सूची में जुड़ें"):
+            if w_art and w_contact:
+                save_entry("महिला रोजगार", w_art, w_contact, "लोकल", w_skill)
+                st.success("आपका विवरण सुरक्षित सेव हो गया है!")
+
+# 3. SENIOR CITIZENS & BLOOD DONOR
+elif choice in [MENU_HI[3], MENU_EN[3]]:
+    st.subheader("🧓 बुजुर्ग सम्मान व आपातकालीन ब्लड डोनर डेस्क")
+    s_tab1, s_tab2 = st.tabs(["🩸 रक्तदाता खोजें / बनें", "🧓 माता-पिता भरण-पोषण कानून"])
+    
+    with s_tab1:
+        st.write("### इमरजेंसी ब्लड डोनर डायरेक्टरी:")
+        st.markdown("• **राहुल वर्मा** — B+ Positive | 📍 पश्चिम चंपारण | [📞 कॉल](tel:9876543210)\n• **अमित कुमार** — O+ Positive | 📍 पश्चिम चंपारण | [📞 कॉल](tel:9876543211)")
+        b_name = st.text_input("डोनर का नाम:")
+        b_grp = st.selectbox("ब्लड ग्रुप:", ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"])
+        b_num = st.text_input("डोनर फोन नंबर:")
+        if st.button("🩸 ब्लड डोनर के रूप में नाम जोड़ें"):
+            if b_name and b_num:
+                save_entry("ब्लड डोनर", b_name, b_num, "लोकल", b_grp)
+                st.success("धन्यवाद! आपका नाम आपातकालीन रक्तदाता सूची में जुड़ गया।")
+
+    with s_tab2:
+        st.info("Senior Citizens Maintenance Act: यदि बच्चे बुजुर्ग माता-पिता की देखभाल या भरण-पोषण नहीं करते, तो SDM कोर्ट द्वारा संतान से मासिक खर्चा और संपत्ति वापस दिलाने का सख्त नियम है।")
+        p_name = st.text_input("बुजुर्ग माता-पिता का नाम:")
+        p_phone = st.text_input("संपर्क नंबर:")
+        p_child = st.text_input("संतान / बेटे का नाम:")
+        p_complaint = st.text_area("समस्या (उदा: खाना-दवा न देना, घर से निकालना):")
+        if st.button("⚡ SDM भरण-पोषण कोर्ट नोटिस बनाएं"):
+            save_entry("बुजुर्ग भरण-पोषण", p_name, p_phone, "लोकल", f"संतान: {p_child} | समस्या: {p_complaint}")
+            sn_notice = f"वरिष्ठ नागरिक भरण-पोषण आवेदन\nसेवा में: उप-जिलाधिकारी (SDM Maintenance Tribunal)\nआवेदक: {p_name} (+91 {p_phone})\nसंतान का नाम: {p_child}\nविवरण: {p_complaint}\nनियम: Senior Citizens Act 2007 के तहत मासिक गुजारा भत्ता दिलाया जाए।"
+            st.text_area("तैयार नोटिस:", sn_notice, height=130)
+            st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(sn_notice)})")
+
+# 4. LIVE FOOD FEED
+elif choice in [MENU_HI[4], MENU_EN[4]]:
     st.subheader("🔴 लाइव अन्नदाता व लंगर बुलेटिन")
     with st.expander("📢 उपलब्ध खाने की सूचना दर्ज करें (200+ पैकेट / बचा खाना)"):
         f_qty = st.text_input("खाने का विवरण (उदा: 200 पैकेट पूड़ी-सब्ज़ी):")
@@ -135,8 +279,8 @@ elif choice in [MENU_HI[1], MENU_EN[1]]:
     else:
         st.info("वर्तमान में कोई खाना लिस्टेड नहीं है। ऊपर फ़ॉर्म से जोड़ें।")
 
-# 3. LIVE JOBS & ARTISANS
-elif choice in [MENU_HI[2], MENU_EN[2]]:
+# 5. LIVE JOBS & ARTISANS
+elif choice in [MENU_HI[5], MENU_EN[5]]:
     st.subheader("💼 ताज़ा रोज़गार व हुनरमंद साथी बोर्ड")
     t1, t2 = st.tabs(["📢 काम / कारीगर चाहिए (Hire)", "🛠️ कारीगर सीधे कॉल करें"])
     with t1:
@@ -156,118 +300,4 @@ elif choice in [MENU_HI[2], MENU_EN[2]]:
         if os.path.exists(JOBS_FILE):
             df_j = pd.read_csv(JOBS_FILE).tail(10)
             for _, r in df_j.iterrows():
-                st.markdown(f"• **{r['Job']}** ({r['Wage']}) | 📍 {r['Location']} — [📞 काम पकड़ें](tel:{r['Phone']})")
-        else:
-            st.info("वर्तमान में कोई काम लिस्टेड नहीं है।")
-
-    with t2:
-        st.markdown("• **अकबर अली** — वेल्डर | 📍 पश्चिम चंपारण | [📞 कॉल](tel:9876543210)\n• **राकेश शर्मा** — इलेक्ट्रीशियन | 📍 पश्चिम चंपारण | [📞 कॉल](tel:9876543211)\n• **मोहम्मद सलीम** — प्लंबर | 📍 पश्चिम चंपारण | [📞 कॉल](tel:9876543212)")
-        st.markdown("---")
-        k_name = st.text_input("कारीगर नाम दर्ज करें:")
-        k_trade = st.selectbox("हुनर:", ["वेल्डर", "प्लंबर", "इलेक्ट्रीशियन", "राजमिस्त्री", "बढ़ई"])
-        k_mob = st.text_input("मोबाइल नंबर:")
-        if st.button("✅ डायरेक्टरी में दर्ज करें"):
-            if k_name and k_mob:
-                save_entry("कारीगर", k_name, k_mob, "लोकल", k_trade)
-                st.success("डेटा संस्थापक के डेटाबेस में सुरक्षित सेव हो गया!")
-
-# 4. MERCHANT DESK
-elif choice in [MENU_HI[3], MENU_EN[3]]:
-    st.subheader("🏪 स्थानीय दुकानदार व्यापार डेस्क")
-    m_tool = st.radio("विकल्प चुनें:", ["⚡ Near-Expiry / सस्ता सामान निकालें", "📲 WhatsApp उधारी तकादा रिमाइंडर"])
-    if m_tool == "⚡ Near-Expiry / सस्ता सामान निकालें":
-        item_name = st.text_input("सामान का नाम व मात्रा (उदा: 20 पैकेट तेल / आटा):")
-        item_disc = st.text_input("छूट भाव (उदा: MRP ₹150, ऑफर ₹90):")
-        shop_name = st.text_input("दुकान का नाम व पता:", value="गुप्ता किराना स्टोर")
-        shop_phone = st.text_input("दुकानदार फोन नंबर:", value="7484878440")
-        if st.button("📢 सस्ता ऑफर ग्राहकों को भेजें"):
-            save_entry("दुकानदार ऑफर", shop_name, shop_phone, "लोकल", f"{item_name} @ {item_disc}")
-            offer_wa = f"किराना महा-छूट! {shop_name} पर {item_name} भारी छूट पर: {item_disc}। संपर्क: +91 {shop_phone}"
-            st.markdown(f"[📲 ग्राहकों के WhatsApp पर शेयर करें](https://wa.me/?text={urllib.parse.quote(offer_wa)})")
-    else:
-        cust_name = st.text_input("ग्राहक का नाम:")
-        cust_phone = st.text_input("ग्राहक का मोबाइल नंबर:")
-        due_amt = st.text_input("बकाया राशि (₹):", value="1500")
-        my_shop = st.text_input("दुकान का नाम:", value="साहिल ट्रेडर्स")
-        if st.button("⚡ WhatsApp रिमाइंडर तैयार करें"):
-            rem_wa = f"नमस्ते {cust_name} जी, {my_shop} पर आपका पिछला ₹{due_amt} का हिसाब बाकी है। कृपया सुविधानुसार भुगतान कराने का कष्ट करें। धन्यवाद!"
-            st.markdown(f"[📲 ग्राहक को उधारी रिमाइंडर भेजें](https://wa.me/91{cust_phone}?text={urllib.parse.quote(rem_wa)})")
-
-# 5. FACTORY ACCIDENT CLAIM
-elif choice in [MENU_HI[4], MENU_EN[4]]:
-    st.subheader("🏭 कंपनी/फ़ैक्ट्री हादसा व क़ानूनी मुआवज़ा दावा")
-    st.info("Employees Compensation Act 1923: ड्यूटी पर चोट लगने पर 100% इलाज, पूरी छुट्टी का वेतन और ₹3-20 लाख कानूनी मुआवजा मिलना अनिवार्य है।")
-    w_name = st.text_input("मज़दूर / पीड़ित का नाम:", value="साहिल कुमार")
-    w_city = st.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
-    w_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
-    w_comp = st.text_input("कंपनी / फ़ैक्ट्री नाम व पता:", value="ABC Manufacturing Pvt. Ltd.")
-    w_post = st.text_input("पद (ऑपरेटर / वेल्डर / हेल्पर):", value="मशीन ऑपरेटर")
-    w_time = st.text_input("हादसे का समय:", value=f"{today}, सुबह 11:30 बजे")
-    w_inj = st.text_area("चोट का विवरण:", value="मशीन में सुरक्षा गार्ड न होने से हाथ में गंभीर चोट व फ्रैक्चर।")
-    w_ev = st.text_area("मौजूद सबूत:", value="अस्पताल MLC पर्ची, ड्यूटी गेट पास, सीसीटीवी फुटेज व साथी मज़दूर गवाह।")
-    if st.button("⚡ मुआवज़ा दावा नोटिस तैयार करें"):
-        save_entry("Accident Claim", w_name, w_phone, w_city, f"{w_comp} | {w_inj}")
-        cl_notice = (
-            "STATUTORY WORKPLACE INJURY & COMPENSATION NOTICE\n"
-            f"(Under Section 10, Employees Compensation Act 1923)\nDate: {today}\n\n"
-            f"To: 1. Management, {w_comp}\n2. Compensation Commissioner / Labour Court, {w_city}\n\n"
-            f"Subject: Immediate Cashless Treatment & Statutory Compensation for {w_name}\n\n"
-            f"Worker: {w_name} (+91 {w_phone}), Post: {w_post}\n"
-            f"Incident: On {w_time}, sustained injury: {w_inj}\n"
-            f"Evidence: {w_ev}\n"
-            "Demand: 100% medical expenses, full salary and deposit statutory compensation under Section 4 within 30 days.\n\n"
-            f"Signature: {w_name}\n"
-        )
-        st.success("🟢 दावा नोटिस तैयार व सुरक्षित सेव:")
-        st.text_area("Claim Notice:", cl_notice, height=180)
-        st.download_button("📥 डाउनलोड क्लेम (.txt)", cl_notice, file_name="Accident_Claim.txt")
-        c_cl = cl_notice.replace("\n", "<br>").replace("'", "\\'")
-        cp_html = f"<div style='text-align:center;'><button onclick='pDoc()' style='background:#2563EB;color:#fff;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;'>🖨️ PDF प्रिंट / सेव करें</button></div><script>function pDoc(){{var w=window.open('','','width=800,height=700');w.document.write('<html><body style=\"font-family:monospace;padding:20px;\">{c_cl}</body></html>');w.document.close();w.print();}}</script>"
-        components.html(cp_html, height=50)
-        st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(cl_notice)})")
-
-# 6. MEDICINE CHECKER
-elif choice in [MENU_HI[5], MENU_EN[5]]:
-    st.subheader("💊 दवा जानकारी व जन औषधि सस्ता विकल्प")
-    st.write("एम्बुलेंस: **108** | प्रसूति सेवा: **102**")
-    m_name = st.text_input("दवा या बीमारी का नाम लिखें:", value="Azithromycin 500")
-    if st.button("🔍 दवा भाव जाँचें"):
-        q_low = m_name.lower()
-        if "paracetamol" in q_low or "बुखार" in q_low:
-            txt = "बुखार व दर्द निवारक। जन औषधि पर मात्र ₹10-15 (बाज़ार में ₹35-40)।"
-        elif "azithromycin" in q_low or "infection" in q_low:
-            txt = "एंटीबायोटिक। जन औषधि पर मात्र ₹25-35 (बाज़ार में ₹120-150)।"
-        elif "pantoprazole" in q_low or "गैस" in q_low:
-            txt = "गैस व एसिडिटी निवारक। जन औषधि भाव मात्र ₹15-20 (बाज़ार में ₹80-100)।"
-        else:
-            txt = f"{m_name} का जेनेरिक साल्ट जन औषधि केंद्र पर 70-80% सस्ते भाव में उपलब्ध है।"
-        st.success(txt)
-
-# 7. NIGHT SOS
-elif choice in [MENU_HI[6], MENU_EN[6]]:
-    st.subheader("🚨 24x7 रात की सुरक्षा व लाइव GPS SOS")
-    st.write("पुलिस: **112** | महिला हेल्पलाइन: **1090**")
-    g_html = "<div style='text-align:center;'><button onclick='fPos()' style='background:#10B981;color:#fff;padding:10px;border:none;border-radius:6px;font-weight:bold;cursor:pointer;'>📡 लाइव GPS निकालें</button><p id='g_res' style='color:#38BDF8;font-size:12px;'></p></div><script>function fPos(){navigator.geolocation.getCurrentPosition(function(p){document.getElementById('g_res').innerHTML='https://maps.google.com/?q='+p.coords.latitude+','+p.coords.longitude;});}</script>"
-    components.html(g_html, height=75)
-    sos_name = st.text_input("पीड़ित का नाम:", value="साहिल")
-    sos_road = st.text_input("सड़क / चौराहा:", value="मेन रोड")
-    st.markdown(f"[📲 परिवार को WhatsApp SOS भेजें](https://wa.me/{WA_NUM}?text={urllib.parse.quote(f'EMERGENCY SOS! Name: {sos_name}. Location: {sos_road}. Time: {t_now}.')})")
-
-# ADMIN PANEL
-st.markdown("---")
-with st.expander("🔐 संस्थापक गुप्त एडमिन पैनल (केवल साहिल अहमद के लिए)"):
-    adm_pass = st.text_input("पासवर्ड डालें:", type="password")
-    if adm_pass == "sahil786":
-        st.success("🟢 स्वागत है साहिल भाई! आपका केंद्रीय डेटाबेस सक्रिय है:")
-        if os.path.exists(DB_NAME):
-            df_v = pd.read_csv(DB_NAME)
-            st.dataframe(df_v, use_container_width=True)
-            st.download_button("📥 संपूर्ण एक्सेल डेटाबेस डाउनलोड करें", df_v.to_csv(index=False).encode('utf-8'), file_name="Maha_Seva_Master.csv", mime="text/csv")
-        else:
-            st.info("डेटाबेस अभी खाली है।")
-    elif adm_pass:
-        st.error("गलत पासवर्ड!")
-
-st.markdown("---")
-st.write("🏛️ **संस्थापक:** साहिल अहमद (Sahil Ahmad) • महा-सेवा AI")
-st.markdown(f"[💬 संस्थापक WhatsApp संपर्क (+91 7484878440)](https://wa.me/{WA_NUM})")
+                st.ma
