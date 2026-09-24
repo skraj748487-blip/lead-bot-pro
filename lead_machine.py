@@ -13,26 +13,18 @@ t_now = datetime.now().strftime("%I:%M %p")
 DB_NAME = "maha_seva_data.csv"
 JOBS_FILE = "live_jobs.csv"
 FOOD_FILE = "live_food.csv"
-AID_FILE = "live_aid.csv"
 
 def save_entry(c_type, name, phone, city, details):
     row = {"Date": today, "Time": t_now, "Type": c_type, "Name": name, "Phone": str(phone), "City": city, "Details": details}
     df = pd.DataFrame([row])
-    if not os.path.exists(DB_NAME):
-        df.to_csv(DB_NAME, index=False)
-    else:
-        df.to_csv(DB_NAME, mode='a', header=False, index=False)
+    df.to_csv(DB_NAME, mode='a' if os.path.exists(DB_NAME) else 'w', header=not os.path.exists(DB_NAME), index=False)
 
 def save_feed(file_path, row_dict):
     df = pd.DataFrame([row_dict])
-    if not os.path.exists(file_path):
-        df.to_csv(file_path, index=False)
-    else:
-        df.to_csv(file_path, mode='a', header=False, index=False)
+    df.to_csv(file_path, mode='a' if os.path.exists(file_path) else 'w', header=not os.path.exists(file_path), index=False)
 
 LANGS = ["🇮🇳 हिन्दी", "🇬🇧 English"]
 c_lang = st.radio("🌐 भाषा / Language:", LANGS, horizontal=True)
-is_en = (c_lang == "🇬🇧 English")
 
 MENU = [
     "💼 ताज़ा रोज़गार (इंजीनियर/कारीगर/हेल्पर)",
@@ -55,35 +47,21 @@ st.caption("अखंड भारत जन-कल्याण • 100% इं�
 choice = st.radio("सेवा चुनें:", MENU, horizontal=True)
 st.markdown("---")
 
-LAW_LIST = [
-    ("मज़दूरी या वेतन चोरी", "Payment of Wages Act 1936", "लेबर कमिश्नर व डीएम", "मज़दूरी दबाना अपराध है; 10 गुना हर्जाना और 18% ब्याज।"),
-    ("पुलिस अवैध मारपीट या चालान", "BNSS 2023 व DK Basu Guidelines", "एसपी व मानवाधिकार आयोग", "अवैध मारपीट पर धारा 166A BNS के तहत निलंबन व FIR।"),
-    ("अस्पताल इमरजेंसी इलाज इनकार", "Supreme Court Parmanand Katara Verdict", "CMO व स्वास्थ्य विभाग", "इमरजेंसी में पैसे मांगकर इलाज से इनकार संज्ञेय अपराध है।"),
-    ("कार्यस्थल पर हादसा व मुआवज़ा", "Employees Compensation Act 1923", "Compensation Commissioner", "हादसा होने पर ₹5-20 लाख मुआवज़ा अनिवार्य।"),
-    ("लोन ऐप ब्लैकमेल व सूदखोरी", "RBI Guidelines & Sec 308 BNS", "साइबर सेल व एसपी", "बिना लाइसेंस सूदखोरी और गाली देकर वसूली पर तुरंत FIR।"),
-    ("सरकारी दफ्तर घूसखोरी (RTPS)", "Right to Public Services Act", "निगरानी विभाग (Vigilance)", "काम लटकाने पर कर्मचारी के वेतन से प्रतिदिन जुर्माना कटता है।"),
-    ("दुकानदार MRP लूट व घटतौली", "Legal Metrology Act 2009", "DSO व उपभोक्ता न्यायालय", "MRP से अधिक लेना या कम तौलना गैर-कानूनी है।"),
-    ("रेलवे TTE अवैध वसूली", "Indian Railway Act", "RailMadad 139 व RPF", "TTE को बदसलूकी करने या ट्रेन से धक्का देने का अधिकार नहीं।"),
-    ("थाने में FIR दर्ज न करना", "Supreme Court Lalita Kumari Directives", "SSP व CJM कोर्ट", "FIR न लिखने वाले पुलिसकर्मी पर धारा 166A BNS में FIR।"),
-    ("ज़मीन पर दबंगों का अवैध क़ब्ज़ा", "Section 145/144 BNSS", "SDM व सिविल कोर्ट", "गरीब की ज़मीन पर क़ब्ज़े की कोशिश पर तुरंत पुलिस सुरक्षा व स्टे।"),
-    ("राशन कोटेदार द्वारा चोरी", "National Food Security Act 2013", "SDO व DSO", "राशन कम देना दंडनीय अपराध है, कोटा तुरंत निरस्त होता है।"),
-    ("बिजली विभाग फ़र्ज़ी बिल व कटाई", "Electricity Act 2003", "विद्युत लोकपाल व EE", "बिना 15 दिन के नोटिस के लाइन काटना गैर-कानूनी है।"),
-    ("महिला घरेलू हिंसा व प्रताड़ना", "Domestic Violence Act 2005", "संरक्षण अधिकारी व महिला थाना", "महिला को सुरक्षा, भरण-पोषण और आवास का पूरा अधिकार है।"),
-    ("दहेज उत्पीड़न व धमकी", "Section 85/86 BNS", "DSP व महिला सेल", "दहेज मांगना व प्रताड़ित करना गैर-जमानती अपराध है।"),
-    ("महिला छेड़छाड़ व पीछा करना", "Section 78/74 BNS", "थाना प्रभारी व 1090", "महिला का पीछा करना या फब्तियां कसना संज्ञेय अपराध है।"),
-    ("मकान मालिक द्वारा अवैध बेदखली", "Rent Control Act & Civil Law", "SDM व सिविल जज", "बिना कोर्ट आदेश के किराएदार का सामान फेंकना अवैध है।"),
-    ("सड़क दुर्घटना हिट एंड रन दावा", "Motor Vehicles Act (MACT)", "MACT ट्रिब्यूनल व SP", "सड़क दुर्घटना में सरकार व बीमा कंपनी से तुरंत मुआवज़ा हक।"),
-    ("ऑनलाइन साइबर बैंक फ्रॉड", "IT Act 2000 & 1930 Helpline", "साइबर सेल व 1930", "तुरंत शिकायत पर खाता फ्रीज होकर रिकवरी होती है।"),
-    ("स्कूल द्वारा अवैध फ़ीस व TC रोकना", "Right to Education Act 2009", "जिला शिक्षा अधिकारी (BSA)", "फीस के नाम पर बच्चे की TC रोकना अपराध है।"),
-    ("बैंक एजेंट अवैध वसूली कॉल", "RBI Fair Practice Code", "Banking Ombudsman व SP", "शाम 7 के बाद कॉल या घर आकर धमकी देना वर्जित है।"),
-    ("ठेकेदार द्वारा EPF/PF चोरी", "EPF & MP Act 1952", "PF कमिश्नर (RPFC)", "वेतन से PF काटकर जमा न करना गबन व गैर-कानूनी है।"),
-    ("जातिसूचक गाली व अपमान", "SC/ST Prevention of Atrocities Act", "DSP (SC/ST सेल)", "जातिसूचक अपमान पर गैर-जमानती धाराओं में कार्रवाई।"),
-    ("वारंटी में सामान बदलने से इनकार", "Consumer Protection Act 2019", "उपभोक्ता आयोग (DCDRC)", "वारंटी अवधि में प्रोडक्ट न बदलना सेवा में गंभीर दोष है।"),
-    ("नगर निगम गंदगी व नाली जाम", "Municipal Corporation Act", "नगर आयुक्त व DM", "साफ-सफाई की जिम्मेदारी स्थानीय निकाय की अनिवार्य है।"),
-    ("सार्वजनिक रास्ते पर रुकावट", "Section 152 BNSS", "तहसीलदार व SDM", "आम रास्ते को रोकना गैर-कानूनी है, प्रशासन हटाएगा।"),
-    ("अवैध ध्वनि प्रदूषण रात में DJ", "Noise Pollution Rules 2000", "प्रदूषण नियंत्रण बोर्ड व 112", "रात 10 बजे बाद तेज आवाज में DJ बजाना प्रतिबंधित है।"),
-    ("बाल मज़दूरी व जोखिम भरा काम", "Child Labour Prohibition Act", "श्रम प्रवर्तन अधिकारी व CWC", "14 वर्ष से कम उम्र के बच्चे से काम कराना दंडनीय है।"),
-    ("RTI सूचना देने से इनकार", "Right to Information Act 2005", "राज्य सूचना आयोग", "30 दिन में सूचना न देने पर अधिकारी पर जुर्माना लगता है।")
+LAW_28 = [
+    "मज़दूरी या वेतन चोरी (Payment of Wages Act 1936)", "पुलिस अवैध मारपीट या चालान (BNSS 2023 / DK Basu)", 
+    "अस्पताल इमरजेंसी इलाज इनकार (SC Parmanand Katara)", "कार्यस्थल हादसा व मुआवज़ा (Employees Comp Act 1923)",
+    "लोन ऐप ब्लैकमेल व सूदखोरी (RBI Guidelines / Sec 308 BNS)", "सरकारी दफ्तर घूसखोरी (RTPS Act)",
+    "दुकानदार MRP लूट व घटतौली (Legal Metrology Act)", "रेलवे TTE अवैध वसूली (Indian Railway Act)",
+    "थाने में FIR दर्ज न करना (SC Lalita Kumari Mandate)", "ज़मीन पर दबंगों का क़ब्ज़ा (Sec 145/144 BNSS)",
+    "राशन कोटेदार द्वारा चोरी (National Food Security Act)", "बिजली विभाग फ़र्ज़ी बिल (Electricity Act 2003)",
+    "महिला घरेलू हिंसा (Domestic Violence Act 2005)", "दहेज उत्पीड़न व धमकी (Sec 85/86 BNS)",
+    "महिला छेड़छाड़ व पीछा करना (Sec 78/74 BNS)", "मकान मालिक अवैध बेदखली (Rent Control Act)",
+    "सड़क दुर्घटना हिट एंड रन (Motor Vehicles Act)", "ऑनलाइन साइबर फ्रॉड (IT Act & 1930)",
+    "स्कूल अवैध फ़ीस व TC रोकना (RTE Act 2009)", "बैंक एजेंट अवैध वसूली धमकी (RBI Fair Code)",
+    "ठेकेदार द्वारा EPF/PF चोरी (EPF Act 1952)", "जातिसूचक गाली व अपमान (SC/ST Prevention Act)",
+    "वारंटी में सामान बदलने से इनकार (Consumer Protection Act)", "नगर निगम गंदगी व नाली जाम (Municipal Act)",
+    "सार्वजनिक रास्ते पर रुकावट (Sec 152 BNSS)", "अवैध रात में DJ व ध्वनि प्रदूषण (Noise Rules 2000)",
+    "बाल मज़दूरी व जोखिम भरा काम (Child Labour Act)", "RTI सूचना देने से इनकार (RTI Act 2005)"
 ]
 
 # 1. LIVE JOBS
@@ -91,8 +69,8 @@ if choice == MENU[0]:
     st.subheader("💼 अखंड भारत रोज़गार बोर्ड (हर हाथ को काम)")
     t1, t2 = st.tabs(["📢 काम / स्टाफ चाहिए (Hire)", "🛠️ काम खोजने वाले साथी"])
     with t1:
-        j_cat = st.selectbox("काम की श्रेणी:", ["इंजीनियर (Civil/Mech/Elec)", "सेफ्टी ऑफिसर (HSE)", "सुपरवाइजर", "वेल्डर / फिटर", "इलेक्ट्रीशियन / प्लंबर", "राजमिस्त्री / बढ़ई", "फैक्ट्री वर्कर / हेल्पर", "सिलाई / कुकिंग / पैकिंग"])
-        j_req = st.text_input("ज़रूरत (उदा: 2 वेल्डर और 1 सेफ्टी ऑफिसर):")
+        j_cat = st.selectbox("श्रेणी:", ["इंजीनियर", "सेफ्टी ऑफिसर", "सुपरवाइजर", "वेल्डर/फिटर", "इलेक्ट्रीशियन/प्लंबर", "राजमिस्त्री", "हेल्पर/लेबर", "सिलाई/कुकिंग"])
+        j_req = st.text_input("ज़रूरत का विवरण (उदा: 2 वेल्डर और 1 सेफ्टी ऑफिसर):")
         j_wage = st.text_input("वेतन / दिहाड़ी:", value="₹650 प्रतिदिन")
         j_loc = st.text_input("कार्यस्थल पता:", value="इंडस्ट्रियल एरिया")
         j_phone = st.text_input("मालिक का मोबाइल नंबर:", value="7484878440")
@@ -101,7 +79,7 @@ if choice == MENU[0]:
                 save_feed(JOBS_FILE, {"Time": t_now, "Category": j_cat, "Job": j_req, "Wage": j_wage, "Location": j_loc, "Phone": j_phone})
                 save_entry("रोज़गार मांग", "नियोक्ता", j_phone, j_loc, f"{j_cat} | {j_req} | {j_wage}")
                 st.success("पोस्ट लाइव हो गई!")
-                st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(f'रोज़गार अलर्ट! {j_cat}: {j_req}। दिहाड़ी: {j_wage}। स्थान: {j_loc}। कॉल: +91 {j_phone}')})")
+                st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(f'रोज़गार अलर्ट! {j_cat}: {j_req}। वेतन: {j_wage}। स्थान: {j_loc}। कॉल: +91 {j_phone}')})")
 
         st.write("### 📌 ताज़ा उपलब्ध नौकरियाँ:")
         if os.path.exists(JOBS_FILE):
@@ -121,40 +99,35 @@ if choice == MENU[0]:
                 save_entry("हुनरमंद साथी", k_name, k_mob, k_city, k_skill)
                 st.success("नाम सुरक्षित सेव हो गया!")
 
-# 2. DIRECT AID & ZAKAT
+# 2. ZAKAT & AID
 elif choice == MENU[1]:
     st.subheader("🌙 बरकत, ज़कात, सदक़ा व गुप्त दान डेस्क")
-    st.info("यह सेवा 100% पारदर्शी है। दानदाता का पैसा सीधे ज़रूरतमंद के हाथ या अस्पताल/स्कूल में जाएगा, बीच में कोई दलाल नहीं।")
-    
+    st.info("यह सेवा 100% पारदर्शी है। दानदाता का पैसा सीधे ज़रूरतमंद के हाथ या दवा/स्कूल में जाएगा, कोई दलाल नहीं।")
     a_tab1, a_tab2 = st.tabs(["🤝 दान / ज़कात देने वाले", "🤲 ज़रूरतमंद सहायता आवेदन"])
-    
     with a_tab1:
-        st.write("### दानदाता अपना संकल्प दर्ज करें:")
-        d_name = st.text_input("दानदाता का नाम (या 'गुप्त दान' लिखें):", value="गुप्त दानदाता")
-        d_type = st.selectbox("दान / ज़कात का माध्यम:", ["गरीब कारीगर को औज़ार दिलाना", "यतीम/अनाथ बच्चे की स्कूल फीस", "अस्पताल में गरीब मरीज़ की दवा", "गरीब परिवार को सूखा राशन कीट", "सामान्य ज़कात राशि"])
+        d_name = st.text_input("दानदाता का नाम (या 'गुप्त दान'):", value="गुप्त दानदाता")
+        d_type = st.selectbox("माध्यम:", ["गरीब कारीगर को औज़ार दिलाना", "यतीम/अनाथ बच्चे की फीस", "मरीज़ की दवा व इलाज", "राशन कीट", "सामान्य ज़कात"])
         d_amt = st.text_input("राशि (₹):", value="1000")
         d_phone = st.text_input("फोन नंबर (गोपनीय रहेगा):", value="7484878440")
         if st.button("🤝 दान संकल्प दर्ज करें"):
             save_entry("दान-संकल्प", d_name, d_phone, "लोकल", f"{d_type} | ₹{d_amt}")
-            st.success("अल्हम्दुलिल्लाह / धन्यवाद! आपका संकल्प संस्थापक के पास सुरक्षित दर्ज हो गया है।")
-
+            st.success("संकल्प संस्थापक के पास सुरक्षित दर्ज हो गया है।")
     with a_tab2:
-        st.write("### वास्तविक ज़रूरतमंद सीधे आवेदन करें:")
         n_name = st.text_input("ज़रूरतमंद का नाम:")
-        n_need = st.selectbox("किस सहायता की आवश्यकता है:", ["काम शुरू करने के लिए औज़ार चाहिए", "बच्चे की पढ़ाई/कॉपी-किताब हेतु", "मरीज़ की दवा व इलाज", "राशन सहायता"])
-        n_desc = st.text_area("अपनी परेशानी का सच्चा विवरण लिखें:")
+        n_need = st.selectbox("सहायता प्रकार:", ["काम शुरू करने के लिए औज़ार", "बच्चे की पढ़ाई/कॉपी-किताब", "मरीज़ की दवा व इलाज", "राशन सहायता"])
+        n_desc = st.text_area("परेशानी का सच्चा विवरण:")
         n_phone = st.text_input("संपर्क नंबर:")
         if st.button("🤲 सहायता का आवेदन भेजें"):
             if n_name and n_phone:
                 save_entry("मदद गुहार", n_name, n_phone, "लोकल", f"{n_need} | {n_desc}")
-                st.success("आपका आवेदन संस्थापक के पास पहुँच चुका है। सत्यापन के बाद सीधे मदद की जाएगी।")
+                st.success("आवेदन संस्थापक के पास पहुँच चुका है।")
 
 # 3. LIVE FOOD FEED
 elif choice == MENU[2]:
     st.subheader("🔴 लाइव अन्नदाता व लंगर बुलेटिन")
     with st.expander("📢 उपलब्ध खाने की सूचना दर्ज करें (200+ पैकेट / बचा खाना)"):
         f_qty = st.text_input("खाने का विवरण (उदा: 200 पैकेट पूड़ी-सब्ज़ी):")
-        f_loc = st.text_input("सटीक स्थान / होटल / शादी हॉल:", value="रेलवे स्टेशन चौक")
+        f_loc = st.text_input("सटीक स्थान / होटल:", value="रेलवे स्टेशन चौक")
         f_phone = st.text_input("पिकअप फोन नंबर:", value="7484878440")
         if st.button("📢 लाइव बोर्ड पर जारी करें"):
             if f_qty and f_phone:
@@ -167,19 +140,19 @@ elif choice == MENU[2]:
     if os.path.exists(FOOD_FILE):
         df_f = pd.read_csv(FOOD_FILE).tail(10)
         for _, r in df_f.iterrows():
-            st.markdown(f"• **{r['Food']}** | 📍 {r['Location']} ({r['Time']}) — [📞 तुरंत कॉल करें](tel:{r['Phone']})")
+            st.markdown(f"• **{r['Food']}** | 📍 {r['Location']} ({r['Time']}) — [📞 कॉल करें](tel:{r['Phone']})")
     else:
         st.info("वर्तमान में कोई खाना लिस्टेड नहीं है।")
 
 # 4. ANTI-CASTE SHIELD
 elif choice == MENU[3]:
     st.subheader("🕊️ राष्ट्रीय सद्भाव व जात-पात विरोधी भाईचारा कवच")
-    st.info("संविधान व कानून: किसी भी नागरिक के साथ जाति, धर्म या वर्ग के आधार पर भेदभाव करना, नफ़रत फैलाना अपराध है (धारा 196, 197, 299 BNS)।")
+    st.info("कानून: किसी भी नागरिक के साथ जाति या धर्म के आधार पर भेदभाव या नफ़रत फैलाना गैर-जमानती अपराध है (धारा 196, 197, 299 BNS)।")
     u_name = st.text_input("शिकायतकर्ता का नाम:", value="साहिल कुमार")
     u_city = st.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
     u_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
     accused_l = st.text_input("नफ़रत/भेदभाव फैलाने वाले व्यक्ति / नेता का नाम:")
-    act_t = st.selectbox("भेदभाव का प्रकार:", ["जाति/धर्म के आधार पर सार्वजनिक गाली-गलौज", "दुकान/पानी/रास्ते से वंचित करना", "सोशल मीडिया पर नफरती बयान", "वर्कप्लेस पर जातिगत प्रताड़ना"])
+    act_t = st.selectbox("भेदभाव का प्रकार:", ["सार्वजनिक गाली-गलौज व भेदभाव", "दुकान/पानी/रास्ते से वंचित करना", "सोशल मीडिया पर नफरती बयान", "वर्कप्लेस पर जातिगत प्रताड़ना"])
     if st.button("⚡ नफ़रत विरोधी आधिकारिक कानूनी नोटिस बनाएं"):
         if accused_l:
             save_entry("सद्भाव शिकायत", u_name, u_phone, u_city, f"आरोपी: {accused_l} | {act_t}")
@@ -190,26 +163,24 @@ elif choice == MENU[3]:
 # 5. 28 LEGAL NOTICES
 elif choice == MENU[4]:
     st.subheader("⚖️ 28 आधिकारिक कानूनी नोटिस जनरेटर")
-    sec_num = st.number_input("धारा संख्या चुनें (1 से 28):", min_value=1, max_value=28, value=1, step=1)
-    s_name, s_act, s_auth, s_rule = LAW_LIST[sec_num - 1]
-    st.info(f"धारा {sec_num}: {s_name} | {s_act}")
+    sec_idx = st.selectbox("धारा / कानूनी अधिकार चुनें:", range(1, 29), format_func=lambda x: f"धारा {x}: {LAW_28[x-1]}")
     v_name = st.text_input("प्रार्थी का नाम:", value="साहिल कुमार")
     v_city = st.text_input("जिला व राज्य:", value="पश्चिम चंपारण, बिहार")
     v_phone = st.text_input("मोबाइल नंबर:", value="7484878440")
     v_acc = st.text_input("दोषी पक्ष / अधिकारी का नाम:", value="संबंधित दोषी पक्ष")
-    v_desc = st.text_area("घटनाक्रम विवरण:", value=f"{s_name} के संबंध में प्रार्थी को प्रताड़ित किया जा रहा है।", height=70)
+    v_desc = st.text_area("घटनाक्रम विवरण:", value=f"{LAW_28[sec_idx-1]} के संबंध में प्रार्थी को प्रताड़ित किया जा रहा है।", height=70)
     if st.button("⚡ कानूनी नोटिस तैयार करें"):
-        save_entry("कानूनी नोटिस", v_name, v_phone, v_city, f"दोषी: {v_acc} | धारा {sec_num}: {s_name}")
-        notc = f"आधिकारिक कानूनी नोटिस\nअधिनियम: {s_act}\nसेवा में: {s_auth}, {v_city}\nविषय: '{v_acc}' के विरुद्ध कानूनी कार्रवाई ({s_name})\nप्रार्थी: {v_name} (+91 {v_phone})\nविवरण: {v_desc}\nनियम: {s_rule}\nहस्ताक्षर: {v_name}"
+        save_entry("कानूनी नोटिस", v_name, v_phone, v_city, f"दोषी: {v_acc} | धारा {sec_idx}: {LAW_28[sec_idx-1]}")
+        notc = f"आधिकारिक कानूनी नोटिस\nविषय: '{v_acc}' के विरुद्ध कानूनी कार्रवाई ({LAW_28[sec_idx-1]})\nप्रार्थी: {v_name} (+91 {v_phone}), निवासी: {v_city}\nविवरण: {v_desc}\nहस्ताक्षर: {v_name}"
         st.success("🟢 नोटिस तैयार:")
         st.text_area("Notice:", notc, height=150)
-        st.download_button("📥 डाउनलोड (.txt)", notc, file_name=f"Notice_{sec_num}.txt")
+        st.download_button("📥 डाउनलोड (.txt)", notc, file_name=f"Notice_{sec_idx}.txt")
         st.markdown(f"[📲 WhatsApp पर भेजें](https://wa.me/?text={urllib.parse.quote(notc)})")
 
 # 6. WOMEN SAFETY
 elif choice == MENU[5]:
     st.subheader("👩‍🦰 नारी सुरक्षा व महिला स्वावलंबन डेस्क")
-    st.info("हेल्पलाइन: 1090 (महिला हेल्पलाइन) | 181 (घरेलू हिंसा) | 112 (पुलिस)")
+    st.info("हेल्पलाइन: 1090 (महिला सुरक्षा) | 181 (घरेलू हिंसा) | 112 (पुलिस)")
     wm_name = st.text_input("बहन / आवेदिका का नाम:")
     wm_phone = st.text_input("संपर्क नंबर:")
     wm_prob = st.selectbox("समस्या:", ["दहेज प्रताड़ना व मारपीट", "ससुराल में हिंसा", "छेड़छाड़ / पीछा करना", "घर बैठे सिलाई/कुकिंग काम चाहिए"])
@@ -299,4 +270,19 @@ elif choice == MENU[11]:
 
 # ADMIN PANEL
 st.markdown("---")
-with st.expander("🔐 संस्थापक गुप
+with st.expander("🔐 संस्थापक गुप्त एडमिन पैनल (केवल साहिल अहमद के लिए)"):
+    adm_pass = st.text_input("पासवर्ड डालें:", type="password")
+    if adm_pass == "sahil786":
+        st.success("🟢 स्वागत है साहिल भाई! आपका केंद्रीय डेटाबेस सक्रिय है:")
+        if os.path.exists(DB_NAME):
+            df_v = pd.read_csv(DB_NAME)
+            st.dataframe(df_v, use_container_width=True)
+            st.download_button("📥 संपूर्ण एक्सेल डेटाबेस डाउनलोड करें", df_v.to_csv(index=False).encode('utf-8'), file_name="Maha_Seva_Master.csv", mime="text/csv")
+        else:
+            st.info("डेटाबेस अभी खाली है।")
+    elif adm_pass:
+        st.error("गलत पासवर्ड!")
+
+st.markdown("---")
+st.write("🏛️ **संस्थापक:** साहिल अहमद (Sahil Ahmad) • महा-सेवा AI")
+st.markdown(f"[💬 संस्थापक WhatsApp संपर्क (+91 7484878440)](https://wa.me/{WA_NUM})")
